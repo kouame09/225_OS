@@ -102,6 +102,28 @@ export const addProject = async (project: Omit<Project, 'id' | 'slug'>): Promise
   }
 };
 
+export const updateProject = async (
+  id: string,
+  updates: Partial<Omit<Project, 'id' | 'slug' | 'userId'>>
+): Promise<void> => {
+  const { error } = await supabase
+    .from('projects')
+    .update({
+      name: updates.name,
+      author: updates.author,
+      description: updates.description,
+      stacks: updates.stacks,
+      // Note: We don't update stars, forks, language, updated_at, imageUrl, or repoUrl
+      // as these come from GitHub
+    })
+    .eq('id', id);
+
+  if (error) {
+    console.error('Error updating project:', JSON.stringify(error, null, 2));
+    throw error;
+  }
+};
+
 export const deleteProject = async (id: string): Promise<void> => {
   const { error } = await supabase.from('projects').delete().eq('id', id);
   if (error) {

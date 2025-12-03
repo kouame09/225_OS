@@ -4,18 +4,20 @@ import { Github, Loader2, Save, X, CheckCircle } from 'lucide-react';
 import { fetchGithubMetadata, extractRepoInfo } from '../services/githubService';
 import { addProject } from '../services/projectService';
 import { useAuth } from '../contexts/AuthContext';
+import { useNotification } from '../contexts/NotificationContext';
 import { Project, GithubMeta } from '../types';
 
 const AddProject: React.FC = () => {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
+  const { addNotification } = useNotification();
 
   const [repoUrl, setRepoUrl] = useState('');
   const [loadingMeta, setLoadingMeta] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [githubData, setGithubData] = useState<GithubMeta | null>(null);
-  
+
   // Form States
   const [name, setName] = useState('');
   const [author, setAuthor] = useState('');
@@ -26,20 +28,21 @@ const AddProject: React.FC = () => {
   // Protect Route
   useEffect(() => {
     if (!loading && !user) {
-        // Redirect to home and ideally open auth modal, but for now just redirect
-        navigate('/');
-        // You might want to trigger the auth modal via a URL param or context here
+      // Redirect to home and ideally open auth modal, but for now just redirect
+      navigate('/');
+      // You might want to trigger the auth modal via a URL param or context here
     }
   }, [loading, user, navigate]);
 
   const handleFetchMeta = async () => {
     if (!repoUrl) return;
-    
+
     // Basic validation
     const info = extractRepoInfo(repoUrl);
     if (!info) {
-        setError('Please enter a valid GitHub repository URL (e.g., https://github.com/owner/repo)');
-        return;
+      setError('Please enter a valid GitHub repository URL (e.g., https://github.com/owner/repo)');
+      addNotification('error', 'Invalid URL', 'Please enter a valid GitHub repository URL');
+      return;
     }
 
     setLoadingMeta(true);
@@ -48,18 +51,21 @@ const AddProject: React.FC = () => {
     try {
       const meta = await fetchGithubMetadata(repoUrl);
       setGithubData(meta);
-      
+
       // Auto-fill form
       setName(meta.name);
       setAuthor(meta.owner.login);
       setDescription(meta.description || '');
       if (meta.language) {
-          if (!stacks.includes(meta.language)) {
-              setStacks(prev => [...prev, meta.language]);
-          }
+        if (!stacks.includes(meta.language)) {
+          setStacks(prev => [...prev, meta.language]);
+        }
       }
+
+      addNotification('success', 'Repository fetched', `Successfully loaded ${meta.name} repository data`);
     } catch (err: any) {
       setError(err.message || 'Failed to fetch GitHub data');
+      addNotification('error', 'Fetch failed', err.message || 'Failed to fetch GitHub repository data');
     } finally {
       setLoadingMeta(false);
     }
@@ -82,8 +88,9 @@ const AddProject: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!githubData || !user) {
-        setError('Please ensure you are logged in and data is fetched.');
-        return;
+      setError('Please ensure you are logged in and data is fetched.');
+      addNotification('error', 'Validation Error', 'Please ensure you are logged in and repository data is fetched');
+      return;
     }
 
     setSubmitting(true);
@@ -107,12 +114,14 @@ const AddProject: React.FC = () => {
     };
 
     try {
-        await addProject(newProject);
-        navigate('/dashboard');
+      await addProject(newProject);
+      addNotification('success', 'Project added!', `"${name}" has been successfully added to your projects`);
+      navigate('/dashboard');
     } catch (e: any) {
-        console.error(e);
-        setError('Failed to save project. ' + e.message);
-        setSubmitting(false);
+      console.error(e);
+      setError('Failed to save project. ' + e.message);
+      addNotification('error', 'Save failed', 'Failed to save project. ' + e.message);
+      setSubmitting(false);
     }
   };
 
@@ -121,14 +130,14 @@ const AddProject: React.FC = () => {
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-950">
       <div className="max-w-2xl mx-auto">
-        
+
         <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Submit a Project</h1>
-            <p className="text-slate-600 dark:text-slate-400">Share your open-source contribution with the community.</p>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Submit a Project</h1>
+          <p className="text-slate-600 dark:text-slate-400">Share your open-source contribution with the community.</p>
         </div>
 
         <div className="bg-white dark:bg-slate-900 shadow-xl rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
-          
+
           {/* Step 1: GitHub URL */}
           <div className="p-8 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900">
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
@@ -142,7 +151,7 @@ const AddProject: React.FC = () => {
                 <input
                   type="url"
                   required
-                  className={`block w-full pl-10 pr-3 py-3 border rounded-xl leading-5 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ${error ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-slate-300 dark:border-slate-700'}`}
+                  className={`block w-full pl-10 pr-3 py-3 border rounded-xl leading-5 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all ${error ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-slate-300 dark:border-slate-700'}`}
                   placeholder="https://github.com/username/repo"
                   value={repoUrl}
                   onChange={(e) => setRepoUrl(e.target.value)}
@@ -159,44 +168,44 @@ const AddProject: React.FC = () => {
               </button>
             </div>
             {error && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>
+              <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>
             )}
             {githubData && !error && (
-                <div className="mt-2 flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
-                    <CheckCircle size={14} />
-                    <span>Repository verified</span>
-                </div>
+              <div className="mt-2 flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
+                <CheckCircle size={14} />
+                <span>Repository verified</span>
+              </div>
             )}
           </div>
 
           {/* Step 2: Details Form */}
           <form onSubmit={handleSubmit} className={`p-8 space-y-6 transition-opacity duration-300 ${!githubData ? 'opacity-50 pointer-events-none blur-[1px]' : 'opacity-100'}`}>
-            
+
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                        Project Name
-                    </label>
-                    <input
-                        type="text"
-                        required
-                        className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 bg-transparent dark:text-white"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                        Author / Organization
-                    </label>
-                    <input
-                        type="text"
-                        required
-                        className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 bg-transparent dark:text-white"
-                        value={author}
-                        onChange={(e) => setAuthor(e.target.value)}
-                    />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  Project Name
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 transition-all"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  Author / Organization
+                </label>
+                <input
+                  type="text"
+                  required
+                  className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 transition-all"
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
+                />
+              </div>
             </div>
 
             <div>
@@ -207,7 +216,7 @@ const AddProject: React.FC = () => {
                 required
                 maxLength={200}
                 rows={3}
-                className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 bg-transparent dark:text-white"
+                className="block w-full px-3 py-2 border border-slate-300 dark:border-slate-700 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 transition-all"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
@@ -223,37 +232,37 @@ const AddProject: React.FC = () => {
                   <span key={stack} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">
                     {stack}
                     <button type="button" onClick={() => removeStack(stack)} className="ml-1.5 text-emerald-600 dark:text-emerald-300 hover:text-emerald-800">
-                        <X size={12} />
+                      <X size={12} />
                     </button>
                   </span>
                 ))}
                 <input
-                    type="text"
-                    className="flex-grow min-w-[120px] bg-transparent border-none focus:ring-0 text-sm dark:text-white"
-                    placeholder="Type and press Enter..."
-                    value={stackInput}
-                    onChange={(e) => setStackInput(e.target.value)}
-                    onKeyDown={handleAddStack}
+                  type="text"
+                  className="flex-grow min-w-[120px] bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-emerald-500 rounded-md px-2 py-1 text-sm dark:text-white"
+                  placeholder="Type and press Enter..."
+                  value={stackInput}
+                  onChange={(e) => setStackInput(e.target.value)}
+                  onKeyDown={handleAddStack}
                 />
               </div>
             </div>
 
             <div className="pt-4 flex items-center justify-end gap-3">
-                <button
-                    type="button"
-                    onClick={() => navigate('/')}
-                    className="px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors"
-                >
-                    Cancel
-                </button>
-                <button
-                    type="submit"
-                    disabled={submitting}
-                    className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all disabled:opacity-70"
-                >
-                    {submitting ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
-                    Publish Project
-                </button>
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className="px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all disabled:opacity-70"
+              >
+                {submitting ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
+                Publish Project
+              </button>
             </div>
           </form>
         </div>

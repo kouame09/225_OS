@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useNotification } from '../contexts/NotificationContext';
 import { Project } from '../types';
 import { getUserProjects, deleteProject } from '../services/projectService';
 import { Link, useNavigate } from 'react-router-dom';
-import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork } from 'lucide-react';
+import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork, Eye, Pencil } from 'lucide-react';
+import Pagination from '../components/Pagination';
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
+    const { addNotification } = useNotification();
     const navigate = useNavigate();
     const [projects, setProjects] = useState<Project[]>([]);
     const [isLoadingProjects, setIsLoadingProjects] = useState(true);
     const [isDeleting, setIsDeleting] = useState<string | null>(null);
+    
+    // Pagination states
+    const [currentPage, setCurrentPage] = useState(1);
+    const projectsPerPage = 6;
 
     // Stats
     const totalProjects = projects.length;
@@ -31,27 +38,48 @@ const Dashboard: React.FC = () => {
                     setProjects(data);
                 } catch (error) {
                     console.error("Failed to load projects", error);
+                    addNotification('error', 'Load failed', 'Failed to load your projects');
                 } finally {
                     setIsLoadingProjects(false);
                 }
             }
         };
         if (user) fetchMyProjects();
-    }, [user]);
+    }, [user, addNotification]);
 
     const handleDelete = async (id: string) => {
-        if (confirm('Are you sure you want to delete this project?')) {
+        const projectToDelete = projects.find(p => p.id === id);
+        if (!projectToDelete) return;
+
+        if (confirm(`Are you sure you want to delete "${projectToDelete.name}"?`)) {
             setIsDeleting(id);
             try {
                 await deleteProject(id);
                 setProjects(prev => prev.filter(p => p.id !== id));
+                addNotification('success', 'Project deleted', `"${projectToDelete.name}" has been successfully deleted`);
+                
+                // Adjust current page if necessary
+                const totalPages = Math.ceil((projects.length - 1) / projectsPerPage);
+                if (currentPage > totalPages && totalPages > 0) {
+                    setCurrentPage(totalPages);
+                }
             } catch (error) {
-                alert('Failed to delete project');
+                addNotification('error', 'Delete failed', `Failed to delete "${projectToDelete.name}"`);
             } finally {
                 setIsDeleting(null);
             }
         }
     };
+
+    // Pagination functions
+    const indexOfLastProject = currentPage * projectsPerPage;
+    const indexOfFirstProject = indexOfLastProject - projectsPerPage;
+    const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
+    const totalPages = Math.ceil(projects.length / projectsPerPage);
+
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+    const goToPreviousPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
+    const goToNextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
 
     if (loading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950"><Loader2 className="animate-spin text-slate-400" /></div>;
 
@@ -107,55 +135,113 @@ const Dashboard: React.FC = () => {
                             <Loader2 className="animate-spin text-emerald-500" size={32} />
                         </div>
                     ) : projects.length > 0 ? (
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400">
-                                <thead className="bg-slate-50 dark:bg-slate-950/50 uppercase text-xs font-semibold text-slate-500 dark:text-slate-400">
-                                    <tr>
-                                        <th className="px-6 py-4">Project Name</th>
-                                        <th className="px-6 py-4 hidden sm:table-cell">Stack</th>
-                                        <th className="px-6 py-4 text-center">Stars</th>
-                                        <th className="px-6 py-4 text-right">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-                                    {projects.map((project) => (
-                                        <tr key={project.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                                            <td className="px-6 py-4">
-                                                <div className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
-                                                    {project.name}
-                                                    <a href={project.repoUrl} target="_blank" rel="noreferrer" className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
-                                                        <ExternalLink size={14} />
-                                                    </a>
-                                                </div>
-                                                <div className="text-xs mt-1 truncate max-w-[200px]">{project.description}</div>
-                                            </td>
-                                            <td className="px-6 py-4 hidden sm:table-cell">
-                                                <div className="flex gap-1 flex-wrap max-w-[200px]">
-                                                    {project.stacks.slice(0, 3).map(s => (
-                                                        <span key={s} className="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-xs border border-slate-200 dark:border-slate-700">
-                                                            {s}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </td>
-                                            <td className="px-6 py-4 text-center">
-                                                {project.stars}
-                                            </td>
-                                            <td className="px-6 py-4 text-right">
-                                                <button
-                                                    onClick={() => handleDelete(project.id)}
-                                                    disabled={isDeleting === project.id}
-                                                    className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                                                    title="Delete Project"
-                                                >
-                                                    {isDeleting === project.id ? <Loader2 size={18} className="animate-spin" /> : <Trash2 size={18} />}
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                        <>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+                                {currentProjects.map((project) => (
+                                <div key={project.id} className="group bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:border-emerald-500/50 dark:hover:border-emerald-500/50 transition-all duration-300">
+                                    {/* Card Image/Header */}
+                                    <div className="h-32 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 relative overflow-hidden">
+                                        {project.imageUrl ? (
+                                            <img src={project.imageUrl} alt={project.name} className="w-full h-full object-cover opacity-60" />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-slate-300 dark:text-slate-600">
+                                                {project.name.substring(0, 2).toUpperCase()}
+                                            </div>
+                                        )}
+                                        {/* Stats Badge */}
+                                        <div className="absolute top-3 right-3 flex gap-2">
+                                            <div className="flex items-center gap-1 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-semibold text-amber-500 shadow-sm">
+                                                <Star size={12} fill="currentColor" />
+                                                <span>{project.stars}</span>
+                                            </div>
+                                            <div className="flex items-center gap-1 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-semibold text-slate-600 dark:text-slate-300 shadow-sm">
+                                                <GitFork size={12} />
+                                                <span>{project.forks}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Card Content */}
+                                    <div className="p-5">
+                                        {/* Project Name & GitHub Link */}
+                                        <div className="flex items-start justify-between mb-2">
+                                            <h3 className="font-bold text-lg text-slate-900 dark:text-white leading-tight flex-1">
+                                                {project.name}
+                                            </h3>
+                                            <a
+                                                href={project.repoUrl}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 ml-2"
+                                                title="View on GitHub"
+                                            >
+                                                <Github size={18} />
+                                            </a>
+                                        </div>
+
+                                        {/* Description */}
+                                        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4 line-clamp-2 min-h-[40px]">
+                                            {project.description}
+                                        </p>
+
+                                        {/* Tech Stack */}
+                                        <div className="flex flex-wrap gap-1.5 mb-4">
+                                            {project.stacks.slice(0, 3).map(stack => (
+                                                <span key={stack} className="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-medium border border-emerald-200 dark:border-emerald-800">
+                                                    {stack}
+                                                </span>
+                                            ))}
+                                            {project.stacks.length > 3 && (
+                                                <span className="px-2 py-0.5 text-xs text-slate-500">+{project.stacks.length - 3}</span>
+                                            )}
+                                        </div>
+
+                                        {/* Action Buttons */}
+                                        <div className="flex items-center gap-2 pt-4 border-t border-slate-100 dark:border-slate-700">
+                                            <Link
+                                                to={`/project/${project.slug}`}
+                                                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors text-sm font-medium"
+                                                title="View Project"
+                                            >
+                                                <Eye size={16} />
+                                                <span>View</span>
+                                            </Link>
+                                            <Link
+                                                to={`/edit/${project.slug}`}
+                                                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition-colors text-sm font-medium"
+                                                title="Edit Project"
+                                            >
+                                                <Pencil size={16} />
+                                                <span>Edit</span>
+                                            </Link>
+                                            <button
+                                                onClick={() => handleDelete(project.id)}
+                                                disabled={isDeleting === project.id}
+                                                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors text-sm font-medium disabled:opacity-50"
+                                                title="Delete Project"
+                                            >
+                                                {isDeleting === project.id ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                                                <span>Delete</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                            </div>
+                            
+                            {/* Pagination */}
+                            {totalPages > 1 && (
+                                <div className="px-6 pb-6">
+                                    <Pagination
+                                        currentPage={currentPage}
+                                        totalPages={totalPages}
+                                        onPageChange={paginate}
+                                        onPreviousPage={goToPreviousPage}
+                                        onNextPage={goToNextPage}
+                                    />
+                                </div>
+                            )}
+                        </>
                     ) : (
                         <div className="p-12 text-center">
                             <Github className="mx-auto h-12 w-12 text-slate-300 mb-4" />
