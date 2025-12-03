@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
@@ -28,12 +28,15 @@ const Navbar: React.FC = () => {
           </Link>
 
           <div className="flex items-center gap-4 sm:gap-6">
-            <Link
-              to="/explore"
-              className={`text-sm font-medium transition-colors ${location.pathname === '/explore' ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white'}`}
-            >
-              Explore
-            </Link>
+            {location.pathname !== '/explore' && (
+              <Link
+                to="/explore"
+                className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+              >
+                <Compass size={14} />
+                <span>Explore</span>
+              </Link>
+            )}
 
             {/* GitHub Repo Link */}
             <a
@@ -48,13 +51,15 @@ const Navbar: React.FC = () => {
 
             {user ? (
               <div className="flex items-center gap-3 border-l border-slate-200 dark:border-slate-700 pl-4">
-                <Link
-                  to="/dashboard"
-                  className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                >
-                  <LayoutDashboard size={18} />
-                  <span className="hidden sm:inline">Dashboard</span>
-                </Link>
+                {location.pathname !== '/dashboard' && (
+                  <Link
+                    to="/dashboard"
+                    className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                  >
+                    <LayoutDashboard size={18} />
+                    <span className="hidden sm:inline">Dashboard</span>
+                  </Link>
+                )}
                 <button
                   onClick={signOut}
                   className="text-slate-400 hover:text-red-500 transition-colors"
