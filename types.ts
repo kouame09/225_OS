@@ -10,6 +10,7 @@ export interface Project {
   language: string;
   updatedAt: string;
   imageUrl?: string;
+  slug: string;
   userId?: string; // Links to Supabase Auth User ID
 }
 

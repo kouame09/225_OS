@@ -8,198 +8,196 @@ import { useAuth } from '../contexts/AuthContext';
 import AuthModal from '../components/AuthModal';
 
 const Explore: React.FC = () => {
-  const { user, loading: authLoading } = useAuth();
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [selectedStack, setSelectedStack] = useState<string | null>(null);
+    const { user, loading: authLoading } = useAuth();
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isAuthOpen, setIsAuthOpen] = useState(false);
+    const [selectedStack, setSelectedStack] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Only fetch if user is logged in
-    const fetchData = async () => {
-        if (!user) {
-            setLoading(false);
-            return;
+    useEffect(() => {
+        // Only fetch if user is logged in
+        const fetchData = async () => {
+            if (!user) {
+                setLoading(false);
+                return;
+            }
+            try {
+                const data = await getProjects();
+                setProjects(data);
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (!authLoading) {
+            fetchData();
         }
-        try {
-            const data = await getProjects();
-            setProjects(data);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
-    
-    if (!authLoading) {
-        fetchData();
-    }
-  }, [user, authLoading]);
+    }, [user, authLoading]);
 
-  // Keyboard shortcut to open search (Cmd+K or Ctrl+K)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        if (user) {
-            e.preventDefault();
-            setIsSearchOpen(true);
-        }
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [user]);
+    // Keyboard shortcut to open search (Cmd+K or Ctrl+K)
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                if (user) {
+                    e.preventDefault();
+                    setIsSearchOpen(true);
+                }
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [user]);
 
-  const allStacks = useMemo(() => {
-    const stacks = new Set<string>();
-    projects.forEach(p => p.stacks.forEach(s => stacks.add(s)));
-    return Array.from(stacks).sort();
-  }, [projects]);
+    const allStacks = useMemo(() => {
+        const stacks = new Set<string>();
+        projects.forEach(p => p.stacks.forEach(s => stacks.add(s)));
+        return Array.from(stacks).sort();
+    }, [projects]);
 
-  const filteredProjects = useMemo(() => {
-    return projects.filter(project => {
-      const matchesStack = selectedStack ? project.stacks.includes(selectedStack) : true;
-      return matchesStack;
-    });
-  }, [projects, selectedStack]);
+    const filteredProjects = useMemo(() => {
+        return projects.filter(project => {
+            const matchesStack = selectedStack ? project.stacks.includes(selectedStack) : true;
+            return matchesStack;
+        });
+    }, [projects, selectedStack]);
 
-  if (authLoading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950"><Loader2 className="animate-spin text-emerald-500" /></div>;
+    if (authLoading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950"><Loader2 className="animate-spin text-emerald-500" /></div>;
 
-  // Restricted Access View
-  if (!user) {
-      return (
-          <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center px-4">
-              <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
-              
-              <div className="max-w-md w-full text-center space-y-6 p-8 bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800">
-                  <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto text-emerald-600 dark:text-emerald-400">
-                      <Lock size={32} />
-                  </div>
-                  
-                  <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Community Access Only</h2>
-                  
-                  <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
-                      The <span className="font-semibold text-emerald-600 dark:text-emerald-400">AfriCode Hub</span> project space is exclusive to our community members.
-                  </p>
-                  
-                  <p className="text-slate-500 dark:text-slate-400 text-sm">
-                      Join 500+ developers sharing their work and growing together.
-                  </p>
+    // Restricted Access View
+    if (!user) {
+        return (
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center px-4">
+                <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
 
-                  <button 
-                      onClick={() => setIsAuthOpen(true)}
-                      className="w-full py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg rounded-xl hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-lg shadow-emerald-500/10"
-                  >
-                      Sign In to Explore
-                  </button>
-              </div>
-          </div>
-      );
-  }
-
-  return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-8 pb-24">
-      <SearchModal 
-        isOpen={isSearchOpen} 
-        onClose={() => setIsSearchOpen(false)} 
-        projects={projects} 
-      />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            {/* Projects Header */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 mt-4">
-                <div>
-                    <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold mb-2 uppercase tracking-wider text-sm">
-                        <Terminal size={16} />
-                        <span>Project Space</span>
+                <div className="max-w-md w-full text-center space-y-6 p-8 bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800">
+                    <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto text-emerald-600 dark:text-emerald-400">
+                        <Lock size={32} />
                     </div>
-                    <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
-                        Explore Projects
-                    </h1>
-                    <p className="mt-2 text-slate-600 dark:text-slate-400 max-w-xl">
-                        Browse through a curated list of open-source tools, libraries, and applications built by the community.
+
+                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Community Access Only</h2>
+
+                    <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
+                        The <span className="font-semibold text-emerald-600 dark:text-emerald-400">AfriCode Hub</span> project space is exclusive to our community members.
                     </p>
-                </div>
 
-                {/* Search Bar */}
-                <button 
-                    onClick={() => setIsSearchOpen(true)}
-                    className="w-full md:w-auto min-w-[300px] flex items-center justify-between px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-500 dark:text-slate-400 hover:border-emerald-500 dark:hover:border-emerald-500 transition-colors shadow-sm"
-                >
-                    <div className="flex items-center gap-2">
-                        <Search size={18} />
-                        <span>Search projects...</span>
-                    </div>
-                    <div className="flex gap-1">
-                        <kbd className="hidden sm:inline-flex items-center rounded border border-slate-200 dark:border-slate-700 px-2 text-xs font-sans font-medium text-slate-400">
-                            ⌘K
-                        </kbd>
-                    </div>
-                </button>
-            </div>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm">
+                        Join 500+ developers sharing their work and growing together.
+                    </p>
 
-            {/* Filters */}
-            <div className="mb-10 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
-                <div className="flex gap-2">
                     <button
-                        onClick={() => setSelectedStack(null)}
-                        className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap border ${
-                            selectedStack === null 
-                            ? 'bg-slate-900 text-white border-slate-900 dark:bg-white dark:text-slate-900' 
-                            : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700'
-                        }`}
+                        onClick={() => setIsAuthOpen(true)}
+                        className="w-full py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg rounded-xl hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-lg shadow-emerald-500/10"
                     >
-                        All Stacks
+                        Sign In to Explore
                     </button>
-                    {allStacks.map(stack => (
-                        <button
-                            key={stack}
-                            onClick={() => setSelectedStack(stack === selectedStack ? null : stack)}
-                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap border ${
-                                stack === selectedStack
-                                ? 'bg-slate-900 text-white border-slate-900 dark:bg-white dark:text-slate-900' 
-                                : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700'
-                            }`}
-                        >
-                            {stack}
-                        </button>
-                    ))}
                 </div>
             </div>
+        );
+    }
 
-            {/* Projects Grid */}
-            {loading ? (
-                <div className="flex justify-center py-20">
-                    <Loader2 className="animate-spin text-emerald-500" size={32} />
-                </div>
-            ) : filteredProjects.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredProjects.map((project) => (
-                        <ProjectCard 
-                            key={project.id} 
-                            project={project} 
-                            onTagClick={(tag) => setSelectedStack(tag)}
-                        />
-                    ))}
-                </div>
-            ) : (
-                <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 border-dashed">
-                    <Filter className="mx-auto h-12 w-12 text-slate-300 dark:text-slate-600 mb-4" />
-                    <h3 className="text-lg font-medium text-slate-900 dark:text-white">No projects found</h3>
-                    <p className="text-slate-500 dark:text-slate-400 mt-1">Try adjusting your filters or search query.</p>
-                    <button 
-                        onClick={() => setSelectedStack(null)}
-                        className="mt-4 text-emerald-600 dark:text-emerald-400 font-medium hover:underline"
+    return (
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-8 pb-24">
+            <SearchModal
+                isOpen={isSearchOpen}
+                onClose={() => setIsSearchOpen(false)}
+                projects={projects}
+            />
+
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                {/* Projects Header */}
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 mt-4">
+                    <div>
+                        <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold mb-2 uppercase tracking-wider text-sm">
+                            <Terminal size={16} />
+                            <span>Project Space</span>
+                        </div>
+                        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
+                            Explore Projects
+                        </h1>
+                        <p className="mt-2 text-slate-600 dark:text-slate-400 max-w-xl">
+                            Browse through a curated list of open-source tools, libraries, and applications built by the community.
+                        </p>
+                    </div>
+
+                    {/* Search Bar */}
+                    <button
+                        onClick={() => setIsSearchOpen(true)}
+                        className="w-full md:w-auto min-w-[300px] flex items-center justify-between px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-500 dark:text-slate-400 hover:border-emerald-500 dark:hover:border-emerald-500 transition-colors shadow-sm"
                     >
-                        Clear filters
+                        <div className="flex items-center gap-2">
+                            <Search size={18} />
+                            <span>Search projects...</span>
+                        </div>
+                        <div className="flex gap-1">
+                            <kbd className="hidden sm:inline-flex items-center rounded border border-slate-200 dark:border-slate-700 px-2 text-xs font-sans font-medium text-slate-400">
+                                ⌘K
+                            </kbd>
+                        </div>
                     </button>
                 </div>
-            )}
-      </div>
-    </div>
-  );
+
+                {/* Filters */}
+                <div className="mb-10 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+                    <div className="flex gap-2">
+                        <button
+                            onClick={() => setSelectedStack(null)}
+                            className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap border ${selectedStack === null
+                                ? 'bg-slate-900 text-white border-slate-900 dark:bg-white dark:text-slate-900'
+                                : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700'
+                                }`}
+                        >
+                            All Stacks
+                        </button>
+                        {allStacks.map(stack => (
+                            <button
+                                key={stack}
+                                onClick={() => setSelectedStack(stack === selectedStack ? null : stack)}
+                                className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap border ${stack === selectedStack
+                                    ? 'bg-slate-900 text-white border-slate-900 dark:bg-white dark:text-slate-900'
+                                    : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700'
+                                    }`}
+                            >
+                                {stack}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Projects Grid */}
+                {loading ? (
+                    <div className="flex justify-center py-20">
+                        <Loader2 className="animate-spin text-emerald-500" size={32} />
+                    </div>
+                ) : filteredProjects.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredProjects.map((project) => (
+                            <ProjectCard
+                                key={project.id}
+                                project={project}
+                                onTagClick={(tag) => setSelectedStack(tag)}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 border-dashed">
+                        <Filter className="mx-auto h-12 w-12 text-slate-300 dark:text-slate-600 mb-4" />
+                        <h3 className="text-lg font-medium text-slate-900 dark:text-white">No projects found</h3>
+                        <p className="text-slate-500 dark:text-slate-400 mt-1">Try adjusting your filters or search query.</p>
+                        <button
+                            onClick={() => setSelectedStack(null)}
+                            className="mt-4 text-emerald-600 dark:text-emerald-400 font-medium hover:underline"
+                        >
+                            Clear filters
+                        </button>
+                    </div>
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default Explore;

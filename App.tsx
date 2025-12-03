@@ -19,16 +19,16 @@ const App: React.FC = () => {
     <ThemeProvider>
       <AuthProvider>
         <Routes>
-            <Route element={<Layout />}>
+          <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/add" element={<AddProject />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/project/:id" element={<ProjectDetails />} />
+            <Route path="/project/:slug" element={<ProjectDetails />} />
             <Route path="/why" element={<WhyAfriCodeHub />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/contact" element={<Contact />} />
-            </Route>
+          </Route>
         </Routes>
       </AuthProvider>
     </ThemeProvider>

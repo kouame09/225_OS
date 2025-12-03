@@ -1,5 +1,6 @@
 import { Project } from '../types';
 import { supabase } from '../lib/supabaseClient';
+import { slugify } from '../utils/slugify';
 
 // Helper to map DB snake_case to Frontend camelCase
 const mapProjectFromDB = (dbProject: any): Project => ({
@@ -14,6 +15,7 @@ const mapProjectFromDB = (dbProject: any): Project => ({
   language: dbProject.language,
   updatedAt: dbProject.updated_at,
   imageUrl: dbProject.image_url,
+  slug: dbProject.slug,
   userId: dbProject.user_id
 });
 
@@ -46,6 +48,21 @@ export const getProjectById = async (id: string): Promise<Project | undefined> =
   return mapProjectFromDB(data);
 };
 
+export const getProjectBySlug = async (slug: string): Promise<Project | undefined> => {
+  const { data, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('slug', slug)
+    .single();
+
+  if (error) {
+    console.error('Error fetching project:', JSON.stringify(error, null, 2));
+    return undefined;
+  }
+
+  return mapProjectFromDB(data);
+};
+
 export const getUserProjects = async (userId: string): Promise<Project[]> => {
   const { data, error } = await supabase
     .from('projects')
@@ -60,7 +77,10 @@ export const getUserProjects = async (userId: string): Promise<Project[]> => {
   return (data || []).map(mapProjectFromDB);
 };
 
-export const addProject = async (project: Omit<Project, 'id'>): Promise<void> => {
+export const addProject = async (project: Omit<Project, 'id' | 'slug'>): Promise<void> => {
+  // Generate slug from project name
+  const slug = slugify(project.name);
+
   const { error } = await supabase.from('projects').insert({
     name: project.name,
     author: project.author,
@@ -72,6 +92,7 @@ export const addProject = async (project: Omit<Project, 'id'>): Promise<void> =>
     language: project.language,
     updated_at: project.updatedAt,
     image_url: project.imageUrl,
+    slug: slug,
     user_id: project.userId
   });
 
@@ -82,9 +103,9 @@ export const addProject = async (project: Omit<Project, 'id'>): Promise<void> =>
 };
 
 export const deleteProject = async (id: string): Promise<void> => {
-    const { error } = await supabase.from('projects').delete().eq('id', id);
-    if (error) {
-        console.error('Error deleting project:', JSON.stringify(error, null, 2));
-        throw error;
-    }
+  const { error } = await supabase.from('projects').delete().eq('id', id);
+  if (error) {
+    console.error('Error deleting project:', JSON.stringify(error, null, 2));
+    throw error;
+  }
 };

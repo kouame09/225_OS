@@ -12,6 +12,7 @@ create table public.projects (
   language text,
   updated_at timestamp with time zone,
   image_url text,
+  slug text unique not null,
   user_id uuid references auth.users(id) on delete cascade
 );
 
