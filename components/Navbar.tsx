@@ -24,11 +24,10 @@ const Navbar: React.FC = () => {
           <div className="flex justify-between items-center h-16">
 
             <Link to="/" className="flex items-center gap-2 group">
-              <div className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 p-1.5 rounded-lg group-hover:rotate-3 transition-transform">
-                <Terminal size={20} strokeWidth={3} />
+              <div className="bg-orange-500 dark:bg-orange-400 text-white dark:text-slate-900 p-1.5 rounded-lg group-hover:rotate-3 transition-transform">
               </div>
               <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white">
-                225<span className="text-emerald-600 dark:text-emerald-400">OS</span>
+                <span className="text-emerald-600 dark:text-emerald-400">225OS</span>
               </span>
             </Link>
 
