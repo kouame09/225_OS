@@ -24,11 +24,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
       {/* Card Header / Image Area - Link to Details */}
       <Link to={`/project/${project.slug}`} className="block h-48 bg-slate-50 dark:bg-slate-800 overflow-hidden relative border-b border-slate-100 dark:border-slate-800 cursor-pointer">
         {project.imageUrl ? (
-          <img
-            src={project.imageUrl}
-            alt={project.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
+          <div className="w-full h-full p-3 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900">
+            <img
+              src={project.imageUrl}
+              alt={project.name}
+              className="max-w-full max-h-full object-contain rounded-lg shadow-md group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
             <span className="text-4xl font-bold text-slate-300 dark:text-slate-700 uppercase">

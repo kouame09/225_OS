@@ -15,6 +15,13 @@ const Explore: React.FC = () => {
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const [selectedStack, setSelectedStack] = useState<string | null>(null);
 
+    // Redirect to auth if not logged in
+    useEffect(() => {
+        if (!authLoading && !user) {
+            setIsAuthOpen(true);
+        }
+    }, [user, authLoading]);
+
     useEffect(() => {
         // Only fetch if user is logged in
         const fetchData = async () => {
@@ -32,7 +39,7 @@ const Explore: React.FC = () => {
             }
         };
 
-        if (!authLoading) {
+        if (!authLoading && user) {
             fetchData();
         }
     }, [user, authLoading]);
@@ -66,34 +73,11 @@ const Explore: React.FC = () => {
 
     if (authLoading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950"><Loader2 className="animate-spin text-emerald-500" /></div>;
 
-    // Restricted Access View
+    // Show auth modal if not logged in, but don't show the restricted access UI
     if (!user) {
         return (
-            <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center px-4">
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
                 <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
-
-                <div className="max-w-md w-full text-center space-y-6 p-8 bg-white dark:bg-slate-900 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800">
-                    <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto text-emerald-600 dark:text-emerald-400">
-                        <Lock size={32} />
-                    </div>
-
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Community Access Only</h2>
-
-                    <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
-                        The <span className="font-semibold text-emerald-600 dark:text-emerald-400">AfriCode Hub</span> project space is exclusive to our community members.
-                    </p>
-
-                    <p className="text-slate-500 dark:text-slate-400 text-sm">
-                        Join 500+ developers sharing their work and growing together.
-                    </p>
-
-                    <button
-                        onClick={() => setIsAuthOpen(true)}
-                        className="w-full py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold text-lg rounded-xl hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-lg shadow-emerald-500/10"
-                    >
-                        Sign In to Explore
-                    </button>
-                </div>
             </div>
         );
     }

@@ -68,12 +68,12 @@ const Home: React.FC = () => {
               Join the Community
               <ArrowRight size={20} />
             </button>
-            <Link
-              to="/explore"
+            <button
+              onClick={() => setIsAuthOpen(true)}
               className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900 text-slate-700 dark:text-white border border-slate-200 dark:border-slate-800 rounded-xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
             >
               Explore Projects
-            </Link>
+            </button>
           </div>
 
           {/* Social Proof Stats */}

@@ -142,7 +142,7 @@ const Dashboard: React.FC = () => {
                                     {/* Card Image/Header */}
                                     <div className="h-32 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 relative overflow-hidden">
                                         {project.imageUrl ? (
-                                            <img src={project.imageUrl} alt={project.name} className="w-full h-full object-cover opacity-60" />
+                                            <img src={project.imageUrl} alt={project.name} className="w-full h-full object-cover opacity-60 rounded-lg" />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center text-4xl font-bold text-slate-300 dark:text-slate-600">
                                                 {project.name.substring(0, 2).toUpperCase()}

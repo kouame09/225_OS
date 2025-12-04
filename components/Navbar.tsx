@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
           </Link>
 
           <div className="flex items-center gap-4 sm:gap-6">
-            {location.pathname !== '/explore' && (
+            {location.pathname !== '/explore' && location.pathname !== '/' && (
               <Link
                 to="/explore"
                 className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
