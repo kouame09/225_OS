@@ -112,7 +112,7 @@ const Home: React.FC = () => {
 
               {/* Visual: Mobile API Integration */}
               <div className="lg:w-1/2 w-full flex justify-center perspective-1000">
-                <div className="relative w-full max-w-md aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-8 flex items-center justify-center transform transition hover:scale-[1.02] duration-500">
+                <div className="relative w-full max-w-md aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-8 flex items-center justify-center transform transition duration-500">
                   {/* Background decoration */}
                   <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%] animate-[shine_4s_linear_infinite] opacity-10 rounded-3xl pointer-events-none"></div>
 
@@ -332,10 +332,10 @@ const Home: React.FC = () => {
                   </div>
 
                   {/* Satellite Nodes */}
-                  <div className="absolute top-12 left-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-pink-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">ABJ</div>
-                  <div className="absolute bottom-12 right-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-orange-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">YOP</div>
-                  <div className="absolute top-12 right-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-blue-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">COC</div>
-                  <div className="absolute bottom-12 left-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-emerald-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">BKE</div>
+                  <div className="absolute top-12 left-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-pink-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">Abidjan</div>
+                  <div className="absolute bottom-12 right-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-orange-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">Yamoussoukro</div>
+                  <div className="absolute top-12 right-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-blue-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">Bouaké</div>
+                  <div className="absolute bottom-12 left-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-emerald-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">Korhogo</div>
 
                   {/* Central Hub */}
                   <div className="relative z-20 w-24 h-24 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-slate-100 dark:border-slate-700 animate-pulse">
