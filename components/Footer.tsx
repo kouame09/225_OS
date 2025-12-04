@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className="text-slate-400 text-sm">
-            &copy; {new Date().getFullYear()} 225 Open Source.
+            225 Open Source &copy; {new Date().getFullYear()}
           </div>
         </div>
       </div>

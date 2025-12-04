@@ -132,12 +132,22 @@ const Why225OpenSource: React.FC = () => {
                             <p className="text-slate-300 dark:text-slate-600 mb-6 max-w-xl mx-auto">
                                 Don't let your project be another hidden gem. Share it with the Ivorian tech community and help put Côte d'Ivoire on the global tech map.
                             </p>
-                            <Link
-                                to="/#hero"
-                                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold rounded-xl transition-all"
-                            >
-                                Get Started
-                            </Link>
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                                <Link
+                                    to="/#hero"
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold rounded-xl transition-all"
+                                >
+                                    Get Started
+                                </Link>
+                                <a
+                                    href="https://www.buymeacoffee.com/princekouame"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white dark:border-slate-900 text-white dark:text-slate-900 rounded-xl hover:bg-white/10 dark:hover:bg-slate-900/10 transition-all"
+                                >
+                                    Support the Project
+                                </a>
+                            </div>
                         </section>
                     </div>
                 </div>
