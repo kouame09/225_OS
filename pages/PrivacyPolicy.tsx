@@ -25,7 +25,7 @@ const PrivacyPolicy: React.FC = () => {
 
           <div className="prose prose-slate dark:prose-invert max-w-none">
             <p className="text-sm text-slate-400 mb-8 border-b border-slate-100 dark:border-slate-800 pb-4">
-              Last updated: {new Date().toLocaleDateString()}
+              Last updated: {new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toLocaleDateString()}
             </p>
 
             <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-6 mb-3">1. Information We Collect</h3>
