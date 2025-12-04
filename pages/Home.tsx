@@ -534,7 +534,7 @@ const Home: React.FC = () => {
               </a>
               <button
                 onClick={() => setIsSignupOpen(true)}
-                className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white font-bold text-lg rounded-xl transition-all"
+                className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white font-bold text-lg rounded-xl transition-all transform hover:scale-105"
               >
                 Create Account
               </button>
