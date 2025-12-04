@@ -8,7 +8,17 @@ const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="text-center md:text-left">
           <p className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">225 Open Source</p>
-          <p className="text-slate-500 text-sm mt-1">Celebrating Ivorian Innovation.</p>
+          <p className="text-slate-500 text-sm mt-1">
+            Driven by{' '}
+            <a
+              href="https://www.princekouame.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-500 hover:text-slate-900 dark:hover:text-white underline font-medium"
+            >
+              Prince Kouamé
+            </a>
+          </p>
         </div>
 
         <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">

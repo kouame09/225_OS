@@ -7,7 +7,9 @@ import {
   Globe,
   Shield,
   Users,
-  Github
+  Github,
+  X,
+  AlertCircle
 } from 'lucide-react';
 import AuthModal from '../components/AuthModal';
 import { useAuth } from '../contexts/AuthContext';
@@ -42,7 +44,7 @@ const Home: React.FC = () => {
       ==================================================================================== */}
 
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
+      <section id="hero" className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
         {/* Abstract Tech Grid Background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
 
@@ -63,7 +65,7 @@ const Home: React.FC = () => {
           </h1>
 
           <p className="max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
-            Discover, showcase, and contribute to cutting-edge open source projects built by the most talented developers from Côte d'Ivoire and beyond.
+            Discover, showcase, and contribute to cutting-edge open source projects built by tech talents from Côte d'Ivoire.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -354,7 +356,7 @@ const Home: React.FC = () => {
                   Uniting the "Tech Maquis"
                 </h2>
                 <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  From freelancers in Cocody to startups in Yopougon, the Ivorian tech scene is vibrant but scattered. This platform acts as the <span className="text-slate-900 dark:text-white font-semibold">central hub</span>—where developers meet, collaborate, and lift each other up through code reviews and shared knowledge.
+                  From freelancers in Bouaké to startups in Abidjan, the Ivorian tech scene is vibrant but scattered. This platform acts as the <span className="text-slate-900 dark:text-white font-semibold">central hub</span>, where developers meet, collaborate, and lift each other up through code reviews and shared knowledge.
                 </p>
               </div>
             </div>
@@ -363,25 +365,150 @@ const Home: React.FC = () => {
 
       </div>
 
-      {/* --- CONTRIBUTORS / COMMUNITY SECTION --- */}
-      <section className="py-20 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Join Top Ivorian Contributors</h2>
-          <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
-                <img src={`https://i.pravatar.cc/150?u=${i + 20}`} alt="Contributor" className="w-full h-full object-cover" />
+
+
+      {/* --- PROBLEM & SOLUTION SECTION --- */}
+      <section className="py-24 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6">
+              The Problem We Solve Together
+            </h2>
+            <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+              GitHub is the world's largest open source platform, but it lacks a crucial feature: filtering projects by country. That's where 225 Open Source comes in.
+            </p>
+          </div>
+
+          {/* Problem Cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            <div className="bg-slate-50 dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center mb-4">
+                <X className="text-red-600 dark:text-red-400" size={24} />
               </div>
-            ))}
-            <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-900 text-slate-500 font-bold">
-              +500
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">No Country Filter on GitHub</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">
+                Impossible to easily discover open source projects created by Ivorian developers
+              </p>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-4">
+                <AlertCircle className="text-orange-600 dark:text-orange-400" size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Limited Visibility</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">
+                Ivorian talents remain hidden in the global ocean of open source projects
+              </p>
+            </div>
+
+            <div className="bg-slate-50 dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+              <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl flex items-center justify-center mb-4">
+                <Users className="text-yellow-600 dark:text-yellow-400" size={24} />
+              </div>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Fragmented Collaboration</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm">
+                Difficult for Ivorian developers to find each other and collaborate
+              </p>
             </div>
           </div>
-          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Our community is growing every day. Developers, designers, and innovators are coming together to shape the future of West Africa.
-          </p>
+
+          {/* Solution Cards */}
+          <div className="mb-20">
+            <h3 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">Our Solution</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-emerald-50 dark:bg-emerald-900/10 p-6 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800">
+                <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mb-4">
+                  <Terminal className="text-white" size={24} />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Smart Centralization</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">
+                  We automatically aggregate Ivorian open source projects from GitHub
+                </p>
+              </div>
+
+              <div className="bg-emerald-50 dark:bg-emerald-900/10 p-6 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800">
+                <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mb-4">
+                  <Globe className="text-white" size={24} />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Country Filtering</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">
+                  Instant access to all open source projects created in Côte d'Ivoire
+                </p>
+              </div>
+
+              <div className="bg-emerald-50 dark:bg-emerald-900/10 p-6 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800">
+                <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mb-4">
+                  <Users className="text-white" size={24} />
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Unified Community</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">
+                  A central space to discover, contribute, and collaborate with local talents
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* How It Works */}
+          <div>
+            <h3 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-4">How It Works?</h3>
+            <p className="text-center text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto">
+              A simple but powerful solution to connect the Ivorian ecosystem
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* Step 1 */}
+              <div className="relative">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 bg-slate-900 dark:bg-white rounded-2xl flex items-center justify-center mb-6 relative">
+                    <span className="text-2xl font-bold text-white dark:text-slate-900">1</span>
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
+                      <Github className="text-white" size={14} />
+                    </div>
+                  </div>
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Share on GitHub</h4>
+                  <p className="text-slate-600 dark:text-slate-400">
+                    Push your open source project to GitHub and make it public to make it accessible to everyone
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="relative">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 bg-slate-900 dark:bg-white rounded-2xl flex items-center justify-center mb-6 relative">
+                    <span className="text-2xl font-bold text-white dark:text-slate-900">2</span>
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
+                      <ArrowRight className="text-white" size={14} />
+                    </div>
+                  </div>
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Add It Here</h4>
+                  <p className="text-slate-600 dark:text-slate-400">
+                    Upload your project here so it can be easily found in our ecosystem
+                  </p>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="relative">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 bg-slate-900 dark:bg-white rounded-2xl flex items-center justify-center mb-6 relative">
+                    <span className="text-2xl font-bold text-white dark:text-slate-900">3</span>
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
+                      <CheckCircle className="text-white" size={14} />
+                    </div>
+                  </div>
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Collaborate</h4>
+                  <p className="text-slate-600 dark:text-slate-400">
+                    The Ivorian community discovers your project, contributes to it, and helps it grow together
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
 
       {/* --- CTA SECTION --- */}
       <section className="py-20 px-4 bg-slate-50 dark:bg-slate-950">
@@ -391,9 +518,9 @@ const Home: React.FC = () => {
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] -ml-32 -mb-32 pointer-events-none"></div>
 
           <div className="relative z-10">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">Ready to put CI on the map?</h2>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">Ready to put CIV on the map?</h2>
             <p className="text-slate-300 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-              Don't let your code gather dust. Add your project to 225 Open Source and inspire the next generation of Ivorian developers.
+              Don't let your project get lost in the ocean of GitHub projects. Add your project to 225 Open Source and contribute to the digital development of Côte d'Ivoire.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
@@ -413,6 +540,26 @@ const Home: React.FC = () => {
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* --- CONTRIBUTORS / COMMUNITY SECTION --- */}
+      <section className="py-20 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Join Top Ivorian Contributors</h2>
+          <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div key={i} className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
+                <img src={`https://i.pravatar.cc/150?u=${i + 20}`} alt="Contributor" className="w-full h-full object-cover" />
+              </div>
+            ))}
+            <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-900 text-slate-500 font-bold">
+              +500
+            </div>
+          </div>
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            Our community is growing every day. Software engineers, cybersecurity experts, data scientists,... are coming together to shape the tech future of Côte d'Ivoire.
+          </p>
         </div>
       </section>
     </div>
