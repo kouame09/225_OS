@@ -228,11 +228,9 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-<div align="center">
-  <p>Made with ❤️ in Côte d'Ivoire</p>
-  <p>
-    <a href="https://225opensource.com">Visit Website</a> •
-    <a href="https://github.com/princekouame/africode-hub/issues">Report Issue</a> •
-    <a href="https://github.com/princekouame/africode-hub/discussions">Discussions</a>
-  </p>
-</div>
+## Principal developer
+
+- **Prince Kouamé**
+- **Email**: [princekouame@gmail.com](mailto:princekouame@gmail.com)
+- **LinkedIn**: [Prince Kouamé](https://www.linkedin.com/in/princekouame/)
+
