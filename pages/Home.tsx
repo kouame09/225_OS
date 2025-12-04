@@ -548,11 +548,21 @@ const Home: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Join Top Ivorian Contributors</h2>
           <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
-                <img src={`https://i.pravatar.cc/150?u=${i + 20}`} alt="Contributor" className="w-full h-full object-cover" />
-              </div>
-            ))}
+            <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
+              <img src="/prince.jpg" alt="Contributor" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
+              <img src="https://i.pravatar.cc/150?u=22" alt="Contributor" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
+              <img src="https://i.pravatar.cc/150?u=23" alt="Contributor" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
+              <img src="https://i.pravatar.cc/150?u=24" alt="Contributor" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
+              <img src="https://i.pravatar.cc/150?u=25" alt="Contributor" className="w-full h-full object-cover" />
+            </div>
             <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-900 text-slate-500 font-bold">
               +500
             </div>
