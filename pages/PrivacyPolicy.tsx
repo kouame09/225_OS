@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const PrivacyPolicy: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-12 pb-24 font-sans">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,7 +30,7 @@ const PrivacyPolicy: React.FC = () => {
 
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-6 mb-3">1. Information We Collect</h3>
                 <p className="text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
-                    AfriCode Hub is a public platform. The projects displayed here are aggregated from public GitHub repositories.
+                    225 Open Source is a public platform. The projects displayed here are aggregated from public GitHub repositories.
                     When you submit a project, we fetch public metadata (repository name, description, stars, forks, language) from the GitHub API.
                     We do not store passwords, private repository data, or personal contact information beyond what is publicly available on your GitHub profile.
                 </p>

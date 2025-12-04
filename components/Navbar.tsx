@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
               <Terminal size={20} strokeWidth={3} />
             </div>
             <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white">
-              Afri<span className="text-emerald-600 dark:text-emerald-400">Code</span> Hub
+              225<span className="text-emerald-600 dark:text-emerald-400">OS</span>
             </span>
           </Link>
 

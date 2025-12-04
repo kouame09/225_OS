@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
     <footer className="py-10 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="text-center md:text-left">
-          <p className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">AfriCode Hub</p>
+          <p className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">225 Open Source</p>
           <p className="text-slate-500 text-sm mt-1">Celebrating African Innovation.</p>
         </div>
 

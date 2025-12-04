@@ -11,7 +11,7 @@ import Home from './pages/Home';
 import AddProject from './pages/AddProject';
 import ProjectDetails from './pages/ProjectDetails';
 import Explore from './pages/Explore';
-import WhyAfriCodeHub from './pages/WhyAfriCodeHub';
+import Why225OpenSource from './pages/Why225OpenSource';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
@@ -30,7 +30,7 @@ const App: React.FC = () => {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/edit/:slug" element={<EditProject />} />
               <Route path="/project/:slug" element={<ProjectDetails />} />
-              <Route path="/why" element={<WhyAfriCodeHub />} />
+              <Route path="/why" element={<Why225OpenSource />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/contact" element={<Contact />} />
             </Route>

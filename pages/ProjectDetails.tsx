@@ -56,7 +56,7 @@ const ProjectDetails: React.FC = () => {
     if (!project) return;
 
     const shareData = {
-      title: `${project.name} on AfriCode Hub`,
+      title: `${project.name} on 225 Open Source`,
       text: `Check out ${project.name} by ${project.author}. ${project.description}`,
       url: window.location.href,
     };

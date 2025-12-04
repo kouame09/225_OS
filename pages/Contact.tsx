@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Mail, MessageSquare, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Contact: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col pt-12 px-4 font-sans">
       

@@ -53,7 +53,7 @@ const Home: React.FC = () => {
 
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.1]">
             Build the Future of <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-600 dark:from-emerald-400 dark:to-blue-400">Ivorian Tech</span> Together
+            <span className="text-transparent bg-clip-text bg-emerald-600 dark:from-emerald-400 dark:to-blue-400">Ivorian Tech</span> Together
           </h1>
 
           <p className="max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
@@ -68,12 +68,12 @@ const Home: React.FC = () => {
               Join the Community
               <ArrowRight size={20} />
             </button>
-            <button
-              onClick={() => setIsAuthOpen(true)}
+            <Link
+              to="/why"
               className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-slate-900 text-slate-700 dark:text-white border border-slate-200 dark:border-slate-800 rounded-xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
             >
-              Explore Projects
-            </button>
+              Learn More
+            </Link>
           </div>
 
           {/* Social Proof Stats */}
@@ -387,7 +387,7 @@ const Home: React.FC = () => {
           <div className="relative z-10">
             <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">Ready to put CI on the map?</h2>
             <p className="text-slate-300 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-              Don't let your code gather dust. Add your project to AfriCode Hub and inspire the next generation of Ivorian developers.
+              Don't let your code gather dust. Add your project to 225 Open Source and inspire the next generation of Ivorian developers.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a

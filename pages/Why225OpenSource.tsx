@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Terminal, Heart, Globe, Shield, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const WhyAfriCodeHub: React.FC = () => {
+const Why225OpenSource: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-12 pb-24 font-sans">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,7 +16,7 @@ const WhyAfriCodeHub: React.FC = () => {
 
         <div className="mb-12">
             <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
-                Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-400">AfriCode Hub?</span>
+                Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-400">225 Open Source?</span>
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-light">
                 A manifesto for the Ivorian and African developer ecosystem.
@@ -30,7 +34,7 @@ const WhyAfriCodeHub: React.FC = () => {
                 <p className="text-lg leading-relaxed">
                     Africa is teeming with talent. In Abidjan, Lagos, Nairobi, and beyond, developers are building incredible tools.
                     However, many of these projects remain hidden in private repositories or local hard drives.
-                    <strong className="text-slate-900 dark:text-white font-semibold"> AfriCode Hub</strong> exists to bring this code to the light. We believe that by showcasing what we build, we change the narrative of African technology from "consumers" to "creators".
+                    <strong className="text-slate-900 dark:text-white font-semibold"> 225 Open Source</strong> exists to bring this code to the light. We believe that by showcasing what we build, we change the narrative of African technology from "consumers" to "creators".
                 </p>
             </section>
 
@@ -54,7 +58,7 @@ const WhyAfriCodeHub: React.FC = () => {
                     <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Digital Sovereignty</h2>
                 </div>
                 <p className="text-lg leading-relaxed">
-                    We cannot rely solely on foreign software to solve our local challenges. We need payment gateways that understand Mobile Money. We need agricultural apps that work offline in rural areas. AfriCode Hub champions the creation of independent, locally-maintained infrastructure that serves our unique needs.
+                    We cannot rely solely on foreign software to solve our local challenges. We need payment gateways that understand Mobile Money. We need agricultural apps that work offline in rural areas. 225 Open Source champions the creation of independent, locally-maintained infrastructure that serves our unique needs.
                 </p>
             </section>
 
@@ -76,4 +80,4 @@ const WhyAfriCodeHub: React.FC = () => {
   );
 };
 
-export default WhyAfriCodeHub;
+export default Why225OpenSource;
