@@ -253,7 +253,7 @@ const Home: React.FC = () => {
                   </li>
                   <li className="flex items-start gap-3 text-slate-600 dark:text-slate-400">
                     <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span>Get recognized by top tech companies in West Africa.</span>
+                    <span>Get recognized by top tech companies in Côte d'Ivoire and West Africa.</span>
                   </li>
                 </ul>
               </div>
