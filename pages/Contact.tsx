@@ -29,8 +29,8 @@ const Contact: React.FC = () => {
             
             <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">Get in Touch</h1>
             <p className="text-slate-600 dark:text-slate-300 mb-10 leading-relaxed text-lg">
-                Have a project suggestion, a partnership idea, or just want to say hi? <br className="hidden sm:block"/>
-                We are always open to discussing how to move the African tech ecosystem forward.
+                Have a suggestion, a partnership idea, or just want to talk? <br className="hidden sm:block"/>
+                We are always open to discussing how to move the Ivorian tech ecosystem forward.
             </p>
 
             <a 
