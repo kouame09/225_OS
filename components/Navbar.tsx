@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
-import AuthModal from './AuthModal';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const { darkMode, toggleDarkMode } = useTheme();
   const { user, signOut } = useAuth();
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/70 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800">
-      <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -69,13 +66,13 @@ const Navbar: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <button
-                onClick={() => setIsAuthOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 rounded-lg transition-colors shadow-sm"
+              <Link
+                to="/"
+                className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 rounded-lg transition-colors"
               >
                 <User size={16} />
                 <span>Join</span>
-              </button>
+              </Link>
             )}
 
             <button

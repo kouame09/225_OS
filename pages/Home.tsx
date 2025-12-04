@@ -86,7 +86,7 @@ const Home: React.FC = () => {
           <div className="mt-16 pt-8 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-wrap justify-center gap-12 md:gap-24">
             <div className="text-center">
               <p className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">500+</p>
-              <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider mt-1">Developers</p>
+              <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider mt-1">Tech Professionals</p>
             </div>
             <div className="text-center">
               <p className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">120+</p>
