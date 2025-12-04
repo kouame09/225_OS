@@ -61,7 +61,7 @@ const Home: React.FC = () => {
 
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.1]">
             Build the Future of <br />
-            <span className="text-transparent bg-clip-text bg-emerald-600 dark:from-emerald-400 dark:to-blue-400">Ivorian Tech</span> Together
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600 dark:from-orange-400 dark:to-orange-500">Ivorian</span> <span className="text-transparent bg-clip-text bg-emerald-600 dark:from-emerald-400 dark:to-blue-400">Tech</span> Together
           </h1>
 
           <p className="max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
