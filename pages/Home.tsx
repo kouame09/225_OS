@@ -52,7 +52,7 @@ const Home: React.FC = () => {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
 
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-sm font-medium mb-8 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-sm font-medium mb-8">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
             The #1 Open Source Community in West Africa
           </div>
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => setIsAuthOpen(true)}
-              className="w-full sm:w-auto px-7 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-base hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-xl shadow-slate-900/20 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-7 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-base hover:bg-slate-800 dark:hover:bg-slate-200 transition-all flex items-center justify-center gap-2"
             >
               Join the Community
               <ArrowRight size={20} />
@@ -110,12 +110,12 @@ const Home: React.FC = () => {
 
               {/* Visual: Mobile API Integration */}
               <div className="lg:w-1/2 w-full flex justify-center perspective-1000">
-                <div className="relative w-full max-w-md aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-8 flex items-center justify-center shadow-2xl transform transition hover:scale-[1.02] duration-500">
+                <div className="relative w-full max-w-md aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-8 flex items-center justify-center transform transition hover:scale-[1.02] duration-500">
                   {/* Background decoration */}
                   <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%] animate-[shine_4s_linear_infinite] opacity-10 rounded-3xl pointer-events-none"></div>
 
                   {/* Floating Phone UI */}
-                  <div className="relative w-48 h-80 bg-slate-900 rounded-[2rem] border-4 border-slate-800 shadow-2xl overflow-hidden flex flex-col z-20 transform rotate-[-6deg] translate-x-4">
+                  <div className="relative w-48 h-80 bg-slate-900 rounded-[2rem] border-4 border-slate-800 overflow-hidden flex flex-col z-20 transform rotate-[-6deg] translate-x-4">
                     <div className="h-full bg-slate-950 p-4 flex flex-col relative">
                       {/* Notch */}
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-slate-900 rounded-b-xl"></div>
@@ -134,7 +134,7 @@ const Home: React.FC = () => {
                   </div>
 
                   {/* Floating Code Snippet Card behind phone */}
-                  <div className="absolute left-8 bottom-12 w-64 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-xl p-4 shadow-xl border border-slate-200 dark:border-slate-600 z-10 transform rotate-[3deg]">
+                  <div className="absolute left-8 bottom-12 w-64 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-xl p-4 border border-slate-200 dark:border-slate-600 z-10 transform rotate-[3deg]">
                     <div className="flex gap-1.5 mb-3">
                       <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
                       <div className="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
@@ -187,7 +187,7 @@ const Home: React.FC = () => {
 
               {/* Visual: Contribution Graph & Profile */}
               <div className="lg:w-1/2 w-full flex justify-center">
-                <div className="relative w-full max-w-md aspect-square bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 flex items-center justify-center shadow-2xl">
+                <div className="relative w-full max-w-md aspect-square bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 flex items-center justify-center">
                   {/* Abstract Contribution Grid Background */}
                   <div className="absolute inset-0 opacity-5 dark:opacity-20 grid grid-cols-12 gap-1 p-8">
                     {Array.from({ length: 144 }).map((_, i) => (
@@ -196,7 +196,7 @@ const Home: React.FC = () => {
                   </div>
 
                   {/* Profile Card */}
-                  <div className="relative z-10 w-64 bg-white dark:bg-slate-950 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 p-5">
+                  <div className="relative z-10 w-64 bg-white dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 p-5">
                     <div className="flex items-center gap-4 mb-6">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-emerald-500"></div>
                       <div>
@@ -224,7 +224,7 @@ const Home: React.FC = () => {
                     </button>
 
                     {/* Hired Badge */}
-                    <div className="absolute -right-6 -top-6 bg-emerald-500 text-white px-4 py-2 rounded-lg shadow-lg transform rotate-12 flex items-center gap-2">
+                    <div className="absolute -right-6 -top-6 bg-emerald-500 text-white px-4 py-2 rounded-lg transform rotate-12 flex items-center gap-2">
                       <CheckCircle size={16} />
                       <span className="font-bold text-sm">HIRED</span>
                     </div>
@@ -266,14 +266,14 @@ const Home: React.FC = () => {
 
               {/* Visual: Server Stack & Shield */}
               <div className="lg:w-1/2 w-full flex justify-center">
-                <div className="relative w-full max-w-md aspect-square bg-slate-900 rounded-3xl border border-slate-800 p-8 flex items-center justify-center shadow-2xl overflow-hidden group">
+                <div className="relative w-full max-w-md aspect-square bg-slate-900 rounded-3xl border border-slate-800 p-8 flex items-center justify-center overflow-hidden group">
                   {/* Glowing Effect */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-purple-500/20 rounded-full blur-[60px] group-hover:bg-purple-500/30 transition-all duration-700"></div>
 
                   {/* Server Stack Illustration (CSS Shapes) */}
                   <div className="relative z-10 flex flex-col gap-4">
                     {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-48 h-12 bg-slate-800 border border-slate-700 rounded-lg flex items-center px-4 justify-between shadow-lg relative overflow-hidden">
+                      <div key={i} className="w-48 h-12 bg-slate-800 border border-slate-700 rounded-lg flex items-center px-4 justify-between relative overflow-hidden">
                         <div className="flex gap-2">
                           <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
                           <div className="w-1.5 h-1.5 rounded-full bg-slate-600"></div>
@@ -286,7 +286,7 @@ const Home: React.FC = () => {
                   </div>
 
                   {/* Shield Overlay */}
-                  <div className="absolute z-20 bg-slate-950/80 backdrop-blur-sm border border-purple-500/50 p-4 rounded-2xl shadow-2xl flex flex-col items-center gap-2 transform translate-y-8 group-hover:translate-y-6 transition-transform">
+                  <div className="absolute z-20 bg-slate-950/80 backdrop-blur-sm border border-purple-500/50 p-4 rounded-2xl flex flex-col items-center gap-2 transform translate-y-8 group-hover:translate-y-6 transition-transform">
                     <Shield size={32} className="text-purple-500" />
                     <span className="text-xs font-bold text-white tracking-widest">OWN YOUR DATA</span>
                   </div>
@@ -320,7 +320,7 @@ const Home: React.FC = () => {
 
               {/* Visual: Network Hub */}
               <div className="lg:w-1/2 w-full flex justify-center">
-                <div className="relative w-full max-w-md aspect-square bg-slate-50 dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 flex items-center justify-center shadow-lg overflow-hidden">
+                <div className="relative w-full max-w-md aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-8 flex items-center justify-center overflow-hidden">
                   {/* Connecting Lines (CSS) */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="absolute w-[80%] h-[1px] bg-slate-300 dark:bg-slate-700 rotate-45"></div>
@@ -330,13 +330,13 @@ const Home: React.FC = () => {
                   </div>
 
                   {/* Satellite Nodes */}
-                  <div className="absolute top-12 left-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-pink-500 shadow-lg z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">ABJ</div>
-                  <div className="absolute bottom-12 right-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-orange-500 shadow-lg z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">YOP</div>
-                  <div className="absolute top-12 right-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-blue-500 shadow-lg z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">COC</div>
-                  <div className="absolute bottom-12 left-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-emerald-500 shadow-lg z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">BKE</div>
+                  <div className="absolute top-12 left-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-pink-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">ABJ</div>
+                  <div className="absolute bottom-12 right-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-orange-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">YOP</div>
+                  <div className="absolute top-12 right-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-blue-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">COC</div>
+                  <div className="absolute bottom-12 left-12 w-12 h-12 bg-white dark:bg-slate-800 rounded-full border-2 border-emerald-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">BKE</div>
 
                   {/* Central Hub */}
-                  <div className="relative z-20 w-24 h-24 bg-white dark:bg-slate-800 rounded-full shadow-2xl flex items-center justify-center border-4 border-slate-100 dark:border-slate-700 animate-pulse">
+                  <div className="relative z-20 w-24 h-24 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-slate-100 dark:border-slate-700 animate-pulse">
                     <div className="w-16 h-16 bg-slate-900 dark:bg-white rounded-full flex items-center justify-center">
                       <Terminal size={24} className="text-white dark:text-slate-900" />
                     </div>
@@ -369,7 +369,7 @@ const Home: React.FC = () => {
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Join Top Ivorian Contributors</h2>
           <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden shadow-lg relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
+              <div key={i} className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
                 <img src={`https://i.pravatar.cc/150?u=${i + 20}`} alt="Contributor" className="w-full h-full object-cover" />
               </div>
             ))}
@@ -385,7 +385,7 @@ const Home: React.FC = () => {
 
       {/* --- CTA SECTION --- */}
       <section className="py-20 px-4 bg-slate-50 dark:bg-slate-950">
-        <div className="max-w-5xl mx-auto bg-slate-900 dark:bg-emerald-950 rounded-[2.5rem] p-10 sm:p-20 text-center shadow-2xl relative overflow-hidden group">
+        <div className="max-w-5xl mx-auto bg-slate-900 dark:bg-emerald-950 rounded-[2.5rem] p-10 sm:p-20 text-center relative overflow-hidden group">
           {/* Decor elements */}
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none group-hover:bg-emerald-500/30 transition-colors duration-700"></div>
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] -ml-32 -mb-32 pointer-events-none"></div>
@@ -400,7 +400,7 @@ const Home: React.FC = () => {
                 href="https://github.com/princekouame/africode-hub"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-lg rounded-xl transition-all transform hover:scale-105 shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-lg rounded-xl transition-all transform hover:scale-105 flex items-center justify-center gap-2"
               >
                 <Github size={20} />
                 View on GitHub
