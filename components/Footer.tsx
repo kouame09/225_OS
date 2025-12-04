@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="text-center md:text-left">
           <p className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">225 Open Source</p>
-          <p className="text-slate-500 text-sm mt-1">Celebrating African Innovation.</p>
+          <p className="text-slate-500 text-sm mt-1">Celebrating Ivorian Innovation.</p>
         </div>
 
         <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
@@ -33,7 +33,7 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className="text-slate-400 text-sm">
-            &copy; {new Date().getFullYear()} Prince Kouame.
+            &copy; {new Date().getFullYear()} 225 Open Source.
           </div>
         </div>
       </div>
