@@ -15,6 +15,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isSignupOpen, setIsSignupOpen] = useState(false);
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -29,6 +30,11 @@ const Home: React.FC = () => {
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
+      />
+      <AuthModal
+        isOpen={isSignupOpen}
+        onClose={() => setIsSignupOpen(false)}
+        initialView="signup"
       />
 
       {/* ====================================================================================
@@ -400,7 +406,7 @@ const Home: React.FC = () => {
                 View on GitHub
               </a>
               <button
-                onClick={() => setIsAuthOpen(true)}
+                onClick={() => setIsSignupOpen(true)}
                 className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white font-bold text-lg rounded-xl transition-all"
               >
                 Create Account

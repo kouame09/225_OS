@@ -15,7 +15,7 @@ const PrivacyPolicy: React.FC = () => {
             <ArrowLeft size={16} /> Back to Home
         </Link>
 
-        <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 sm:p-12 shadow-xl border border-slate-200 dark:border-slate-800">
+        <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 sm:p-12 border border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-4 mb-8">
                 <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded-xl">
                     <Lock className="text-slate-700 dark:text-slate-300" size={24} />

@@ -17,7 +17,7 @@ const Contact: React.FC = () => {
       </div>
 
       <div className="flex-1 flex items-center justify-center pb-20">
-        <div className="max-w-xl w-full bg-white dark:bg-slate-900 rounded-[2rem] p-8 sm:p-12 shadow-2xl border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden">
+        <div className="max-w-xl w-full bg-white dark:bg-slate-900 rounded-[2rem] p-8 sm:p-12 border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden">
             
             {/* Background Decor */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-500/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
