@@ -7,6 +7,12 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { Project, GithubMeta } from '../types';
 
+const SUGGESTED_STACKS = [
+  'React', 'TypeScript', 'Python', 'Node.js', 'Vue',
+  'Flutter', 'Go', 'Rust', 'PHP', 'Laravel',
+  'TailwindCSS', 'Django', 'Express', 'Next.js', 'NestJS', 'Spring Boot', 'Java'
+];
+
 const AddProject: React.FC = () => {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
@@ -78,6 +84,12 @@ const AddProject: React.FC = () => {
         setStacks([...stacks, stackInput.trim()]);
       }
       setStackInput('');
+    }
+  };
+
+  const handleAddSuggestion = (tech: string) => {
+    if (!stacks.includes(tech)) {
+      setStacks([...stacks, tech]);
     }
   };
 
@@ -248,6 +260,19 @@ const AddProject: React.FC = () => {
                   onChange={(e) => setStackInput(e.target.value)}
                   onKeyDown={handleAddStack}
                 />
+              </div>
+
+              <div className="flex flex-wrap gap-2 mt-3">
+                {SUGGESTED_STACKS.map(tech => (
+                  <button
+                    key={tech}
+                    type="button"
+                    onClick={() => handleAddSuggestion(tech)}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 transition-colors"
+                  >
+                    {tech} <span className="ml-1 text-slate-400">+</span>
+                  </button>
+                ))}
               </div>
             </div>
 

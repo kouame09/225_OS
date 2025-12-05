@@ -11,7 +11,7 @@
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.2-blue.svg)](https://www.typescriptlang.org/)
   [![Supabase](https://img.shields.io/badge/Supabase-2.39.7-green.svg)](https://supabase.com/)
   
-  [Live Demo](https://225opensource.com) • [Report Bug](https://github.com/princekouame/africode-hub/issues) • [Request Feature](https://github.com/princekouame/africode-hub/issues)
+  [Live Demo](https://225opensource.com) • [Report Bug](https://github.com/princekouame/225opensource/issues) • [Request Feature](https://github.com/princekouame/225opensource/issues)
 </div>
 
 ---
@@ -59,8 +59,8 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/princekouame/africode-hub.git
-   cd africode-hub
+   git clone https://github.com/princekouame/225opensource.git
+   cd 225opensource
    ```
 
 2. **Install dependencies**
