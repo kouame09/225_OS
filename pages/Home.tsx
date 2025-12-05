@@ -554,7 +554,7 @@ const Home: React.FC = () => {
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
               <img src="https://i.pravatar.cc/150?u=22" alt="Contributor" className="w-full h-full object-cover" />
             </div>
-            <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
+            <div c lassName="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
               <img src="https://i.pravatar.cc/150?u=23" alt="Contributor" className="w-full h-full object-cover" />
             </div>
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
