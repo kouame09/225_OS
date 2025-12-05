@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         <div className="text-center md:text-left">
           <p className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">225 Open Source</p>
           <p className="text-slate-500 text-sm mt-1">
-            Driven by{' '}
+            Led by{' '}
             <a
               href="https://www.princekouame.com"
               target="_blank"
