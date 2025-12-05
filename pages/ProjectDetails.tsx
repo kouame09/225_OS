@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import {
   ArrowLeft,
   Github,
@@ -19,6 +20,7 @@ import Badge from '../components/Badge';
 const ProjectDetails: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
@@ -96,13 +98,17 @@ const ProjectDetails: React.FC = () => {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-64 relative z-20">
 
+
+
         {/* Navigation */}
-        <button
-          onClick={() => navigate(-1)}
-          className="mb-6 flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm font-medium"
-        >
-          <ArrowLeft size={16} /> Back to Projects
-        </button>
+        {user && (
+          <button
+            onClick={() => navigate(-1)}
+            className="mb-6 flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm font-medium"
+          >
+            <ArrowLeft size={16} /> Back to Projects
+          </button>
+        )}
 
         {/* Unified Card */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
@@ -208,6 +214,25 @@ const ProjectDetails: React.FC = () => {
 
           </div>
         </div>
+
+        {/* CTA for unauthenticated users (Bottom) */}
+        {!user && (
+          <div className="mt-12 p-8 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl shadow-xl text-white flex flex-col items-center text-center gap-6 relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div className="relative z-10 max-w-2xl">
+              <h3 className="text-3xl font-bold mb-3">Love this project?</h3>
+              <p className="text-emerald-50 text-lg mb-2">
+                Join 225 Open Source to discover more amazing projects, support local developers, and share your own work.
+              </p>
+            </div>
+            <Link
+              to="/"
+              className="relative z-10 px-8 py-4 bg-white text-emerald-600 font-bold text-lg rounded-xl hover:bg-emerald-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Create Free Account
+            </Link>
+          </div>
+        )}
 
       </div>
     </div>
