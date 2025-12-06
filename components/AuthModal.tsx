@@ -52,6 +52,61 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
     setView(newView);
   };
 
+  const getAuthErrorMessage = (error: any): string => {
+    // Handle specific Supabase error messages
+    if (error?.message) {
+      const message = error.message.toLowerCase();
+      
+      // Email/Password errors
+      if (message.includes('invalid login credentials')) {
+        return 'Invalid email or password';
+      }
+      if (message.includes('invalid email')) {
+        return 'Invalid email address';
+      }
+      if (message.includes('email not confirmed')) {
+        return 'Please confirm your email address before signing in';
+      }
+      if (message.includes('weak password')) {
+        return 'Password must be at least 6 characters long';
+      }
+      if (message.includes('user already registered')) {
+        return 'An account already exists with this email address';
+      }
+      if (message.includes('signup disabled')) {
+        return 'Sign up is temporarily disabled';
+      }
+      
+      // Network/Server errors
+      if (message.includes('network') || message.includes('fetch')) {
+        return 'Connection problem. Check your internet and try again';
+      }
+      if (message.includes('timeout')) {
+        return 'Server is taking too long to respond. Please try again in a moment';
+      }
+      if (message.includes('too many requests')) {
+        return 'Too many attempts. Please wait a few minutes before trying again';
+      }
+    }
+    
+    // Handle specific view errors
+    if (view === 'signup' && error?.message?.includes('password')) {
+      return 'Passwords do not match';
+    }
+    
+    // Default fallback messages
+    switch (view) {
+      case 'login':
+        return 'Sign in failed. Please check your credentials';
+      case 'signup':
+        return 'Account creation failed. Please check your information';
+      case 'forgot':
+        return 'Failed to send reset link';
+      default:
+        return 'An error occurred. Please try again';
+    }
+  };
+
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -76,7 +131,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         });
         if (error) throw error;
         onClose();
-        alert('Account created! You can now log in.');
+        setSuccessMessage('Account created! You can now log in.');
       } else if (view === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: window.location.origin,
@@ -85,7 +140,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         setSuccessMessage('Password reset link sent to your email.');
       }
     } catch (err: any) {
-      setError(err.message || 'Authentication failed');
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -98,7 +153,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
       });
       if (error) throw error;
     } catch (err: any) {
-      setError(err.message);
+      setError(getAuthErrorMessage(err));
     }
   };
 
