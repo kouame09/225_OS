@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Terminal, Heart, Globe, Shield, ArrowLeft, Lightbulb, TrendingUp, Users, Code } from 'lucide-react';
+import { Terminal, Heart, Globe, Shield, ArrowLeft, Lightbulb, TrendingUp, Users, Code, DollarSign } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AuthModal from '../components/AuthModal';
 
@@ -25,7 +25,7 @@ const Why225OpenSource: React.FC = () => {
 
                     <div className="mb-12">
                         <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
-                            Why <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-400">225 Open Source?</span>
+                            Why <span className="text-transparent bg-clip-text bg-emerald-600">225 Open Source?</span>
                         </h1>
                         <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-light">
                             Beyond solving GitHub's filtering problem, we're building something bigger: a movement to put Ivorian tech on the global map.
@@ -145,6 +145,7 @@ const Why225OpenSource: React.FC = () => {
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white dark:border-slate-900 text-white dark:text-slate-900 rounded-xl hover:bg-white/10 dark:hover:bg-slate-900/10 transition-all"
                                 >
+                                    <DollarSign size={18} />
                                     Support the Project
                                 </a>
                             </div>
