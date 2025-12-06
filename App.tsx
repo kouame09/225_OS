@@ -16,8 +16,17 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import EditProject from './pages/EditProject';
+import MaintenancePage from './pages/MaintenancePage';
+import { CONFIG } from './config';
 
 const App: React.FC = () => {
+  if (CONFIG.IS_MAINTENANCE_MODE) {
+    return (
+      <ThemeProvider>
+        <MaintenancePage />
+      </ThemeProvider>
+    );
+  }
   return (
     <ThemeProvider>
       <AuthProvider>
