@@ -24,28 +24,36 @@ const Explore: React.FC = () => {
             title: "Abidjan Tech Summit 2025",
             description: "Join the biggest tech event in Côte d'Ivoire. Connect with developers, startups, and tech enthusiasts from March 15-17.",
             date: "Mar 15-17, 2025",
-            location: "Abidjan, Côte d'Ivoire"
+            location: "Abidjan, Côte d'Ivoire",
+            learnMoreUrl: "#",
+            registerUrl: "#"
         },
         {
             id: 2,
             title: "AI & Machine Learning Workshop",
             description: "Hands-on workshop covering the latest in AI and ML technologies. Perfect for developers looking to level up their skills.",
             date: "Apr 20-21, 2025",
-            location: "Yamoussoukro"
+            location: "Yamoussoukro",
+            learnMoreUrl: "#",
+            registerUrl: "#"
         },
         {
             id: 3,
             title: "Startup Pitch Night",
             description: "Present your startup ideas to investors and mentors. Network with fellow entrepreneurs and get valuable feedback.",
             date: "May 8, 2025",
-            location: "Grand-Bassam"
+            location: "Grand-Bassam",
+            learnMoreUrl: "#",
+            registerUrl: "#"
         },
         {
             id: 4,
             title: "Web3 & Blockchain Conference",
             description: "Explore the future of decentralized web. Learn about blockchain, crypto, and Web3 technologies from industry experts.",
             date: "Jun 10-12, 2025",
-            location: "Abidjan"
+            location: "Abidjan",
+            learnMoreUrl: "#",
+            registerUrl: "#"
         }
     ];
 
@@ -179,12 +187,22 @@ const Explore: React.FC = () => {
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3">
-                            <button className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-colors shadow-lg shadow-emerald-500/30">
+                            <a
+                                href={techEvents[currentEventIndex].learnMoreUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-colors shadow-lg shadow-emerald-500/30 text-center"
+                            >
                                 Learn More
-                            </button>
-                            <button className="px-6 py-3 bg-slate-800/50 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-slate-800/70 transition-colors border border-emerald-600/30">
+                            </a>
+                            <a
+                                href={techEvents[currentEventIndex].registerUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-3 bg-slate-800/50 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-slate-800/70 transition-colors border border-emerald-600/30 text-center"
+                            >
                                 Register Now
-                            </button>
+                            </a>
                         </div>
                     </div>
 
