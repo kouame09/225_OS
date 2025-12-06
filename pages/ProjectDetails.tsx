@@ -217,17 +217,17 @@ const ProjectDetails: React.FC = () => {
 
         {/* CTA for unauthenticated users (Bottom) */}
         {!user && (
-          <div className="mt-12 p-8 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl shadow-xl text-white flex flex-col items-center text-center gap-6 relative overflow-hidden">
+          <div className="mt-12 p-8 bg-slate-900 dark:bg-slate-950 rounded-2xl shadow-xl text-white flex flex-col items-center text-center gap-6 relative overflow-hidden border border-slate-800">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
             <div className="relative z-10 max-w-2xl">
               <h3 className="text-3xl font-bold mb-3">Love this project?</h3>
-              <p className="text-emerald-50 text-lg mb-2">
+              <p className="text-slate-300 text-lg mb-2">
                 Join 225 Open Source to discover more amazing projects, support local developers, and share your own work.
               </p>
             </div>
             <Link
               to="/"
-              className="relative z-10 px-8 py-4 bg-white text-emerald-600 font-bold text-lg rounded-xl hover:bg-emerald-50 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="relative z-10 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               Create Free Account
             </Link>
