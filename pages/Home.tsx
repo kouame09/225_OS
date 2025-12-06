@@ -552,16 +552,16 @@ const Home: React.FC = () => {
               <img src="/prince.jpg" alt="Contributor" className="w-full h-full object-cover" />
             </div>
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
-              <img src="https://i.pravatar.cc/150?u=22" alt="Contributor" className="w-full h-full object-cover" />
-            </div>
-            <div c lassName="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
-              <img src="https://i.pravatar.cc/150?u=23" alt="Contributor" className="w-full h-full object-cover" />
+              <img src="https://us.123rf.com/450wm/afe207/afe2071602/afe207160200158/52329668-male-avatar-profile-picture-silhouette-light-shadow.jpg" alt="Contributor" className="w-full h-full object-cover" />
             </div>
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
-              <img src="https://i.pravatar.cc/150?u=24" alt="Contributor" className="w-full h-full object-cover" />
+              <img src="https://us.123rf.com/450wm/afe207/afe2071602/afe207160200158/52329668-male-avatar-profile-picture-silhouette-light-shadow.jpg" alt="Contributor" className="w-full h-full object-cover" />
             </div>
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
-              <img src="https://i.pravatar.cc/150?u=25" alt="Contributor" className="w-full h-full object-cover" />
+              <img src="https://us.123rf.com/450wm/afe207/afe2071602/afe207160200158/52329668-male-avatar-profile-picture-silhouette-light-shadow.jpg" alt="Contributor" className="w-full h-full object-cover" />
+            </div>
+            <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
+              <img src="https://us.123rf.com/450wm/afe207/afe2071602/afe207160200158/52329668-male-avatar-profile-picture-silhouette-light-shadow.jpg" alt="Contributor" className="w-full h-full object-cover" />
             </div>
             <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center border-4 border-white dark:border-slate-900 text-slate-500 font-bold">
               +500
