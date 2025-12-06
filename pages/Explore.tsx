@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Search, Filter, Terminal, Loader2, Lock } from 'lucide-react';
+import { Search, Filter, Terminal, Loader2, Lock, ChevronLeft, ChevronRight } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
 import SearchModal from '../components/SearchModal';
 import { Project } from '../types';
@@ -14,6 +14,40 @@ const Explore: React.FC = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const [selectedStack, setSelectedStack] = useState<string | null>(null);
+    const [currentEventIndex, setCurrentEventIndex] = useState(0);
+    const [isAutoScrollPaused, setIsAutoScrollPaused] = useState(false);
+
+    // Tech Events Data
+    const techEvents = [
+        {
+            id: 1,
+            title: "Abidjan Tech Summit 2025",
+            description: "Join the biggest tech event in Côte d'Ivoire. Connect with developers, startups, and tech enthusiasts from March 15-17.",
+            date: "Mar 15-17, 2025",
+            location: "Abidjan, Côte d'Ivoire"
+        },
+        {
+            id: 2,
+            title: "AI & Machine Learning Workshop",
+            description: "Hands-on workshop covering the latest in AI and ML technologies. Perfect for developers looking to level up their skills.",
+            date: "Apr 20-21, 2025",
+            location: "Yamoussoukro"
+        },
+        {
+            id: 3,
+            title: "Startup Pitch Night",
+            description: "Present your startup ideas to investors and mentors. Network with fellow entrepreneurs and get valuable feedback.",
+            date: "May 8, 2025",
+            location: "Grand-Bassam"
+        },
+        {
+            id: 4,
+            title: "Web3 & Blockchain Conference",
+            description: "Explore the future of decentralized web. Learn about blockchain, crypto, and Web3 technologies from industry experts.",
+            date: "Jun 10-12, 2025",
+            location: "Abidjan"
+        }
+    ];
 
     // Redirect to auth if not logged in
     useEffect(() => {
@@ -44,6 +78,17 @@ const Explore: React.FC = () => {
         }
     }, [user, authLoading]);
 
+    // Auto-scroll carousel
+    useEffect(() => {
+        if (isAutoScrollPaused) return;
+        
+        const interval = setInterval(() => {
+            setCurrentEventIndex((prev) => (prev + 1) % techEvents.length);
+        }, 5000); // Change event every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [techEvents.length, isAutoScrollPaused]);
+
     // Keyboard shortcut to open search (Cmd+K or Ctrl+K)
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -71,6 +116,25 @@ const Explore: React.FC = () => {
         });
     }, [projects, selectedStack]);
 
+    // Carousel navigation
+    const nextEvent = () => {
+        setCurrentEventIndex((prev) => (prev + 1) % techEvents.length);
+        setIsAutoScrollPaused(true);
+        setTimeout(() => setIsAutoScrollPaused(false), 10000); // Resume after 10 seconds
+    };
+
+    const prevEvent = () => {
+        setCurrentEventIndex((prev) => (prev - 1 + techEvents.length) % techEvents.length);
+        setIsAutoScrollPaused(true);
+        setTimeout(() => setIsAutoScrollPaused(false), 10000); // Resume after 10 seconds
+    };
+
+    const goToEvent = (index: number) => {
+        setCurrentEventIndex(index);
+        setIsAutoScrollPaused(true);
+        setTimeout(() => setIsAutoScrollPaused(false), 10000); // Resume after 10 seconds
+    };
+
     if (authLoading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950"><Loader2 className="animate-spin text-emerald-500" /></div>;
 
     // Show auth modal if not logged in, but don't show the restricted access UI
@@ -91,6 +155,54 @@ const Explore: React.FC = () => {
             />
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                {/* Tech Events Carousel */}
+                <div 
+                    className="mb-8 bg-slate-900 dark:bg-slate-950 rounded-2xl p-6 text-white relative overflow-hidden shadow-xl border border-slate-800"
+                    onMouseEnter={() => setIsAutoScrollPaused(true)}
+                    onMouseLeave={() => setIsAutoScrollPaused(false)}
+                >
+                    <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+
+                    {/* Event Content */}
+                    <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-2">
+                                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                                <span className="text-emerald-300 font-semibold text-sm uppercase tracking-wider">Featured Event</span>
+                                <span className="text-slate-500 text-sm">• {techEvents[currentEventIndex].date}</span>
+                                <span className="text-slate-500 text-sm">• {techEvents[currentEventIndex].location}</span>
+                            </div>
+                            <h3 className="text-xl md:text-2xl font-bold mb-2">{techEvents[currentEventIndex].title}</h3>
+                            <p className="text-slate-300 text-sm md:text-base max-w-2xl">
+                                {techEvents[currentEventIndex].description}
+                            </p>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-3">
+                            <button className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-colors shadow-lg shadow-emerald-500/30">
+                                Learn More
+                            </button>
+                            <button className="px-6 py-3 bg-slate-800/50 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-slate-800/70 transition-colors border border-emerald-600/30">
+                                Register Now
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Carousel Indicators */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                        {techEvents.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => goToEvent(index)}
+                                className={`w-2 h-2 rounded-full transition-all ${
+                                    index === currentEventIndex
+                                        ? 'bg-emerald-400 w-8'
+                                        : 'bg-slate-600 hover:bg-slate-500'
+                                }`}
+                            />
+                        ))}
+                    </div>
+                </div>
 
                 {/* Projects Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 mt-4">
