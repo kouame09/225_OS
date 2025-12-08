@@ -5,6 +5,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { NotificationProvider } from './contexts/NotificationContext';
 import Layout from './components/Layout';
 import ToastContainer from './components/ToastContainer';
+import ScrollToTop from './components/ScrollToTop';
 
 // Pages
 import Home from './pages/Home';
@@ -31,6 +32,7 @@ const App: React.FC = () => {
     <ThemeProvider>
       <AuthProvider>
         <NotificationProvider>
+          <ScrollToTop />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
