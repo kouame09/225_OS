@@ -88,7 +88,7 @@ const Home: React.FC = () => {
           <div className="mt-16 pt-8 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-wrap justify-center gap-12 md:gap-24">
             <div className="text-center">
               <p className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">500+</p>
-              <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider mt-1">Tech Professionals</p>
+              <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider mt-1">Tech Talents</p>
             </div>
             <div className="text-center">
               <p className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">120+</p>
@@ -509,6 +509,37 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* --- PARTNERS SECTION --- */}
+      <section className="py-16 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-10">
+            Trusted by Ecosystem Leaders
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-60">
+            {/* Fake Partners - Placeholders */}
+            <div className="flex items-center gap-2 text-2xl font-bold text-slate-800 dark:text-slate-200">
+              <Globe className="h-8 w-8 text-emerald-500" />
+              <span>AfricaTech</span>
+            </div>
+            <div className="flex items-center gap-2 text-2xl font-bold text-slate-800 dark:text-slate-200">
+              <Cpu className="h-8 w-8 text-blue-500" />
+              <span>IvoireSoft</span>
+            </div>
+            <div className="flex items-center gap-2 text-2xl font-bold text-slate-800 dark:text-slate-200">
+              <Terminal className="h-8 w-8 text-orange-500" />
+              <span>AbidjanCode</span>
+            </div>
+            <div className="flex items-center gap-2 text-2xl font-bold text-slate-800 dark:text-slate-200">
+              <Shield className="h-8 w-8 text-purple-500" />
+              <span>SecuWeb</span>
+            </div>
+            <div className="flex items-center gap-2 text-2xl font-bold text-slate-800 dark:text-slate-200">
+              <Users className="h-8 w-8 text-pink-500" />
+              <span>TechHub225</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* --- CTA SECTION --- */}
       <section className="py-20 px-4 bg-slate-50 dark:bg-slate-950">

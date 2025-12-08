@@ -216,7 +216,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📊 Project Stats
 
-- **500+** Tech Professionals
+- **500+** Tech Talents
 - **120+** Open Source Projects
 - **50+** Startups Represented
 
