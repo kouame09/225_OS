@@ -25,8 +25,8 @@ const Explore: React.FC = () => {
             description: "Join the biggest tech event in Côte d'Ivoire. Connect with developers, startups, and tech enthusiasts from March 15-17.",
             date: "Mar 15-17, 2025",
             location: "Abidjan, Côte d'Ivoire",
-            learnMoreUrl: "#",
-            registerUrl: "#"
+            learnMoreUrl: "https://github.com/",
+            registerUrl: "https://github.com/"
         },
         {
             id: 2,
@@ -34,8 +34,8 @@ const Explore: React.FC = () => {
             description: "Hands-on workshop covering the latest in AI and ML technologies. Perfect for developers looking to level up their skills.",
             date: "Apr 20-21, 2025",
             location: "Yamoussoukro",
-            learnMoreUrl: "#",
-            registerUrl: "#"
+            learnMoreUrl: "https://github.com/",
+            registerUrl: "https://github.com/"
         },
         {
             id: 3,
@@ -43,8 +43,8 @@ const Explore: React.FC = () => {
             description: "Present your startup ideas to investors and mentors. Network with fellow entrepreneurs and get valuable feedback.",
             date: "May 8, 2025",
             location: "Grand-Bassam",
-            learnMoreUrl: "#",
-            registerUrl: "#"
+            learnMoreUrl: "https://github.com/",
+            registerUrl: "https://github.com/"
         },
         {
             id: 4,
@@ -52,8 +52,8 @@ const Explore: React.FC = () => {
             description: "Explore the future of decentralized web. Learn about blockchain, crypto, and Web3 technologies from industry experts.",
             date: "Jun 10-12, 2025",
             location: "Abidjan",
-            learnMoreUrl: "#",
-            registerUrl: "#"
+            learnMoreUrl: "https://github.com/",
+            registerUrl: "https://github.com/"
         }
     ];
 
@@ -89,7 +89,7 @@ const Explore: React.FC = () => {
     // Auto-scroll carousel
     useEffect(() => {
         if (isAutoScrollPaused) return;
-        
+
         const interval = setInterval(() => {
             setCurrentEventIndex((prev) => (prev + 1) % techEvents.length);
         }, 5000); // Change event every 5 seconds
@@ -165,7 +165,7 @@ const Explore: React.FC = () => {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Tech Events Carousel */}
-                <div 
+                <div
                     className="mb-8 bg-slate-900 dark:bg-slate-950 rounded-2xl p-6 text-white relative overflow-hidden shadow-xl border border-slate-800"
                     onMouseEnter={() => setIsAutoScrollPaused(true)}
                     onMouseLeave={() => setIsAutoScrollPaused(false)}
@@ -187,22 +187,26 @@ const Explore: React.FC = () => {
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3">
-                            <a
-                                href={techEvents[currentEventIndex].learnMoreUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-colors shadow-lg shadow-emerald-500/30 text-center"
-                            >
-                                Learn More
-                            </a>
-                            <a
-                                href={techEvents[currentEventIndex].registerUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-6 py-3 bg-slate-800/50 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-slate-800/70 transition-colors border border-emerald-600/30 text-center"
-                            >
-                                Register Now
-                            </a>
+                            {techEvents[currentEventIndex].learnMoreUrl && techEvents[currentEventIndex].learnMoreUrl !== '#' && (
+                                <a
+                                    href={techEvents[currentEventIndex].learnMoreUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-colors shadow-lg shadow-emerald-500/30 text-center"
+                                >
+                                    Learn More
+                                </a>
+                            )}
+                            {techEvents[currentEventIndex].registerUrl && techEvents[currentEventIndex].registerUrl !== '#' && (
+                                <a
+                                    href={techEvents[currentEventIndex].registerUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-6 py-3 bg-slate-800/50 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-slate-800/70 transition-colors border border-emerald-600/30 text-center"
+                                >
+                                    Register Now
+                                </a>
+                            )}
                         </div>
                     </div>
 
@@ -212,11 +216,10 @@ const Explore: React.FC = () => {
                             <button
                                 key={index}
                                 onClick={() => goToEvent(index)}
-                                className={`w-2 h-2 rounded-full transition-all ${
-                                    index === currentEventIndex
-                                        ? 'bg-emerald-400 w-8'
-                                        : 'bg-slate-600 hover:bg-slate-500'
-                                }`}
+                                className={`w-2 h-2 rounded-full transition-all ${index === currentEventIndex
+                                    ? 'bg-emerald-400 w-8'
+                                    : 'bg-slate-600 hover:bg-slate-500'
+                                    }`}
                             />
                         ))}
                     </div>
