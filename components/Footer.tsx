@@ -29,21 +29,21 @@ const Footer: React.FC = () => {
 
         <div className="flex flex-col items-center md:items-end gap-4">
           <div className="flex items-center gap-4">
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+            <a href="#" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
               <Twitter size={20} />
               <span className="sr-only">Twitter</span>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+            <a href="https://www.linkedin.com/company/222opensource" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
               <Linkedin size={20} />
               <span className="sr-only">LinkedIn</span>
             </a>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+            <a href="https://github.com/kouame09/225opensource-v1" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
               <Github size={20} />
               <span className="sr-only">GitHub</span>
             </a>
           </div>
           <div className="text-slate-400 text-sm">
-            &copy;225 Open Source <span className="inline-block w-px h-3.5 bg-slate-400 mx-2 align-middle"></span> {new Date().getFullYear()} 
+            &copy;225 Open Source <span className="inline-block w-px h-3.5 bg-slate-400 mx-2 align-middle"></span> {new Date().getFullYear()}
           </div>
         </div>
       </div>
