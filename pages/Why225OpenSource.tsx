@@ -44,7 +44,7 @@ const Why225OpenSource: React.FC = () => {
                                 Right now, when people think of tech innovation, they think Silicon Valley, Tel Aviv, Bangalore, or Shenzhen. <strong className="text-slate-900 dark:text-white font-semibold">Abidjan is not on that list. Yet.</strong>
                             </p>
                             <p className="text-lg leading-relaxed">
-                                225 Open Source is our answer to this invisibility. We're creating a centralized showcase of Ivorian innovation that proves our developers aren't just consuming technology, we're creating it. Every project added is a statement: <em className="text-slate-900 dark:text-white">"We build. We innovate. We matter."</em>
+                                225 Open Source is our answer to this invisibility. We're creating a centralized showcase of Ivorian innovation that proves our tech professionals aren't just consuming technology, we're creating it. Every project added is a statement: <em className="text-slate-900 dark:text-white">"We build. We innovate. We matter."</em>
                             </p>
                         </section>
 
