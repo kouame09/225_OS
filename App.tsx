@@ -18,6 +18,7 @@ import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import EditProject from './pages/EditProject';
 import MaintenancePage from './pages/MaintenancePage';
+import Donation from './pages/Donation';
 import { CONFIG } from './config';
 
 const App: React.FC = () => {
@@ -44,6 +45,7 @@ const App: React.FC = () => {
               <Route path="/why" element={<Why225OpenSource />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/donate" element={<Donation />} />
             </Route>
           </Routes>
           <ToastContainer />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
             </Link>
 
             <div className="flex items-center gap-4 sm:gap-6">
-              {location.pathname !== '/explore' && location.pathname !== '/' && (
+              {location.pathname !== '/donate' && location.pathname !== '/' && location.pathname !== '/explore' && (
                 <Link
                   to="/explore"
                   className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
@@ -52,6 +52,15 @@ const Navbar: React.FC = () => {
                 <Github size={14} />
                 <span>Star</span>
               </a>
+
+              {/* Donation Link */}
+              <Link
+                to="/donate"
+                className="hidden md:flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
+              >
+                <Heart size={14} />
+                <span>Donate</span>
+              </Link>
 
               {user ? (
                 <div className="flex items-center gap-3 border-l border-slate-200 dark:border-slate-700 pl-4">

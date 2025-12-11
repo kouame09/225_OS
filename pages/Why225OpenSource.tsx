@@ -139,15 +139,13 @@ const Why225OpenSource: React.FC = () => {
                                 >
                                     Get Started
                                 </Link>
-                                <a
-                                    href="https://www.buymeacoffee.com/princekouame"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <Link
+                                    to="/donate"
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white dark:border-slate-900 text-white dark:text-slate-900 rounded-xl hover:bg-white/10 dark:hover:bg-slate-900/10 transition-all"
                                 >
                                     <DollarSign size={18} />
                                     Support the Project
-                                </a>
+                                </Link>
                             </div>
                         </section>
                     </div>
