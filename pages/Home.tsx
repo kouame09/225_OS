@@ -84,19 +84,86 @@ const Home: React.FC = () => {
             </Link>
           </div>
 
-          {/* Social Proof Stats */}
-          <div className="mt-16 pt-8 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-wrap justify-center gap-12 md:gap-24">
-            <div className="text-center">
-              <p className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">500+</p>
-              <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider mt-1">Tech Talents</p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">120+</p>
-              <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider mt-1">Projects</p>
-            </div>
-            <div className="text-center">
-              <p className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">50+</p>
-              <p className="text-sm text-slate-500 font-semibold uppercase tracking-wider mt-1">Startups</p>
+          {/* Community & Connection Highlight */}
+          <div className="mt-24 relative max-w-5xl mx-auto">
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 blur-3xl -z-10 rounded-full opacity-50"></div>
+
+            <div className="bg-white/40 dark:bg-slate-900/40 backdrop-blur-2xl border border-slate-200/60 dark:border-slate-800/60 p-8 md:p-12 rounded-[2rem] overflow-hidden shadow-xl shadow-slate-200/20 dark:shadow-black/20">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+
+                {/* Text Content */}
+                <div className="space-y-6 text-left">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold uppercase tracking-wider shadow-sm">
+                    <Users size={12} className="text-emerald-500" />
+                    Community First
+                  </div>
+
+                  <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                    Unity Makes <br />
+                    <span className="text-transparent bg-clip-text bg-emerald-500">Tech Strength</span>
+                  </h3>
+
+                  <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
+                    Connect with the largest open source community in Côte d'Ivoire. Share, learn, and grow alongside the country's top talents.
+                  </p>
+
+                  <div className="flex items-center gap-4 pt-4">
+                    <div className="flex -space-x-4">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="w-12 h-12 rounded-full border-[3px] border-white dark:border-slate-900 bg-slate-200 dark:bg-slate-800 flex items-center justify-center overflow-hidden">
+                          <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i * 55}`} alt="Avatar" className="w-full h-full object-cover" />
+                        </div>
+                      ))}
+                      <div className="w-12 h-12 rounded-full border-[3px] border-white dark:border-slate-900 bg-emerald-500 flex items-center justify-center text-white text-xs font-bold shadow-lg">
+                        +500
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* The "Joliement Codée" Illustration - Dynamic Connectivity Node */}
+                <div className="relative w-full aspect-square md:aspect-[4/3] flex items-center justify-center">
+                  {/* Background Elements */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-blue-500/5 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm -skew-y-3 transform translate-x-4 select-none pointer-events-none"></div>
+
+                  {/* Central Hub Animation */}
+                  <div className="relative z-10 w-full h-full flex items-center justify-center">
+
+                    {/* Orbital Rings */}
+                    <div className="absolute w-64 h-64 border border-dashed border-slate-300 dark:border-slate-600 rounded-full animate-[spin_60s_linear_infinite] opacity-40"></div>
+                    <div className="absolute w-48 h-48 border border-slate-200 dark:border-slate-700 rounded-full animate-[spin_40s_linear_infinite_reverse] opacity-40"></div>
+
+                    {/* Central Core */}
+                    <div className="relative z-20 w-24 h-24 bg-white dark:bg-slate-900 rounded-full shadow-2xl shadow-emerald-500/20 border-4 border-slate-50 dark:border-slate-800 flex items-center justify-center p-1 group cursor-pointer transition-transform hover:scale-110 duration-500">
+                      <div className="w-full h-full bg-gradient-to-br from-emerald-500 to-blue-600 rounded-full flex items-center justify-center animate-pulse">
+                        <Cpu className="text-white w-8 h-8" />
+                      </div>
+                      {/* Connecting Lines emitting from center (CSS) */}
+                      <div className="absolute inset-0 rounded-full border-2 border-emerald-500/30 animate-ping"></div>
+                    </div>
+
+                    {/* Satellite Nodes */}
+                    <div className="absolute w-64 h-64 animate-[spin_20s_linear_infinite]">
+                      {/* Satellite 1 */}
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-900 p-2 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 transform hover:scale-110 transition-transform">
+                        <Terminal size={16} className="text-slate-600 dark:text-slate-300" />
+                      </div>
+                      {/* Satellite 2 */}
+                      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white dark:bg-slate-900 p-2 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 transform hover:scale-110 transition-transform">
+                        <Globe size={16} className="text-slate-600 dark:text-slate-300" />
+                      </div>
+                      {/* Satellite 3 */}
+                      <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-900 p-2 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 transform hover:scale-110 transition-transform">
+                        <Github size={16} className="text-slate-600 dark:text-slate-300" />
+                      </div>
+                      {/* Satellite 4 */}
+                      <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-900 p-2 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 transform hover:scale-110 transition-transform">
+                        <Users size={16} className="text-slate-600 dark:text-slate-300" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -555,7 +622,7 @@ const Home: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
-                href="https://github.com/kouame09/225opensource-v1"
+                href="https://github.com/kouame09/225_OS"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-lg rounded-xl transition-all transform hover:scale-105 flex items-center justify-center gap-2"

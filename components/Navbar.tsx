@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
 
               {/* GitHub Repo Link */}
               <a
-                href="https://github.com/kouame09/225opensource-v1"
+                href="https://github.com/kouame09/225_OS"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
