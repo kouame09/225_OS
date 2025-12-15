@@ -16,7 +16,7 @@
 
 ---
 
-## 🌍 About The Project
+## About The Project
 
 **225 Open Source** is a centralized platform showcasing open source projects built by developers in Côte d'Ivoire. While GitHub is the world's largest open source platform, it lacks a crucial feature: **filtering projects by country**. That's where we come in.
 
@@ -34,20 +34,20 @@
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔍 **Project Discovery**: Browse and search open source projects from Ivorian developers
-- 🎯 **Smart Filtering**: Filter by technology, category, and popularity
-- 👤 **User Profiles**: Showcase your projects and contributions
-- ⭐ **Favorites System**: Save and track projects you're interested in
-- 🌓 **Dark Mode**: Beautiful UI with light and dark themes
-- 🔐 **Secure Authentication**: Powered by Supabase with location-based access control
-- 📱 **Responsive Design**: Optimized for desktop, tablet, and mobile
-- 🌐 **Geolocation Restriction**: Platform accessible only from Côte d'Ivoire
+- **Project Discovery**: Browse and search open source projects from Ivorian developers
+- **Smart Filtering**: Filter by technology, category, and popularity
+- **User Profiles**: Showcase your projects and contributions
+- **Favorites System**: Save and track projects you're interested in
+- **Dark Mode**: Beautiful UI with light and dark themes
+- **Secure Authentication**: Powered by Supabase with location-based access control
+- **Responsive Design**: Optimized for desktop, tablet, and mobile
+- **Geolocation Restriction**: Platform accessible only from Côte d'Ivoire
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -59,7 +59,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/princekouame/225opensource.git
+   git clone https://github.com/kouame09/225_OS
    cd 225opensource
    ```
 
@@ -88,7 +88,7 @@
 
 5. **Open your browser**
    
-   Navigate to `http://localhost:5173`
+   Navigate to `http://localhost:3000`
 
 ### Building for Production
 
@@ -99,7 +99,7 @@ npm run preview
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend Framework**: React 18.2.0
 - **Language**: TypeScript 5.8.2
@@ -112,7 +112,7 @@ npm run preview
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 225OS/
@@ -140,7 +140,7 @@ npm run preview
 
 ---
 
-## 🔐 Authentication & Security
+## Authentication & Security
 
 - **Supabase Authentication**: Email/password and OAuth (GitHub)
 - **Location-Based Access**: Platform restricted to users in Côte d'Ivoire using IP geolocation
@@ -149,7 +149,7 @@ npm run preview
 
 ---
 
-## 🌟 Key Features Explained
+## Key Features Explained
 
 ### Location Restriction
 The platform uses IP geolocation (via `ipapi.co`) to verify that users are accessing from Côte d'Ivoire. If not, authentication buttons are disabled with a clear message.
@@ -169,7 +169,7 @@ Users can add their GitHub projects with:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions from the Ivorian tech community! Here's how you can help:
 
@@ -189,23 +189,13 @@ We welcome contributions from the Ivorian tech community! Here's how you can hel
 
 ---
 
-## 📝 License
+## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
----
 
-## 👨‍💻 Author
 
-**Prince Kouamé**
-
-- Website: [princekouame.com](https://www.princekouame.com)
-- GitHub: [@princekouame](https://github.com/princekouame)
-- LinkedIn: [Prince Kouamé](https://linkedin.com/in/princekouame)
-
----
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - All Ivorian developers contributing to open source
 - The Supabase team for their amazing platform
@@ -214,7 +204,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-## 📊 Project Stats
+## Project Stats
 
 - **500+** Tech Talents
 - **120+** Open Source Projects
@@ -222,15 +212,17 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-## 🎯 Our Mission
+## Our Mission
 
 > "To make Côte d'Ivoire a recognized hub of open-source innovation, proving that African developers are not just participants in the global tech ecosystem—we are leaders, creators, and pioneers."
 
 ---
 
-## Principal developer
+## Author & Principal developer
 
 - **Prince Kouamé**
-- **Email**: [princekouame@gmail.com](mailto:princekouame@gmail.com)
-- **LinkedIn**: [Prince Kouamé](https://www.linkedin.com/in/princekouame/)
+- Website: [princekouame.com](https://www.princekouame.com)
+- GitHub: [@princekouame](https://github.com/princekouame)
+- LinkedIn: [Prince Kouamé](https://linkedin.com/in/princekouame)
+
 
