@@ -11,7 +11,7 @@
   [![TypeScript](https://img.shields.io/badge/TypeScript-5.8.2-blue.svg)](https://www.typescriptlang.org/)
   [![Supabase](https://img.shields.io/badge/Supabase-2.39.7-green.svg)](https://supabase.com/)
   
-  [Live Demo](https://225opensource.com) • [Report Bug](https://github.com/princekouame/225opensource/issues) • [Request Feature](https://github.com/princekouame/225opensource/issues)
+  [Live Demo](https://225os.com) • [Report Bug](https://github.com/princekouame/225_OS/issues) • [Request Feature](https://github.com/princekouame/225_OS/issues)
 </div>
 
 ---
