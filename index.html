@@ -107,6 +107,56 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
+
+    /* Custom Thin Scrollbar for Categories */
+    .thin-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+    }
+
+    .dark .thin-scrollbar {
+      scrollbar-color: #475569 transparent;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      /* Horizontal scrollbar height */
+      width: 4px;
+      /* Vertical scrollbar width */
+    }
+
+    .thin-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 20px;
+    }
+
+    .dark .thin-scrollbar::-webkit-scrollbar-thumb {
+      background: #475569;
+    }
+
+    .dark .thin-scrollbar::-webkit-scrollbar-thumb {
+      background: #475569;
+    }
+
+    .thin-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Hide Scrollbar but allow scrolling */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      /* IE and Edge */
+      scrollbar-width: none;
+      /* Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
   </style>
 
   <link rel="stylesheet" href="/index.css">
