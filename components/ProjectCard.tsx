@@ -38,16 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
             </span>
           </div>
         )}
-        <div className="absolute top-3 left-3 flex gap-2">
-          <div className="flex items-center gap-1 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-semibold text-amber-500 shadow-sm border border-slate-200 dark:border-slate-700">
-            <Star size={12} fill="currentColor" />
-            <span>{project.stars}</span>
-          </div>
-          <div className="flex items-center gap-1 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-semibold text-slate-600 dark:text-slate-300 shadow-sm border border-slate-200 dark:border-slate-700">
-            <GitFork size={12} />
-            <span>{project.forks}</span>
-          </div>
-        </div>
+
       </Link>
 
       {/* Card Body */}
@@ -63,15 +54,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
               by {project.author}
             </p>
           </div>
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
-            title="View on GitHub"
-          >
-            <Github size={20} />
-          </a>
+          <div className="flex items-center gap-3">
+            <div className="flex gap-2">
+              <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold text-amber-600 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800">
+                <Star size={12} fill="currentColor" />
+                <span>{project.stars}</span>
+              </div>
+              <div className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+                <GitFork size={12} />
+                <span>{project.forks}</span>
+              </div>
+            </div>
+            <a
+              href={project.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+              title="View on GitHub"
+            >
+              <Github size={20} />
+            </a>
+          </div>
         </div>
 
         <p className="text-sm text-slate-600 dark:text-slate-300 mb-4 line-clamp-2 leading-relaxed">
