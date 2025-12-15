@@ -50,7 +50,7 @@ const Why225OpenSource: React.FC = () => {
 
                         <section>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-2xl text-blue-600 dark:text-blue-400">
+                                <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400">
                                     <TrendingUp size={28} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Economic Impact: Building Careers, Not Just Code</h2>
@@ -65,7 +65,7 @@ const Why225OpenSource: React.FC = () => {
 
                         <section>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-2xl text-purple-600 dark:text-purple-400">
+                                <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400">
                                     <Shield size={28} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Digital Sovereignty: Owning Our Future</h2>
@@ -80,7 +80,7 @@ const Why225OpenSource: React.FC = () => {
 
                         <section>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-orange-100 dark:bg-orange-900/30 rounded-2xl text-orange-600 dark:text-orange-400">
+                                <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400">
                                     <Users size={28} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Community: Ending the Isolation</h2>
@@ -95,7 +95,7 @@ const Why225OpenSource: React.FC = () => {
 
                         <section>
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="p-3 bg-pink-100 dark:bg-pink-900/30 rounded-2xl text-pink-600 dark:text-pink-400">
+                                <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400">
                                     <Globe size={28} />
                                 </div>
                                 <h2 className="text-2xl font-bold text-slate-900 dark:text-white">A Blueprint for Africa</h2>

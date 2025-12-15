@@ -23,7 +23,7 @@ const Donation: React.FC = () => {
                 </Link>
 
                 {/* Hero Section */}
-                <div className="text-center mb-20">                                        
+                <div className="text-center mb-20">
                     <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-8 leading-[1.1]">
                         Support <span className="text-transparent bg-clip-text bg-emerald-600">225 Open Source</span>
                     </h1>
@@ -36,15 +36,15 @@ const Donation: React.FC = () => {
                 <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 md:p-12 mb-20 relative overflow-hidden">
                     {/* Glow Effect */}
                     <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-emerald-400/20 to-transparent rounded-full blur-3xl"></div>
-                    
+
                     <div className="relative z-10 text-center mb-12">
                         <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border border-emerald-200 dark:border-emerald-800 mb-6">
                             <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">Secure & Instant</span>
                         </div>
-                        
-                        <img 
-                            src={waveLogo} 
-                            alt="Wave" 
+
+                        <img
+                            src={waveLogo}
+                            alt="Wave"
                             className="h-16 mx-auto mb-6 drop-shadow-sm"
                         />
                         <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
@@ -78,10 +78,10 @@ const Donation: React.FC = () => {
                 {/* Impact Cards */}
                 <div className="grid md:grid-cols-3 gap-8 mb-20">
                     <div className="group relative dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <div className="relative z-10">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="p-3 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 rounded-xl text-blue-600 dark:text-blue-400 shadow-sm">
+                                <div className="p-3 bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900/30 dark:to-emerald-800/30 rounded-xl text-emerald-600 dark:text-emerald-400 shadow-sm">
                                     <Zap size={24} />
                                 </div>
                                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">Lightning Fast</h3>
@@ -93,10 +93,10 @@ const Donation: React.FC = () => {
                     </div>
 
                     <div className="group relative dark:bg-slate-900 rounded-2xl p-8 border border-slate-200 dark:border-slate-800 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         <div className="relative z-10">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="p-3 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/30 rounded-xl text-purple-600 dark:text-purple-400 shadow-sm">
+                                <div className="p-3 bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900/30 dark:to-emerald-800/30 rounded-xl text-emerald-600 dark:text-emerald-400 shadow-sm">
                                     <Users size={24} />
                                 </div>
                                 <h3 className="text-xl font-bold text-slate-900 dark:text-white">Community First</h3>
@@ -128,20 +128,20 @@ const Donation: React.FC = () => {
                     {/* Decor elements */}
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] -ml-32 -mb-32 pointer-events-none"></div>
-                    
+
                     <div className="relative z-10">
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 mb-6">
                             <TrendingUp className="w-4 h-4 text-white" />
                             <span className="text-sm font-medium text-white">Join the Movement</span>
                         </div>
-                        
+
                         <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
                             Be Part of Something Bigger
                         </h3>
                         <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
                             Your support transforms individual developers into a collective force, putting Ivorian innovation on the global stage.
                         </p>
-                        
+
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <a
                                 href={donationUrl}
