@@ -215,7 +215,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 - **Prince Kouamé**
 - Website: [princekouame.com](https://www.princekouame.com)
-- GitHub: [@princekouame](https://github.com/princekouame)
+- Email : [hello@princekouame.com](mailto:hello@princekouame.com)
 - LinkedIn: [Prince Kouamé](https://linkedin.com/in/princekouame)
 
 
