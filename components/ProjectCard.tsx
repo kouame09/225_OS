@@ -38,7 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
             </span>
           </div>
         )}
-        <div className="absolute top-3 right-3 flex gap-2">
+        <div className="absolute top-3 left-3 flex gap-2">
           <div className="flex items-center gap-1 bg-white/90 dark:bg-black/70 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-semibold text-amber-500 shadow-sm border border-slate-200 dark:border-slate-700">
             <Star size={12} fill="currentColor" />
             <span>{project.stars}</span>
