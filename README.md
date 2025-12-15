@@ -108,7 +108,7 @@ npm run preview
 - **Icons**: Lucide React 0.344.0
 - **Backend**: Supabase 2.39.7
 - **Build Tool**: Vite 6.2.0
-- **Deployment**: Vercel / Netlify
+- **Deployment**: Vercel
 
 ---
 
