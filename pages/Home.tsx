@@ -184,16 +184,16 @@ const Home: React.FC = () => {
                   <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%] animate-[shine_4s_linear_infinite] opacity-10 rounded-3xl pointer-events-none"></div>
 
                   {/* Floating Phone UI */}
-                  <div className="relative w-48 h-80 bg-slate-900 rounded-[2rem] border-4 border-slate-800 overflow-hidden flex flex-col z-20 transform rotate-[-6deg] translate-x-4">
+                  <div className="relative w-48 h-80 bg-slate-900 rounded-[2rem] border-4 border-slate-800 overflow-hidden flex flex-col z-20 transform rotate-[-6deg] translate-x-4 animate-float">
                     <div className="h-full bg-slate-950 p-4 flex flex-col relative">
                       {/* Notch */}
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-slate-900 rounded-b-xl"></div>
                       <div className="mt-8 space-y-3">
                         <div className="h-20 bg-emerald-500/10 rounded-xl border border-emerald-500/20 flex flex-col items-center justify-center">
-                          <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center mb-1">
+                          <div className="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center mb-1 animate-pulse">
                             <CheckCircle size={16} className="text-white" />
                           </div>
-                          <div className="text-[10px] text-emerald-400 font-bold">Payment Success</div>
+                          <div className="text-[10px] text-emerald-400 font-bold animate-pulse">Payment Success</div>
                         </div>
                         <div className="h-2 w-1/2 bg-slate-800 rounded-full"></div>
                         <div className="h-2 w-3/4 bg-slate-800 rounded-full"></div>
@@ -203,7 +203,7 @@ const Home: React.FC = () => {
                   </div>
 
                   {/* Floating Code Snippet Card behind phone */}
-                  <div className="absolute left-8 bottom-12 w-64 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-xl p-4 border border-slate-200 dark:border-slate-600 z-10 transform rotate-[3deg]">
+                  <div className="absolute left-8 bottom-12 w-64 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-xl p-4 border border-slate-200 dark:border-slate-600 z-10 transform rotate-[3deg] animate-float-delayed">
                     <div className="flex gap-1.5 mb-3">
                       <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
                       <div className="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
@@ -265,7 +265,7 @@ const Home: React.FC = () => {
                   </div>
 
                   {/* Profile Card */}
-                  <div className="relative z-10 w-64 bg-white dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 p-5">
+                  <div className="relative z-10 w-64 bg-white dark:bg-slate-950 rounded-2xl border border-slate-100 dark:border-slate-800 p-5 animate-float">
                     <div className="flex items-center gap-4 mb-6">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-emerald-500"></div>
                       <div>
@@ -293,7 +293,7 @@ const Home: React.FC = () => {
                     </button>
 
                     {/* Hired Badge */}
-                    <div className="absolute -right-6 -top-6 bg-emerald-500 text-white px-4 py-2 rounded-lg transform rotate-12 flex items-center gap-2">
+                    <div className="absolute -right-6 -top-6 bg-emerald-500 text-white px-4 py-2 rounded-lg transform rotate-12 flex items-center gap-2 animate-wiggle">
                       <CheckCircle size={16} />
                       <span className="font-bold text-sm">HIRED</span>
                     </div>
@@ -349,13 +349,13 @@ const Home: React.FC = () => {
                         </div>
                         <div className="h-1 w-12 bg-slate-700 rounded-full"></div>
                         {/* Scanning line animation */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer_2s_infinite]"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer"></div>
                       </div>
                     ))}
                   </div>
 
                   {/* Shield Overlay */}
-                  <div className="absolute z-20 bg-slate-950/80 backdrop-blur-sm border border-purple-500/50 p-4 rounded-2xl flex flex-col items-center gap-2 transform translate-y-8 group-hover:translate-y-6 transition-transform">
+                  <div className="absolute z-20 bg-slate-950/80 backdrop-blur-sm border border-purple-500/50 p-4 rounded-2xl flex flex-col items-center gap-2 transform translate-y-8 group-hover:translate-y-6 transition-transform animate-float-delayed">
                     <Shield size={32} className="text-purple-500" />
                     <span className="text-xs font-bold text-white tracking-widest">OWN YOUR DATA</span>
                   </div>
@@ -399,13 +399,13 @@ const Home: React.FC = () => {
                   </div>
 
                   {/* Satellite Nodes */}
-                  <div className="absolute top-12 left-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-pink-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">Abidjan</div>
-                  <div className="absolute bottom-12 right-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-orange-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">Yamoussoukro</div>
-                  <div className="absolute top-12 right-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-blue-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">Bouaké</div>
-                  <div className="absolute bottom-12 left-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-emerald-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white">Korhogo</div>
+                  <div className="absolute top-12 left-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-pink-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white animate-pulse">Abidjan</div>
+                  <div className="absolute bottom-12 right-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-orange-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white animate-pulse delay-75">Yamoussoukro</div>
+                  <div className="absolute top-12 right-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-blue-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white animate-pulse delay-150">Bouaké</div>
+                  <div className="absolute bottom-12 left-12 px-3 py-1 bg-white dark:bg-slate-800 rounded-full border-2 border-emerald-500 z-10 flex items-center justify-center text-xs font-bold text-slate-700 dark:text-white animate-pulse delay-300">Korhogo</div>
 
                   {/* Central Hub */}
-                  <div className="relative z-20 w-24 h-24 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-slate-100 dark:border-slate-700 animate-pulse">
+                  <div className="relative z-20 w-24 h-24 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-slate-100 dark:border-slate-700 animate-[spin_60s_linear_infinite]">
                     <div className="w-16 h-16 bg-slate-900 dark:bg-white rounded-full flex items-center justify-center">
                       <Terminal size={24} className="text-white dark:text-slate-900" />
                     </div>
@@ -647,10 +647,10 @@ const Home: React.FC = () => {
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Join Top Ivorian Contributors</h2>
           <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
-              <img src="/prince.jpg" alt="Contributor" className="w-full h-full object-cover" />
+              <img src="/Contributors/prince.jpg" alt="Prince Kouamé" className="w-full h-full object-cover" />
             </div>
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
-              <img src="https://us.123rf.com/450wm/afe207/afe2071602/afe207160200158/52329668-male-avatar-profile-picture-silhouette-light-shadow.jpg" alt="Contributor" className="w-full h-full object-cover" />
+              <img src="/Contributors/Kouame_Thibaut.jpg" alt="Kouame Thibaut" className="w-full h-full object-cover" />
             </div>
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
               <img src="https://us.123rf.com/450wm/afe207/afe2071602/afe207160200158/52329668-male-avatar-profile-picture-silhouette-light-shadow.jpg" alt="Contributor" className="w-full h-full object-cover" />

@@ -22,7 +22,7 @@
   <meta property="og:title" content="225 Open Source - Ivorian Open Source Projects Hub" />
   <meta property="og:description"
     content="Discover, showcase, and contribute to cutting-edge open source projects built by talented developers from Côte d'Ivoire and across Africa. Join the 225 Open Source community today." />
-  <meta property="og:image" content="https://225os.com/banner.png" />
+  <meta property="og:image" content="https://225os.com/Brand/banner.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="225 Open Source" />
@@ -34,7 +34,7 @@
   <meta property="twitter:title" content="225 Open Source - Ivorian Open Source Projects Hub" />
   <meta property="twitter:description"
     content="Discover, showcase, and contribute to cutting-edge open source projects built by talented developers from Côte d'Ivoire and across Africa." />
-  <meta property="twitter:image" content="https://225os.com/banner.png" />
+  <meta property="twitter:image" content="https://225os.com/Brand/banner.png" />
   <meta property="twitter:creator" content="@225os" />
 
   <!-- Additional SEO -->
@@ -46,9 +46,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/Brand/favicon.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/Brand/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/Brand/favicon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
   <!-- Preconnect for performance -->
@@ -156,6 +156,69 @@
 
     .scrollbar-hide::-webkit-scrollbar {
       display: none;
+    }
+
+    /* Custom Animations */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes float-delayed {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes wiggle {
+
+      0%,
+      100% {
+        transform: rotate(-3deg);
+      }
+
+      50% {
+        transform: rotate(3deg);
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-150%);
+      }
+
+      100% {
+        transform: translateX(150%);
+      }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-float-delayed {
+      animation: float-delayed 7s ease-in-out 3s infinite;
+    }
+
+    .animate-wiggle {
+      animation: wiggle 3s ease-in-out infinite;
+    }
+
+    .animate-shimmer {
+      animation: shimmer 2.5s infinite linear;
     }
   </style>
 

@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="1200" height="475" alt="225 Open Source Banner" src="./public/banner.png" />
+  <img width="1200" height="475" alt="225 Open Source Banner" src="./public/Brand/banner.png" />
 
   
   # 225 Open Source
