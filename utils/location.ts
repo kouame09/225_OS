@@ -1,14 +1,18 @@
 export const checkIsLocationAllowed = async (): Promise<boolean> => {
     try {
-        const response = await fetch('https://ipapi.co/json/');
+        // Use our own server-side API which checks Vercel headers or falls back to 'CI' in dev
+        const response = await fetch('/api/check-location');
+
         if (!response.ok) {
-            throw new Error('Failed to fetch location');
+            console.warn('Location check API failed, failing gracefully');
+            return false;
         }
+
         const data = await response.json();
-        return data.country_code === 'CI';
+        return data.allowed === true;
     } catch (error) {
         console.error('Error checking location:', error);
-        // Default to blocking if check fails, as per plan
+        // Default to blocking if check fails completely
         return false;
     }
 };
