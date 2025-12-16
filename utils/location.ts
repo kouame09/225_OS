@@ -1,5 +1,10 @@
 export const checkIsLocationAllowed = async (): Promise<boolean> => {
     try {
+        // Bypass check in development environment
+        if (import.meta.env.DEV) {
+            return true;
+        }
+
         // Use our own server-side API which checks Vercel headers or falls back to 'CI' in dev
         const response = await fetch('/api/check-location');
 
