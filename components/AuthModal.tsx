@@ -128,12 +128,19 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         });
         if (signUpError) throw signUpError;
 
-        // Create a profile for the new user
+        // Create a profile for new user
         if (signUpData.user) {
+          // Get user's country from IP
+          const response = await fetch('https://ipapi.co/json/');
+          const locationData = await response.json().catch(() => ({}));
+          const country = locationData.country_name || 'Unknown';
+          
           const { error: profileError } = await supabase.from('profiles').insert({ 
             id: signUpData.user.id, 
             email: signUpData.user.email,
-            is_approved: false
+            is_approved: false,
+            country: country,
+            created_at: new Date().toISOString()
           });
           if (profileError) throw profileError;
         }
