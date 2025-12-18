@@ -17,6 +17,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isRestricted, setIsRestricted] = useState(false);
+  const [isDiaspora, setIsDiaspora] = useState(false);
   const [checkingLocation, setCheckingLocation] = useState(false);
 
   React.useEffect(() => {
@@ -45,6 +46,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
     setEmail('');
     setPassword('');
     setConfirmPassword('');
+    setIsDiaspora(false);
   };
 
   const switchView = (newView: AuthView) => {
@@ -125,13 +127,28 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         if (password !== confirmPassword) {
           throw new Error("Passwords do not match");
         }
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-        });
-        if (error) throw error;
-        onClose();
-        setSuccessMessage('Account created! You can now log in.');
+        if (isRestricted && isDiaspora) {
+          const { error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+              data: {
+                diaspora_pending_approval: true,
+              },
+            },
+          });
+          if (error) throw error;
+          setSuccessMessage('Votre compte a été créé et est en attente de validation. Vous recevrez un email dès qu\'il sera approuvé.');
+          setTimeout(() => onClose(), 5000); // Close modal after 5s
+        } else {
+          const { error } = await supabase.auth.signUp({
+            email,
+            password,
+          });
+          if (error) throw error;
+          onClose();
+          setSuccessMessage('Account created! You can now log in.');
+        }
       } else if (view === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: window.location.origin,
@@ -213,7 +230,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                   <div>
                     <h3 className="text-orange-800 font-semibold text-sm mb-1">Accès restreint</h3>
                     <p className="text-orange-700 text-sm">
-                      Cette plateforme est réservée exclusivement aux utilisateurs situés en Côte d'Ivoire.
+                      Cette plateforme est réservée exclusivement aux utilisateurs situés en Côte d'Ivoire. Si vous êtes un Ivoirien de la diaspora, cochez la case correspondante pour soumettre votre inscription à une validation.
                     </p>
                   </div>
                 </div>
@@ -233,6 +250,20 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                 </div>
               )}
 
+              {isRestricted && view === 'signup' && (
+                <div className="mb-4">
+                  <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={isDiaspora}
+                      onChange={(e) => setIsDiaspora(e.target.checked)}
+                      className="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                    />
+                    <span>Je suis un(e) Ivoirien(ne) résidant à l'étranger</span>
+                  </label>
+                </div>
+              )}
+
               <form className="space-y-4" onSubmit={handleAuth}>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email Address</label>
@@ -245,7 +276,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                       placeholder="you@example.com"
                       required
                       className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                      disabled={isRestricted || checkingLocation}
+                      disabled={(isRestricted && !isDiaspora) || checkingLocation}
                     />
                   </div>
                 </div>
@@ -274,7 +305,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                         required
                         minLength={6}
                         className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={isRestricted || checkingLocation}
+                        disabled={(isRestricted && !isDiaspora) || checkingLocation}
                       />
                     </div>
                   </div>
@@ -292,7 +323,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                         placeholder="••••••••"
                         required
                         className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={isRestricted || checkingLocation}
+                        disabled={(isRestricted && !isDiaspora) || checkingLocation}
                       />
                     </div>
                   </div>
@@ -300,7 +331,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
                 <button
                   type="submit"
-                  disabled={loading || isRestricted || checkingLocation}
+                  disabled={loading || (isRestricted && !isDiaspora) || checkingLocation}
                   className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/30 transition-all flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {loading ? (
@@ -338,7 +369,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                   <button
                     type="button"
                     onClick={handleGithubLogin}
-                    disabled={isRestricted || checkingLocation}
+                    disabled={(isRestricted && !isDiaspora) || checkingLocation}
                     className="w-full py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-medium rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Github size={20} />
