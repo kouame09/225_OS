@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { X, Mail, Lock, Github, ArrowRight, Loader2, AlertCircle, ArrowLeft, CheckCircle, MapPin } from 'lucide-react';
-import { checkIsLocationAllowed } from '../utils/location';
 import { supabase } from '../lib/supabaseClient';
 
 interface AuthModalProps {
@@ -16,21 +15,6 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [isRestricted, setIsRestricted] = useState(false);
-  const [checkingLocation, setCheckingLocation] = useState(false);
-
-  React.useEffect(() => {
-    if (isOpen) {
-      checkLocation();
-    }
-  }, [isOpen]);
-
-  const checkLocation = async () => {
-    setCheckingLocation(true);
-    const allowed = await checkIsLocationAllowed();
-    setIsRestricted(!allowed);
-    setCheckingLocation(false);
-  };
 
   // Form Fields
   const [email, setEmail] = useState('');
@@ -115,23 +99,46 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
     try {
       if (view === 'login') {
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
-        if (error) throw error;
+        if (signInError) throw signInError;
+
+        // Check for manual approval
+        const { data: profile, error: profileError } = await supabase
+          .from('profiles')
+          .select('is_approved')
+          .eq('id', signInData.user.id)
+          .single();
+
+        if (profileError || !profile || !profile.is_approved) {
+          await supabase.auth.signOut();
+          throw new Error('Your account has not been approved yet. Please wait for an administrator to validate your profile.');
+        }
+
         onClose();
       } else if (view === 'signup') {
         if (password !== confirmPassword) {
           throw new Error("Passwords do not match");
         }
-        const { error } = await supabase.auth.signUp({
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
         });
-        if (error) throw error;
-        onClose();
-        setSuccessMessage('Account created! You can now log in.');
+        if (signUpError) throw signUpError;
+
+        // Create a profile for the new user
+        if (signUpData.user) {
+          const { error: profileError } = await supabase.from('profiles').insert({ 
+            id: signUpData.user.id, 
+            email: signUpData.user.email,
+            is_approved: false
+          });
+          if (profileError) throw profileError;
+        }
+
+        setSuccessMessage('Account created! Please wait for an administrator to approve your account.');
       } else if (view === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: window.location.origin,
@@ -207,18 +214,6 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                 </p>
               </div>
 
-              {isRestricted && (
-                <div className="mb-6 p-4 bg-orange-50 border border-orange-200 rounded-xl flex items-start gap-3">
-                  <MapPin className="text-orange-600 shrink-0 mt-0.5" size={20} />
-                  <div>
-                    <h3 className="text-orange-800 font-semibold text-sm mb-1">Accès restreint</h3>
-                    <p className="text-orange-700 text-sm">
-                      Cette plateforme est réservée exclusivement aux utilisateurs situés en Côte d'Ivoire.
-                    </p>
-                  </div>
-                </div>
-              )}
-
               {error && (
                 <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-lg flex items-center gap-2 text-sm text-red-600 dark:text-red-400">
                   <AlertCircle size={16} className="shrink-0" />
@@ -245,7 +240,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                       placeholder="you@example.com"
                       required
                       className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                      disabled={isRestricted || checkingLocation}
+                      disabled={loading}
                     />
                   </div>
                 </div>
@@ -274,7 +269,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                         required
                         minLength={6}
                         className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={isRestricted || checkingLocation}
+                        disabled={loading}
                       />
                     </div>
                   </div>
@@ -292,7 +287,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                         placeholder="••••••••"
                         required
                         className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={isRestricted || checkingLocation}
+                        disabled={loading}
                       />
                     </div>
                   </div>
@@ -300,7 +295,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
                 <button
                   type="submit"
-                  disabled={loading || isRestricted || checkingLocation}
+                  disabled={loading}
                   className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/30 transition-all flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed"
                 >
                   {loading ? (
@@ -338,7 +333,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                   <button
                     type="button"
                     onClick={handleGithubLogin}
-                    disabled={isRestricted || checkingLocation}
+                    disabled={loading}
                     className="w-full py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-medium rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Github size={20} />
