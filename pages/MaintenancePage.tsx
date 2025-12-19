@@ -28,12 +28,12 @@ const MaintenancePage: React.FC = () => {
                     </div>
 
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white tracking-tight">
-                        Nous construisons quelque chose d'<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-500 dark:from-emerald-500 dark:to-emerald-400">incroyable</span>.
+                        225OS en <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-emerald-500 dark:from-emerald-500 dark:to-emerald-400">maintenance</span>.
                     </h1>
 
                     <p className="text-lg text-slate-600 dark:text-slate-300 max-w-lg mx-auto leading-relaxed">
-                        La plateforme est actuellement en maintenance pendant que nous apportons les dernières touches.
-                        Nous serons de retour en ligne très bientôt avec une expérience améliorée.
+                        La plateforme est actuellement en maintenance.
+                        Elle sera à nouveau disponible sous peu. Merci de votre patience !
                     </p>
                 </div>
 
