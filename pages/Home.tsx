@@ -181,7 +181,7 @@ const Home: React.FC = () => {
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
               {/* Visual: Mobile API Integration */}
-              <div className="lg:w-1/2 w-full flex justify-center perspective-1000">
+              <div className="lg:w-1/2 w-full flex lg:justify-start justify-center perspective-1000">
                 <div className="relative w-full max-w-md aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-8 flex items-center justify-center transform transition duration-500">
                   {/* Background decoration */}
                   <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(68,68,68,.2)_50%,transparent_75%,transparent_100%)] bg-[length:250%_250%] animate-[shine_4s_linear_infinite] opacity-10 rounded-3xl pointer-events-none"></div>
@@ -258,7 +258,7 @@ const Home: React.FC = () => {
             <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
 
               {/* Visual: Contribution Graph & Profile */}
-              <div className="lg:w-1/2 w-full flex justify-center">
+              <div className="lg:w-1/2 w-full flex lg:justify-end justify-center">
                 <div className="relative w-full max-w-md aspect-square bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 p-8 flex items-center justify-center">
                   {/* Abstract Contribution Grid Background */}
                   <div className="absolute inset-0 opacity-5 dark:opacity-20 grid grid-cols-12 gap-1 p-8">
@@ -337,7 +337,7 @@ const Home: React.FC = () => {
             <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
               {/* Visual: Server Stack & Shield */}
-              <div className="lg:w-1/2 w-full flex justify-center">
+              <div className="lg:w-1/2 w-full flex lg:justify-start justify-center">
                 <div className="relative w-full max-w-md aspect-square bg-slate-900 rounded-3xl border border-slate-800 p-8 flex items-center justify-center overflow-hidden group">
                   {/* Glowing Effect */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-purple-500/20 rounded-full blur-[60px] group-hover:bg-purple-500/30 transition-all duration-700"></div>
@@ -391,7 +391,7 @@ const Home: React.FC = () => {
             <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
 
               {/* Visual: Network Hub */}
-              <div className="lg:w-1/2 w-full flex justify-center">
+              <div className="lg:w-1/2 w-full flex lg:justify-end justify-center">
                 <div className="relative w-full max-w-md aspect-square bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-900 dark:to-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-8 flex items-center justify-center overflow-hidden">
                   {/* Connecting Lines (CSS) */}
                   <div className="absolute inset-0 flex items-center justify-center">
