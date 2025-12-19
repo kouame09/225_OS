@@ -114,7 +114,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
         if (profileError || !profile || !profile.is_approved) {
           await supabase.auth.signOut();
-          throw new Error('Your account has not been approved yet. Please wait for an administrator to validate your profile.');
+          throw new Error('Your account has been created but is pending approval. Please wait for an administrator to review it.');
         }
 
         onClose();
@@ -139,7 +139,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
           if (profileError) throw profileError;
         }
 
-        setSuccessMessage('Account created! Please wait for an administrator to approve your account.');
+        setSuccessMessage('Account created! Please check your email to validate your account.');
       } else if (view === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: window.location.origin,

@@ -44,7 +44,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         if (profile && !profile.is_approved) {
           await supabase.auth.signOut();
-          setGlobalMessage('Your account is pending approval. Please wait for an administrator to review it.');
+          setGlobalMessage('Your account has been created but is pending approval. Please wait for an administrator to review it.');
           setSession(null);
           setUser(null);
         } else if (!profile) {
