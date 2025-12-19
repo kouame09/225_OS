@@ -22,14 +22,73 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     let isMounted = true;
+    let initialSessionLoaded = false;
 
-    // Timeout fallback to prevent infinite loading in case of errors
-    const timeout = setTimeout(() => {
-      if (isMounted && loading) {
-        console.warn("Auth timeout: forcing loading state to false.");
-        setLoading(false);
+    // Function to handle profile check logic
+    const checkUserProfile = async (currentUser: User) => {
+      try {
+        const { data: profile, error: fetchError } = await supabase
+          .from('profiles')
+          .select('is_approved')
+          .eq('id', currentUser.id)
+          .single();
+
+        if (fetchError && fetchError.code !== 'PGRST116') {
+          console.error("Profile fetch error:", fetchError);
+        }
+
+        if (profile && !profile.is_approved) {
+          await supabase.auth.signOut();
+          addNotification('warning', 'Compte en attente', 'Votre compte est en attente d\'approbation.', 8000);
+          if (isMounted) {
+            setSession(null);
+            setUser(null);
+          }
+        } else if (!profile) {
+          // First time login logic - create profile
+          const { error: insertError } = await supabase.from('profiles').insert({
+            id: currentUser.id,
+            email: currentUser.email,
+            is_approved: false,
+            created_at: new Date().toISOString()
+          });
+
+          if (!insertError) {
+            await supabase.auth.signOut();
+            addNotification('success', 'Inscription réussie', 'Votre compte est maintenant en attente d\'approbation.', 8000);
+            if (isMounted) {
+              setSession(null);
+              setUser(null);
+            }
+          } else if (insertError.code !== '23505') {
+            console.error("Profile creation error:", insertError);
+          }
+        }
+      } catch (err) {
+        console.error("Auth initialization error:", err);
       }
-    }, 5000); // 5 seconds max wait
+    };
+
+    // Get the initial session on component mount
+    const initSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+
+        if (!isMounted) return;
+
+        initialSessionLoaded = true;
+        setSession(session);
+        setUser(session?.user ?? null);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error getting session:", error);
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    initSession();
 
     // Listen for changes on auth state (sign in, sign out, etc.)
     const {
@@ -37,62 +96,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (!isMounted) return;
 
+      // Skip INITIAL_SESSION if we already loaded it
+      if (_event === 'INITIAL_SESSION' && initialSessionLoaded) {
+        return;
+      }
+
       setSession(session);
       setUser(session?.user ?? null);
 
       // Only perform profile checks on explicit SIGNED_IN events
       if (_event === 'SIGNED_IN' && session?.user) {
-        try {
-          const currentUser = session.user;
-          const { data: profile, error: fetchError } = await supabase
-            .from('profiles')
-            .select('is_approved')
-            .eq('id', currentUser.id)
-            .single();
-
-          if (fetchError && fetchError.code !== 'PGRST116') {
-            console.error("Profile fetch error:", fetchError);
-          }
-
-          if (profile && !profile.is_approved) {
-            await supabase.auth.signOut();
-            addNotification('warning', 'Compte en attente', 'Votre compte est en attente d\'approbation.', 8000);
-            setSession(null);
-            setUser(null);
-          } else if (!profile) {
-            // First time login logic - create profile
-            const { error: insertError } = await supabase.from('profiles').insert({
-              id: currentUser.id,
-              email: currentUser.email,
-              is_approved: false,
-              created_at: new Date().toISOString()
-            });
-
-            if (!insertError) {
-              await supabase.auth.signOut();
-              addNotification('success', 'Inscription réussie', 'Votre compte est maintenant en attente d\'approbation.', 8000);
-              setSession(null);
-              setUser(null);
-            } else {
-              if (insertError.code !== '23505') {
-                console.error("Profile creation error:", insertError);
-              }
-            }
-          }
-        } catch (err) {
-          console.error("Auth initialization error:", err);
-        }
+        await checkUserProfile(session.user);
       }
 
-      // Always set loading to false after processing any event
-      if (isMounted) {
-        setLoading(false);
-      }
+      setLoading(false);
     });
 
     return () => {
       isMounted = false;
-      clearTimeout(timeout);
       subscription.unsubscribe();
     };
   }, [addNotification]);
