@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         <div className="text-center md:text-left">
           <p className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">225 Open Source</p>
           <p className="text-slate-500 text-sm mt-1">
-            Led by{' '}
+            Dirigé par{' '}
             <a
               href="https://www.princekouame.com"
               target="_blank"
@@ -22,8 +22,8 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
-          <Link to="/why" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Why Us?</Link>
-          <Link to="/privacy" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Privacy</Link>
+          <Link to="/why" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Pourquoi 225OS ?</Link>
+          <Link to="/privacy" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Confidentialité</Link>
           <Link to="/contact" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Contact</Link>
         </div>
 

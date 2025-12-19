@@ -56,16 +56,16 @@ const Home: React.FC = () => {
 
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-sm font-medium mb-8">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            The #1 Open Source Community in West Africa
+            La communauté Open Source n°1 en Afrique de l'Ouest
           </div>
 
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.1]">
-            Build the Future of <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600 dark:from-orange-400 dark:to-orange-500">Ivorian</span> <span className="text-transparent bg-clip-text bg-emerald-600 dark:from-emerald-400 dark:to-blue-400">Tech</span> Together
+            Contruire le futur <br />
+            de la <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600 dark:from-orange-400 dark:to-orange-500">Tech</span> <span className="text-transparent bg-clip-text bg-emerald-600 dark:from-emerald-400 dark:to-blue-400">Ivoirienne</span>
           </h1>
 
           <p className="max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
-            Discover, showcase, and contribute to cutting-edge open source projects built by tech talents from Côte d'Ivoire.
+            Découvrez, présentez et contribuez à des projets open source de pointe créés par des talents tech ivoiriens.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -73,14 +73,14 @@ const Home: React.FC = () => {
               onClick={() => setIsAuthOpen(true)}
               className="w-full sm:w-auto px-7 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-base hover:bg-slate-800 dark:hover:bg-slate-200 transition-all flex items-center justify-center gap-2"
             >
-              Join the Community
+              Rejoindre la communauté
               <ArrowRight size={20} />
             </button>
             <Link
               to="/why"
               className="w-full sm:w-auto px-7 py-3.5 bg-white dark:bg-slate-900 text-slate-700 dark:text-white border border-slate-200 dark:border-slate-800 rounded-xl font-bold text-base hover:bg-slate-50 dark:hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
             >
-              Learn More
+              En savoir plus
             </Link>
           </div>
 
@@ -95,16 +95,16 @@ const Home: React.FC = () => {
                 <div className="space-y-6 text-left">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-bold uppercase tracking-wider shadow-sm">
                     <Users size={12} className="text-emerald-500" />
-                    Community First
+                    La communauté d'abord
                   </div>
 
                   <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight">
-                    Unity Makes <br />
-                    <span className="text-transparent bg-clip-text bg-emerald-500">Tech Strength</span>
+                    L'union fait la <br />
+                    <span className="text-transparent bg-clip-text bg-emerald-500">force technologique</span>
                   </h3>
 
                   <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
-                    Connect with the largest open source community in Côte d'Ivoire. Share, learn, and grow alongside the country's top talents.
+                    Connectez-vous avec la plus grande communauté open source de Côte d'Ivoire. Partagez, apprenez et grandissez aux côtés des meilleurs talents du pays.
                   </p>
 
                   <div className="flex items-center gap-4 pt-4">
@@ -222,26 +222,26 @@ const Home: React.FC = () => {
               <div className="lg:w-1/2">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-6">
                   <Globe size={14} />
-                  Local Solutions
+                  Solutions locales
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
-                  Solve Real Challenges <br /> with Local Code
+                  Résolvez des défis réels <br /> avec du code local
                 </h2>
                 <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  Silicon Valley won't solve Abidjan's problems. Whether it's integrating <span className="text-slate-900 dark:text-white font-semibold">Mobile Money APIs</span>, digitizing agriculture, or optimizing transport, open source allows us to build solutions tailored to our reality.
+                  La Silicon Valley ne résoudra pas les problèmes d'Abidjan. Qu'il s'agisse d'intégrer des <span className="text-slate-900 dark:text-white font-semibold">APIs Mobile Money</span>, de numériser l'agriculture ou d'optimiser les transports, l'open source nous permet de construire des solutions adaptées à notre réalité.
                 </p>
                 <div className="flex flex-col gap-3">
                   <div className="flex items-start gap-3">
                     <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
                       <CheckCircle size={12} className="text-emerald-600 dark:text-emerald-400" />
                     </div>
-                    <span className="text-slate-600 dark:text-slate-400">Adapt tools to Wave, Orange Money, and MTN.</span>
+                    <span className="text-slate-600 dark:text-slate-400">Adapter les outils à Wave, Orange Money et MTN.</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center">
                       <CheckCircle size={12} className="text-emerald-600 dark:text-emerald-400" />
                     </div>
-                    <span className="text-slate-600 dark:text-slate-400">Build offline-first apps for low-bandwidth areas.</span>
+                    <span className="text-slate-600 dark:text-slate-400">Créer des applications hors-ligne pour les zones à faible débit.</span>
                   </div>
                 </div>
               </div>
@@ -281,21 +281,21 @@ const Home: React.FC = () => {
                       </div>
                       <div className="text-center">
                         <div className="text-lg font-bold text-slate-900 dark:text-white">12</div>
-                        <div className="text-[10px] text-slate-500 uppercase">Projects</div>
+                        <div className="text-[10px] text-slate-500 uppercase">Projets</div>
                       </div>
                       <div className="text-center">
                         <div className="text-lg font-bold text-slate-900 dark:text-white">5</div>
-                        <div className="text-[10px] text-slate-500 uppercase">Stars</div>
+                        <div className="text-[10px] text-slate-500 uppercase">Étoiles</div>
                       </div>
                     </div>
                     <button className="w-full py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-lg text-xs font-bold">
-                      View Profile
+                      Voir le profil
                     </button>
 
                     {/* Hired Badge */}
                     <div className="absolute -right-6 -top-6 bg-emerald-500 text-white px-4 py-2 rounded-lg transform rotate-12 flex items-center gap-2 animate-wiggle">
                       <CheckCircle size={16} />
-                      <span className="font-bold text-sm">HIRED</span>
+                      <span className="font-bold text-sm">RECRUTÉ</span>
                     </div>
                   </div>
                 </div>
@@ -305,22 +305,22 @@ const Home: React.FC = () => {
               <div className="lg:w-1/2">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-6">
                   <Terminal size={14} />
-                  Career Booster
+                  Accélérateur de carrière
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
-                  Your Code is Your <br /> New Resume
+                  Votre code est votre <br /> nouveau CV
                 </h2>
                 <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  In a competitive market, a PDF CV isn't enough. Contributing to open source gives you <span className="text-slate-900 dark:text-white font-semibold">proof of competence</span>. It helps local companies find hidden gems and allows you to land remote jobs.
+                  Dans un marché compétitif, un CV PDF ne suffit plus. Contribuer à l'open source vous donne une <span className="text-slate-900 dark:text-white font-semibold">preuve de compétence</span>. Cela aide les entreprises locales à trouver des pépites cachées et vous permet de décrocher des opportunités.
                 </p>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3 text-slate-600 dark:text-slate-400">
                     <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span>Showcase your coding style and collaboration skills.</span>
+                    <span>Présentez votre style de code et vos compétences de collaboration.</span>
                   </li>
                   <li className="flex items-start gap-3 text-slate-600 dark:text-slate-400">
                     <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span>Get recognized by top tech companies in Côte d'Ivoire and West Africa.</span>
+                    <span>Soyez reconnu par les meilleures entreprises technologiques de Côte d'Ivoire et d'Afrique de l'Ouest.</span>
                   </li>
                 </ul>
               </div>
@@ -357,7 +357,7 @@ const Home: React.FC = () => {
                   {/* Shield Overlay */}
                   <div className="absolute z-20 bg-slate-950/80 backdrop-blur-sm border border-purple-500/50 p-4 rounded-2xl flex flex-col items-center gap-2 transform translate-y-8 group-hover:translate-y-6 transition-transform animate-float-delayed">
                     <Shield size={32} className="text-purple-500" />
-                    <span className="text-xs font-bold text-white tracking-widest">OWN YOUR DATA</span>
+                    <span className="text-xs font-bold text-white tracking-widest">MAÎTRISEZ VOS DONNÉES</span>
                   </div>
                 </div>
               </div>
@@ -366,16 +366,16 @@ const Home: React.FC = () => {
               <div className="lg:w-1/2">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-bold uppercase tracking-wider mb-6">
                   <Cpu size={14} />
-                  Sovereignty
+                  Souveraineté
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
-                  Build Independent <br /> Infrastructure
+                  Construire une infrastructure <br /> indépendante
                 </h2>
                 <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  Dependency on expensive foreign software limits our growth. By championing open source in Côte d'Ivoire, we are building a <span className="text-slate-900 dark:text-white font-semibold">resilient digital infrastructure</span> that belongs to us.
+                  La dépendance vis-à-vis de logiciels étrangers coûteux limite notre croissance. En défendant l'open source en Côte d'Ivoire, nous construisons une <span className="text-slate-900 dark:text-white font-semibold">infrastructure numérique résiliente</span> qui nous appartient.
                 </p>
                 <p className="text-slate-600 dark:text-slate-400">
-                  We create tools that are accessible, modifiable, and owned by the community, reducing reliance on costly proprietary SaaS.
+                  Nous créons des outils accessibles, modifiables et détenus par la communauté, réduisant ainsi la dépendance aux SaaS propriétaires coûteux.
                 </p>
               </div>
             </div>
@@ -417,13 +417,13 @@ const Home: React.FC = () => {
               <div className="lg:w-1/2">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-400 text-xs font-bold uppercase tracking-wider mb-6">
                   <Users size={14} />
-                  Unity
+                  Unité
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6">
-                  Uniting the "Tech Maquis"
+                  Unir le "Tech Maquis"
                 </h2>
                 <p className="text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
-                  From freelancers in Bouaké to startups in Abidjan, the Ivorian tech scene is vibrant but scattered. This platform acts as the <span className="text-slate-900 dark:text-white font-semibold">central hub</span>, where developers meet, collaborate, and lift each other up through code reviews and shared knowledge.
+                  Des freelances à Bouaké aux startups à Abidjan, la scène tech ivoirienne est vibrante mais dispersée. Cette plateforme agit comme le <span className="text-slate-900 dark:text-white font-semibold">hub central</span>, où les développeurs se rencontrent, collaborent et se soutiennent mutuellement.
                 </p>
               </div>
             </div>
@@ -440,10 +440,10 @@ const Home: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6">
-              The Problem We Solve Together
+              Le problème que nous résolvons
             </h2>
             <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-              GitHub is the world's largest open source platform, but it lacks a crucial feature: filtering projects by country. That's where 225 Open Source comes in.
+              GitHub est la plus grande plateforme open source au monde, mais il lui manque une fonctionnalité cruciale : filtrer les projets par pays. C'est là qu'intervient 225 Open Source.
             </p>
           </div>
 
@@ -453,9 +453,9 @@ const Home: React.FC = () => {
               <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center mb-4">
                 <X className="text-red-600 dark:text-red-400" size={24} />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">No Country Filter on GitHub</h3>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Pas de filtre par pays sur GitHub</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm">
-                Impossible to easily discover open source projects created by Ivorian developers
+                Impossible de découvrir facilement les projets open source créés par des développeurs ivoiriens
               </p>
             </div>
 
@@ -463,9 +463,9 @@ const Home: React.FC = () => {
               <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-4">
                 <AlertCircle className="text-orange-600 dark:text-orange-400" size={24} />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Limited Visibility</h3>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Visibilité limitée</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm">
-                Ivorian talents remain hidden in the global ocean of open source projects
+                Les talents ivoiriens restent cachés dans l'océan mondial des projets open source
               </p>
             </div>
 
@@ -473,24 +473,24 @@ const Home: React.FC = () => {
               <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-xl flex items-center justify-center mb-4">
                 <Users className="text-yellow-600 dark:text-yellow-400" size={24} />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Fragmented Collaboration</h3>
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Collaboration fragmentée</h3>
               <p className="text-slate-600 dark:text-slate-400 text-sm">
-                Difficult for Ivorian developers to find each other and collaborate
+                Difficile pour les développeurs ivoiriens de se trouver et de collaborer
               </p>
             </div>
           </div>
 
           {/* Solution Cards */}
           <div className="mb-20">
-            <h3 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">Our Solution</h3>
+            <h3 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-10">Notre solution</h3>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-emerald-50 dark:bg-emerald-900/10 p-6 rounded-2xl border-2 border-emerald-200 dark:border-emerald-800">
                 <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mb-4">
                   <Terminal className="text-white" size={24} />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Smart Centralization</h3>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Centralisation intelligente</h3>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">
-                  We automatically aggregate Ivorian open source projects from GitHub
+                  Nous regroupons automatiquement les projets open source ivoiriens depuis GitHub
                 </p>
               </div>
 
@@ -498,9 +498,9 @@ const Home: React.FC = () => {
                 <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mb-4">
                   <Globe className="text-white" size={24} />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Country Filtering</h3>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Filtrage par pays</h3>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">
-                  Instant access to all open source projects created in Côte d'Ivoire
+                  Accès instantané à tous les projets open source créés en Côte d'Ivoire
                 </p>
               </div>
 
@@ -508,9 +508,9 @@ const Home: React.FC = () => {
                 <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center mb-4">
                   <Users className="text-white" size={24} />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Unified Community</h3>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Communauté unifiée</h3>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">
-                  A central space to discover, contribute, and collaborate with local talents
+                  Un espace central pour découvrir, contribuer et collaborer avec les talents locaux
                 </p>
               </div>
             </div>
@@ -518,9 +518,9 @@ const Home: React.FC = () => {
 
           {/* How It Works */}
           <div>
-            <h3 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-4">How It Works?</h3>
+            <h3 className="text-3xl font-bold text-slate-900 dark:text-white text-center mb-4">Comment ça marche ?</h3>
             <p className="text-center text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto">
-              A simple but powerful solution to connect the Ivorian ecosystem
+              Une solution simple mais puissante pour connecter l'écosystème ivoirien
             </p>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -533,9 +533,9 @@ const Home: React.FC = () => {
                       <Github className="text-white" size={14} />
                     </div>
                   </div>
-                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Share on GitHub</h4>
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Partagez sur GitHub</h4>
                   <p className="text-slate-600 dark:text-slate-400">
-                    Push your open source project to GitHub and make it public to make it accessible to everyone
+                    Poussez votre projet open source sur GitHub et rendez-le public pour qu'il soit accessible à tous
                   </p>
                 </div>
               </div>
@@ -549,9 +549,9 @@ const Home: React.FC = () => {
                       <ArrowRight className="text-white" size={14} />
                     </div>
                   </div>
-                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Add It Here</h4>
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Ajoutez-le ici</h4>
                   <p className="text-slate-600 dark:text-slate-400">
-                    Upload your project here so it can be easily found in our ecosystem
+                    Importez votre projet ici pour qu'il puisse être facilement trouvé dans notre écosystème
                   </p>
                 </div>
               </div>
@@ -565,9 +565,9 @@ const Home: React.FC = () => {
                       <CheckCircle className="text-white" size={14} />
                     </div>
                   </div>
-                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Collaborate</h4>
+                  <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3">Collaborez</h4>
                   <p className="text-slate-600 dark:text-slate-400">
-                    The Ivorian community discovers your project, contributes to it, and helps it grow together
+                    La communauté ivoirienne découvre votre projet, y contribue et l'aide à grandir ensemble
                   </p>
                 </div>
               </div>
@@ -580,7 +580,7 @@ const Home: React.FC = () => {
       <section className="py-16 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-10">
-            Trusted by Ecosystem Leaders
+            Approuvé par ces entreprises de l'écosystème
           </p>
           <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-60">
             {/* Fake Partners - Placeholders */}
@@ -616,9 +616,9 @@ const Home: React.FC = () => {
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] -ml-32 -mb-32 pointer-events-none"></div>
 
           <div className="relative z-10">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">Ready to put CIV on the map?</h2>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">Prêt pour la dynamique ?</h2>
             <p className="text-slate-300 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-              Don't let your project get lost in the ocean of GitHub projects. Add your project to 225 Open Source and contribute to the digital development of Côte d'Ivoire.
+              Ne laissez pas votre projet se perdre dans l'océan des projets GitHub. Ajoutez votre projet sur 225 Open Source et contribuez au développement numérique de la Côte d'Ivoire.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
@@ -628,13 +628,13 @@ const Home: React.FC = () => {
                 className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-lg rounded-xl transition-all transform hover:scale-105 flex items-center justify-center gap-2"
               >
                 <Github size={20} />
-                View on GitHub
+                Voir sur GitHub
               </a>
               <button
                 onClick={() => setIsSignupOpen(true)}
                 className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white font-bold text-lg rounded-xl transition-all transform hover:scale-105"
               >
-                Create Account
+                Créer un compte
               </button>
             </div>
           </div>
@@ -644,7 +644,7 @@ const Home: React.FC = () => {
       {/* --- CONTRIBUTORS / COMMUNITY SECTION --- */}
       <section className="py-20 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Join Top Ivorian Contributors</h2>
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">Rejoignez le top des contributeurs</h2>
           <div className="flex flex-wrap justify-center items-center gap-4 mb-8">
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
               <img src="/Contributors/prince.jpg" alt="Prince Kouamé" className="w-full h-full object-cover" />
@@ -666,7 +666,7 @@ const Home: React.FC = () => {
             </div>
           </div>
           <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Our community is growing every day. Software engineers, cybersecurity experts, data scientists,... are coming together to shape the tech future of Côte d'Ivoire.
+            Notre communauté s'agrandit chaque jour. Ingénieurs logiciels, experts en cybersécurité, data scientists... s'unissent pour façonner l'avenir technologique de la Côte d'Ivoire.
           </p>
         </div>
       </section>

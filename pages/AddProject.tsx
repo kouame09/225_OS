@@ -46,8 +46,8 @@ const AddProject: React.FC = () => {
     // Basic validation
     const info = extractRepoInfo(repoUrl);
     if (!info) {
-      setError('Please enter a valid GitHub repository URL (e.g., https://github.com/owner/repo)');
-      addNotification('error', 'Invalid URL', 'Please enter a valid GitHub repository URL');
+      setError('Veuillez entrer une URL de dépôt GitHub valide (ex: https://github.com/owner/repo)');
+      addNotification('error', 'URL invalide', 'Veuillez entrer une URL de dépôt GitHub valide');
       return;
     }
 
@@ -68,10 +68,10 @@ const AddProject: React.FC = () => {
         }
       }
 
-      addNotification('success', 'Repository fetched', `Successfully loaded ${meta.name} repository data`);
+      addNotification('success', 'Dépôt récupéré', `Les données du dépôt ${meta.name} ont été chargées avec succès`);
     } catch (err: any) {
-      setError(err.message || 'Failed to fetch GitHub data');
-      addNotification('error', 'Fetch failed', err.message || 'Failed to fetch GitHub repository data');
+      setError(err.message || 'Échec de la récupération des données GitHub');
+      addNotification('error', 'Échec de la récupération', err.message || 'Impossible de récupérer les données du dépôt GitHub');
     } finally {
       setLoadingMeta(false);
     }
@@ -100,8 +100,8 @@ const AddProject: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!githubData || !user) {
-      setError('Please ensure you are logged in and data is fetched.');
-      addNotification('error', 'Validation Error', 'Please ensure you are logged in and repository data is fetched');
+      setError('Veuillez vous assurer d\'être connecté et que les données ont été récupérées.');
+      addNotification('error', 'Erreur de validation', 'Veuillez vous assurer d\'être connecté et que les données du dépôt ont été récupérées');
       return;
     }
 
@@ -131,12 +131,12 @@ const AddProject: React.FC = () => {
 
     try {
       await addProject(newProject);
-      addNotification('success', 'Project added!', `"${name}" has been successfully added to your projects`);
+      addNotification('success', 'Projet ajouté !', `"${name}" a été ajouté avec succès à vos projets`);
       navigate('/dashboard');
     } catch (e: any) {
       console.error(e);
-      setError('Failed to save project. ' + e.message);
-      addNotification('error', 'Save failed', 'Failed to save project. ' + e.message);
+      setError('Échec de l\'enregistrement du projet. ' + e.message);
+      addNotification('error', 'Échec de l\'enregistrement', 'Impossible d\'enregistrer le projet. ' + e.message);
       setSubmitting(false);
     }
   };
@@ -148,8 +148,8 @@ const AddProject: React.FC = () => {
       <div className="max-w-2xl mx-auto">
 
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Submit a Project</h1>
-          <p className="text-slate-600 dark:text-slate-400">Share your open-source contribution with the community.</p>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Soumettre un projet</h1>
+          <p className="text-slate-600 dark:text-slate-400">Partagez votre contribution open-source avec la communauté.</p>
         </div>
 
         <div className="bg-white dark:bg-slate-900 shadow-xl rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
@@ -157,7 +157,7 @@ const AddProject: React.FC = () => {
           {/* Step 1: GitHub URL */}
           <div className="p-8 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900">
             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              GitHub Repository URL <span className="text-red-500">*</span>
+              URL du dépôt GitHub <span className="text-red-500">*</span>
             </label>
             <div className="flex gap-2">
               <div className="relative flex-grow">
@@ -180,7 +180,7 @@ const AddProject: React.FC = () => {
                 disabled={loadingMeta || !repoUrl}
                 className="px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-medium hover:opacity-90 disabled:opacity-50 transition-all flex items-center justify-center min-w-[100px]"
               >
-                {loadingMeta ? <Loader2 className="animate-spin" /> : 'Fetch'}
+                {loadingMeta ? <Loader2 className="animate-spin" /> : 'Récupérer'}
               </button>
             </div>
             {error && (
@@ -189,7 +189,7 @@ const AddProject: React.FC = () => {
             {githubData && !error && (
               <div className="mt-2 flex items-center gap-2 text-sm text-green-600 dark:text-green-400">
                 <CheckCircle size={14} />
-                <span>Repository verified</span>
+                <span>Dépôt vérifié</span>
               </div>
             )}
           </div>
@@ -200,7 +200,7 @@ const AddProject: React.FC = () => {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                  Project Name
+                  Nom du projet
                 </label>
                 <input
                   type="text"
@@ -212,7 +212,7 @@ const AddProject: React.FC = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                  Author / Organization
+                  Auteur / Organisation
                 </label>
                 <input
                   type="text"
@@ -226,7 +226,7 @@ const AddProject: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                Description (Max 200 chars)
+                Description (Max 200 caract.)
               </label>
               <textarea
                 required
@@ -241,7 +241,7 @@ const AddProject: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                Tech Stack & Tags
+                Technologies & Tags
               </label>
               <div className="flex flex-wrap gap-2 mb-2 p-2 border border-slate-200 dark:border-slate-800 rounded-lg min-h-[42px] bg-slate-50 dark:bg-slate-900/50">
                 {stacks.map(stack => (
@@ -255,7 +255,7 @@ const AddProject: React.FC = () => {
                 <input
                   type="text"
                   className="flex-grow min-w-[120px] bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-emerald-500 rounded-md px-2 py-1 text-sm dark:text-white"
-                  placeholder="Type and press Enter..."
+                  placeholder="Tapez et appuyez sur Entrée..."
                   value={stackInput}
                   onChange={(e) => setStackInput(e.target.value)}
                   onKeyDown={handleAddStack}
@@ -282,7 +282,7 @@ const AddProject: React.FC = () => {
                 onClick={() => navigate('/')}
                 className="px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors"
               >
-                Cancel
+                Annuler
               </button>
               <button
                 type="submit"
@@ -290,7 +290,7 @@ const AddProject: React.FC = () => {
                 className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all disabled:opacity-70"
               >
                 {submitting ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
-                Publish Project
+                Publier le projet
               </button>
             </div>
           </form>

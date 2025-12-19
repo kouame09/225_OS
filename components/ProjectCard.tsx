@@ -11,7 +11,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
   const formatDate = (isoString: string) => {
-    return new Date(isoString).toLocaleDateString('en-US', {
+    return new Date(isoString).toLocaleDateString('fr-FR', {
       month: 'short',
       day: 'numeric',
       year: 'numeric'
@@ -51,7 +51,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
               </h3>
             </Link>
             <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
-              by {project.author}
+              par {project.author}
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -70,7 +70,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
-              title="View on GitHub"
+              title="Voir sur GitHub"
             >
               <Github size={20} />
             </a>
@@ -92,12 +92,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
           </div>
 
           <div className="flex items-center justify-between text-xs text-slate-400 dark:text-slate-500">
-            <span>Updated {formatDate(project.updatedAt)}</span>
+            <span>Mis à jour le {formatDate(project.updatedAt)}</span>
             <Link
               to={`/project/${project.slug}`}
               className="flex items-center gap-1 font-semibold text-slate-900 dark:text-white hover:underline"
             >
-              View Details
+              Voir les détails
             </Link>
           </div>
         </div>

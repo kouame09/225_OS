@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
                   className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
                 >
                   <Compass size={14} />
-                  <span>Explore</span>
+                  <span>Explorer</span>
                 </Link>
               )}
 
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
                 className="hidden md:flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
               >
                 <Github size={14} />
-                <span>Star</span>
+                <span>Soutenir</span>
               </a>
 
               {/* Donation Link */}
@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
                 className="hidden md:flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
               >
                 <Heart size={14} />
-                <span>Donate</span>
+                <span>Donation</span>
               </Link>
 
               {user ? (
@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
                   <button
                     onClick={signOut}
                     className="text-slate-400 hover:text-red-500 transition-colors"
-                    title="Sign Out"
+                    title="Se déconnecter"
                   >
                     <LogOut size={18} />
                   </button>
@@ -87,14 +87,14 @@ const Navbar: React.FC = () => {
                   className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 rounded-lg transition-colors"
                 >
                   <User size={16} />
-                  <span>Join</span>
+                  <span>Rejoindre</span>
                 </button>
               )}
 
               <button
                 onClick={toggleDarkMode}
                 className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors"
-                aria-label="Toggle Dark Mode"
+                aria-label="Changer de thème"
               >
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>

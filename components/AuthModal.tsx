@@ -43,33 +43,33 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
       // Email/Password errors
       if (message.includes('invalid login credentials')) {
-        return 'Invalid email or password';
+        return 'Email ou mot de passe invalide';
       }
       if (message.includes('invalid email')) {
-        return 'Invalid email address';
+        return 'Adresse email invalide';
       }
       if (message.includes('email not confirmed')) {
-        return 'Please confirm your email address before signing in';
+        return 'Veuillez confirmer votre adresse email avant de vous connecter';
       }
       if (message.includes('weak password')) {
-        return 'Password must be at least 6 characters long';
+        return 'Le mot de passe doit contenir au moins 6 caractères';
       }
       if (message.includes('user already registered')) {
-        return 'An account already exists with this email address';
+        return 'Un compte existe déjà avec cette adresse email';
       }
       if (message.includes('signup disabled')) {
-        return 'Sign up is temporarily disabled';
+        return 'Les inscriptions sont temporairement désactivées';
       }
 
       // Network/Server errors
       if (message.includes('network') || message.includes('fetch')) {
-        return 'Connection problem. Check your internet and try again';
+        return 'Problème de connexion. Vérifiez votre internet et réessayez';
       }
       if (message.includes('timeout')) {
-        return 'Server is taking too long to respond. Please try again in a moment';
+        return 'Le serveur met trop de temps à répondre. Veuillez réessayer dans un instant';
       }
       if (message.includes('too many requests')) {
-        return 'Too many attempts. Please wait a few minutes before trying again';
+        return 'Trop de tentatives. Veuillez patienter quelques minutes avant de réessayer';
       }
       if (message.includes('pending approval') || message.includes('approbation')) {
         return error.message;
@@ -78,19 +78,19 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
     // Handle specific view errors
     if (view === 'signup' && error?.message?.includes('password')) {
-      return 'Passwords do not match';
+      return 'Les mots de passe ne correspondent pas';
     }
 
     // Default fallback messages
     switch (view) {
       case 'login':
-        return 'Sign in failed. Please check your credentials';
+        return 'Échec de la connexion. Veuillez vérifier vos identifiants';
       case 'signup':
-        return 'Account creation failed. Please check your information';
+        return 'Échec de la création du compte. Veuillez vérifier vos informations';
       case 'forgot':
-        return 'Failed to send reset link';
+        return 'Impossible d\'envoyer le lien de réinitialisation';
       default:
-        return 'An error occurred. Please try again';
+        return 'Une erreur est survenue. Veuillez réessayer';
     }
   };
 
@@ -123,23 +123,20 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         onClose();
       } else if (view === 'signup') {
         if (password !== confirmPassword) {
-          throw new Error("Passwords do not match");
+          throw new Error("Les mots de passe ne correspondent pas");
         }
         const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email,
           password,
         });
         if (signUpError) throw signUpError;
-
-        if (signUpError) throw signUpError;
-
-        setSuccessMessage('Account created! Please check your email to validate your account.');
+        setSuccessMessage('Compte créé ! Veuillez vérifier vos e-mails pour valider votre compte.');
       } else if (view === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: window.location.origin,
         });
         if (error) throw error;
-        setSuccessMessage('Password reset link sent to your email.');
+        setSuccessMessage('Lien de réinitialisation envoyé par e-mail.');
       }
     } catch (err: any) {
       setError(getAuthErrorMessage(err));
@@ -162,17 +159,17 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
   // Helper for title text
   const getTitle = () => {
     switch (view) {
-      case 'login': return 'Welcome back';
-      case 'signup': return 'Join the community';
-      case 'forgot': return 'Reset Password';
+      case 'login': return 'Bon retour';
+      case 'signup': return 'Rejoindre la communauté';
+      case 'forgot': return 'Réinitialiser le mot de passe';
     }
   };
 
   const getDescription = () => {
     switch (view) {
-      case 'login': return 'Enter your details to access your account';
-      case 'signup': return 'Connect with African tech professionals today';
-      case 'forgot': return 'Enter your email to receive reset instructions';
+      case 'login': return 'Entrez vos informations pour accéder à votre compte';
+      case 'signup': return 'Connectez-vous avec les professionnels de la tech africaine aujourd\'hui';
+      case 'forgot': return 'Entrez votre e-mail pour recevoir les instructions de réinitialisation';
     }
   };
 
@@ -225,7 +222,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
               <form className="space-y-4" onSubmit={handleAuth}>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email Address</label>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Adresse e-mail</label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3.5 text-slate-400" size={18} />
                     <input
@@ -243,14 +240,14 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                 {view !== 'forgot' && (
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Password</label>
+                      <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Mot de passe</label>
                       {view === 'login' && (
                         <button
                           type="button"
                           onClick={() => switchView('forgot')}
                           className="text-xs font-semibold text-emerald-600 hover:text-emerald-500 dark:text-emerald-400"
                         >
-                          Forgot password?
+                          Mot de passe oublié ?
                         </button>
                       )}
                     </div>
@@ -272,7 +269,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
                 {view === 'signup' && (
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Confirm Password</label>
+                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Confirmer le mot de passe</label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3.5 text-slate-400" size={18} />
                       <input
@@ -297,9 +294,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                     <Loader2 className="animate-spin" size={20} />
                   ) : (
                     <>
-                      {view === 'login' && 'Sign In'}
-                      {view === 'signup' && 'Create Account'}
-                      {view === 'forgot' && 'Send Reset Link'}
+                      {view === 'login' && 'Se connecter'}
+                      {view === 'signup' && 'Créer un compte'}
+                      {view === 'forgot' && 'Envoyer le lien'}
                       {view !== 'forgot' && <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
                     </>
                   )}
@@ -314,14 +311,14 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
                     className="flex items-center justify-center gap-2 w-full text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors text-sm font-medium"
                   >
                     <ArrowLeft size={16} />
-                    Back to Login
+                    Retour à la connexion
                   </button>
                 </div>
               ) : (
                 <>
                   <div className="my-6 flex items-center gap-4">
                     <div className="h-px bg-slate-100 dark:bg-slate-800 flex-1" />
-                    <span className="text-xs text-slate-400 font-medium uppercase">Or continue with</span>
+                    <span className="text-xs text-slate-400 font-medium uppercase">Ou continuer avec</span>
                     <div className="h-px bg-slate-100 dark:bg-slate-800 flex-1" />
                   </div>
 
@@ -337,13 +334,13 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
                   <div className="mt-6 text-center text-sm">
                     <span className="text-slate-500 dark:text-slate-400">
-                      {view === 'login' ? "Don't have an account? " : "Already have an account? "}
+                      {view === 'login' ? "Vous n'avez pas de compte ? " : "Vous avez déjà un compte ? "}
                     </span>
                     <button
                       onClick={() => switchView(view === 'login' ? 'signup' : 'login')}
                       className="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline"
                     >
-                      {view === 'login' ? 'Sign up' : 'Log in'}
+                      {view === 'login' ? 'S\'inscrire' : 'Se connecter'}
                     </button>
                   </div>
                 </>

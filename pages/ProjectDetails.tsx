@@ -46,7 +46,7 @@ const ProjectDetails: React.FC = () => {
   }, [slug, navigate]);
 
   const formatDate = (isoString: string) => {
-    return new Date(isoString).toLocaleDateString('en-US', {
+    return new Date(isoString).toLocaleDateString('fr-FR', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -58,8 +58,8 @@ const ProjectDetails: React.FC = () => {
     if (!project) return;
 
     const shareData = {
-      title: `${project.name} on 225 Open Source`,
-      text: `Check out ${project.name} by ${project.author}. ${project.description}`,
+      title: `${project.name} sur 225 Open Source`,
+      text: `Découvrez ${project.name} par ${project.author}. ${project.description}`,
       url: window.location.href,
     };
 
@@ -106,7 +106,7 @@ const ProjectDetails: React.FC = () => {
             onClick={() => navigate(-1)}
             className="mb-6 flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm font-medium"
           >
-            <ArrowLeft size={16} /> Back to Projects
+            <ArrowLeft size={16} /> Retour aux projets
           </button>
         )}
 
@@ -140,7 +140,7 @@ const ProjectDetails: React.FC = () => {
                     {project.name}
                   </h1>
                   <div className="flex items-center gap-2 text-lg text-slate-500 dark:text-slate-400 font-medium">
-                    <span>by <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.author}</span></span>
+                    <span>par <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.author}</span></span>
                   </div>
                 </div>
 
@@ -148,7 +148,7 @@ const ProjectDetails: React.FC = () => {
                 <div className="flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-300">
                   <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-500 border border-amber-200 dark:border-amber-800/50">
                     <Star size={16} fill="currentColor" />
-                    <span className="font-bold">{project.stars}</span> <span className="hidden sm:inline">stars</span>
+                    <span className="font-bold">{project.stars}</span> <span className="hidden sm:inline">étoiles</span>
                   </div>
                   <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
                     <GitFork size={16} />
@@ -166,7 +166,7 @@ const ProjectDetails: React.FC = () => {
 
             {/* 3. Description (About) */}
             <div>
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">About this project</h2>
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">À propos de ce projet</h2>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
                 {project.description}
               </p>
@@ -174,7 +174,7 @@ const ProjectDetails: React.FC = () => {
 
             {/* 4. Stacks */}
             <div>
-              <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">Tech Stack</h3>
+              <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">Technologies utilisées</h3>
               <div className="flex flex-wrap gap-2">
                 {project.stacks.map(stack => (
                   <Badge key={stack} text={stack} />
@@ -192,7 +192,7 @@ const ProjectDetails: React.FC = () => {
                   className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 text-white rounded-xl font-semibold transition-all shadow-md group"
                 >
                   <Github size={20} />
-                  <span>View on GitHub</span>
+                  <span>Voir sur GitHub</span>
                   <ExternalLink size={16} className="opacity-50 group-hover:translate-x-0.5 transition-transform" />
                 </a>
 
@@ -201,14 +201,15 @@ const ProjectDetails: React.FC = () => {
                   className="flex items-center justify-center gap-2 w-full py-3.5 px-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-medium transition-all"
                 >
                   {copied ? <Check size={20} className="text-green-500" /> : <Share2 size={20} />}
-                  <span>{copied ? 'Link Copied' : 'Share Project'}</span>
+                  <span>{copied ? 'Lien copié' : 'Partager le projet'}</span>
                 </button>
               </div>
 
-              {/* 6. Footer */}
               <div className="flex items-center justify-center gap-3 text-slate-400 text-xs">
-                <Calendar size={14} />
-                <span>Last updated: {formatDate(project.updatedAt)}</span>
+                <div className="flex items-center gap-1.5">
+                  <Calendar size={14} />
+                  <span>Dernière mise à jour le : {formatDate(project.updatedAt)}</span>
+                </div>
               </div>
             </div>
 
@@ -220,16 +221,16 @@ const ProjectDetails: React.FC = () => {
           <div className="mt-12 p-8 bg-slate-900 dark:bg-slate-950 rounded-2xl shadow-xl text-white flex flex-col items-center text-center gap-6 relative overflow-hidden border border-slate-800">
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
             <div className="relative z-10 max-w-2xl">
-              <h3 className="text-3xl font-bold mb-3">Love this project?</h3>
+              <h3 className="text-3xl font-bold mb-3">Vous aimez ce projet ?</h3>
               <p className="text-slate-300 text-lg mb-2">
-                Join 225 Open Source to discover more amazing projects, support local developers, and share your own work.
+                Rejoignez 225 Open Source pour découvrir plus de projets incroyables, soutenir les développeurs locaux et partager votre propre travail.
               </p>
             </div>
             <Link
               to="/"
               className="relative z-10 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
-              Create Free Account
+              Créer un compte gratuit
             </Link>
           </div>
         )}

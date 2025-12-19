@@ -20,15 +20,15 @@ const Why225OpenSource: React.FC = () => {
             <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-12 pb-24 font-sans">
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
                     <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors mb-8 text-sm font-medium">
-                        <ArrowLeft size={16} /> Back to Home
+                        <ArrowLeft size={16} /> Retour à l'accueil
                     </Link>
 
                     <div className="mb-12">
                         <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
-                            Why <span className="text-transparent bg-clip-text bg-emerald-600">225 Open Source?</span>
+                            Pourquoi <span className="text-transparent bg-clip-text bg-emerald-600">225 Open Source ?</span>
                         </h1>
                         <p className="text-xl text-slate-600 dark:text-slate-300 leading-relaxed font-light">
-                            Beyond solving GitHub's filtering problem, we're building something bigger: a movement to put Ivorian tech on the global map.
+                            Au-delà de la résolution du problème de filtrage de GitHub, nous construisons quelque chose de plus grand : un mouvement pour mettre la tech ivoirienne sur la carte mondiale.
                         </p>
                     </div>
 
@@ -38,13 +38,13 @@ const Why225OpenSource: React.FC = () => {
                                 <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400">
                                     <Lightbulb size={28} />
                                 </div>
-                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">The Vision: From Invisible to Inevitable</h2>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">La vision : De l'invisible à l'inévitable</h2>
                             </div>
                             <p className="text-lg leading-relaxed mb-4">
-                                Right now, when people think of tech innovation, they think Silicon Valley, Tel Aviv, Bangalore, or Shenzhen. <strong className="text-slate-900 dark:text-white font-semibold">Abidjan is not on that list. Yet.</strong>
+                                Actuellement, quand les gens pensent à l'innovation technologique, ils pensent à la Silicon Valley, Tel Aviv, Bangalore ou Shenzhen. <strong className="text-slate-900 dark:text-white font-semibold">Abidjan n'est pas encore sur cette liste.</strong>
                             </p>
                             <p className="text-lg leading-relaxed">
-                                225 Open Source is our answer to this invisibility. We're creating a centralized showcase of Ivorian innovation that proves our tech professionals aren't just consuming technology, we're creating it. Every project added is a statement: <em className="text-slate-900 dark:text-white">"We build. We innovate. We matter."</em>
+                                225 Open Source est notre réponse à cette invisibilité. Nous créons une vitrine centralisée de l'innovation ivoirienne qui prouve que nos professionnels de la tech ne font pas que consommer de la technologie, nous la créons. Chaque projet ajouté est une déclaration : <em className="text-slate-900 dark:text-white">"Nous construisons. Nous innovons. Nous comptons."</em>
                             </p>
                         </section>
 
@@ -53,13 +53,13 @@ const Why225OpenSource: React.FC = () => {
                                 <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400">
                                     <TrendingUp size={28} />
                                 </div>
-                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Economic Impact: Building Careers, Not Just Code</h2>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Impact économique : Construire des carrières, pas seulement du code</h2>
                             </div>
                             <p className="text-lg leading-relaxed mb-4">
-                                In Côte d'Ivoire, talented developers struggle to prove their skills to international companies. A PDF resume means nothing when competing globally. But a <strong className="text-slate-900 dark:text-white font-semibold">public portfolio of real contributions?</strong> That's undeniable proof.
+                                En Côte d'Ivoire, les développeurs talentueux ont du mal à prouver leurs compétences aux entreprises internationales. Un CV PDF ne signifie rien face à la concurrence mondiale. Mais un <strong className="text-slate-900 dark:text-white font-semibold">portfolio public de contributions réelles ?</strong> C'est une preuve indéniable.
                             </p>
                             <p className="text-lg leading-relaxed">
-                                By centralizing Ivorian projects, we're creating a talent discovery engine. International companies looking for African developers can find us. Local companies can identify hidden gems. Junior developers can learn from senior ones. This isn't just about code, it's about <strong className="text-slate-900 dark:text-white font-semibold">economic opportunity</strong>.
+                                En centralisant les projets ivoiriens, nous créons un moteur de découverte de talents. Les entreprises internationales à la recherche de développeurs africains peuvent nous trouver. Les entreprises locales peuvent identifier des pépites cachées. Les développeurs juniors peuvent apprendre des seniors. Il ne s'agit pas seulement de code, mais d'une <strong className="text-slate-900 dark:text-white font-semibold">opportunité économique</strong>.
                             </p>
                         </section>
 
@@ -68,13 +68,13 @@ const Why225OpenSource: React.FC = () => {
                                 <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400">
                                     <Shield size={28} />
                                 </div>
-                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Digital Sovereignty: Owning Our Future</h2>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Souveraineté numérique : Maîtriser notre avenir</h2>
                             </div>
                             <p className="text-lg leading-relaxed mb-4">
-                                Every dollar spent on foreign SaaS is a dollar that leaves our economy. Every dependency on proprietary software is a vulnerability. <strong className="text-slate-900 dark:text-white font-semibold">Open source is our path to digital independence.</strong>
+                                Chaque dollar dépensé en SaaS étranger est un dollar qui quitte notre économie. Chaque dépendance à un logiciel propriétaire est une vulnérabilité. <strong className="text-slate-900 dark:text-white font-semibold">L'open source est notre voie vers l'indépendance numérique.</strong>
                             </p>
                             <p className="text-lg leading-relaxed">
-                                When we build payment systems that understand Mobile Money, when we create agricultural tools that work offline, when we develop solutions for our specific challenges, we're not just solving problems. We're building infrastructure that <em className="text-slate-900 dark:text-white">belongs to us</em>, that we control, that we can modify and improve forever.
+                                Quand nous construisons des systèmes de paiement qui comprennent le Mobile Money, quand nous créons des outils agricoles qui fonctionnent hors-ligne, quand nous développons des solutions pour nos défis spécifiques, nous ne faisons pas que résoudre des problèmes. Nous construisons une infrastructure qui <em className="text-slate-900 dark:text-white">nous appartient</em>, que nous contrôlons, que nous pouvons modifier et améliorer indéfiniment.
                             </p>
                         </section>
 
@@ -83,13 +83,13 @@ const Why225OpenSource: React.FC = () => {
                                 <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400">
                                     <Users size={28} />
                                 </div>
-                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Community: Ending the Isolation</h2>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Communauté : En finir avec l'isolement</h2>
                             </div>
                             <p className="text-lg leading-relaxed mb-4">
-                                Too many Ivorian developers work in silos. A brilliant engineer in Bouaké doesn't know about the amazing project being built in Abidjan. A startup in Yopougon reinvents the wheel because they don't know someone already solved that problem.
+                                Trop de développeurs ivoiriens travaillent en silos. Un ingénieur brillant à Bouaké ne connaît pas le projet incroyable en cours à Abidjan. Une startup à Yopougon réinvente la roue car elle ignore que quelqu'un a déjà résolu ce problème.
                             </p>
                             <p className="text-lg leading-relaxed">
-                                225 Open Source breaks down these walls. We're creating a <strong className="text-slate-900 dark:text-white font-semibold">unified ecosystem</strong> where collaboration replaces isolation, where knowledge flows freely, where we lift each other up instead of competing in the dark.
+                                225 Open Source brise ces murs. Nous créons un <strong className="text-slate-900 dark:text-white font-semibold">écosystème unifié</strong> où la collaboration remplace l'isolement, où la connaissance circule librement, où nous nous soutenons mutuellement au lieu de rivaliser dans l'ombre.
                             </p>
                         </section>
 
@@ -98,13 +98,13 @@ const Why225OpenSource: React.FC = () => {
                                 <div className="p-3 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl text-emerald-600 dark:text-emerald-400">
                                     <Globe size={28} />
                                 </div>
-                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">A Blueprint for Africa</h2>
+                                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Un modèle pour l'Afrique</h2>
                             </div>
                             <p className="text-lg leading-relaxed mb-4">
-                                What we're building in Côte d'Ivoire isn't just for us. It's a <strong className="text-slate-900 dark:text-white font-semibold">model that any African country can replicate</strong>. Imagine "Ghana Open Source," "Senegal Open Source," "Kenya Open Source", each country showcasing its innovation, each ecosystem strengthening the others.
+                                Ce que nous construisons en Côte d'Ivoire n'est pas seulement pour nous. C'est un <strong className="text-slate-900 dark:text-white font-semibold">modèle que n'importe quel pays africain peut reproduire</strong>. Imaginez "Ghana Open Source", "Senegal Open Source", "Kenya Open Source", chaque pays mettant en avant son innovation, chaque écosystème renforçant les autres.
                             </p>
                             <p className="text-lg leading-relaxed">
-                                Together, we can shift the global perception of African tech from "emerging market" to "innovation powerhouse." But it starts with one country leading the way. <em className="text-slate-900 dark:text-white">That country is Côte d'Ivoire.</em>
+                                Ensemble, nous pouvons faire passer la perception mondiale de la tech africaine de "marché émergent" à "puissance d'innovation". Mais cela commence par un pays qui montre la voie. <em className="text-slate-900 dark:text-white">Ce pays est la Côte d'Ivoire.</em>
                             </p>
                         </section>
 
@@ -113,14 +113,14 @@ const Why225OpenSource: React.FC = () => {
                             <div className="relative z-10">
                                 <div className="flex items-center gap-3 mb-6">
                                     <Heart className="text-red-500 fill-current animate-pulse" size={24} />
-                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">Our Mission</h3>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">Notre Mission</h3>
                                 </div>
                                 <p className="italic text-xl text-slate-700 dark:text-slate-300 font-serif mb-6">
-                                    "To make Côte d'Ivoire a recognized hub of open-source innovation, proving that African developers are not just participants in the global tech ecosystem, we are leaders, creators, and pioneers."
+                                    "Faire de la Côte d'Ivoire un hub reconnu de l'innovation open-source, prouvant que les développeurs africains ne sont pas de simples participants à l'écosystème tech mondial, nous sommes des leaders, des créateurs et des pionniers."
                                 </p>
                                 <div className="pt-6 border-t border-emerald-200 dark:border-emerald-800">
                                     <p className="text-lg text-slate-600 dark:text-slate-400">
-                                        This is bigger than a platform. It's a movement. And every project you add, every contribution you make, every collaboration you start, <strong className="text-slate-900 dark:text-white">you're part of writing history</strong>.
+                                        C'est plus grand qu'une plateforme. C'est un mouvement. Et chaque projet que vous ajoutez, chaque contribution que vous faites, chaque collaboration que vous commencez, <strong className="text-slate-900 dark:text-white">vous participez à l'écriture de l'histoire</strong>.
                                     </p>
                                 </div>
                             </div>
@@ -128,23 +128,23 @@ const Why225OpenSource: React.FC = () => {
 
                         <section className="text-center bg-slate-900 dark:bg-white p-10 rounded-3xl">
                             <Code className="mx-auto mb-4 text-white dark:text-slate-900" size={48} />
-                            <h3 className="text-2xl font-bold text-white dark:text-slate-900 mb-4">Ready to Make History?</h3>
+                            <h3 className="text-2xl font-bold text-white dark:text-slate-900 mb-4">Prêt à écrire l'histoire ?</h3>
                             <p className="text-slate-300 dark:text-slate-600 mb-6 max-w-xl mx-auto">
-                                Don't let your project be another hidden gem. Share it with the Ivorian tech community and help put Côte d'Ivoire on the global tech map.
+                                Ne laissez pas votre projet être une autre pépite cachée. Partagez-le avec la communauté tech ivoirienne et aidez à mettre la Côte d'Ivoire sur la carte technologique mondiale.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                                 <Link
                                     to="/#hero"
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold rounded-xl transition-all"
                                 >
-                                    Get Started
+                                    Commencer
                                 </Link>
                                 <Link
                                     to="/donate"
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-transparent border border-white dark:border-slate-900 text-white dark:text-slate-900 rounded-xl hover:bg-white/10 dark:hover:bg-slate-900/10 transition-all"
                                 >
                                     <DollarSign size={18} />
-                                    Support the Project
+                                    Soutenir le projet
                                 </Link>
                             </div>
                         </section>

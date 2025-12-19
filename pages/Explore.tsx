@@ -21,36 +21,36 @@ const Explore: React.FC = () => {
     const techEvents = [
         {
             id: 1,
-            title: "Abidjan Tech Summit 2025",
-            description: "Join the biggest tech event in Côte d'Ivoire. Connect with developers, startups, and tech enthusiasts from March 15-17.",
-            date: "Mar 15-17, 2025",
+            title: "Sommet Tech d'Abidjan 2025",
+            description: "Rejoignez le plus grand événement tech en Côte d'Ivoire. Connectez-vous avec des développeurs, des startups et des passionnés de tech du 15 au 17 mars.",
+            date: "15-17 Mar 2025",
             location: "Abidjan, Côte d'Ivoire",
             learnMoreUrl: "https://github.com/",
             registerUrl: "https://github.com/"
         },
         {
             id: 2,
-            title: "AI & Machine Learning Workshop",
-            description: "Hands-on workshop covering the latest in AI and ML technologies. Perfect for developers looking to level up their skills.",
-            date: "Apr 20-21, 2025",
+            title: "Atelier IA & Machine Learning",
+            description: "Atelier pratique couvrant les dernières technologies en IA et ML. Parfait pour les développeurs souhaitant monter en compétences.",
+            date: "20-21 Avr 2025",
             location: "Yamoussoukro",
             learnMoreUrl: "https://github.com/",
             registerUrl: "https://github.com/"
         },
         {
             id: 3,
-            title: "Startup Pitch Night",
-            description: "Present your startup ideas to investors and mentors. Network with fellow entrepreneurs and get valuable feedback.",
-            date: "May 8, 2025",
+            title: "Soirée Pitch de Startup",
+            description: "Présentez vos idées de startup à des investisseurs et des mentors. Réseautez avec d'autres entrepreneurs et recevez des retours précieux.",
+            date: "8 Mai 2025",
             location: "Grand-Bassam",
             learnMoreUrl: "https://github.com/",
             registerUrl: "https://github.com/"
         },
         {
             id: 4,
-            title: "Web3 & Blockchain Conference",
-            description: "Explore the future of decentralized web. Learn about blockchain, crypto, and Web3 technologies from industry experts.",
-            date: "Jun 10-12, 2025",
+            title: "Conférence Web3 & Blockchain",
+            description: "Explorez l'avenir du web décentralisé. Apprenez-en plus sur la blockchain, la crypto et les technologies Web3 auprès d'experts du domaine.",
+            date: "10-12 Juin 2025",
             location: "Abidjan",
             learnMoreUrl: "https://github.com/",
             registerUrl: "https://github.com/"
@@ -177,7 +177,7 @@ const Explore: React.FC = () => {
                         <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
                                 <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                                <span className="text-emerald-300 font-semibold text-sm uppercase tracking-wider">Featured Event</span>
+                                <span className="text-emerald-300 font-semibold text-sm uppercase tracking-wider">Événement Mis en Avant</span>
                                 <span className="text-slate-500 text-sm">• {techEvents[currentEventIndex].date}</span>
                                 <span className="text-slate-500 text-sm">• {techEvents[currentEventIndex].location}</span>
                             </div>
@@ -194,7 +194,7 @@ const Explore: React.FC = () => {
                                     rel="noopener noreferrer"
                                     className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl transition-colors shadow-lg shadow-emerald-500/30 text-center"
                                 >
-                                    Learn More
+                                    En savoir plus
                                 </a>
                             )}
                             {techEvents[currentEventIndex].registerUrl && techEvents[currentEventIndex].registerUrl !== '#' && (
@@ -204,7 +204,7 @@ const Explore: React.FC = () => {
                                     rel="noopener noreferrer"
                                     className="px-6 py-3 bg-slate-800/50 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-slate-800/70 transition-colors border border-emerald-600/30 text-center"
                                 >
-                                    Register Now
+                                    S'inscrire
                                 </a>
                             )}
                         </div>
@@ -230,13 +230,13 @@ const Explore: React.FC = () => {
                     <div>
                         <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold mb-2 uppercase tracking-wider text-sm">
                             <Terminal size={16} />
-                            <span>Project Space</span>
+                            <span>Espace Projets</span>
                         </div>
                         <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">
-                            Explore Projects
+                            Explorer les Projets
                         </h1>
                         <p className="mt-2 text-slate-600 dark:text-slate-400 max-w-xl">
-                            Browse through a curated list of open-source tools, libraries, and applications built by the community.
+                            Parcourez une liste organisée d'outils, bibliothèques et applications open-source créés par la communauté.
                         </p>
                     </div>
 
@@ -247,7 +247,7 @@ const Explore: React.FC = () => {
                     >
                         <div className="flex items-center gap-2">
                             <Search size={18} />
-                            <span>Search projects...</span>
+                            <span>Rechercher des projets...</span>
                         </div>
                         <div className="flex gap-1">
                             <kbd className="hidden sm:inline-flex items-center rounded border border-slate-200 dark:border-slate-700 px-2 text-xs font-sans font-medium text-slate-400">
@@ -267,7 +267,7 @@ const Explore: React.FC = () => {
                                 : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700'
                                 }`}
                         >
-                            All Stacks
+                            Toutes les technos
                         </button>
                         {allStacks.map(stack => (
                             <button
@@ -302,13 +302,13 @@ const Explore: React.FC = () => {
                 ) : (
                     <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 border-dashed">
                         <Filter className="mx-auto h-12 w-12 text-slate-300 dark:text-slate-600 mb-4" />
-                        <h3 className="text-lg font-medium text-slate-900 dark:text-white">No projects found</h3>
-                        <p className="text-slate-500 dark:text-slate-400 mt-1">Try adjusting your filters or search query.</p>
+                        <h3 className="text-lg font-medium text-slate-900 dark:text-white">Aucun projet trouvé</h3>
+                        <p className="text-slate-500 dark:text-slate-400 mt-1">Essayez d'ajuster vos filtres ou votre recherche.</p>
                         <button
                             onClick={() => setSelectedStack(null)}
                             className="mt-4 text-emerald-600 dark:text-emerald-400 font-medium hover:underline"
                         >
-                            Clear filters
+                            Effacer les filtres
                         </button>
                     </div>
                 )}

@@ -35,16 +35,16 @@ const EditProject: React.FC = () => {
             try {
                 const foundProject = await getProjectBySlug(slug);
                 if (!foundProject) {
-                    setError('Project not found');
-                    addNotification('error', 'Project not found', 'The requested project could not be found');
+                    setError('Projet non trouvé');
+                    addNotification('error', 'Projet non trouvé', 'Le projet demandé n\'a pas pu être trouvé');
                     setTimeout(() => navigate('/dashboard'), 2000);
                     return;
                 }
 
                 // Check if user owns this project
                 if (foundProject.userId !== user?.id) {
-                    setError('You do not have permission to edit this project');
-                    addNotification('error', 'Access denied', 'You do not have permission to edit this project');
+                    setError('Vous n\'avez pas la permission de modifier ce projet');
+                    addNotification('error', 'Accès refusé', 'Vous n\'avez pas la permission de modifier ce projet');
                     setTimeout(() => navigate('/dashboard'), 2000);
                     return;
                 }
@@ -55,8 +55,8 @@ const EditProject: React.FC = () => {
                 setDescription(foundProject.description);
                 setStacks(foundProject.stacks);
             } catch (err) {
-                setError('Failed to load project');
-                addNotification('error', 'Load failed', 'Failed to load project data');
+                setError('Échec du chargement du projet');
+                addNotification('error', 'Échec du chargement', 'Impossible de charger les données du projet');
                 setTimeout(() => navigate('/dashboard'), 2000);
             } finally {
                 setLoading(false);
@@ -93,11 +93,11 @@ const EditProject: React.FC = () => {
 
         try {
             await updateProject(project.id, { name, author, description, stacks });
-            addNotification('success', 'Project updated!', `"${name}" has been successfully updated`);
+            addNotification('success', 'Projet mis à jour !', `"${name}" a été mis à jour avec succès`);
             navigate('/dashboard');
         } catch (err: any) {
-            setError('Failed to update project: ' + err.message);
-            addNotification('error', 'Update failed', 'Failed to update project: ' + err.message);
+            setError('Échec de la mise à jour du projet : ' + err.message);
+            addNotification('error', 'Échec de la mise à jour', 'Impossible de mettre à jour le projet : ' + err.message);
             setSubmitting(false);
         }
     };
@@ -115,7 +115,7 @@ const EditProject: React.FC = () => {
             <div className="min-h-screen flex items-center justify-center dark:bg-slate-950">
                 <div className="text-center">
                     <p className="text-red-500 mb-4">{error}</p>
-                    <p className="text-slate-500">Redirecting...</p>
+                    <p className="text-slate-500">Redirection...</p>
                 </div>
             </div>
         );
@@ -126,8 +126,8 @@ const EditProject: React.FC = () => {
             <div className="max-w-2xl mx-auto">
 
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Edit Project</h1>
-                    <p className="text-slate-600 dark:text-slate-400">Update your project information.</p>
+                    <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">Modifier le projet</h1>
+                    <p className="text-slate-600 dark:text-slate-400">Mettez à jour les informations de votre projet.</p>
                 </div>
 
                 <div className="bg-white dark:bg-slate-900 shadow-xl rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
@@ -143,7 +143,7 @@ const EditProject: React.FC = () => {
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                                    Project Name
+                                    Nom du projet
                                 </label>
                                 <input
                                     type="text"
@@ -155,7 +155,7 @@ const EditProject: React.FC = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                                    Author / Organization
+                                    Auteur / Organisation
                                 </label>
                                 <input
                                     type="text"
@@ -169,7 +169,7 @@ const EditProject: React.FC = () => {
 
                         <div>
                             <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
-                                Description (Max 200 chars)
+                                Description (Max 200 caract.)
                             </label>
                             <textarea
                                 required
@@ -198,7 +198,7 @@ const EditProject: React.FC = () => {
                                 <input
                                     type="text"
                                     className="flex-grow min-w-[120px] bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-emerald-500 rounded-md px-2 py-1 text-sm dark:text-white"
-                                    placeholder="Type and press Enter..."
+                                    placeholder="Tapez et appuyez sur Entrée..."
                                     value={stackInput}
                                     onChange={(e) => setStackInput(e.target.value)}
                                     onKeyDown={handleAddStack}
@@ -212,7 +212,7 @@ const EditProject: React.FC = () => {
                                 onClick={() => navigate('/dashboard')}
                                 className="px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors"
                             >
-                                Cancel
+                                Annuler
                             </button>
                             <button
                                 type="submit"
@@ -220,7 +220,7 @@ const EditProject: React.FC = () => {
                                 className="px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium shadow-md shadow-emerald-500/20 flex items-center gap-2 transition-all disabled:opacity-70"
                             >
                                 {submitting ? <Loader2 className="animate-spin" size={18} /> : <Save size={18} />}
-                                Save Changes
+                                Enregistrer les modifications
                             </button>
                         </div>
                     </form>
