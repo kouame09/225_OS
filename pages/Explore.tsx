@@ -177,7 +177,7 @@ const Explore: React.FC = () => {
                         <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
                                 <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                                <span className="text-emerald-300 font-semibold text-sm uppercase tracking-wider">Événement Mis en Avant</span>
+                                <span className="text-emerald-300 font-semibold text-sm uppercase tracking-wider">Événement à venir</span>
                                 <span className="text-slate-500 text-sm">• {techEvents[currentEventIndex].date}</span>
                                 <span className="text-slate-500 text-sm">• {techEvents[currentEventIndex].location}</span>
                             </div>
