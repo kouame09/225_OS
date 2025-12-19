@@ -21,23 +21,28 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check active sessions and sets the user
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
+    let isMounted = true;
+
+    // Timeout fallback to prevent infinite loading in case of errors
+    const timeout = setTimeout(() => {
+      if (isMounted && loading) {
+        console.warn("Auth timeout: forcing loading state to false.");
+        setLoading(false);
+      }
+    }, 5000); // 5 seconds max wait
 
     // Listen for changes on auth state (sign in, sign out, etc.)
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (!isMounted) return;
+
       setSession(session);
       setUser(session?.user ?? null);
 
+      // Only perform profile checks on explicit SIGNED_IN events
       if (_event === 'SIGNED_IN' && session?.user) {
         try {
-          // Check if we need to verify approval
           const currentUser = session.user;
           const { data: profile, error: fetchError } = await supabase
             .from('profiles')
@@ -69,23 +74,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
               setSession(null);
               setUser(null);
             } else {
-              if (insertError.code !== '23505') { // Ignore duplicate key
+              if (insertError.code !== '23505') {
                 console.error("Profile creation error:", insertError);
               }
             }
           }
         } catch (err) {
           console.error("Auth initialization error:", err);
-        } finally {
-          setLoading(false);
         }
-      } else {
-        // Handle SIGNED_OUT, INITIAL_SESSION, TOKEN_REFRESHED, etc.
+      }
+
+      // Always set loading to false after processing any event
+      if (isMounted) {
         setLoading(false);
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      isMounted = false;
+      clearTimeout(timeout);
+      subscription.unsubscribe();
+    };
   }, [addNotification]);
 
   const signOut = async () => {

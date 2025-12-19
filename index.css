@@ -56,6 +56,11 @@
   body {
     font-family: var(--font-sans);
   }
+
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
 }
 
 /* Custom Scrollbar */
