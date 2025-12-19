@@ -65,7 +65,7 @@ const Home: React.FC = () => {
           </h1>
 
           <p className="max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
-            Découvrez, présentez et contribuez à des projets open source de pointe créés par des talents tech ivoiriens.
+            Découvrez, Ajoutez et contribuez à des projets open source de pointe créés par des talents tech ivoiriens.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
