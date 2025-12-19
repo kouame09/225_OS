@@ -56,7 +56,7 @@ const Home: React.FC = () => {
 
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-sm font-medium mb-8">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            La communauté Open Source n°1 en Afrique de l'Ouest
+            La communauté open-source n°1 de Côte d'Ivoire
           </div>
 
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.1]">
