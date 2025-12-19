@@ -130,7 +130,6 @@ npm run preview
 ├── services/           # API services
 │   └── projectService.ts
 ├── utils/              # Utility functions
-│   ├── location.ts     # Geolocation check
 │   └── slugify.ts      # URL slug generator
 ├── lib/                # Third-party configurations
 │   └── supabaseClient.ts
@@ -142,16 +141,12 @@ npm run preview
 ## Authentication & Security
 
 - **Supabase Authentication**: Email/password and OAuth (GitHub)
-- **Location-Based Access**: Platform restricted to users in Côte d'Ivoire using IP geolocation
 - **Row Level Security**: Supabase RLS policies for data protection
 - **Secure Sessions**: JWT-based authentication
 
 ---
 
 ## Key Features Explained
-
-### Location Restriction
-The platform uses IP geolocation (via `ipapi.co`) to verify that users are accessing from Côte d'Ivoire. If not, authentication buttons are disabled with a clear message.
 
 ### Project Showcase
 Users can add their GitHub projects with:

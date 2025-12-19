@@ -40,7 +40,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
     // Handle specific Supabase error messages
     if (error?.message) {
       const message = error.message.toLowerCase();
-      
+
       // Email/Password errors
       if (message.includes('invalid login credentials')) {
         return 'Invalid email or password';
@@ -60,7 +60,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
       if (message.includes('signup disabled')) {
         return 'Sign up is temporarily disabled';
       }
-      
+
       // Network/Server errors
       if (message.includes('network') || message.includes('fetch')) {
         return 'Connection problem. Check your internet and try again';
@@ -72,12 +72,12 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         return 'Too many attempts. Please wait a few minutes before trying again';
       }
     }
-    
+
     // Handle specific view errors
     if (view === 'signup' && error?.message?.includes('password')) {
       return 'Passwords do not match';
     }
-    
+
     // Default fallback messages
     switch (view) {
       case 'login':
@@ -128,16 +128,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         });
         if (signUpError) throw signUpError;
 
-        // Create a profile for new user
-        if (signUpData.user) {
-          const { error: profileError } = await supabase.from('profiles').insert({ 
-            id: signUpData.user.id, 
-            email: signUpData.user.email,
-            is_approved: false,
-            created_at: new Date().toISOString()
-          });
-          if (profileError) throw profileError;
-        }
+        if (signUpError) throw signUpError;
 
         setSuccessMessage('Account created! Please check your email to validate your account.');
       } else if (view === 'forgot') {
