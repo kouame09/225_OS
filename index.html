@@ -11,7 +11,7 @@
   <meta name="description"
     content="Découvrez, partagez et contribuez à des projets open-source de pointe créés par des talents tech ivoiriens. Rejoignez la communauté 225 Open Source dès aujourd'hui." />
   <meta name="keywords"
-    content="225 Open Source, Côte d'Ivoire, Afrique, open source, projets, développeurs, tech, innovation, Abidjan, développeurs ivoiriens, tech africaine" />
+    content="225 Open Source, Côte d'Ivoire, Afrique, open source, projects, développeurs, tech, innovation, Abidjan, développeurs ivoiriens, tech africaine" />
   <meta name="author" content="225 Open Source" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://225os.com" />
@@ -42,7 +42,7 @@
   <meta name="msapplication-TileColor" content="#ffffff" />
   <meta name="application-name" content="225 Open Source" />
   <meta name="apple-mobile-web-app-title" content="225 Open Source" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
   <!-- Favicon -->
@@ -50,177 +50,6 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/Brand/favicon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/Brand/favicon.png" />
   <link rel="manifest" href="/site.webmanifest" />
-
-  <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          },
-          colors: {
-            background: 'var(--background)',
-            foreground: 'var(--foreground)',
-            primary: {
-              50: '#ecfdf5',
-              100: '#d1fae5',
-              500: '#10b981',
-              600: '#059669',
-              700: '#047857',
-            }
-          }
-        },
-      },
-    }
-  </script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 4px;
-    }
-
-    .dark ::-webkit-scrollbar-thumb {
-      background: #475569;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
-    }
-
-    /* Custom Thin Scrollbar for Categories */
-    .thin-scrollbar {
-      scrollbar-width: thin;
-      scrollbar-color: #cbd5e1 transparent;
-    }
-
-    .dark .thin-scrollbar {
-      scrollbar-color: #475569 transparent;
-    }
-
-    .thin-scrollbar::-webkit-scrollbar {
-      height: 4px;
-      /* Horizontal scrollbar height */
-      width: 4px;
-      /* Vertical scrollbar width */
-    }
-
-    .thin-scrollbar::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .thin-scrollbar::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 20px;
-    }
-
-    .dark .thin-scrollbar::-webkit-scrollbar-thumb {
-      background: #475569;
-    }
-
-    .dark .thin-scrollbar::-webkit-scrollbar-thumb {
-      background: #475569;
-    }
-
-    .thin-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
-    }
-
-    /* Hide Scrollbar but allow scrolling */
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      /* IE and Edge */
-      scrollbar-width: none;
-      /* Firefox */
-    }
-
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Custom Animations */
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    @keyframes float-delayed {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    @keyframes wiggle {
-
-      0%,
-      100% {
-        transform: rotate(-3deg);
-      }
-
-      50% {
-        transform: rotate(3deg);
-      }
-    }
-
-    @keyframes shimmer {
-      0% {
-        transform: translateX(-150%);
-      }
-
-      100% {
-        transform: translateX(150%);
-      }
-    }
-
-    .animate-float {
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .animate-float-delayed {
-      animation: float-delayed 7s ease-in-out 3s infinite;
-    }
-
-    .animate-wiggle {
-      animation: wiggle 3s ease-in-out infinite;
-    }
-
-    .animate-shimmer {
-      animation: shimmer 2.5s infinite linear;
-    }
-  </style>
 
   <link rel="stylesheet" href="/index.css">
 </head>
