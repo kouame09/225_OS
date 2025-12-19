@@ -71,6 +71,9 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
       if (message.includes('too many requests')) {
         return 'Too many attempts. Please wait a few minutes before trying again';
       }
+      if (message.includes('pending approval') || message.includes('approbation')) {
+        return error.message;
+      }
     }
 
     // Handle specific view errors
@@ -114,7 +117,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
         if (profileError || !profile || !profile.is_approved) {
           await supabase.auth.signOut();
-          throw new Error('Your account has been created but is pending approval. Please wait for an administrator to review it.');
+          throw new Error('Votre compte a été créé mais est en attente d\'approbation. Veuillez patienter pendant qu\'un administrateur le vérifie.');
         }
 
         onClose();
