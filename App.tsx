@@ -31,8 +31,8 @@ const App: React.FC = () => {
   }
   return (
     <ThemeProvider>
-      <AuthProvider>
-        <NotificationProvider>
+      <NotificationProvider>
+        <AuthProvider>
           <ScrollToTop />
           <Routes>
             <Route element={<Layout />}>
@@ -49,8 +49,8 @@ const App: React.FC = () => {
             </Route>
           </Routes>
           <ToastContainer />
-        </NotificationProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </NotificationProvider>
     </ThemeProvider>
   );
 };
