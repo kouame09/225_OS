@@ -59,13 +59,16 @@ const Home: React.FC = () => {
             La communauté open-source n°1 de Côte d'Ivoire
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.1]">
-            Contruire le futur <br />
-            de la <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-orange-600 dark:from-orange-400 dark:to-orange-500">Tech</span> <span className="text-transparent bg-clip-text bg-emerald-600 dark:from-emerald-400 dark:to-blue-400">Ivoirienne</span>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.25]">
+            Construire le futur <br />
+            de la <span className="relative inline-block px-4 py-0 ml-1">
+              <span className="absolute inset-0 bg-emerald-600 -rotate-2 rounded-xl sm:rounded-2xl shadow-lg shadow-emerald-500/20"></span>
+              <span className="relative text-white">Tech Ivoirienne</span>
+            </span>
           </h1>
 
           <p className="max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-300 mb-10 leading-relaxed">
-            Découvrez, partagez et contribuez à des projets open source de pointe créés par des talents tech ivoiriens.
+            Découvrez, partagez et contribuez à des projets open-source de pointe créés par des talents tech ivoiriens.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
