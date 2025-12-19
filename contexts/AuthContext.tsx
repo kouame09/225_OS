@@ -32,58 +32,55 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+
       if (_event === 'SIGNED_IN' && session?.user) {
-        setSession(session);
-        setUser(session.user);
+        try {
+          // Check if we need to verify approval
+          const currentUser = session.user;
+          const { data: profile, error: fetchError } = await supabase
+            .from('profiles')
+            .select('is_approved')
+            .eq('id', currentUser.id)
+            .single();
 
-        // Check if we need to verify approval
-        const currentUser = session.user;
-        const { data: profile, error: fetchError } = await supabase
-          .from('profiles')
-          .select('is_approved')
-          .eq('id', currentUser.id)
-          .single();
+          if (fetchError && fetchError.code !== 'PGRST116') {
+            console.error("Profile fetch error:", fetchError);
+          }
 
-        if (fetchError && fetchError.code !== 'PGRST116') {
-          console.error("Profile fetch error:", fetchError);
-        }
-
-        if (profile && !profile.is_approved) {
-          await supabase.auth.signOut();
-          addNotification('warning', 'Compte en attente', 'Votre compte est en attente d\'approbation.', 8000);
-          setSession(null);
-          setUser(null);
-        } else if (!profile && _event === 'SIGNED_IN') {
-          // This usually happens during OAuth or the very first login after manual signup
-          const { error: insertError } = await supabase.from('profiles').insert({
-            id: currentUser.id,
-            email: currentUser.email,
-            is_approved: false,
-            created_at: new Date().toISOString()
-          });
-
-          if (!insertError) {
+          if (profile && !profile.is_approved) {
             await supabase.auth.signOut();
-            addNotification('success', 'Inscription réussie', 'Votre compte est maintenant en attente d\'approbation.', 8000);
+            addNotification('warning', 'Compte en attente', 'Votre compte est en attente d\'approbation.', 8000);
             setSession(null);
             setUser(null);
-          } else {
-            // If insertion failed, we might already have a profile or restricted access
-            console.error("Profile creation error:", insertError);
+          } else if (!profile) {
+            // First time login logic - create profile
+            const { error: insertError } = await supabase.from('profiles').insert({
+              id: currentUser.id,
+              email: currentUser.email,
+              is_approved: false,
+              created_at: new Date().toISOString()
+            });
+
+            if (!insertError) {
+              await supabase.auth.signOut();
+              addNotification('success', 'Inscription réussie', 'Votre compte est maintenant en attente d\'approbation.', 8000);
+              setSession(null);
+              setUser(null);
+            } else {
+              if (insertError.code !== '23505') { // Ignore duplicate key
+                console.error("Profile creation error:", insertError);
+              }
+            }
           }
-        } else {
-          // User is logged in and approved
+        } catch (err) {
+          console.error("Auth initialization error:", err);
+        } finally {
           setLoading(false);
-          // Only show welcome if it's a fresh login (not just a refresh)
-          // We can't strictly detect "fresh" login easily here without extra state, 
-          // so let's skip the toast on every refresh to avoid annoyance.
         }
-      } else if (_event === 'SIGNED_OUT') {
-        setSession(null);
-        setUser(null);
-        setLoading(false);
       } else {
-        // For other events (TOKEN_REFRESHED, INITIAL_SESSION with no user, etc.)
+        // Handle SIGNED_OUT, INITIAL_SESSION, TOKEN_REFRESHED, etc.
         setLoading(false);
       }
     });
