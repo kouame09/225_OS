@@ -41,9 +41,8 @@
 - **User Profiles**: Showcase your projects and contributions
 - **Favorites System**: Save and track projects you're interested in
 - **Dark Mode**: Beautiful UI with light and dark themes
-- **Secure Authentication**: Powered by Supabase with location-based access control
+- **Secure Authentication**: Powered by Supabase with manual approval system
 - **Responsive Design**: Optimized for desktop, tablet, and mobile
-- **Geolocation Restriction**: Platform accessible only from Côte d'Ivoire
 
 ---
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Mail, Lock, Github, ArrowRight, Loader2, AlertCircle, ArrowLeft, CheckCircle, MapPin } from 'lucide-react';
+import { X, Mail, Lock, Github, ArrowRight, Loader2, AlertCircle, ArrowLeft, CheckCircle } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 
 interface AuthModalProps {
@@ -130,16 +130,10 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
         // Create a profile for new user
         if (signUpData.user) {
-          // Get user's country from IP
-          const response = await fetch('https://ipapi.co/json/');
-          const locationData = await response.json().catch(() => ({}));
-          const country = locationData.country_name || 'Unknown';
-          
           const { error: profileError } = await supabase.from('profiles').insert({ 
             id: signUpData.user.id, 
             email: signUpData.user.email,
             is_approved: false,
-            country: country,
             created_at: new Date().toISOString()
           });
           if (profileError) throw profileError;
