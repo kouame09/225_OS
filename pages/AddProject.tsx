@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Github, Loader2, Save, X, CheckCircle } from 'lucide-react';
 import { fetchGithubMetadata, extractRepoInfo } from '../services/githubService';
-import { addProject } from '../services/projectService';
+import { addProject, getUserProjects } from '../services/projectService';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { Project, GithubMeta } from '../types';
+import CelebrationModal from '../components/CelebrationModal';
 
 const SUGGESTED_STACKS = [
   'React', 'TypeScript', 'Python', 'Node.js', 'Vue',
@@ -24,6 +25,10 @@ const AddProject: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [githubData, setGithubData] = useState<GithubMeta | null>(null);
 
+  // Celebration Logic
+  const [isFirstProject, setIsFirstProject] = useState(false);
+  const [showCelebration, setShowCelebration] = useState(false);
+
   // Form States
   const [name, setName] = useState('');
   const [author, setAuthor] = useState('');
@@ -34,9 +39,14 @@ const AddProject: React.FC = () => {
   // Protect Route
   useEffect(() => {
     if (!loading && !user) {
-      // Redirect to home and ideally open auth modal, but for now just redirect
       navigate('/');
-      // You might want to trigger the auth modal via a URL param or context here
+    } else if (user) {
+      // Check if user has 0 projects to determine if this is their first
+      getUserProjects(user.id).then(projects => {
+        if (projects.length === 0) {
+          setIsFirstProject(true);
+        }
+      }).catch(err => console.error("Error checking project count", err));
     }
   }, [loading, user, navigate]);
 
@@ -132,7 +142,12 @@ const AddProject: React.FC = () => {
     try {
       await addProject(newProject);
       addNotification('success', 'Projet ajouté !', `"${name}" a été ajouté avec succès à vos projets`);
-      navigate('/dashboard');
+
+      if (isFirstProject) {
+        setShowCelebration(true);
+      } else {
+        navigate('/dashboard');
+      }
     } catch (e: any) {
       console.error(e);
       setError('Échec de l\'enregistrement du projet. ' + e.message);
@@ -296,6 +311,12 @@ const AddProject: React.FC = () => {
           </form>
         </div>
       </div>
+      {/* Celebration Modal */}
+      <CelebrationModal
+        isOpen={showCelebration}
+        onClose={() => navigate('/dashboard')}
+        projectName={name}
+      />
     </div>
   );
 };
