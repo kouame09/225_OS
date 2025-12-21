@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { Session, User } from '@supabase/supabase-js';
 import { useNavigate } from 'react-router-dom';
@@ -20,11 +20,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const { addNotification } = useNotification();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    let isMounted = true;
-    let initialSessionLoaded = false;
+  // Use refs to track initialization state without causing re-renders
+  const isInitialized = useRef(false);
+  const isMounted = useRef(true);
 
-    // Function to handle profile check logic
+  // Memoize the notification function to prevent unnecessary effect re-runs
+  const showNotification = useCallback((type: 'success' | 'warning' | 'error', title: string, message: string, duration?: number) => {
+    addNotification(type, title, message, duration);
+  }, [addNotification]);
+
+  useEffect(() => {
+    isMounted.current = true;
+
+    // Function to handle profile check logic (same as before)
     const checkUserProfile = async (currentUser: User) => {
       try {
         const { data: profile, error: fetchError } = await supabase
@@ -39,8 +47,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         if (profile && !profile.is_approved) {
           await supabase.auth.signOut();
-          addNotification('warning', 'Compte en attente', 'Votre compte est en attente d\'approbation.', 8000);
-          if (isMounted) {
+          showNotification('warning', 'Compte en attente', 'Votre compte est en attente d\'approbation.', 8000);
+          if (isMounted.current) {
             setSession(null);
             setUser(null);
           }
@@ -55,8 +63,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
           if (!insertError) {
             await supabase.auth.signOut();
-            addNotification('success', 'Inscription réussie', 'Votre compte est maintenant en attente d\'approbation.', 8000);
-            if (isMounted) {
+            showNotification('success', 'Inscription réussie', 'Votre compte est maintenant en attente d\'approbation.', 8000);
+            if (isMounted.current) {
               setSession(null);
               setUser(null);
             }
@@ -69,54 +77,82 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     };
 
-    // Get the initial session on component mount
+    // Initialize session with safety timeout
     const initSession = async () => {
+      // Safety timeout to prevent infinite loading if Supabase hangs
+      const timeoutId = setTimeout(() => {
+        if (isMounted.current && !isInitialized.current) {
+          console.warn("Auth initialization timed out, forcing load completion");
+          setLoading(false);
+          isInitialized.current = true;
+        }
+      }, 5000); // 5 seconds max wait
+
       try {
         const { data: { session } } = await supabase.auth.getSession();
 
-        if (!isMounted) return;
+        if (!isMounted.current) return;
 
-        initialSessionLoaded = true;
-        setSession(session);
-        setUser(session?.user ?? null);
-        setLoading(false);
+        // Only update if not already handled by listener/timeout
+        if (!isInitialized.current) {
+          setSession(session);
+          setUser(session?.user ?? null);
+        }
       } catch (error) {
         console.error("Error getting session:", error);
-        if (isMounted) {
+      } finally {
+        clearTimeout(timeoutId);
+        if (isMounted.current && !isInitialized.current) {
+          isInitialized.current = true;
           setLoading(false);
         }
       }
     };
 
-    initSession();
+    // Start initialization
+    if (!isInitialized.current) {
+      initSession();
+    } else {
+      setLoading(false);
+    }
 
-    // Listen for changes on auth state (sign in, sign out, etc.)
+    // Listen for changes on auth state
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (!isMounted) return;
+      if (!isMounted.current) return;
 
-      // Skip INITIAL_SESSION if we already loaded it
-      if (_event === 'INITIAL_SESSION' && initialSessionLoaded) {
+      // Skip INITIAL_SESSION if we're handling it via getSession
+      if (_event === 'INITIAL_SESSION') {
         return;
       }
 
       setSession(session);
       setUser(session?.user ?? null);
 
+      // Ensure loading is complete whenever we get an authoritative update
+      if (loading) {
+        setLoading(false);
+        isInitialized.current = true;
+      }
+
       // Only perform profile checks on explicit SIGNED_IN events
       if (_event === 'SIGNED_IN' && session?.user) {
         await checkUserProfile(session.user);
       }
 
-      setLoading(false);
+      // Handle SIGNED_OUT event
+      if (_event === 'SIGNED_OUT') {
+        setSession(null);
+        setUser(null);
+      }
     });
 
     return () => {
-      isMounted = false;
+      isMounted.current = false;
       subscription.unsubscribe();
     };
-  }, [addNotification]);
+  }, [showNotification, loading]);
 
   const signOut = async () => {
     await supabase.auth.signOut();

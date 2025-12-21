@@ -32,18 +32,25 @@ const Dashboard: React.FC = () => {
 
     useEffect(() => {
         const fetchMyProjects = async () => {
+            console.log("Dashboard: fetchMyProjects called", { user });
             if (user) {
                 try {
+                    console.log("Dashboard: calling getUserProjects", user.id);
                     const data = await getUserProjects(user.id);
+                    console.log("Dashboard: projects loaded", data);
                     setProjects(data);
                 } catch (error) {
                     console.error("Failed to load projects", error);
                     addNotification('error', 'Échec du chargement', 'Impossible de charger vos projets');
                 } finally {
+                    console.log("Dashboard: finished loading projects");
                     setIsLoadingProjects(false);
                 }
+            } else {
+                console.log("Dashboard: no user, skipping fetch");
             }
         };
+        console.log("Dashboard: Effect triggered", { userId: user?.id, loading });
         if (user) fetchMyProjects();
     }, [user, addNotification]);
 
@@ -92,7 +99,7 @@ const Dashboard: React.FC = () => {
                     <div>
                         <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Dashboard</h1>
                         <p className="text-slate-600 dark:text-slate-400 mt-1">
-                            Heureux de vous revoir ! 👋
+                            Heureux de te revoir, geek ! 👋
                         </p>
                     </div>
                     <Link

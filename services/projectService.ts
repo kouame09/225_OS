@@ -64,17 +64,39 @@ export const getProjectBySlug = async (slug: string): Promise<Project | undefine
 };
 
 export const getUserProjects = async (userId: string): Promise<Project[]> => {
-  const { data, error } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false });
+  console.log('projectService: getUserProjects called for', userId);
 
-  if (error) {
-    console.error('Error fetching user projects:', JSON.stringify(error, null, 2));
-    throw error;
+  // Create a timeout promise to prevent infinite hanging
+  const timeoutPromise = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('Request timed out after 10000ms')), 10000)
+  );
+
+  try {
+    const supabasePromise = supabase
+      .from('projects')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    console.log('projectService: sending supabase request...');
+
+    // Race against timeout
+    const { data, error } = await Promise.race([
+      supabasePromise,
+      timeoutPromise
+    ]) as any;
+
+    console.log('projectService: response received', { data: data?.length, error });
+
+    if (error) {
+      console.error('Error fetching user projects:', JSON.stringify(error, null, 2));
+      throw error;
+    }
+    return (data || []).map(mapProjectFromDB);
+  } catch (err) {
+    console.error("projectService: Critical error in getUserProjects", err);
+    throw err;
   }
-  return (data || []).map(mapProjectFromDB);
 };
 
 export const addProject = async (project: Omit<Project, 'id' | 'slug'>): Promise<void> => {
