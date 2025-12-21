@@ -155,8 +155,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [showNotification, loading]);
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    navigate('/');
+    try {
+      // Attempt generic sign out with short timeout
+      await Promise.race([
+        supabase.auth.signOut(),
+        new Promise((_, reject) => setTimeout(() => reject('SignOut Timeout'), 1000))
+      ]);
+    } catch (e) {
+      console.warn("Sign out timed out or failed, forcing local cleanup", e);
+    } finally {
+      // FORCE CLEANUP: Remove Supabase tokens manually to ensure next refresh doesn't auto-login
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('sb-') && key.endsWith('-auth-token')) {
+          localStorage.removeItem(key);
+        }
+      });
+
+      setSession(null);
+      setUser(null);
+      navigate('/');
+    }
   };
 
   return (
