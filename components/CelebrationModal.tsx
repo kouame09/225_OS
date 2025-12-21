@@ -49,9 +49,17 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
                 });
             }, 250);
 
-            return () => clearInterval(interval);
+            // Auto-redirect after 5 seconds
+            const redirectTimer = setTimeout(() => {
+                onClose();
+            }, 5000);
+
+            return () => {
+                clearInterval(interval);
+                clearTimeout(redirectTimer);
+            };
         }
-    }, [isOpen]);
+    }, [isOpen, onClose]);
 
     if (!isOpen) return null;
 
@@ -82,13 +90,14 @@ const CelebrationModal: React.FC<CelebrationModalProps> = ({
                         Vous venez de publier votre tout premier projet <span className="font-bold text-slate-900 dark:text-white">"{projectName}"</span> sur la plateforme. C'est le début d'une grande aventure open-source ! 🚀
                     </p>
 
-                    <button
-                        onClick={onClose}
-                        className="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl shadow-xl shadow-emerald-500/30 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 group"
-                    >
-                        <span>Admirer mon Dashboard</span>
-                        <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    <div className="mt-8 flex flex-col items-center gap-2">
+                        <div className="w-full h-1 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div className="h-full bg-emerald-500 animate-[progress_5s_linear_forwards] w-full origin-left"></div>
+                        </div>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 animate-pulse">
+                            Redirection vers votre dashboard...
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
