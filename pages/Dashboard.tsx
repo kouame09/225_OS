@@ -36,12 +36,10 @@ const Dashboard: React.FC = () => {
         const fetchMyProjects = async () => {
             if (!user?.id) return;
 
-            console.log("Dashboard: fetchMyProjects called for", user.id);
             try {
                 setIsLoadingProjects(true);
                 const data = await getUserProjects(user.id);
                 if (isMounted) {
-                    console.log("Dashboard: projects loaded", data.length);
                     setProjects(data);
                 }
             } catch (error) {

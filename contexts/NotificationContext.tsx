@@ -35,7 +35,7 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({ chil
 
   const addNotification = useCallback(
     (type: ToastType, title: string, message?: string, duration?: number) => {
-      const id = Date.now().toString();
+      const id = Date.now().toString() + Math.random().toString(36).slice(2);
       const newNotification: Notification = {
         id,
         type,

@@ -20,17 +20,32 @@ const mapProjectFromDB = (dbProject: any): Project => ({
 });
 
 export const getProjects = async (): Promise<Project[]> => {
-  const { data, error } = await supabase
-    .from('projects')
-    .select('*')
-    .order('created_at', { ascending: false });
+  // FALLBACK: Use raw fetch because supabase-js client is hanging
+  try {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-  if (error) {
-    console.error('Error fetching projects:', JSON.stringify(error, null, 2));
-    return [];
+    if (!url || !key) throw new Error("Missing Supabase config");
+
+    const response = await fetch(`${url}/rest/v1/projects?select=*&order=created_at.desc`, {
+      method: 'GET',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${key}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Fetch error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return (data || []).map(mapProjectFromDB);
+  } catch (err) {
+    console.error("projectService: Raw fetch failed in getProjects", err);
+    throw err;
   }
-
-  return (data || []).map(mapProjectFromDB);
 };
 
 export const getProjectById = async (id: string): Promise<Project | undefined> => {
@@ -64,37 +79,30 @@ export const getProjectBySlug = async (slug: string): Promise<Project | undefine
 };
 
 export const getUserProjects = async (userId: string): Promise<Project[]> => {
-  console.log('projectService: getUserProjects called for', userId);
-
-  // Create a timeout promise to prevent infinite hanging
-  const timeoutPromise = new Promise((_, reject) =>
-    setTimeout(() => reject(new Error('Request timed out after 10000ms')), 10000)
-  );
-
+  // FALLBACK: Use raw fetch because supabase-js client is hanging
   try {
-    const supabasePromise = supabase
-      .from('projects')
-      .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false });
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-    console.log('projectService: sending supabase request...');
+    if (!url || !key) throw new Error("Missing Supabase config");
 
-    // Race against timeout
-    const { data, error } = await Promise.race([
-      supabasePromise,
-      timeoutPromise
-    ]) as any;
+    const response = await fetch(`${url}/rest/v1/projects?user_id=eq.${userId}&select=*&order=created_at.desc`, {
+      method: 'GET',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${key}`,
+        'Content-Type': 'application/json'
+      }
+    });
 
-    console.log('projectService: response received', { data: data?.length, error });
-
-    if (error) {
-      console.error('Error fetching user projects:', JSON.stringify(error, null, 2));
-      throw error;
+    if (!response.ok) {
+      throw new Error(`Fetch error: ${response.status} ${response.statusText}`);
     }
+
+    const data = await response.json();
     return (data || []).map(mapProjectFromDB);
   } catch (err) {
-    console.error("projectService: Critical error in getUserProjects", err);
+    console.error("projectService: Raw fetch failed", err);
     throw err;
   }
 };
