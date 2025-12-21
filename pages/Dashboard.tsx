@@ -31,28 +31,43 @@ const Dashboard: React.FC = () => {
     }, [user, loading, navigate]);
 
     useEffect(() => {
+        let isMounted = true;
+
         const fetchMyProjects = async () => {
-            console.log("Dashboard: fetchMyProjects called", { user });
-            if (user) {
-                try {
-                    console.log("Dashboard: calling getUserProjects", user.id);
-                    const data = await getUserProjects(user.id);
-                    console.log("Dashboard: projects loaded", data);
+            if (!user?.id) return;
+
+            console.log("Dashboard: fetchMyProjects called for", user.id);
+            try {
+                setIsLoadingProjects(true);
+                const data = await getUserProjects(user.id);
+                if (isMounted) {
+                    console.log("Dashboard: projects loaded", data.length);
                     setProjects(data);
-                } catch (error) {
-                    console.error("Failed to load projects", error);
+                }
+            } catch (error) {
+                console.error("Failed to load projects", error);
+                if (isMounted) {
                     addNotification('error', 'Échec du chargement', 'Impossible de charger vos projets');
-                } finally {
-                    console.log("Dashboard: finished loading projects");
+                }
+            } finally {
+                if (isMounted) {
                     setIsLoadingProjects(false);
                 }
-            } else {
-                console.log("Dashboard: no user, skipping fetch");
             }
         };
-        console.log("Dashboard: Effect triggered", { userId: user?.id, loading });
-        if (user) fetchMyProjects();
-    }, [user, addNotification]);
+
+        if (user?.id) {
+            fetchMyProjects();
+        } else {
+            // If no user, ensure loading is off
+            setIsLoadingProjects(false);
+        }
+
+        return () => {
+            isMounted = false;
+        };
+        // Depend ONLY on user.id to avoid refetching when user object ref changes but id is same
+    }, [user?.id, addNotification]);
 
     const handleDelete = async (id: string) => {
         const projectToDelete = projects.find(p => p.id === id);
