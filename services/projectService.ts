@@ -4,16 +4,27 @@ import { slugify } from '../utils/slugify';
 
 // Helper to get auth token (robust against client failure)
 const getAuthToken = async () => {
-  const { data } = await supabase.auth.getSession();
-  if (data.session?.access_token) return data.session.access_token;
-  // Fallback: Parse LocalStorage for sb-*-auth-token
+  // 1. FASTEST: Sync LocalStorage check
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
     if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
-      try { return JSON.parse(localStorage.getItem(key) || '{}').access_token; } catch (e) { }
+      try {
+        const val = localStorage.getItem(key);
+        if (val) return JSON.parse(val).access_token;
+      } catch (e) { }
     }
   }
-  return null;
+
+  // 2. BACKUP: Supabase with timeout
+  try {
+    const { data } = await Promise.race([
+      supabase.auth.getSession(),
+      new Promise<any>((_, reject) => setTimeout(() => reject('Session Timeout'), 1000))
+    ]);
+    return data.session?.access_token || null;
+  } catch (e) {
+    return null;
+  }
 };
 
 // Helper to map DB snake_case to Frontend camelCase
@@ -63,33 +74,63 @@ export const getProjects = async (): Promise<Project[]> => {
 };
 
 export const getProjectById = async (id: string): Promise<Project | undefined> => {
-  const { data, error } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('id', id)
-    .single();
+  try {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-  if (error) {
-    console.error('Error fetching project:', JSON.stringify(error, null, 2));
+    if (!url || !key) throw new Error("Missing Supabase config");
+
+    const response = await fetch(`${url}/rest/v1/projects?id=eq.${id}&select=*`, {
+      method: 'GET',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${key}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.pgrst.object+json' // Return single object
+      }
+    });
+
+    if (!response.ok) {
+      if (response.status === 406) return undefined; // Not found
+      throw new Error(`Fetch error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return mapProjectFromDB(data);
+  } catch (err) {
+    console.error("projectService: Fetch failed in getProjectById", err);
     return undefined;
   }
-
-  return mapProjectFromDB(data);
 };
 
 export const getProjectBySlug = async (slug: string): Promise<Project | undefined> => {
-  const { data, error } = await supabase
-    .from('projects')
-    .select('*')
-    .eq('slug', slug)
-    .single();
+  try {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-  if (error) {
-    console.error('Error fetching project:', JSON.stringify(error, null, 2));
+    if (!url || !key) throw new Error("Missing Supabase config");
+
+    const response = await fetch(`${url}/rest/v1/projects?slug=eq.${slug}&select=*`, {
+      method: 'GET',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${key}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.pgrst.object+json'
+      }
+    });
+
+    if (!response.ok) {
+      if (response.status === 406) return undefined;
+      throw new Error(`Fetch error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    return mapProjectFromDB(data);
+  } catch (err) {
+    console.error("projectService: Fetch failed in getProjectBySlug", err);
     return undefined;
   }
-
-  return mapProjectFromDB(data);
 };
 
 export const getUserProjects = async (userId: string): Promise<Project[]> => {
