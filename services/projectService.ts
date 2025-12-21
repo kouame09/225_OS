@@ -2,6 +2,20 @@ import { Project } from '../types';
 import { supabase } from '../lib/supabaseClient';
 import { slugify } from '../utils/slugify';
 
+// Helper to get auth token (robust against client failure)
+const getAuthToken = async () => {
+  const { data } = await supabase.auth.getSession();
+  if (data.session?.access_token) return data.session.access_token;
+  // Fallback: Parse LocalStorage for sb-*-auth-token
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
+      try { return JSON.parse(localStorage.getItem(key) || '{}').access_token; } catch (e) { }
+    }
+  }
+  return null;
+};
+
 // Helper to map DB snake_case to Frontend camelCase
 const mapProjectFromDB = (dbProject: any): Project => ({
   id: dbProject.id,
@@ -108,27 +122,46 @@ export const getUserProjects = async (userId: string): Promise<Project[]> => {
 };
 
 export const addProject = async (project: Omit<Project, 'id' | 'slug'>): Promise<void> => {
-  // Generate slug from project name
-  const slug = slugify(project.name);
+  try {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const token = await getAuthToken();
 
-  const { error } = await supabase.from('projects').insert({
-    name: project.name,
-    author: project.author,
-    description: project.description,
-    repo_url: project.repoUrl,
-    stacks: project.stacks,
-    stars: project.stars,
-    forks: project.forks,
-    language: project.language,
-    updated_at: project.updatedAt,
-    image_url: project.imageUrl,
-    slug: slug,
-    user_id: project.userId
-  });
+    if (!url || !key || !token) throw new Error("Missing config or auth token");
 
-  if (error) {
-    console.error('Error adding project:', JSON.stringify(error, null, 2));
-    throw error;
+    // Generate slug from project name
+    const slug = slugify(project.name);
+
+    const response = await fetch(`${url}/rest/v1/projects`, {
+      method: 'POST',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({
+        name: project.name,
+        author: project.author,
+        description: project.description,
+        repo_url: project.repoUrl,
+        stacks: project.stacks,
+        stars: project.stars,
+        forks: project.forks,
+        language: project.language,
+        updated_at: project.updatedAt,
+        image_url: project.imageUrl,
+        slug: slug,
+        user_id: project.userId
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Add Project Failed: ${response.status} ${response.statusText}`);
+    }
+  } catch (err) {
+    console.error("projectService: Raw fetch failed in addProject", err);
+    throw err;
   }
 };
 
@@ -136,28 +169,58 @@ export const updateProject = async (
   id: string,
   updates: Partial<Omit<Project, 'id' | 'slug' | 'userId'>>
 ): Promise<void> => {
-  const { error } = await supabase
-    .from('projects')
-    .update({
-      name: updates.name,
-      author: updates.author,
-      description: updates.description,
-      stacks: updates.stacks,
-      // Note: We don't update stars, forks, language, updated_at, imageUrl, or repoUrl
-      // as these come from GitHub
-    })
-    .eq('id', id);
+  try {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const token = await getAuthToken();
 
-  if (error) {
-    console.error('Error updating project:', JSON.stringify(error, null, 2));
-    throw error;
+    if (!url || !key || !token) throw new Error("Missing config or auth token");
+
+    const response = await fetch(`${url}/rest/v1/projects?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: updates.name,
+        author: updates.author,
+        description: updates.description,
+        stacks: updates.stacks
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Update Project Failed: ${response.status} ${response.statusText}`);
+    }
+  } catch (err) {
+    console.error("projectService: Raw fetch failed in updateProject", err);
+    throw err;
   }
 };
 
 export const deleteProject = async (id: string): Promise<void> => {
-  const { error } = await supabase.from('projects').delete().eq('id', id);
-  if (error) {
-    console.error('Error deleting project:', JSON.stringify(error, null, 2));
-    throw error;
+  try {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const token = await getAuthToken();
+
+    if (!url || !key || !token) throw new Error("Missing config or auth token");
+
+    const response = await fetch(`${url}/rest/v1/projects?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: {
+        'apikey': key,
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Delete Project Failed: ${response.status} ${response.statusText}`);
+    }
+  } catch (err) {
+    console.error("projectService: Raw fetch failed in deleteProject", err);
+    throw err;
   }
 };

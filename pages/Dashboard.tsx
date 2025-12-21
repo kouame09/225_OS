@@ -6,6 +6,7 @@ import { getUserProjects, deleteProject } from '../services/projectService';
 import { Link, useNavigate } from 'react-router-dom';
 import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork, Eye, Pencil } from 'lucide-react';
 import Pagination from '../components/Pagination';
+import ConfirmModal from '../components/ConfirmModal';
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
@@ -14,6 +15,7 @@ const Dashboard: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
     const [isLoadingProjects, setIsLoadingProjects] = useState(true);
     const [isDeleting, setIsDeleting] = useState<string | null>(null);
+    const [projectToDelete, setProjectToDelete] = useState<Project | null>(null);
 
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
@@ -67,27 +69,29 @@ const Dashboard: React.FC = () => {
         // Depend ONLY on user.id to avoid refetching when user object ref changes but id is same
     }, [user?.id, addNotification]);
 
-    const handleDelete = async (id: string) => {
-        const projectToDelete = projects.find(p => p.id === id);
+    const handleDeleteClick = (project: Project) => {
+        setProjectToDelete(project);
+    };
+
+    const confirmDelete = async () => {
         if (!projectToDelete) return;
 
-        if (confirm(`Êtes-vous sûr de vouloir supprimer "${projectToDelete.name}" ?`)) {
-            setIsDeleting(id);
-            try {
-                await deleteProject(id);
-                setProjects(prev => prev.filter(p => p.id !== id));
-                addNotification('success', 'Projet supprimé', `"${projectToDelete.name}" a été supprimé avec succès`);
+        setIsDeleting(projectToDelete.id);
+        try {
+            await deleteProject(projectToDelete.id);
+            setProjects(prev => prev.filter(p => p.id !== projectToDelete.id));
+            addNotification('success', 'Projet supprimé', `"${projectToDelete.name}" a été supprimé avec succès`);
 
-                // Adjust current page if necessary
-                const totalPages = Math.ceil((projects.length - 1) / projectsPerPage);
-                if (currentPage > totalPages && totalPages > 0) {
-                    setCurrentPage(totalPages);
-                }
-            } catch (error) {
-                addNotification('error', 'Échec de la suppression', `Impossible de supprimer "${projectToDelete.name}"`);
-            } finally {
-                setIsDeleting(null);
+            // Adjust current page if necessary
+            const totalPages = Math.ceil((projects.length - 1) / projectsPerPage);
+            if (currentPage > totalPages && totalPages > 0) {
+                setCurrentPage(totalPages);
             }
+        } catch (error) {
+            addNotification('error', 'Échec de la suppression', `Impossible de supprimer "${projectToDelete.name}"`);
+        } finally {
+            setIsDeleting(null);
+            setProjectToDelete(null);
         }
     };
 
@@ -235,7 +239,7 @@ const Dashboard: React.FC = () => {
                                                     <span>Modifier</span>
                                                 </Link>
                                                 <button
-                                                    onClick={() => handleDelete(project.id)}
+                                                    onClick={() => handleDeleteClick(project)}
                                                     disabled={isDeleting === project.id}
                                                     className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors text-sm font-medium disabled:opacity-50"
                                                     title="Supprimer le projet"
@@ -277,6 +281,17 @@ const Dashboard: React.FC = () => {
                     )}
                 </div>
             </div>
+            {/* Delete Confirmation Modal */}
+            <ConfirmModal
+                isOpen={!!projectToDelete}
+                onClose={() => !isDeleting && setProjectToDelete(null)}
+                onConfirm={confirmDelete}
+                title="Supprimer le projet"
+                message={`Êtes-vous sûr de vouloir supprimer définitivement le projet "${projectToDelete?.name}" ? Cette action est irréversible.`}
+                confirmText="Supprimer"
+                isDangerous={true}
+                isLoading={!!isDeleting}
+            />
         </div>
     );
 };
