@@ -619,7 +619,7 @@ const Home: React.FC = () => {
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px] -ml-32 -mb-32 pointer-events-none"></div>
 
           <div className="relative z-10">
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">Prêt pour la dynamique ?</h2>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6">Prêts pour la dynamique ?</h2>
             <p className="text-slate-300 text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
               Ne laissez pas votre projet se perdre dans l'océan des projets GitHub. Ajoutez votre projet sur 225 Open Source et contribuez au développement numérique de la Côte d'Ivoire.
             </p>
