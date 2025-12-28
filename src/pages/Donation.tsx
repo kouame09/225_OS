@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { Heart, ArrowLeft, Shield, Zap, Users, ArrowRight, ExternalLink, TrendingUp, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import waveLogo from '../public/Services/wave-logo.png';
-
 const Donation: React.FC = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -43,7 +41,7 @@ const Donation: React.FC = () => {
                         </div>
 
                         <img
-                            src={waveLogo}
+                            src="/Services/wave-logo.png"
                             alt="Wave"
                             className="h-16 mx-auto mb-6 drop-shadow-sm"
                         />
