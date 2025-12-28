@@ -54,16 +54,16 @@ const Home: React.FC = () => {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
 
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-sm font-medium mb-8">
+          <div className="inline-flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-white/50 dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 text-xs sm:text-sm font-medium mb-8">
             <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
             La communauté open-source n°1 de Côte d'Ivoire
           </div>
 
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.25]">
-            Construire le futur <br />
-            de la <span className="relative inline-block px-4 py-0 ml-1">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.25]">
+            Construire le futur <br className="hidden sm:block" />
+            de la <span className="relative inline-block px-3 sm:px-4 py-0 ml-1">
               <span className="absolute inset-0 bg-emerald-600 -rotate-2 rounded-xl sm:rounded-2xl shadow-lg shadow-emerald-500/20"></span>
-              <span className="relative text-white">Tech Ivoirienne</span>
+              <span className="relative text-white whitespace-nowrap">Tech Ivoirienne</span>
             </span>
           </h1>
 
@@ -631,7 +631,7 @@ const Home: React.FC = () => {
                 className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-lg rounded-xl transition-all transform hover:scale-105 flex items-center justify-center gap-2"
               >
                 <Github size={20} />
-                Voir sur GitHub
+                Contribuer
               </a>
               <button
                 onClick={() => setIsSignupOpen(true)}
@@ -656,7 +656,7 @@ const Home: React.FC = () => {
               <img src="/Contributors/Kouame_Thibaut.jpg" alt="Kouame Thibaut" className="w-full h-full object-cover" />
             </div>
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
-              <img src="https://us.123rf.com/450wm/afe207/afe2071602/afe207160200158/52329668-male-avatar-profile-picture-silhouette-light-shadow.jpg" alt="Contributor" className="w-full h-full object-cover" />
+              <img src="/Contributors/Kechiedou_meda.jpg" alt="Contributor" className="w-full h-full object-cover" />
             </div>
             <div className="w-16 h-16 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-300 transform hover:scale-110">
               <img src="https://us.123rf.com/450wm/afe207/afe2071602/afe207160200158/52329668-male-avatar-profile-picture-silhouette-light-shadow.jpg" alt="Contributor" className="w-full h-full object-cover" />

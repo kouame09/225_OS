@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
+import SearchModalPublic from './SearchModalPublic';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const { darkMode, toggleDarkMode } = useTheme();
   const { user, signOut } = useAuth();
   const [isAuthOpen, setIsAuthOpen] = React.useState(false);
+  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
 
   return (
     <>
@@ -17,6 +19,10 @@ const Navbar: React.FC = () => {
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
         initialView="signup"
+      />
+      <SearchModalPublic
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
       />
       <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/70 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800">
 
@@ -32,6 +38,18 @@ const Navbar: React.FC = () => {
             </Link>
 
             <div className="flex items-center gap-4 sm:gap-6">
+              {/* Search Button - only on landing page */}
+              {location.pathname === '/' && (
+                <button
+                  onClick={() => setIsSearchOpen(true)}
+                  className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors"
+                  aria-label="Rechercher"
+                  title="Rechercher des projets"
+                >
+                  <Search size={20} />
+                </button>
+              )}
+
               {location.pathname !== '/donate' && location.pathname !== '/' && location.pathname !== '/explore' && (
                 <Link
                   to="/explore"
@@ -62,7 +80,7 @@ const Navbar: React.FC = () => {
                 <span>Donation</span>
               </Link>
 
-              {user ? (
+              {user && (
                 <div className="flex items-center gap-3 border-l border-slate-200 dark:border-slate-700 pl-4">
                   {location.pathname !== '/dashboard' && (
                     <Link
@@ -81,14 +99,6 @@ const Navbar: React.FC = () => {
                     <LogOut size={18} />
                   </button>
                 </div>
-              ) : (
-                <button
-                  onClick={() => setIsAuthOpen(true)}
-                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-200 rounded-lg transition-colors"
-                >
-                  <User size={16} />
-                  <span>Rejoindre</span>
-                </button>
               )}
 
               <button
