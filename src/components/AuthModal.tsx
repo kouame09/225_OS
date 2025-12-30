@@ -133,7 +133,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         setSuccessMessage('Compte créé ! Veuillez vérifier vos e-mails pour valider votre compte.');
       } else if (view === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: window.location.origin,
+          redirectTo: window.location.origin + '/reset-password',
         });
         if (error) throw error;
         setSuccessMessage('Lien de réinitialisation envoyé par e-mail.');

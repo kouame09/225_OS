@@ -19,6 +19,7 @@ import Dashboard from './pages/Dashboard';
 import EditProject from './pages/EditProject';
 import MaintenancePage from './pages/MaintenancePage';
 import Donation from './pages/Donation';
+import ResetPassword from './pages/ResetPassword';
 import { CONFIG } from './config';
 
 const App: React.FC = () => {
@@ -46,6 +47,7 @@ const App: React.FC = () => {
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/donate" element={<Donation />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
             </Route>
           </Routes>
           <ToastContainer />
