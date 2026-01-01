@@ -72,13 +72,15 @@ const Navbar: React.FC = () => {
               </a>
 
               {/* Donation Link */}
-              <Link
-                to="/donate"
-                className="hidden md:flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
-              >
-                <Heart size={14} />
-                <span>Donation</span>
-              </Link>
+              {location.pathname !== '/donate' && (
+                <Link
+                  to="/donate"
+                  className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
+                >
+                  <Heart size={14} />
+                  <span>Donation</span>
+                </Link>
+              )}
 
               {user && (
                 <div className="flex items-center gap-3 border-l border-slate-200 dark:border-slate-700 pl-4">

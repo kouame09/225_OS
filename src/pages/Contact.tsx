@@ -35,10 +35,10 @@ const Contact: React.FC = () => {
 
           <a
             href="mailto:hello@princekouame.com"
-            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-lg hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-xl hover:scale-105 active:scale-95"
+            className="inline-flex items-center justify-center gap-3 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-base hover:bg-slate-800 dark:hover:bg-slate-200 transition-all shadow-xl hover:scale-105 active:scale-95 w-full max-w-sm"
           >
-            <Mail size={22} />
-            <span>hello@princekouame.com</span>
+            <Mail size={20} />
+            <span className="text-sm sm:text-base">hello@princekouame.com</span>
           </a>
 
           <p className="mt-10 text-sm text-slate-400">
