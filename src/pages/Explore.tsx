@@ -267,7 +267,7 @@ const Explore: React.FC = () => {
                                 : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700'
                                 }`}
                         >
-                            Toutes les technos
+                            Tous
                         </button>
                         {allStacks.map(stack => (
                             <button
