@@ -86,14 +86,16 @@ const ProjectDetails: React.FC = () => {
   return (
     <div className="min-h-screen pb-20 bg-slate-50 dark:bg-slate-950">
 
-      {/* Minimalist Back Button - Top Left */}
-      <button
-        onClick={() => navigate(-1)}
-        className="fixed top-4 left-4 z-30 p-2 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-900 transition-all shadow-sm"
-        aria-label="Retour aux projets"
-      >
-        <ArrowLeft size={18} />
-      </button>
+      {/* Minimalist Back Button - Top Left - Only for authenticated users */}
+      {user && (
+        <button
+          onClick={() => navigate(-1)}
+          className="fixed top-4 left-4 z-30 p-2 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-900 transition-all shadow-sm"
+          aria-label="Retour aux projets"
+        >
+          <ArrowLeft size={18} />
+        </button>
+      )}
 
       {/* Page Background Ambience (Blurred) */}
       <div className="h-96 w-full bg-slate-900 relative overflow-hidden">
@@ -220,7 +222,7 @@ const ProjectDetails: React.FC = () => {
             <div className="relative z-10 max-w-2xl">
               <h3 className="text-3xl font-bold mb-3">Vous aimez ce projet ?</h3>
               <p className="text-slate-300 text-lg mb-2">
-                Rejoignez 225 Open Source pour découvrir plus de projets incroyables, soutenir les développeurs locaux et partager votre propre travail.
+                Rejoignez 225 Open Source pour découvrir plus de projets, contribuer aux projets locaux et partager votre propre travail.
               </p>
             </div>
             <Link
