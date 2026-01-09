@@ -10,12 +10,6 @@ const Contact: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col pt-12 px-4 font-sans">
 
-      <div className="max-w-xl w-full mx-auto mb-8">
-        <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors text-sm font-medium">
-          <ArrowLeft size={16} /> Retour à l'accueil
-        </Link>
-      </div>
-
       <div className="flex-1 flex items-center justify-center pb-20">
         <div className="max-w-xl w-full bg-white dark:bg-slate-900 rounded-[2rem] p-8 sm:p-12 border border-slate-200 dark:border-slate-800 text-center relative overflow-hidden">
 

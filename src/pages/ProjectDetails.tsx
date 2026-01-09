@@ -86,6 +86,15 @@ const ProjectDetails: React.FC = () => {
   return (
     <div className="min-h-screen pb-20 bg-slate-50 dark:bg-slate-950">
 
+      {/* Minimalist Back Button - Top Left */}
+      <button
+        onClick={() => navigate(-1)}
+        className="fixed top-4 left-4 z-30 p-2 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-900 transition-all shadow-sm"
+        aria-label="Retour aux projets"
+      >
+        <ArrowLeft size={18} />
+      </button>
+
       {/* Page Background Ambience (Blurred) */}
       <div className="h-96 w-full bg-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/90 z-10"></div>
@@ -97,18 +106,6 @@ const ProjectDetails: React.FC = () => {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-64 relative z-20">
-
-
-
-        {/* Navigation */}
-        {user && (
-          <button
-            onClick={() => navigate(-1)}
-            className="mb-6 flex items-center gap-2 text-white/80 hover:text-white transition-colors text-sm font-medium"
-          >
-            <ArrowLeft size={16} /> Retour aux projets
-          </button>
-        )}
 
         {/* Unified Card */}
         <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">

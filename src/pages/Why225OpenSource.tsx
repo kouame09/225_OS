@@ -18,11 +18,7 @@ const Why225OpenSource: React.FC = () => {
                 initialView="signup"
             />
             <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-12 pb-24 font-sans">
-                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors mb-8 text-sm font-medium">
-                        <ArrowLeft size={16} /> Retour à l'accueil
-                    </Link>
-
+                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">                  
                     <div className="mb-12">
                         <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 leading-tight">
                             Pourquoi <span className="text-transparent bg-clip-text bg-emerald-600">225 Open Source ?</span>

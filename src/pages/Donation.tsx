@@ -15,11 +15,7 @@ const Donation: React.FC = () => {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/20 rounded-full blur-[120px] -z-10 mix-blend-multiply dark:mix-blend-screen opacity-60"></div>
             <div className="absolute top-20 right-0 w-[600px] h-[400px] bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[100px] -z-10 opacity-40"></div>
 
-            <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
-                <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors mb-8 text-sm font-medium">
-                    <ArrowLeft size={16} /> Retour à l'accueil
-                </Link>
-
+            <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">              
                 {/* Hero Section */}
                 <div className="text-center mb-20">
                     <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-8 leading-[1.1]">
