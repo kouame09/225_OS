@@ -166,20 +166,28 @@ const Explore: React.FC = () => {
 
                 {/* Tech Events Carousel */}
                 <div
-                    className="mb-8 bg-slate-900 dark:bg-slate-950 rounded-2xl p-6 text-white relative overflow-hidden shadow-xl border border-slate-800"
+                    className="mb-8 bg-slate-900 dark:bg-slate-950 rounded-2xl p-6 md:p-10 pb-16 md:pb-14 text-white relative overflow-hidden shadow-xl border border-slate-800"
                     onMouseEnter={() => setIsAutoScrollPaused(true)}
                     onMouseLeave={() => setIsAutoScrollPaused(false)}
                 >
+
+
                     <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
 
                     {/* Event Content */}
                     <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
                         <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
-                                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                                <span className="text-emerald-300 font-semibold text-sm uppercase tracking-wider">Événement à venir</span>
-                                <span className="text-slate-500 text-sm">• {techEvents[currentEventIndex].date}</span>
-                                <span className="text-slate-500 text-sm">• {techEvents[currentEventIndex].location}</span>
+                            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2 mb-2">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                                    <span className="text-emerald-300 font-semibold text-sm uppercase tracking-wider">Événement à venir</span>
+                                </div>
+                                <div className="flex items-center gap-2 text-slate-500 text-sm pl-4 md:pl-0">
+                                    <span className="hidden md:inline">•</span>
+                                    <span>{techEvents[currentEventIndex].date}</span>
+                                    <span>•</span>
+                                    <span>{techEvents[currentEventIndex].location}</span>
+                                </div>
                             </div>
                             <h3 className="text-xl md:text-2xl font-bold mb-2">{techEvents[currentEventIndex].title}</h3>
                             <p className="text-slate-300 text-sm md:text-base max-w-2xl">
