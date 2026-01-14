@@ -121,6 +121,7 @@ const Navbar: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2 group">
               <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white">
+                <span className="inline-block w-3 h-3 bg-orange-500 rounded-full mr-1"></span>
                 <span className="text-emerald-600 dark:text-emerald-400">225OS</span>
               </span>
             </Link>
