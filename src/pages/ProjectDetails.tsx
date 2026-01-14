@@ -13,7 +13,7 @@ import {
   ExternalLink,
   Loader2
 } from 'lucide-react';
-import { getProjectBySlug } from '../services/projectService';
+import { getProjectBySlug, syncProjectStats } from '../services/projectService';
 import { Project } from '../types';
 import Badge from '../components/Badge';
 
@@ -32,6 +32,15 @@ const ProjectDetails: React.FC = () => {
           const foundProject = await getProjectBySlug(slug);
           if (foundProject) {
             setProject(foundProject);
+
+            // SILENT BACKGROUND SYNC
+            // We do this after initial set to show data immediately
+            syncProjectStats(foundProject).then(updates => {
+              if (Object.keys(updates).length > 0) {
+                setProject(prev => prev ? { ...prev, ...updates } : null);
+              }
+            });
+
           } else {
             navigate('/');
           }
@@ -44,6 +53,7 @@ const ProjectDetails: React.FC = () => {
     };
     fetchProject();
   }, [slug, navigate]);
+
 
   const formatDate = (isoString: string) => {
     return new Date(isoString).toLocaleDateString('fr-FR', {

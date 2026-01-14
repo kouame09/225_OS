@@ -265,3 +265,58 @@ export const deleteProject = async (id: string): Promise<void> => {
     throw err;
   }
 };
+
+/**
+ * Synchronizes project statistics from GitHub and updates the local database.
+ * No auth token required as this is typically called during public viewing,
+ * using the anon key for the PATCH (if RLS allows) or simply returning data.
+ * NOTE: If RLS requires Auth for PATCH, this will only work for logged in users.
+ */
+export const syncProjectStats = async (project: Project): Promise<Partial<Project>> => {
+  try {
+    const { fetchGithubMetadata } = await import('./githubService');
+    const githubData = await fetchGithubMetadata(project.repoUrl);
+
+    const updates = {
+      stars: githubData.stargazers_count,
+      forks: githubData.forks_count,
+      updatedAt: githubData.updated_at
+    };
+
+    // Only update DB if values actually changed
+    if (
+      updates.stars !== project.stars ||
+      updates.forks !== project.forks ||
+      updates.updatedAt !== project.updatedAt
+    ) {
+      const url = import.meta.env.VITE_SUPABASE_URL;
+      const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      // We try to get token, but if it's a public view by guest, 
+      // the DB update might fail depending on RLS.
+      const token = await getAuthToken();
+
+      if (url && key) {
+        await fetch(`${url}/rest/v1/projects?id=eq.${project.id}`, {
+          method: 'PATCH',
+          headers: {
+            'apikey': key,
+            'Authorization': `Bearer ${token || key}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            stars: updates.stars,
+            forks: updates.forks,
+            updated_at: updates.updatedAt
+          })
+        });
+      }
+    }
+
+    return updates;
+  } catch (err) {
+    console.error("projectService: Failed to sync with GitHub", err);
+    return {};
+  }
+};
