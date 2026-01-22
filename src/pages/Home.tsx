@@ -44,7 +44,7 @@ const Home: React.FC = () => {
       ==================================================================================== */}
 
       {/* --- HERO SECTION --- */}
-      <section id="hero" className="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
+      <section id="hero" className="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden">
         {/* Abstract Tech Grid Background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
 
@@ -61,9 +61,12 @@ const Home: React.FC = () => {
 
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-8 leading-[1.25]">
             Construire le futur <br className="hidden sm:block" />
-            de la <span className="relative inline-block px-3 sm:px-4 py-0 ml-1">
-              <span className="absolute inset-0 bg-emerald-600 -rotate-2 rounded-xl sm:rounded-2xl shadow-lg shadow-emerald-500/20"></span>
-              <span className="relative text-white whitespace-nowrap">Tech Ivoirienne</span>
+            de la <span className="relative inline-block ml-2">
+              <span className="relative z-10 text-slate-900 dark:text-white whitespace-nowrap">Tech Ivoirienne</span>
+              <svg className="absolute -bottom-1 sm:-bottom-2 left-0 w-full h-2 sm:h-3 text-emerald-500 pointer-events-none" viewBox="0 0 100 12" preserveAspectRatio="none">
+                <path d="M0,10 Q50,0 100,10" stroke="currentColor" strokeWidth="8" strokeLinecap="round" fill="none" className="opacity-30" />
+                <path d="M0,10 Q50,5 100,10" stroke="currentColor" strokeWidth="4" strokeLinecap="round" fill="none" />
+              </svg>
             </span>
           </h1>
 
@@ -74,9 +77,9 @@ const Home: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => setIsAuthOpen(true)}
-              className="w-full sm:w-auto px-7 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl font-bold text-base hover:bg-slate-800 dark:hover:bg-slate-200 transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-7 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-base transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20"
             >
-              Rejoindre la communauté
+              Rejoindre le mouvement
               <ArrowRight size={20} />
             </button>
             <Link
@@ -102,8 +105,8 @@ const Home: React.FC = () => {
                   </div>
 
                   <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight">
-                    L'union fait la <br />
-                    <span className="text-transparent bg-clip-text bg-emerald-500">force technologique</span>
+                    L'union fait <br />
+                    <span className="text-transparent bg-clip-text bg-emerald-500">la force en tech</span>
                   </h3>
 
                   <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">

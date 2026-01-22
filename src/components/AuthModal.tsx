@@ -160,7 +160,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
   const getTitle = () => {
     switch (view) {
       case 'login': return 'Bon retour';
-      case 'signup': return 'Rejoindre la communauté';
+      case 'signup': return 'Rejoindre le mouvement';
       case 'forgot': return 'Réinitialiser le mot de passe';
     }
   };

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Search, Filter, Terminal, Loader2, Lock, ChevronLeft, ChevronRight } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
 import SearchModal from '../components/SearchModal';
+import Pagination from '../components/Pagination';
 import { Project } from '../types';
 import { getProjects } from '../services/projectService';
 import { useAuth } from '../contexts/AuthContext';
@@ -16,6 +17,8 @@ const Explore: React.FC = () => {
     const [selectedStack, setSelectedStack] = useState<string | null>(null);
     const [currentEventIndex, setCurrentEventIndex] = useState(0);
     const [isAutoScrollPaused, setIsAutoScrollPaused] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const ITEMS_PER_PAGE = 9;
 
     // Tech Events Data
     const techEvents = [
@@ -123,6 +126,18 @@ const Explore: React.FC = () => {
             return matchesStack;
         });
     }, [projects, selectedStack]);
+
+    // Pagination logic
+    const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+    const paginatedProjects = useMemo(() => {
+        const start = (currentPage - 1) * ITEMS_PER_PAGE;
+        return filteredProjects.slice(start, start + ITEMS_PER_PAGE);
+    }, [filteredProjects, currentPage]);
+
+    // Reset to page 1 when filter changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [selectedStack, projects]);
 
     // Carousel navigation
     const nextEvent = () => {
@@ -297,16 +312,25 @@ const Explore: React.FC = () => {
                     <div className="flex justify-center py-20">
                         <Loader2 className="animate-spin text-emerald-500" size={32} />
                     </div>
-                ) : filteredProjects.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {filteredProjects.map((project) => (
-                            <ProjectCard
-                                key={project.id}
-                                project={project}
-                                onTagClick={(tag) => setSelectedStack(tag)}
-                            />
-                        ))}
-                    </div>
+                ) : paginatedProjects.length > 0 ? (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {paginatedProjects.map((project) => (
+                                <ProjectCard
+                                    key={project.id}
+                                    project={project}
+                                    onTagClick={(tag) => setSelectedStack(tag)}
+                                />
+                            ))}
+                        </div>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={setCurrentPage}
+                            onPreviousPage={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                            onNextPage={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                        />
+                    </>
                 ) : (
                     <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 border-dashed">
                         <Filter className="mx-auto h-12 w-12 text-slate-300 dark:text-slate-600 mb-4" />
