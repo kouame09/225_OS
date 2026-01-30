@@ -149,7 +149,13 @@ const ProjectDetails: React.FC = () => {
                     {project.name}
                   </h1>
                   <div className="flex items-center gap-2 text-lg text-slate-500 dark:text-slate-400 font-medium">
-                    <span>par <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.author}</span></span>
+                    <span>par {project.userId ? (
+                      <Link to={`/profile/${project.userId}`} className="text-slate-900 dark:text-slate-200 font-semibold hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+                        {project.author}
+                      </Link>
+                    ) : (
+                      <span className="text-slate-900 dark:text-slate-200 font-semibold">{project.author}</span>
+                    )}</span>
                   </div>
                 </div>
 

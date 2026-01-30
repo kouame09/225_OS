@@ -20,6 +20,9 @@ import EditProject from './pages/EditProject';
 import MaintenancePage from './pages/MaintenancePage';
 import Donation from './pages/Donation';
 import ResetPassword from './pages/ResetPassword';
+import Profile from './pages/Profile';
+import Talents from './pages/Talents';
+import EditProfile from './pages/EditProfile';
 import { CONFIG } from './config';
 
 const App: React.FC = () => {
@@ -39,9 +42,12 @@ const App: React.FC = () => {
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/explore" element={<Explore />} />
+              <Route path="/talents" element={<Talents />} />
               <Route path="/add" element={<AddProject />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/edit-profile" element={<EditProfile />} />
               <Route path="/edit/:slug" element={<EditProject />} />
+              <Route path="/profile/:id" element={<Profile />} />
               <Route path="/project/:slug" element={<ProjectDetails />} />
               <Route path="/why" element={<Why225OpenSource />} />
               <Route path="/privacy" element={<PrivacyPolicy />} />

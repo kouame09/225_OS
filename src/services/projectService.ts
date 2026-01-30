@@ -1,31 +1,7 @@
 import { Project } from '../types';
 import { supabase } from '../lib/supabaseClient';
 import { slugify } from '../utils/slugify';
-
-// Helper to get auth token (robust against client failure)
-const getAuthToken = async () => {
-  // 1. FASTEST: Sync LocalStorage check
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
-      try {
-        const val = localStorage.getItem(key);
-        if (val) return JSON.parse(val).access_token;
-      } catch (e) { }
-    }
-  }
-
-  // 2. BACKUP: Supabase with timeout
-  try {
-    const { data } = await Promise.race([
-      supabase.auth.getSession(),
-      new Promise<any>((_, reject) => setTimeout(() => reject('Session Timeout'), 1000))
-    ]);
-    return data.session?.access_token || null;
-  } catch (e) {
-    return null;
-  }
-};
+import { getAuthToken } from '../utils/supabaseUtils';
 
 // Helper to map DB snake_case to Frontend camelCase
 const mapProjectFromDB = (dbProject: any): Project => ({

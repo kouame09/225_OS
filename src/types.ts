@@ -11,7 +11,26 @@ export interface Project {
   updatedAt: string;
   imageUrl?: string;
   slug: string;
-  userId?: string; // Links to Supabase Auth User ID
+  userId?: string;
+}
+
+export interface UserProfile {
+  id: string;
+  email?: string;
+  username?: string;
+  full_name?: string;
+  avatar_url?: string;
+  banner_url?: string;
+  headline?: string;
+  bio?: string;
+  location?: string;
+  website?: string;
+  github?: string;
+  linkedin?: string;
+  twitter?: string;
+  facebook?: string;
+  created_at?: string;
+  is_approved?: boolean;
 }
 
 export interface GithubMeta {

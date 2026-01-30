@@ -37,11 +37,14 @@
 ## Features
 
 - **Project Discovery**: Browse and search open source projects from Ivorian developers
-- **Smart Filtering**: Filter by technology, category, and popularity
-- **User Profiles**: Showcase your projects and contributions
+- **Global Search**: Advanced real-time search for projects and talents
+- **Talents Showcase**: Discover and connect with Ivorian developers and their expertise
+- **Donation System**: Support the platform and local open source initiatives
+- **Smart Filtering**: Filter projects by technology, category, and popularity
+- **User Profiles**: Showcase your projects, skills, and social links
 - **Favorites System**: Save and track projects you're interested in
 - **Dark Mode**: Beautiful UI with light and dark themes
-- **Secure Authentication**: Powered by Supabase with manual approval system
+- **Secure Authentication**: Powered by Supabase with email and GitHub OAuth
 - **Responsive Design**: Optimized for desktop, tablet, and mobile
 
 ---
@@ -59,7 +62,7 @@
 1. **Clone the repository**
    ```bash
    git clone https://github.com/kouame09/225_OS
-   cd 225opensource
+   cd 225_OS
    ```
 
 2. **Install dependencies**
@@ -102,11 +105,11 @@ npm run preview
 
 - **Frontend Framework**: React 18.2.0
 - **Language**: TypeScript 5.8.2
+- **Styling**: Tailwind CSS v4.1.18 (Migrated from Vanilla CSS)
+- **Build Tool / Compiler**: Vite 6.2.0
 - **Routing**: React Router DOM 6.22.3
-- **Styling**: Vanilla CSS with Tailwind-inspired utilities
 - **Icons**: Lucide React 0.344.0
 - **Backend**: Supabase 2.39.7
-- **Build Tool**: Vite 6.2.0
 - **Deployment**: Vercel
 
 ---
@@ -115,25 +118,28 @@ npm run preview
 
 ```
 225OS/
-├── components/          # Reusable UI components
-│   ├── AuthModal.tsx   # Authentication modal
-│   ├── Footer.tsx      # Site footer
-│   ├── Navbar.tsx      # Navigation bar
-│   └── ...
-├── pages/              # Page components
-│   ├── Home.tsx        # Landing page
-│   ├── Dashboard.tsx   # User dashboard
-│   ├── AddProject.tsx  # Add project form
-│   └── ...
-├── contexts/           # React contexts
-│   └── AuthContext.tsx # Authentication context
-├── services/           # API services
-│   └── projectService.ts
-├── utils/              # Utility functions
-│   └── slugify.ts      # URL slug generator
-├── lib/                # Third-party configurations
-│   └── supabaseClient.ts
-└── public/             # Static assets
+├── src/                # Source code
+│   ├── components/     # Reusable UI components
+│   │   ├── Profile/    # Profile-related components
+│   │   ├── AuthModal.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── ProjectCard.tsx
+│   │   ├── SearchModal.tsx
+│   │   └── ...
+│   ├── pages/          # Page components
+│   │   ├── Home.tsx
+│   │   ├── Explore.tsx
+│   │   ├── Dashboard.tsx
+│   │   ├── Donation.tsx
+│   │   ├── Talents.tsx
+│   │   └── ...
+│   ├── services/       # API and data services
+│   ├── contexts/       # Application state contexts
+│   ├── utils/          # Helper functions
+│   ├── lib/            # Configuration (Supabase, etc.)
+│   └── types.ts        # TypeScript definitions
+├── public/             # Static assets
+└── ...
 ```
 
 ---
@@ -150,16 +156,24 @@ npm run preview
 
 ### Project Showcase
 Users can add their GitHub projects with:
-- Project name, description, and repository URL
-- Technology tags
-- Category classification
-- Automatic GitHub stats fetching
+- Automatic metadata fetching (stars, forks, languages) via GitHub API
+- Technology tags and category classification
+- Rich project descriptions and preview images
+- Approval workflow to maintain quality
 
-### Community Features
-- Browse all projects from Ivorian developers
-- Filter by technology stack
-- Save favorites for later
-- View project details and contributors
+### Talent Discovery
+- Explore a directory of local developers
+- View developer profiles with their cumulative open-source impact
+- Direct contact links and social media integration
+
+### Search & Accessibility
+- **Global Search**: Instantly find projects and talents from anywhere in the app
+- **Responsive Layout**: Seamless experience on mobile and desktop
+- **Themes**: Support for both Dark and Light modes
+
+### Community Support
+- **Donation Hub**: Integrated support for the platform's sustainability
+- **Favorite Projects**: Create a personal list of projects to follow or contribute to
 
 ---
 

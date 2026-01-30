@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
@@ -57,14 +57,27 @@ const Navbar: React.FC = () => {
             </button>
           )}
 
-          <Link
-            to="/explore"
-            onClick={closeMobileMenu}
-            className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium transition-colors"
-          >
-            <Compass size={18} />
-            <span>Explorer</span>
-          </Link>
+          {user && (
+            <>
+              <Link
+                to="/explore"
+                onClick={closeMobileMenu}
+                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium transition-colors"
+              >
+                <Compass size={18} />
+                <span>Explorer</span>
+              </Link>
+
+              <Link
+                to="/talents"
+                onClick={closeMobileMenu}
+                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium transition-colors"
+              >
+                <Users size={18} />
+                <span>Talents</span>
+              </Link>
+            </>
+          )}
 
           <a
             href="https://github.com/kouame09/225_OS"
@@ -138,14 +151,26 @@ const Navbar: React.FC = () => {
                 </button>
               )}
 
-              {location.pathname !== '/explore' && location.pathname !== '/' && (
-                <Link
-                  to="/explore"
-                  className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-                >
-                  <Compass size={14} />
-                  <span>Explorer</span>
-                </Link>
+              {user && (
+                <>
+                  <Link
+                    to="/explore"
+                    className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                  >
+                    <Compass size={14} />
+                    <span>Explorer</span>
+                  </Link>
+
+                  {location.pathname !== '/talents' && (
+                    <Link
+                      to="/talents"
+                      className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                    >
+                      <Users size={14} />
+                      <span>Talents</span>
+                    </Link>
+                  )}
+                </>
               )}
 
               <a

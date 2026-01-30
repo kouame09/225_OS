@@ -4,7 +4,7 @@ import { useNotification } from '../contexts/NotificationContext';
 import { Project } from '../types';
 import { getUserProjects, deleteProject } from '../services/projectService';
 import { Link, useNavigate } from 'react-router-dom';
-import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork, Eye, Pencil } from 'lucide-react';
+import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork, Eye, Pencil, User } from 'lucide-react';
 import Pagination from '../components/Pagination';
 import ConfirmModal from '../components/ConfirmModal';
 
@@ -119,13 +119,23 @@ const Dashboard: React.FC = () => {
                             Heureux de te revoir, geek ! 👋
                         </p>
                     </div>
-                    <Link
-                        to="/add"
-                        className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold shadow-lg shadow-emerald-500/30 transition-all"
-                    >
-                        <Plus size={20} />
-                        Ajouter un projet
-                    </Link>
+                    <div className="flex gap-3">
+                        <Link
+                            to="/edit-profile"
+                            className="flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all"
+                        >
+                            <User size={20} />
+                            <span className="hidden sm:inline">Mon Profil</span>
+                        </Link>
+                        <Link
+                            to="/add"
+                            className="flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold shadow-lg shadow-emerald-500/30 transition-all"
+                        >
+                            <Plus size={20} />
+                            <span className="hidden sm:inline">Ajouter un projet</span>
+                            <span className="inline sm:hidden"><Plus size={24} /></span>
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Stats Cards */}
