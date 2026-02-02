@@ -45,9 +45,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           console.error("Profile fetch error:", fetchError);
         }
 
-        if (profile && !profile.is_approved) {
+        if (profile && profile.is_approved === false) {
           await supabase.auth.signOut();
-          showNotification('warning', 'Compte en attente', 'Votre compte est en attente d\'approbation.', 8000);
+          showNotification('warning', 'Compte désactivé', 'Votre compte a été désactivé par un administrateur.', 8000);
           if (isMounted.current) {
             setSession(null);
             setUser(null);
@@ -57,20 +57,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           const { error: insertError } = await supabase.from('profiles').insert({
             id: currentUser.id,
             email: currentUser.email,
-            is_approved: false,
+            is_approved: true,
             created_at: new Date().toISOString()
           });
 
-          if (!insertError) {
-            await supabase.auth.signOut();
-            showNotification('success', 'Inscription réussie', 'Votre compte est maintenant en attente d\'approbation.', 8000);
-            if (isMounted.current) {
-              setSession(null);
-              setUser(null);
+          if (insertError) {
+            if (insertError.code !== '23505') {
+              console.error("Profile creation error:", insertError);
             }
-          } else if (insertError.code !== '23505') {
-            console.error("Profile creation error:", insertError);
           }
+          // No sign out here anymore, user is approved by default
         }
       } catch (err) {
         console.error("Auth initialization error:", err);
