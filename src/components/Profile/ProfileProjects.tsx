@@ -43,7 +43,7 @@ const ProfileProjects: React.FC<ProfileProjectsProps> = ({ userId }) => {
 
     if (projects.length === 0) {
         return (
-            <div className="bg-white dark:bg-dark-card rounded-2xl p-8 text-center border border-gray-100 dark:border-dark-border">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-8 text-center border border-gray-100 dark:border-slate-800">
                 <p className="text-gray-500 dark:text-gray-400 text-lg">
                     Cet utilisateur n'a pas encore ajouté de projets.
                 </p>

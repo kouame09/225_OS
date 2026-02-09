@@ -10,9 +10,9 @@ interface ProfileHeaderProps {
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isOwnProfile }) => {
     return (
-        <div className="bg-white dark:bg-dark-card rounded-2xl overflow-hidden border border-gray-100 dark:border-dark-border transition-colors duration-300">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-gray-100 dark:border-slate-800 transition-colors duration-300">
             {/* Banner */}
-            <div className="h-48 md:h-64 bg-gray-200 dark:bg-gray-800 relative">
+            <div className="h-48 md:h-64 bg-gray-200 dark:bg-slate-800 relative">
                 {profile.banner_url ? (
                     <img
                         src={profile.banner_url}
@@ -32,7 +32,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isOwnProfile }) 
                 {isOwnProfile && (
                     <Link
                         to="/edit-profile"
-                        className="absolute top-4 right-4 bg-white/90 dark:bg-black/80 p-2 rounded-full cursor-pointer hover:bg-white dark:hover:bg-black transition border border-gray-200 dark:border-gray-700"
+                        className="absolute top-4 right-4 bg-white/90 dark:bg-black/80 p-2 rounded-full cursor-pointer hover:bg-white dark:hover:bg-black transition border border-gray-200 dark:border-slate-700"
                         title="Edit Profile"
                     >
                         <Edit2 size={18} className="text-gray-700 dark:text-gray-300" />
@@ -44,7 +44,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isOwnProfile }) 
                 <div className="flex flex-col md:flex-row items-start md:items-end mb-4 md:mb-6">
                     {/* Avatar */}
                     <div className="relative -mt-16 md:-mt-20">
-                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-dark-card overflow-hidden bg-gray-200 dark:bg-gray-700 shadow-md">
+                        <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden bg-gray-200 dark:bg-slate-700 shadow-md">
                             <img
                                 src={profile.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.full_name || 'User')}&background=cbd5e1&color=475569`}
                                 alt={profile.full_name}
@@ -93,7 +93,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isOwnProfile }) 
                                 href={profile.github.startsWith('http') ? profile.github : `https://github.com/${profile.github}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-2 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700"
+                                className="p-2 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors border border-gray-200 dark:border-slate-700"
                                 title="GitHub"
                             >
                                 <Github size={20} />
@@ -104,7 +104,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isOwnProfile }) 
                                 href={profile.linkedin.startsWith('http') ? profile.linkedin : `https://linkedin.com/in/${profile.linkedin}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-2 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700"
+                                className="p-2 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors border border-gray-200 dark:border-slate-700"
                                 title="LinkedIn"
                             >
                                 <Linkedin size={20} />
@@ -115,7 +115,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isOwnProfile }) 
                                 href={profile.twitter.startsWith('http') ? profile.twitter : `https://twitter.com/${profile.twitter}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-2 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700"
+                                className="p-2 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors border border-gray-200 dark:border-slate-700"
                                 title="Twitter / X"
                             >
                                 <Twitter size={20} />
@@ -126,7 +126,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isOwnProfile }) 
                                 href={profile.facebook.startsWith('http') ? profile.facebook : `https://facebook.com/${profile.facebook}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-2 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors border border-gray-200 dark:border-gray-700"
+                                className="p-2 bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-gray-400 rounded-full hover:bg-gray-200 dark:hover:bg-slate-700 transition-colors border border-gray-200 dark:border-slate-700"
                                 title="Facebook"
                             >
                                 <Facebook size={20} />

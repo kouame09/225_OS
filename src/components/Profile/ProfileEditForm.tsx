@@ -135,7 +135,7 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                             Bannière (Max 1000 Ko)
                         </label>
                         <div
-                            className="h-40 md:h-48 w-full rounded-2xl border-2 border-dashed border-gray-200 dark:border-dark-border overflow-hidden relative bg-gray-50 dark:bg-dark-bg cursor-pointer hover:border-emerald-500/50 transition-all"
+                            className="h-40 md:h-48 w-full rounded-2xl border-2 border-dashed border-gray-200 dark:border-slate-800 overflow-hidden relative bg-gray-50 dark:bg-slate-950 cursor-pointer hover:border-emerald-500/50 transition-all"
                             onClick={() => bannerInputRef.current?.click()}
                         >
                             {bannerPreview ? (
@@ -176,7 +176,7 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                         </label>
                         <div className="relative group">
                             <div
-                                className="w-32 h-32 rounded-full border-2 border-dashed border-gray-200 dark:border-dark-border overflow-hidden relative bg-gray-200 dark:bg-gray-700 cursor-pointer hover:border-emerald-500/50 transition-all"
+                                className="w-32 h-32 rounded-full border-2 border-dashed border-gray-200 dark:border-slate-800 overflow-hidden relative bg-gray-200 dark:bg-slate-700 cursor-pointer hover:border-emerald-500/50 transition-all"
                                 onClick={() => avatarInputRef.current?.click()}
                             >
                                 {avatarPreview ? (
@@ -197,7 +197,7 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                                 <button
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handleRemoveFile('avatar'); }}
-                                    className="absolute -top-1 -right-1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors z-20 shadow-lg border-2 border-white dark:border-dark-card"
+                                    className="absolute -top-1 -right-1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors z-20 shadow-lg border-2 border-white dark:border-slate-900"
                                     title="Supprimer la photo"
                                 >
                                     <X size={14} />
@@ -229,7 +229,7 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                             name="full_name"
                             value={formData.full_name}
                             onChange={handleChange}
-                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                             placeholder="Prince Kouamé"
                         />
                     </div>
@@ -243,7 +243,7 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                             name="headline"
                             value={formData.headline}
                             onChange={handleChange}
-                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                             placeholder="Développeur Fullstack React/Node"
                         />
                     </div>
@@ -257,7 +257,7 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                             name="location"
                             value={formData.location}
                             onChange={handleChange}
-                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                             placeholder="Abidjan, Côte d'Ivoire"
                         />
                     </div>
@@ -277,7 +277,7 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                             onChange={handleChange}
                             rows={4}
                             maxLength={500}
-                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none"
+                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none"
                             placeholder="Parlez-nous un peu de vous..."
                         />
                     </div>
@@ -295,7 +295,7 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                             name="website"
                             value={formData.website}
                             onChange={handleChange}
-                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                            className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                             placeholder="https://mon-site.com"
                         />
                     </div>
@@ -303,19 +303,19 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                     <div className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Github (URL)</label>
-                            <input type="text" name="github" value={formData.github} onChange={handleChange} className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border" placeholder="https://github.com/username" />
+                            <input type="text" name="github" value={formData.github} onChange={handleChange} className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800" placeholder="https://github.com/username" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">LinkedIn (URL)</label>
-                            <input type="text" name="linkedin" value={formData.linkedin} onChange={handleChange} className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border" placeholder="https://linkedin.com/in/username" />
+                            <input type="text" name="linkedin" value={formData.linkedin} onChange={handleChange} className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800" placeholder="https://linkedin.com/in/username" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Twitter (URL)</label>
-                            <input type="text" name="twitter" value={formData.twitter} onChange={handleChange} className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border" placeholder="https://twitter.com/username" />
+                            <input type="text" name="twitter" value={formData.twitter} onChange={handleChange} className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800" placeholder="https://twitter.com/username" />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Facebook (URL)</label>
-                            <input type="text" name="facebook" value={formData.facebook} onChange={handleChange} className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-dark-bg border border-gray-200 dark:border-dark-border" placeholder="https://facebook.com/username" />
+                            <input type="text" name="facebook" value={formData.facebook} onChange={handleChange} className="w-full px-4 py-2 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800" placeholder="https://facebook.com/username" />
                         </div>
                     </div>
                 </div>

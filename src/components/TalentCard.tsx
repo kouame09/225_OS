@@ -11,9 +11,9 @@ const TalentCard: React.FC<TalentCardProps> = ({ profile }) => {
     return (
         <Link
             to={`/profile/${profile.id}`}
-            className="group block bg-white dark:bg-dark-card rounded-xl overflow-hidden border border-gray-100 dark:border-dark-border hover:shadow-lg dark:hover:shadow-primary/5 transition-all duration-300"
+            className="group block bg-white dark:bg-slate-900 rounded-xl overflow-hidden border border-gray-100 dark:border-slate-800 hover:shadow-lg dark:hover:shadow-primary/5 transition-all duration-300"
         >
-            <div className="h-24 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 relative">
+            <div className="h-24 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-slate-800 dark:to-slate-900 relative">
                 {profile.banner_url && (
                     <img
                         src={profile.banner_url}
@@ -26,7 +26,7 @@ const TalentCard: React.FC<TalentCardProps> = ({ profile }) => {
             <div className="px-5 pb-5 relative">
                 <div className="flex justify-between items-end -mt-10 mb-3">
                     <div className="relative">
-                        <div className="w-20 h-20 rounded-full border-4 border-white dark:border-dark-card overflow-hidden bg-white dark:bg-gray-800 shadow-sm">
+                        <div className="w-20 h-20 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden bg-white dark:bg-slate-800 shadow-sm">
                             <img
                                 src={profile.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.full_name || 'User')}&background=random`}
                                 alt={profile.full_name}

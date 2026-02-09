@@ -105,7 +105,7 @@ const Talents: React.FC = () => {
                     />
                 </>
             ) : (
-                <div className="text-center py-12 bg-gray-50 dark:bg-dark-card rounded-2xl">
+                <div className="text-center py-12 bg-gray-50 dark:bg-slate-900 rounded-2xl">
                     <p className="text-xl text-gray-500">Aucun talent trouvé pour le moment.</p>
                 </div>
             )}

@@ -55,13 +55,13 @@ const EditProfile: React.FC = () => {
         <div className="container mx-auto px-4 pt-24 pb-12">
             <div className="max-w-4xl mx-auto">
                 <div className="mb-6 flex items-center gap-2">
-                    <Link to="/dashboard" className="p-2 hover:bg-gray-100 dark:hover:bg-dark-card rounded-full transition-colors text-gray-600 dark:text-gray-400">
+                    <Link to="/dashboard" className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full transition-colors text-gray-600 dark:text-gray-400">
                         <ArrowLeft size={20} />
                     </Link>
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Modifier mon profil</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Retour au Dashboard</h1>
                 </div>
 
-                <div className="bg-white dark:bg-dark-card rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100 dark:border-dark-border">
+                <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm p-6 md:p-8 border border-gray-100 dark:border-slate-800">
                     <ProfileEditForm
                         initialProfile={profile}
                         userId={user.id}
