@@ -6,7 +6,8 @@ const Donation: React.FC = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const donationUrl = "https://pay.wave.com/m/M_ci_BzrF5N5Dmt4d/c/ci/";
+    const waveUrl = "https://pay.wave.com/m/M_ci_BzrF5N5Dmt4d/c/ci/";
+    const bmcUrl = "https://buymeacoffee.com/princekouame";
 
     return (
         <div className="min-h-screen relative bg-slate-50 dark:bg-slate-950 font-sans overflow-x-hidden">
@@ -15,7 +16,7 @@ const Donation: React.FC = () => {
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/20 rounded-full blur-[120px] -z-10 mix-blend-multiply dark:mix-blend-screen opacity-60"></div>
             <div className="absolute top-20 right-0 w-[600px] h-[400px] bg-orange-500/10 dark:bg-orange-500/20 rounded-full blur-[100px] -z-10 opacity-40"></div>
 
-            <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">              
+            <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
                 {/* Hero Section */}
                 <div className="text-center mb-20">
                     <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-slate-900 dark:text-white mb-8 leading-[1.1]">
@@ -27,102 +28,101 @@ const Donation: React.FC = () => {
                 </div>
 
                 {/* Main Donation Card */}
-                <div className="bg-white dark:bg-slate-900 rounded-[3rem] border border-slate-200 dark:border-slate-800 p-8 md:p-16 mb-20 relative overflow-hidden shadow-2xl shadow-emerald-500/10 dark:shadow-emerald-900/20">
-                    {/* Brand Background Elements */}
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-[100px] -mr-16 -mt-16"></div>
-                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-[100px] -ml-16 -mb-16"></div>
-
-                    <div className="relative z-10">
-                        <div className="flex flex-col lg:flex-row gap-16 items-center">
-                            {/* Left Side: QR Visualization */}
-                            <div className="w-full lg:w-2/5 flex flex-col items-center">
-                                <div className="relative">
-                                    <div className="relative bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-100 dark:border-slate-700 flex flex-col items-center group transition-transform duration-500 hover:scale-105">
-                                        <div className="w-48 h-48 bg-white dark:bg-slate-900 rounded-2xl border-2 border-emerald-100 dark:border-emerald-800 flex items-center justify-center mb-4 overflow-hidden relative group-hover:border-emerald-500 transition-colors p-2">
-                                            <img
-                                                src="/Services/qr-code.png"
-                                                alt="QR Code Wave"
-                                                className="w-full h-full object-contain"
-                                            />
-                                            <div className="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/5 transition-colors pointer-events-none"></div>
-                                        </div>
-                                        <div className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 dark:bg-emerald-900/20 rounded-full border border-emerald-100 dark:border-emerald-800 mb-4">
-                                            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
-                                            <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">Lien Direct Actif</span>
-                                        </div>
-                                        <img
-                                            src="/Services/wave-logo.png"
-                                            alt="Wave"
-                                            className="h-6 object-contain"
-                                        />
-                                    </div>
+                <div className="grid lg:grid-cols-2 gap-8 mb-20">
+                    {/* Wave Donation Card */}
+                    <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 p-8 md:p-10 relative overflow-hidden shadow-xl shadow-emerald-500/5 transition-all duration-300 hover:shadow-emerald-500/10 hover:-translate-y-1">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-[80px] -mr-16 -mt-16"></div>
+                        <div className="relative z-10 flex flex-col h-full">
+                            <div className="flex items-center gap-4 mb-8">
+                                <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl border border-emerald-100 dark:border-emerald-800 flex items-center justify-center">
+                                    <Smartphone className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                                 </div>
-                                <div className="mt-8 flex flex-col gap-3 w-full max-w-[240px]">
-                                    {[
-                                        { icon: <CheckCircle2 size={16} />, text: "Zéro frais de transaction" },
-                                        { icon: <CheckCircle2 size={16} />, text: "Supporte les talents locaux" },
-                                        { icon: <CheckCircle2 size={16} />, text: "Déduction possible" }
-                                    ].map((item, idx) => (
-                                        <div key={idx} className="flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
-                                            <span className="text-emerald-500">{item.icon}</span>
-                                            {item.text}
-                                        </div>
-                                    ))}
+                                <div>
+                                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest block mb-1">Local & Instantané</span>
+                                    <h2 className="text-2xl font-black text-slate-900 dark:text-white">Wave Money</h2>
                                 </div>
                             </div>
 
-                            {/* Right Side: Content & Actions */}
-                            <div className="w-full lg:w-3/5 text-center lg:text-left">
-                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800 mb-8">
-                                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">Partenaire de Don Officiel</span>
+                            <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
+                                <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 w-fit">
+                                    <img src="/Services/wave.jpg" alt="Wave Money" className="w-32 h-32 object-contain" />
                                 </div>
+                                <div className="flex-1">
+                                    <p className="text-slate-600 dark:text-slate-300 font-light mb-4">
+                                        Idéal pour les contributeurs en Côte d'Ivoire. Simple, rapide et sans frais.
+                                    </p>
+                                    <img src="/Services/wave-logo.png" alt="Wave" className="h-6 object-contain" />
+                                </div>
+                            </div>
 
-                                <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 leading-tight">
-                                    Soutenez avec <span className="text-emerald-500">Wave</span>
-                                </h2>
-
-                                <p className="text-lg text-slate-600 dark:text-slate-300 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0 font-light">
-                                    Faites un don instantané et sécurisé. Chaque contribution, petite ou grande, nourrit l'innovation en Côte d'Ivoire.
-                                </p>
-
-                                {/* Amount Suggestions */}
-                                <div className="mb-10">
-                                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Montants suggérés (FCFA)</p>
-                                    <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                                        {[1000, 2000, 5000, 10000].map((amt) => (
-                                            <button
-                                                key={amt}
-                                                onClick={() => window.open(donationUrl, '_blank')}
-                                                className="px-6 py-3 rounded-2xl border-2 border-slate-100 dark:border-slate-800 hover:border-emerald-500 dark:hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/10 text-slate-600 dark:text-slate-300 font-bold transition-all duration-300 active:scale-95"
-                                            >
-                                                {amt.toLocaleString()}
-                                            </button>
-                                        ))}
+                            <div className="mt-auto flex flex-col gap-4">
+                                <div className="flex flex-wrap gap-2">
+                                    {[1000, 2000, 5000].map((amt) => (
                                         <button
-                                            onClick={() => window.open(donationUrl, '_blank')}
-                                            className="px-6 py-3 rounded-2xl border-2 border-slate-100 dark:border-slate-800 hover:border-emerald-500 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold transition-all"
+                                            key={amt}
+                                            onClick={() => window.open(waveUrl, '_blank')}
+                                            className="px-4 py-2 rounded-xl border border-slate-100 dark:border-slate-800 hover:border-emerald-500 text-sm font-bold text-slate-600 dark:text-slate-300 transition-all"
                                         >
-                                            Autre
+                                            {amt.toLocaleString()}
                                         </button>
+                                    ))}
+                                </div>
+                                <a
+                                    href={waveUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex items-center justify-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-emerald-600/20"
+                                >
+                                    <Heart className="w-5 h-5 fill-white" />
+                                    <span>Soutenir via Wave</span>
+                                    <ExternalLink className="w-4 h-4 opacity-50" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Buy Me A Coffee Card */}
+                    <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-slate-800 p-8 md:p-10 relative overflow-hidden shadow-xl shadow-orange-500/5 transition-all duration-300 hover:shadow-orange-500/10 hover:-translate-y-1">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-[80px] -mr-16 -mt-16"></div>
+                        <div className="relative z-10 flex flex-col h-full">
+                            <div className="flex items-center gap-4 mb-8">
+                                <div className="w-12 h-12 bg-orange-50 dark:bg-orange-900/20 rounded-2xl border border-orange-100 dark:border-orange-800 flex items-center justify-center">
+                                    <Globe className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+                                </div>
+                                <div>
+                                    <span className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase tracking-widest block mb-1">International</span>
+                                    <h2 className="text-2xl font-black text-slate-900 dark:text-white">Buy Me A Coffee</h2>
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col md:flex-row gap-8 items-center mb-8">
+                                <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 w-fit">
+                                    <div className="w-32 h-32 flex items-center justify-center overflow-hidden">
+                                        <img src="/Services/buyme.png" alt="Buy Me A Coffee Logo" className="w-full h-full object-contain" />
                                     </div>
                                 </div>
-
-                                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                                    <a
-                                        href={donationUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group inline-flex items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white font-black px-10 py-5 rounded-[1.5rem] transition-all duration-500 shadow-xl shadow-emerald-600/20 hover:shadow-emerald-600/40 hover:-translate-y-1"
-                                    >
-                                        <Heart className="w-6 h-6 fill-white" />
-                                        <span className="text-lg text-white">Faire un don maintenant</span>
-                                        <ExternalLink className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" />
-                                    </a>
+                                <div className="flex-1">
+                                    <p className="text-slate-600 dark:text-slate-300 font-light mb-4">
+                                        Pour notre communauté internationale. Soutenez-nous avec votre carte bancaire.
+                                    </p>
+                                    <div className="flex items-center gap-2 text-orange-600 dark:text-orange-400 font-bold italic">
+                                        ☕ Offrez un café !
+                                    </div>
                                 </div>
-                                <p className="mt-6 flex items-center justify-center lg:justify-start gap-2 text-xs text-slate-400 font-medium">
-                                    <Shield size={14} className="text-emerald-500" />
-                                    Transactions cryptées et gérées par Wave CI
-                                </p>
+                            </div>
+
+                            <div className="mt-auto">
+                                <a
+                                    href={bmcUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group inline-flex w-full items-center justify-center gap-3 bg-[#FFDD00] hover:bg-[#FFCC00] text-black font-bold py-4 rounded-2xl transition-all shadow-lg shadow-orange-600/10"
+                                >
+                                    <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="BMC logo" className="w-5 h-5" />
+                                    <span>Soutenir via BMC</span>
+                                    <ExternalLink className="w-4 h-4 opacity-50" />
+                                </a>
+
                             </div>
                         </div>
                     </div>
@@ -196,16 +196,14 @@ const Donation: React.FC = () => {
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a
-                                href={donationUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                            <button
+                                onClick={() => window.open(waveUrl, '_blank')}
                                 className="inline-flex items-center justify-center gap-2 bg-white dark:bg-slate-900 text-slate-950 dark:text-emerald-300 font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
                             >
                                 <Heart className="w-5 h-5" />
-                                Faire un don
+                                Faire un don (Wave)
                                 <ArrowRight className="w-5 h-5" />
-                            </a>
+                            </button>
                             <Link
                                 to="/why"
                                 className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white font-bold px-8 py-4 rounded-xl border border-white/30 transition-all duration-300 transform hover:scale-105"
@@ -224,7 +222,7 @@ const Donation: React.FC = () => {
                     </p>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
