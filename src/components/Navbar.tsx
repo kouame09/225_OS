@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
 import SearchModalPublic from './SearchModalPublic';
+import { fetchGithubMetadata } from '../services/githubService';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const { darkMode, toggleDarkMode } = useTheme();
   const { user, signOut } = useAuth();
-  const [isAuthOpen, setIsAuthOpen] = React.useState(false);
-  const [isSearchOpen, setIsSearchOpen] = React.useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [starCount, setStarCount] = useState<number | null>(null);
+
+  const REPO_URL = 'https://github.com/kouame09/225_OS';
+
+  useEffect(() => {
+    const getStars = async () => {
+      try {
+        const data = await fetchGithubMetadata(REPO_URL);
+        setStarCount(data.stargazers_count);
+      } catch (error) {
+        console.error('Error fetching stars:', error);
+      }
+    };
+    getStars();
+  }, []);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
+
+  const formatStars = (count: number) => {
+    if (count >= 1000) return `${(count / 1000).toFixed(1)}k`;
+    return count.toString();
+  };
 
   return (
     <>
@@ -80,14 +101,22 @@ const Navbar: React.FC = () => {
           )}
 
           <a
-            href="https://github.com/kouame09/225_OS"
+            href={REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
             onClick={closeMobileMenu}
-            className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium transition-colors"
+            className="flex items-center justify-between w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium transition-colors"
           >
-            <Github size={18} />
-            <span>Soutenir</span>
+            <div className="flex items-center gap-3">
+              <Github size={18} />
+              <span>Soutenir</span>
+            </div>
+            {starCount !== null && (
+              <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-600 dark:text-slate-400">
+                <Star size={10} className="fill-current text-amber-500" />
+                <span>{formatStars(starCount)}</span>
+              </div>
+            )}
           </a>
 
           <Link
@@ -174,13 +203,19 @@ const Navbar: React.FC = () => {
               )}
 
               <a
-                href="https://github.com/kouame09/225_OS"
+                href={REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
               >
                 <Github size={14} />
                 <span>Soutenir</span>
+                {starCount !== null && (
+                  <div className="flex items-center gap-1 border-l border-slate-200 dark:border-slate-700 ml-1 pl-2 text-slate-500 dark:text-slate-400 transition-colors">
+                    <Star size={12} className="fill-current text-amber-500" />
+                    <span className="font-bold">{formatStars(starCount)}</span>
+                  </div>
+                )}
               </a>
 
               {location.pathname !== '/donate' && (
@@ -240,6 +275,5 @@ const Navbar: React.FC = () => {
     </>
   );
 };
-
 
 export default Navbar;
