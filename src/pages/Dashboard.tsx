@@ -69,6 +69,11 @@ const Dashboard: React.FC = () => {
         // Depend ONLY on user.id to avoid refetching when user object ref changes but id is same
     }, [user?.id, addNotification]);
 
+    // Scroll to top when page changes
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
+
     const handleDeleteClick = (project: Project) => {
         setProjectToDelete(project);
     };

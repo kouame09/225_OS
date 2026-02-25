@@ -139,6 +139,11 @@ const Explore: React.FC = () => {
         setCurrentPage(1);
     }, [selectedStack, projects]);
 
+    // Scroll to top when page changes
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
+
     // Carousel navigation
     const nextEvent = () => {
         setCurrentEventIndex((prev) => (prev + 1) % techEvents.length);

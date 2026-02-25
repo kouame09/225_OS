@@ -23,6 +23,11 @@ const Talents: React.FC = () => {
         fetchProfiles();
     }, []);
 
+    // Scroll to top when page changes
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
+
     // Pagination logic
     const totalPages = Math.ceil(profiles.length / ITEMS_PER_PAGE);
     const paginatedProfiles = useMemo(() => {
