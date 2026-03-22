@@ -179,7 +179,7 @@ const ProductPage: React.FC = () => {
                     </div>
 
                     {/* Meta/Action Section */}
-                    <div className="px-6 pb-12 sm:px-12 -mt-16 relative">
+                    <div className="px-6 pb-12 sm:px-12 mt-4 relative">
                         <div className="flex flex-col gap-8">
 
                             {/* Left Column: Title & Info */}

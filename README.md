@@ -37,8 +37,10 @@
 ## Features
 
 - **Project Discovery**: Browse and search open source projects from Ivorian developers
+- **225 Launchpad**: Discover and vote for the best local products, SaaS and apps
 - **Global Search**: Advanced real-time search for projects and talents
 - **Talents Showcase**: Discover and connect with Ivorian developers and their expertise
+- **Announcement System**: Stay updated with community events and promos
 - **Donation System**: Support the platform and local open source initiatives
 - **Smart Filtering**: Filter projects by technology, category, and popularity
 - **User Profiles**: Showcase your projects, skills, and social links
@@ -121,6 +123,7 @@ npm run preview
 ├── src/                # Source code
 │   ├── components/     # Reusable UI components
 │   │   ├── Profile/    # Profile-related components
+│   │   ├── Launchpad/  # Launchpad-specific components
 │   │   ├── AuthModal.tsx
 │   │   ├── Navbar.tsx
 │   │   ├── ProjectCard.tsx
@@ -128,6 +131,9 @@ npm run preview
 │   │   └── ...
 │   ├── pages/          # Page components
 │   │   ├── Home.tsx
+│   │   ├── Launchpad.tsx
+│   │   ├── ProductPage.tsx
+│   │   ├── SubmitProduct.tsx
 │   │   ├── Explore.tsx
 │   │   ├── Dashboard.tsx
 │   │   ├── Donation.tsx
@@ -161,10 +167,15 @@ Users can add their GitHub projects with:
 - Rich project descriptions and preview images
 - Approval workflow to maintain quality
 
-### Talent Discovery
-- Explore a directory of local developers
-- View developer profiles with their cumulative open-source impact
-- Direct contact links and social media integration
+### 225 Launchpad
+- **Product Showcase**: A dedicated space for finished products, SaaS, and apps
+- **Community Voting**: Vote for your favorite projects to help them trend
+- **Daily Updates**: Fresh products launched by the community daily
+- **Direct Contact**: Easily get in touch with product makers
+
+### Announcement System
+- **Events & Promos**: Real-time updates about community activities
+- **Rich Integration**: Visual banners and carousels for maximum visibility
 
 ### Search & Accessibility
 - **Global Search**: Instantly find projects and talents from anywhere in the app
