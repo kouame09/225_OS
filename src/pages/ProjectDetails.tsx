@@ -96,14 +96,14 @@ const ProjectDetails: React.FC = () => {
   return (
     <div className="min-h-screen pb-20 bg-slate-50 dark:bg-slate-950">
 
-      {/* Minimalist Back Button - Top Left - Only for authenticated users */}
+      {/* Minimalist Back Button - Top Left - Only for internal users */}
       {user && (
         <button
-          onClick={() => navigate(-1)}
-          className="fixed top-4 left-4 z-30 p-2 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-white dark:hover:bg-slate-900 transition-all shadow-sm"
+          onClick={() => navigate('/explore')}
+          className="fixed top-6 left-6 z-30 p-3 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all shadow-lg group"
           aria-label="Retour aux projets"
         >
-          <ArrowLeft size={18} />
+          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
         </button>
       )}
 

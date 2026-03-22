@@ -3,10 +3,12 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { Project } from '../types';
 import { getUserProjects, deleteProject } from '../services/projectService';
+import { getUserLaunchpadProducts } from '../services/launchpadService';
 import { Link, useNavigate } from 'react-router-dom';
-import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork, Eye, Pencil, User } from 'lucide-react';
+import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork, Eye, Pencil, User, Rocket, ArrowBigUp, MessageCircle } from 'lucide-react';
 import Pagination from '../components/Pagination';
 import ConfirmModal from '../components/ConfirmModal';
+import AnnouncementManager from '../components/AnnouncementManager';
 
 const Dashboard: React.FC = () => {
     const { user, loading } = useAuth();
@@ -16,6 +18,8 @@ const Dashboard: React.FC = () => {
     const [isLoadingProjects, setIsLoadingProjects] = useState(true);
     const [isDeleting, setIsDeleting] = useState<string | null>(null);
     const [projectToDelete, setProjectToDelete] = useState<Project | null>(null);
+    const [totalProducts, setTotalProducts] = useState(0);
+    const [totalVotes, setTotalVotes] = useState(0);
 
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
@@ -69,6 +73,22 @@ const Dashboard: React.FC = () => {
         // Depend ONLY on user.id to avoid refetching when user object ref changes but id is same
     }, [user?.id, addNotification]);
 
+    // Fetch user's launchpad products count
+    useEffect(() => {
+        const fetchProductsCount = async () => {
+            if (!user?.id) return;
+            try {
+                const products = await getUserLaunchpadProducts(user.id);
+                setTotalProducts(products.length);
+                const votes = products.reduce((acc, p) => acc + (p.votes_count || 0), 0);
+                setTotalVotes(votes);
+            } catch (error) {
+                console.error('Failed to load products count', error);
+            }
+        };
+        if (user?.id) fetchProductsCount();
+    }, [user?.id]);
+
     // Scroll to top when page changes
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -110,6 +130,8 @@ const Dashboard: React.FC = () => {
     const goToPreviousPage = () => setCurrentPage(prev => Math.max(prev - 1, 1));
     const goToNextPage = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
 
+    const isAdmin = user?.email === 'princekouame7@gmail.com';
+
     if (loading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950"><Loader2 className="animate-spin text-slate-400" /></div>;
 
     return (
@@ -138,27 +160,81 @@ const Dashboard: React.FC = () => {
                         >
                             <Plus size={20} />
                             <span className="hidden sm:inline">Ajouter un projet</span>
-                            <span className="inline sm:hidden"><Plus size={24} /></span>
                         </Link>
+                        {isAdmin && (
+                            <Link
+                                to="/admin/announcements"
+                                className="flex items-center justify-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-semibold shadow-lg shadow-amber-500/30 transition-all"
+                            >
+                                <Rocket size={20} />
+                                <span className="hidden sm:inline">Gérer les annonces</span>
+                            </Link>
+                        )}
                     </div>
                 </div>
 
+                {/* Community Banner */}
+                <div className="bg-emerald-600/10 dark:bg-emerald-600/5 border border-emerald-500/20 rounded-2xl p-4 mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-emerald-500 p-2.5 rounded-xl text-white shadow-lg shadow-emerald-500/20">
+                            <MessageCircle size={22} />
+                        </div>
+                        <div className="text-left">
+                            <h3 className="text-emerald-900 dark:text-emerald-400 font-bold">Rejoignez le Gbonhi ! 🇨🇮</h3>
+                            <p className="text-emerald-700/70 dark:text-emerald-500/60 text-sm">Discutez avec les autres builders sur WhatsApp.</p>
+                        </div>
+                    </div>
+                    <a
+                        href="https://chat.whatsapp.com/CjWNZ6lTyrc4m0Yweizi99?mode=gi_t"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full sm:w-auto px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition-all shadow-md shadow-emerald-500/20 text-center"
+                    >
+                        Rejoindre le groupe
+                    </a>
+                </div>
+
                 {/* Stats Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
                     <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
                         <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Projets</div>
                         <div className="text-4xl font-bold text-slate-900 dark:text-white mt-2">{totalProjects}</div>
+                        <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+                            <Github size={14} className="text-slate-400" />
+                            <span className="text-xs text-slate-400 dark:text-slate-500">dépôts importés</span>
+                        </div>
+                    </div>
+                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
+                        <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Produits</div>
+                        <div className="text-4xl font-bold text-emerald-500 mt-2 flex items-center gap-2">
+                            {totalProducts} <Rocket size={24} />
+                        </div>
+                        <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+                            <ArrowBigUp size={16} className="text-emerald-400" />
+                            <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">{totalVotes}</span>
+                            <span className="text-xs text-slate-400 dark:text-slate-500">votes récoltés</span>
+                        </div>
                     </div>
                     <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
                         <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Étoiles</div>
                         <div className="text-4xl font-bold text-amber-500 mt-2 flex items-center gap-2">
                             {totalStars} <Star size={24} fill="currentColor" />
                         </div>
+                        <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+                            <Star size={14} className="text-amber-400" />
+                            <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">~{totalProjects > 0 ? (totalStars / totalProjects).toFixed(1) : 0}</span>
+                            <span className="text-xs text-slate-400 dark:text-slate-500">par projet</span>
+                        </div>
                     </div>
                     <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
                         <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Forks</div>
                         <div className="text-4xl font-bold text-slate-700 dark:text-slate-300 mt-2 flex items-center gap-2">
                             {totalForks} <GitFork size={24} />
+                        </div>
+                        <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+                            <GitFork size={14} className="text-slate-400" />
+                            <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">~{totalProjects > 0 ? (totalForks / totalProjects).toFixed(1) : 0}</span>
+                            <span className="text-xs text-slate-400 dark:text-slate-500">par projet</span>
                         </div>
                     </div>
                 </div>

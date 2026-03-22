@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star, Rocket } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
@@ -83,7 +83,10 @@ const Navbar: React.FC = () => {
               <Link
                 to="/explore"
                 onClick={closeMobileMenu}
-                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium transition-colors"
+                className={`flex items-center gap-3 w-full p-3 rounded-xl font-medium transition-colors ${location.pathname === '/explore'
+                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                  : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                  }`}
               >
                 <Compass size={18} />
                 <span>Explorer</span>
@@ -92,13 +95,45 @@ const Navbar: React.FC = () => {
               <Link
                 to="/talents"
                 onClick={closeMobileMenu}
-                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium transition-colors"
+                className={`flex items-center gap-3 w-full p-3 rounded-xl font-medium transition-colors ${location.pathname === '/talents'
+                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                  : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                  }`}
               >
                 <Users size={18} />
                 <span>Talents</span>
               </Link>
+
+              <Link
+                to="/launchpad"
+                onClick={closeMobileMenu}
+                className={`flex items-center gap-3 w-full p-3 rounded-xl font-medium transition-colors ${location.pathname.startsWith('/launchpad')
+                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                  : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                  }`}
+              >
+                <Rocket size={18} />
+                <div className="flex items-center gap-2">
+                  <span>Launchpad</span>
+                  <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                    New
+                  </span>
+                </div>
+              </Link>
             </>
           )}
+
+          <Link
+            to="/donate"
+            onClick={closeMobileMenu}
+            className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/donate'
+              ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300'
+              : 'bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/20'
+              }`}
+          >
+            <Heart size={18} />
+            <span>Faire un don</span>
+          </Link>
 
           <a
             href={REPO_URL}
@@ -109,7 +144,7 @@ const Navbar: React.FC = () => {
           >
             <div className="flex items-center gap-3">
               <Github size={18} />
-              <span>Soutenir</span>
+              <span>GitHub</span>
             </div>
             {starCount !== null && (
               <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-600 dark:text-slate-400">
@@ -118,15 +153,6 @@ const Navbar: React.FC = () => {
               </div>
             )}
           </a>
-
-          <Link
-            to="/donate"
-            onClick={closeMobileMenu}
-            className="flex items-center gap-3 w-full p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 font-bold transition-colors"
-          >
-            <Heart size={18} />
-            <span>Faire un don</span>
-          </Link>
 
           {user ? (
             <div className="mt-2 pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
@@ -184,23 +210,52 @@ const Navbar: React.FC = () => {
                 <>
                   <Link
                     to="/explore"
-                    className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/explore'
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                      }`}
                   >
                     <Compass size={14} />
                     <span>Explorer</span>
                   </Link>
 
-                  {location.pathname !== '/talents' && (
-                    <Link
-                      to="/talents"
-                      className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
-                    >
-                      <Users size={14} />
-                      <span>Talents</span>
-                    </Link>
-                  )}
+                  <Link
+                    to="/talents"
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/talents'
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                      }`}
+                  >
+                    <Users size={14} />
+                    <span>Talents</span>
+                  </Link>
+
+                  <Link
+                    to="/launchpad"
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/launchpad')
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                      }`}
+                  >
+                    <Rocket size={14} />
+                    <span>Launchpad</span>
+                    <span className="bg-emerald-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                      New
+                    </span>
+                  </Link>
                 </>
               )}
+
+              <Link
+                to="/donate"
+                className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/donate'
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                  : 'text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'
+                  }`}
+              >
+                <Heart size={14} />
+                <span>Soutenir</span>
+              </Link>
 
               <a
                 href={REPO_URL}
@@ -209,7 +264,7 @@ const Navbar: React.FC = () => {
                 className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
               >
                 <Github size={14} />
-                <span>Soutenir</span>
+                <span>GitHub</span>
                 {starCount !== null && (
                   <div className="flex items-center gap-1 border-l border-slate-200 dark:border-slate-700 ml-1 pl-2 text-slate-500 dark:text-slate-400 transition-colors">
                     <Star size={12} className="fill-current text-amber-500" />
@@ -217,16 +272,6 @@ const Navbar: React.FC = () => {
                   </div>
                 )}
               </a>
-
-              {location.pathname !== '/donate' && (
-                <Link
-                  to="/donate"
-                  className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
-                >
-                  <Heart size={14} />
-                  <span>Donation</span>
-                </Link>
-              )}
 
               {user && (
                 <div className="flex items-center gap-3 border-l border-slate-200 dark:border-slate-700 pl-4">

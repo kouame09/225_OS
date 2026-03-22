@@ -5,6 +5,7 @@ import { UserProfile } from '../types';
 import ProfileHeader from '../components/Profile/ProfileHeader';
 import ProfileAbout from '../components/Profile/ProfileAbout';
 import ProfileProjects from '../components/Profile/ProfileProjects';
+import ProfileLaunchpad from '../components/Profile/ProfileLaunchpad';
 import { useAuth } from '../contexts/AuthContext';
 import { Loader2 } from 'lucide-react';
 
@@ -53,6 +54,10 @@ const Profile: React.FC = () => {
                 {profile.bio && (
                     <ProfileAbout bio={profile.bio} />
                 )}
+
+                <div className="mt-8">
+                    <ProfileLaunchpad userId={profile.id} />
+                </div>
 
                 <div className="mt-8">
                     <ProfileProjects userId={profile.id} />

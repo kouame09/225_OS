@@ -51,3 +51,40 @@ export interface ApiResponse<T> {
   data?: T;
   error?: string;
 }
+
+export interface LaunchpadProduct {
+  id: string;
+  name: string;
+  tagline: string;
+  description: string;
+  url: string;
+  image_url: string;
+  maker_id: string;
+  slug: string;
+  created_at: string;
+  votes_count?: number;
+  has_voted?: boolean;
+  contact_email?: string;
+  maker?: UserProfile;
+}
+
+export interface LaunchpadVote {
+  product_id: string;
+  user_id: string;
+}
+
+export interface Announcement {
+  id: string | number;
+  title: string;
+  description: string;
+  date: string;
+  location: string;
+  learnMoreUrl?: string;
+  registerUrl?: string;
+  created_at?: string;
+  order_index?: number;
+  type: 'event' | 'promo';
+  tag?: string;
+  image_url?: string;
+  is_active: boolean;
+}

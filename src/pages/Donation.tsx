@@ -17,12 +17,6 @@ const Donation: React.FC = () => {
 
             <div className="relative z-10 w-full max-w-4xl bg-white dark:bg-slate-900/50 backdrop-blur-sm rounded-[2rem] shadow-2xl shadow-slate-200 dark:shadow-none border border-slate-100 dark:border-slate-800 p-8 md:p-12 lg:p-16">
 
-                {/* Header Back Button */}
-                <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-emerald-600 transition-colors mb-8 group">
-                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                    <span>Retour</span>
-                </Link>
-
                 {/* Intro Text */}
                 <div className="mb-12">
                     <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
@@ -83,7 +77,7 @@ const Donation: React.FC = () => {
                 {/* Footer Disclaimer */}
                 <div className="mt-12">
                     <p className="text-slate-400 dark:text-slate-500 text-sm italic">
-                        * Chaque don nous permet de maintenir la gratuité pour tous.
+                        * Chaque don nous permet de couvrir les frais de fonctionnement de la plateforme.
                     </p>
                 </div>
 

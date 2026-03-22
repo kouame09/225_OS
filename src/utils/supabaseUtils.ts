@@ -3,30 +3,54 @@ import { supabase } from '../lib/supabaseClient';
 // Helper to get auth token (robust against client failure)
 export const getAuthToken = async () => {
     try {
-        // Race between Supabase client and a timeout
-        // This prevents infinite hanging if the client web socket is blocked/stalled
+        // Increase timeout to 5 seconds
         const { data } = await Promise.race([
             supabase.auth.getSession(),
-            new Promise<any>((_, reject) => setTimeout(() => reject('Session Timeout'), 2000))
+            new Promise<any>((_, reject) => setTimeout(() => reject('Session Timeout'), 5000))
         ]);
 
-        if (!data?.session) {
-            throw new Error("No session from client");
+        if (data?.session) {
+            return data.session.access_token;
         }
 
-        return data.session.access_token;
+        throw new Error("No session from client");
     } catch (e) {
-        // Fallback: Try reading from localStorage if SDK fails or times out
-        console.warn("Supabase client timed out or failed, checking localStorage fallback");
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
-            if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
+        console.warn("Supabase client search failed, checking localStorage fallbacks...");
+
+        // Try known Supabase v2 keys first
+        const projectRef = import.meta.env.VITE_SUPABASE_URL?.split('//')[1]?.split('.')[0];
+        const keys = [
+            `sb-${projectRef}-auth-token`,
+            'supabase.auth.token' // older versions/manual
+        ];
+
+        for (const key of keys) {
+            const val = localStorage.getItem(key);
+            if (val) {
                 try {
-                    const val = localStorage.getItem(key);
-                    if (val) return JSON.parse(val).access_token;
+                    const session = JSON.parse(val);
+                    // Supabase v2 nests it under session or directly
+                    const token = session.access_token || session.session?.access_token;
+                    if (token) return token;
                 } catch (err) { }
             }
         }
+
+        // Last resort: search all keys
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && (key.includes('auth-token') || key.includes('supabase'))) {
+                try {
+                    const val = localStorage.getItem(key);
+                    if (val) {
+                        const parsed = JSON.parse(val);
+                        const token = parsed.access_token || parsed.session?.access_token || parsed.currentSession?.access_token;
+                        if (token) return token;
+                    }
+                } catch (err) { }
+            }
+        }
+
         return null;
     }
 };
