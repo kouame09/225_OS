@@ -46,12 +46,13 @@ const Explore: React.FC = () => {
                 return;
             }
             try {
-                // Fetch projects
-                const projectsData = await getProjects();
+                // Fetch projects and announcements in parallel
+                const [projectsData, announcementsData] = await Promise.all([
+                    getProjects(),
+                    getAnnouncements()
+                ]);
+
                 setProjects(projectsData);
-                
-                // Fetch announcements
-                const announcementsData = await getAnnouncements();
                 setAnnouncements(announcementsData);
             } catch (error) {
                 console.error(error);

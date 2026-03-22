@@ -6,7 +6,7 @@ export const getAuthToken = async () => {
         // Increase timeout to 5 seconds
         const { data } = await Promise.race([
             supabase.auth.getSession(),
-            new Promise<any>((_, reject) => setTimeout(() => reject('Session Timeout'), 5000))
+            new Promise<any>((_, reject) => setTimeout(() => reject('Session Timeout'), 1000))
         ]);
 
         if (data?.session) {

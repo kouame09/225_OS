@@ -82,7 +82,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           setLoading(false);
           isInitialized.current = true;
         }
-      }, 5000); // 5 seconds max wait
+      }, 1000); // 1 second max wait
 
       try {
         const { data: { session } } = await supabase.auth.getSession();
