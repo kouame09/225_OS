@@ -919,7 +919,7 @@ const Home: React.FC = () => {
             {/* Bidjang */}
             <div className="relative group p-1">
               <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden shadow-xl transition-all duration-300 group-hover:scale-110 z-10 relative">
-                <img src="/Contributors/BIDJANG.jpg" alt="Bidjang" className="w-full h-full object-cover" />
+                <img src="/Contributors/dorgeles.jpg" alt="Dorgeles" className="w-full h-full object-cover" />
               </div>
             </div>
 
