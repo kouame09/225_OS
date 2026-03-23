@@ -65,6 +65,8 @@ export interface LaunchpadProduct {
   votes_count?: number;
   has_voted?: boolean;
   contact_email?: string;
+  app_store_url?: string;
+  play_store_url?: string;
   maker?: UserProfile;
 }
 

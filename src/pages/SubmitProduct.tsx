@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { Rocket, Loader2, Save, X, Globe, Image as ImageIcon, Layout, ArrowLeft, Mail } from 'lucide-react';
+import { Rocket, Loader2, Save, X, Globe, Image as ImageIcon, Layout, ArrowLeft, Mail, Smartphone } from 'lucide-react';
 import { addLaunchpadProduct, getLaunchpadProductBySlug, updateLaunchpadProduct } from '../services/launchpadService';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
@@ -17,6 +17,8 @@ const SubmitProduct: React.FC = () => {
     const [tagline, setTagline] = useState('');
     const [description, setDescription] = useState('');
     const [url, setUrl] = useState('');
+    const [appStoreUrl, setAppStoreUrl] = useState('');
+    const [playStoreUrl, setPlayStoreUrl] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [contactEmail, setContactEmail] = useState('');
     const { slug } = useParams<{ slug: string }>();
@@ -45,6 +47,8 @@ const SubmitProduct: React.FC = () => {
                     setTagline(product.tagline);
                     setDescription(product.description);
                     setUrl(product.url);
+                    setAppStoreUrl(product.app_store_url || '');
+                    setPlayStoreUrl(product.play_store_url || '');
                     setImageUrl(product.image_url);
                     setContactEmail(product.contact_email || '');
                 } else {
@@ -60,8 +64,8 @@ const SubmitProduct: React.FC = () => {
         e.preventDefault();
         if (!user) return;
 
-        if (!name || !tagline || !description || !url || !imageUrl) {
-            addNotification('error', 'Champs manquants', 'Veuillez remplir tous les champs obligatoires.');
+        if (!name || !tagline || !description || (!url && !appStoreUrl && !playStoreUrl) || !imageUrl) {
+            addNotification('error', 'Champs manquants', 'Veuillez remplir tous les champs obligatoires (incluant au moins un lien).');
             return;
         }
 
@@ -79,7 +83,9 @@ const SubmitProduct: React.FC = () => {
                     description,
                     url,
                     image_url: imageUrl,
-                    contact_email: contactEmail
+                    contact_email: contactEmail,
+                    app_store_url: appStoreUrl,
+                    play_store_url: playStoreUrl
                 });
                 addNotification('success', 'Produit mis à jour !', `Vos modifications pour "${name}" ont été enregistrées.`);
             } else {
@@ -90,7 +96,9 @@ const SubmitProduct: React.FC = () => {
                     url,
                     image_url: imageUrl,
                     maker_id: user.id,
-                    contact_email: contactEmail
+                    contact_email: contactEmail,
+                    app_store_url: appStoreUrl,
+                    play_store_url: playStoreUrl
                 });
                 addNotification('success', 'Produit lancé !', `"${name}" est maintenant en orbite dans le Launchpad.`);
             }
@@ -167,7 +175,7 @@ const SubmitProduct: React.FC = () => {
 
                             <div>
                                 <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                                    Lien du produit (URL)
+                                    Lien du produit (URL) - Requis si aucun store n'est renseigné
                                 </label>
                                 <div className="relative">
                                     <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -175,11 +183,46 @@ const SubmitProduct: React.FC = () => {
                                     </div>
                                     <input
                                         type="url"
-                                        required
                                         placeholder="https://monproduit.com"
                                         className="block w-full pl-12 pr-4 py-4 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-medium"
                                         value={url}
                                         onChange={(e) => setUrl(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                                    URL App Store (Facultatif)
+                                </label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <Smartphone className="h-5 w-5 text-slate-400" />
+                                    </div>
+                                    <input
+                                        type="url"
+                                        placeholder="https://apps.apple.com/..."
+                                        className="block w-full pl-12 pr-4 py-4 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-medium"
+                                        value={appStoreUrl}
+                                        onChange={(e) => setAppStoreUrl(e.target.value)}
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
+                                    URL Play Store (Facultatif)
+                                </label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                        <Smartphone className="h-5 w-5 text-slate-400" />
+                                    </div>
+                                    <input
+                                        type="url"
+                                        placeholder="https://play.google.com/store/..."
+                                        className="block w-full pl-12 pr-4 py-4 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-medium"
+                                        value={playStoreUrl}
+                                        onChange={(e) => setPlayStoreUrl(e.target.value)}
                                     />
                                 </div>
                             </div>

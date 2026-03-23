@@ -15,6 +15,8 @@ const mapProductFromDB = (dbProduct: any): LaunchpadProduct => ({
     maker_id: dbProduct.maker_id,
     slug: dbProduct.slug,
     contact_email: dbProduct.contact_email,
+    app_store_url: dbProduct.app_store_url,
+    play_store_url: dbProduct.play_store_url,
     created_at: dbProduct.created_at,
     votes_count: dbProduct.votes_count || 0,
     has_voted: dbProduct.has_voted || false,
@@ -128,6 +130,8 @@ export const addLaunchpadProduct = async (product: Omit<LaunchpadProduct, 'id' |
                 image_url: product.image_url,
                 maker_id: product.maker_id,
                 contact_email: product.contact_email,
+                app_store_url: product.app_store_url,
+                play_store_url: product.play_store_url,
                 slug: slug
             })
         });
@@ -158,7 +162,9 @@ export const updateLaunchpadProduct = async (id: string, product: Partial<Launch
                 description: product.description,
                 url: product.url,
                 image_url: product.image_url,
-                contact_email: product.contact_email
+                contact_email: product.contact_email,
+                app_store_url: product.app_store_url,
+                play_store_url: product.play_store_url
             })
         });
 

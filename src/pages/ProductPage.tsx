@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { X, ExternalLink, ArrowBigUp, MapPin, Calendar, User, ArrowLeft, Loader2, MessageSquare, Mail, Edit, Trash2 } from 'lucide-react';
+import { X, ExternalLink, ArrowBigUp, MapPin, Calendar, User, ArrowLeft, Loader2, MessageSquare, Mail, Edit, Trash2, Smartphone } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { getLaunchpadProductBySlug, toggleVote, deleteLaunchpadProduct } from '../services/launchpadService';
@@ -222,15 +222,41 @@ const ProductPage: React.FC = () => {
                                         </div>
                                     </button>
 
-                                    <a
-                                        href={product.url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center gap-2 w-full md:w-auto px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-[1.02] transition-all shadow-xl shadow-slate-200 dark:shadow-none"
-                                    >
-                                        <span>Visiter le produit</span>
-                                        <ExternalLink size={16} />
-                                    </a>
+                                    {product.url && (
+                                        <a
+                                            href={product.url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center gap-2 w-full md:w-auto px-8 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-[1.02] transition-all shadow-xl shadow-slate-200 dark:shadow-none"
+                                        >
+                                            <span>Visiter le produit</span>
+                                            <ExternalLink size={16} />
+                                        </a>
+                                    )}
+
+                                    {product.app_store_url && (
+                                        <a
+                                            href={product.app_store_url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center gap-2 w-full md:w-auto px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold rounded-2xl hover:scale-[1.02] transition-all border border-slate-200 dark:border-slate-700"
+                                        >
+                                            <Smartphone size={18} />
+                                            <span>App Store</span>
+                                        </a>
+                                    )}
+
+                                    {product.play_store_url && (
+                                        <a
+                                            href={product.play_store_url}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center gap-2 w-full md:w-auto px-8 py-4 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold rounded-2xl hover:scale-[1.02] transition-all border border-slate-200 dark:border-slate-700"
+                                        >
+                                            <Smartphone size={18} />
+                                            <span>Play Store</span>
+                                        </a>
+                                    )}
 
                                     <button
                                         onClick={() => {
