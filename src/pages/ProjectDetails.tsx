@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import {
@@ -24,6 +24,18 @@ const ProjectDetails: React.FC = () => {
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+
+  const handleImageError = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
+    if (retryCount < 1 && project?.imageUrl) {
+      setRetryCount(prev => prev + 1);
+      const separator = project.imageUrl!.includes('?') ? '&' : '?';
+      (e.target as HTMLImageElement).src = `${project.imageUrl}${separator}_retry=${Date.now()}`;
+    } else {
+      setImgFailed(true);
+    }
+  }, [retryCount, project?.imageUrl]);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -111,8 +123,8 @@ const ProjectDetails: React.FC = () => {
       <div className="h-96 w-full bg-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/90 z-10"></div>
         <div className="absolute inset-0 opacity-30">
-          {project.imageUrl && (
-            <img src={project.imageUrl} className="w-full h-full object-cover blur-2xl scale-110" alt="" />
+          {project.imageUrl && !imgFailed && (
+            <img src={project.imageUrl} className="w-full h-full object-cover blur-2xl scale-110" alt="" loading="lazy" onError={handleImageError} />
           )}
         </div>
       </div>
@@ -124,10 +136,12 @@ const ProjectDetails: React.FC = () => {
 
           {/* 1. Hero Banner Image */}
           <div className="w-full h-64 sm:h-96 bg-slate-100 dark:bg-slate-800 relative group">
-            {project.imageUrl ? (
+            {project.imageUrl && !imgFailed ? (
               <img
                 src={project.imageUrl}
                 alt={project.name}
+                loading="lazy"
+                onError={handleImageError}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             ) : (

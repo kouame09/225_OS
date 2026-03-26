@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Project } from '../types';
 import { Star, GitFork, ExternalLink, Github } from 'lucide-react';
@@ -10,6 +10,9 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
+  const [imgFailed, setImgFailed] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+
   const formatDate = (isoString: string) => {
     return new Date(isoString).toLocaleDateString('fr-FR', {
       month: 'short',
@@ -18,16 +21,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onTagClick }) => {
     });
   };
 
+  const handleImageError = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
+    if (retryCount < 1 && project.imageUrl) {
+      // First failure: retry with cache-busting parameter
+      setRetryCount(prev => prev + 1);
+      const separator = project.imageUrl!.includes('?') ? '&' : '?';
+      (e.target as HTMLImageElement).src = `${project.imageUrl}${separator}_retry=${Date.now()}`;
+    } else {
+      // Second failure: show fallback placeholder
+      setImgFailed(true);
+    }
+  }, [retryCount, project.imageUrl]);
+
+  const showImage = project.imageUrl && !imgFailed;
+
   return (
     <div className="group flex flex-col bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-300">
 
       {/* Card Header / Image Area - Link to Details */}
       <Link to={`/project/${project.slug}`} className="block h-48 bg-slate-50 dark:bg-slate-800 overflow-hidden relative border-b border-slate-100 dark:border-slate-800 cursor-pointer">
-        {project.imageUrl ? (
+        {showImage ? (
           <div className="w-full h-full p-3 flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900">
             <img
               src={project.imageUrl}
               alt={project.name}
+              loading="lazy"
+              onError={handleImageError}
               className="max-w-full max-h-full object-contain rounded-lg shadow-md group-hover:scale-105 transition-transform duration-500"
             />
           </div>
