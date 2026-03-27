@@ -188,10 +188,11 @@ const Navbar: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link to="/" className="flex items-center gap-2 group">
-              <span className="font-bold text-xl tracking-tight text-slate-900 dark:text-white">
-                <span className="inline-block w-3 h-3 bg-orange-500 rounded-full mr-1"></span>
-                <span className="text-emerald-600 dark:text-emerald-400">225OS</span>
-              </span>
+              <img
+                src={darkMode ? "/logo_white.png" : "/logo_color.png"}
+                alt="225OS Logo"
+                className="h-8 w-auto -ml-2"
+              />
             </Link>
 
             {/* Desktop Navigation */}

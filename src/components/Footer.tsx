@@ -1,13 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Twitter, Linkedin, Github } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Footer: React.FC = () => {
+  const { darkMode } = useTheme();
+
   return (
     <footer className="py-10 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="text-center md:text-left">
-          <p className="font-bold text-slate-900 dark:text-white text-lg tracking-tight">225 Open Source</p>
+          <Link to="/" className="inline-block">
+            <img
+              src={darkMode ? "/logo_white.png" : "/logo_color.png"}
+              alt="225OS Logo"
+              className="h-8 w-auto -ml-2"
+            />
+          </Link>
           <p className="text-slate-500 text-sm mt-1">
             Led by{' '}
             <a
