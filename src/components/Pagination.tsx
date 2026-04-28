@@ -56,7 +56,7 @@ const Pagination: React.FC<PaginationProps> = ({
         className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
         <ChevronLeft size={16} />
-        Previous
+        <span className="hidden sm:inline">Précédent</span>
       </button>
 
       <div className="flex items-center gap-1">
@@ -85,7 +85,7 @@ const Pagination: React.FC<PaginationProps> = ({
         disabled={currentPage === totalPages}
         className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
       >
-        Next
+        <span className="hidden sm:inline">Suivant</span>
         <ChevronRight size={16} />
       </button>
     </div>
