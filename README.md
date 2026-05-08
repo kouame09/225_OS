@@ -38,13 +38,13 @@
 
 - **Project Discovery**: Browse and search open source projects from Ivorian developers
 - **225 Launchpad**: Discover and vote for the best local products, SaaS and apps
+- **PitchHub**: Share your startup ideas and find co-founders, investors, or technical leads
 - **Global Search**: Advanced real-time search for projects and talents
 - **Talents Showcase**: Discover and connect with Ivorian developers and their expertise
 - **Announcement System**: Stay updated with community events and promos
 - **Donation System**: Support the platform and local open source initiatives
 - **Smart Filtering**: Filter projects by technology, category, and popularity
 - **User Profiles**: Showcase your projects, skills, and social links
-- **Favorites System**: Save and track projects you're interested in
 - **Dark Mode**: Beautiful UI with light and dark themes
 - **Secure Authentication**: Powered by Supabase with email and GitHub OAuth
 - **Responsive Design**: Optimized for desktop, tablet, and mobile
@@ -94,13 +94,6 @@
    
    Navigate to `http://localhost:3000`
 
-### Building for Production
-
-```bash
-npm run build
-npm run preview
-```
-
 ---
 
 ## Tech Stack
@@ -124,20 +117,19 @@ npm run preview
 │   ├── components/     # Reusable UI components
 │   │   ├── Profile/    # Profile-related components
 │   │   ├── Launchpad/  # Launchpad-specific components
-│   │   ├── AuthModal.tsx
+│   │   ├── Layout.tsx  # Dynamic layout management
 │   │   ├── Navbar.tsx
 │   │   ├── ProjectCard.tsx
-│   │   ├── SearchModal.tsx
 │   │   └── ...
 │   ├── pages/          # Page components
 │   │   ├── Home.tsx
 │   │   ├── Launchpad.tsx
-│   │   ├── ProductPage.tsx
+│   │   ├── PitchHub.tsx       # NEW: Startup Ideas Hub
+│   │   ├── ProductPage.tsx    # Product details
+│   │   ├── PitchDetails.tsx   # Pitch details
 │   │   ├── SubmitProduct.tsx
+│   │   ├── SubmitPitch.tsx
 │   │   ├── Explore.tsx
-│   │   ├── Dashboard.tsx
-│   │   ├── Donation.tsx
-│   │   ├── Talents.tsx
 │   │   └── ...
 │   ├── services/       # API and data services
 │   ├── contexts/       # Application state contexts
@@ -170,21 +162,20 @@ Users can add their GitHub projects with:
 ### 225 Launchpad
 - **Product Showcase**: A dedicated space for finished products, SaaS, and apps
 - **Community Voting**: Vote for your favorite projects to help them trend
-- **Daily Updates**: Fresh products launched by the community daily
+- **Public-Facing Pages**: Clean, distraction-free pages for unauthenticated visitors
+- **Modern Sharing**: Quick "Copy Link" features with minimalist UI
 - **Direct Contact**: Easily get in touch with product makers
 
-### Announcement System
-- **Events & Promos**: Real-time updates about community activities
-- **Rich Integration**: Visual banners and carousels for maximum visibility
+### PitchHub
+- **Idea Sharing**: Post your startup or project ideas to get feedback
+- **Need-Based Filtering**: Filter pitches by need (Co-founder, Investor, Tech Lead, etc.)
+- **Talent Matchmaking**: Connect with project owners and potential partners
+- **Collaborative Ecosystem**: A space for early-stage collaboration and networking
 
 ### Search & Accessibility
-- **Global Search**: Instantly find projects and talents from anywhere in the app
+- **Global Search**: Instantly find projects, products, and pitches
 - **Responsive Layout**: Seamless experience on mobile and desktop
-- **Themes**: Support for both Dark and Light modes
-
-### Community Support
-- **Donation Hub**: Integrated support for the platform's sustainability
-- **Favorite Projects**: Create a personal list of projects to follow or contribute to
+- **Author Identity**: Clean author name display with smart truncation for a professional look
 
 ---
 
@@ -212,8 +203,6 @@ We welcome contributions from the Ivorian tech community! Here's how you can hel
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-
-
 ## Acknowledgments
 
 - All Ivorian developers contributing to open source
@@ -222,7 +211,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - Everyone supporting the African tech ecosystem
 
 ---
-
 
 ## Our Mission
 
@@ -236,5 +224,3 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - Website: [princekouame.com](https://www.princekouame.com)
 - Email : [hello@princekouame.com](mailto:hello@princekouame.com)
 - LinkedIn: [Prince Kouamé](https://linkedin.com/in/princekouame)
-
-
