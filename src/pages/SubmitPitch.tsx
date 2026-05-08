@@ -177,8 +177,8 @@ const SubmitPitch: React.FC = () => {
                                     {pitchContent.length} / 500
                                 </span>
                             </div>
-                            <textarea
-                                placeholder="Expliquez votre concept en quelques phrases."
+                                <textarea
+                                    placeholder="Exemple : Une plateforme qui connecte les développeurs locaux avec des projets innovants. (Expliquez votre concept en quelques phrases, sans donner les détails techniques et stratégiques)."
                                 className="w-full h-40 px-5 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white resize-none"
                                 value={pitchContent}
                                 onChange={(e) => setPitchContent(e.target.value.slice(0, 500))}
