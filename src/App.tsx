@@ -21,10 +21,13 @@ import MaintenancePage from './pages/MaintenancePage';
 import Donation from './pages/Donation';
 import ResetPassword from './pages/ResetPassword';
 import Profile from './pages/Profile';
-import Talents from './pages/Talents';
+
 import Launchpad from './pages/Launchpad';
 import SubmitProduct from './pages/SubmitProduct';
 import ProductPage from './pages/ProductPage';
+import PitchHub from './pages/PitchHub';
+import SubmitPitch from './pages/SubmitPitch';
+import PitchDetails from './pages/PitchDetails';
 import EditProfile from './pages/EditProfile';
 import AdminAnnouncements from './pages/AdminAnnouncements';
 import { CONFIG } from './config';
@@ -46,11 +49,17 @@ const App: React.FC = () => {
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/explore" element={<Explore />} />
-              <Route path="/talents" element={<Talents />} />
+
               <Route path="/launchpad" element={<Launchpad />} />
               <Route path="/launchpad/submit" element={<SubmitProduct />} />
               <Route path="/launchpad/edit/:slug" element={<SubmitProduct />} />
               <Route path="/launchpad/p/:slug" element={<ProductPage />} />
+
+              <Route path="/pitchhub" element={<PitchHub />} />
+              <Route path="/pitchhub/submit" element={<SubmitPitch />} />
+              <Route path="/pitchhub/edit/:slug" element={<SubmitPitch />} />
+              <Route path="/pitchhub/p/:slug" element={<PitchDetails />} />
+              
               <Route path="/add" element={<AddProject />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/edit-profile" element={<EditProfile />} />

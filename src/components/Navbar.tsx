@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star, Rocket } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star, Rocket, Lightbulb } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
@@ -14,9 +14,21 @@ const Navbar: React.FC = () => {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [starCount, setStarCount] = useState<number | null>(null);
+  const userMenuRef = useRef<HTMLDivElement>(null);
 
   const REPO_URL = 'https://github.com/kouame09/225_OS';
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const getStars = async () => {
@@ -92,17 +104,7 @@ const Navbar: React.FC = () => {
                 <span>Explorer</span>
               </Link>
 
-              <Link
-                to="/talents"
-                onClick={closeMobileMenu}
-                className={`flex items-center gap-3 w-full p-3 rounded-xl font-medium transition-colors ${location.pathname === '/talents'
-                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                  : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                  }`}
-              >
-                <Users size={18} />
-                <span>Talents</span>
-              </Link>
+
 
               <Link
                 to="/launchpad"
@@ -120,6 +122,23 @@ const Navbar: React.FC = () => {
                   </span>
                 </div>
               </Link>
+
+              <Link
+                to="/pitchhub"
+                onClick={closeMobileMenu}
+                className={`flex items-center gap-3 w-full p-3 rounded-xl font-medium transition-colors ${location.pathname.startsWith('/pitchhub')
+                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                  : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                  }`}
+              >
+                <Lightbulb size={18} />
+                <div className="flex items-center gap-2">
+                  <span>PitchHub</span>
+                  <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                    New
+                  </span>
+                </div>
+              </Link>
             </>
           )}
 
@@ -132,7 +151,7 @@ const Navbar: React.FC = () => {
               }`}
           >
             <Heart size={18} />
-            <span>Faire un don</span>
+            <span>Soutenir le projet</span>
           </Link>
 
           <a
@@ -220,16 +239,7 @@ const Navbar: React.FC = () => {
                     <span>Explorer</span>
                   </Link>
 
-                  <Link
-                    to="/talents"
-                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/talents'
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
-                      }`}
-                  >
-                    <Users size={14} />
-                    <span>Talents</span>
-                  </Link>
+
 
                   <Link
                     to="/launchpad"
@@ -240,23 +250,36 @@ const Navbar: React.FC = () => {
                   >
                     <Rocket size={14} />
                     <span>Launchpad</span>
-                    <span className="bg-emerald-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                  </Link>
+
+                  <Link
+                    to="/pitchhub"
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/pitchhub')
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                      }`}
+                  >
+                    <Lightbulb size={14} />
+                    <span>PitchHub</span>
+                    <span className="bg-emerald-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
                       New
                     </span>
                   </Link>
                 </>
               )}
 
-              <Link
-                to="/donate"
-                className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/donate'
-                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                  : 'text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'
-                  }`}
-              >
-                <Heart size={14} />
-                <span>Soutenir</span>
-              </Link>
+              {!user && (
+                <Link
+                  to="/donate"
+                  className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/donate'
+                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                    : 'text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'
+                    }`}
+                >
+                  <Heart size={14} />
+                  <span>Soutenir</span>
+                </Link>
+              )}
 
               <a
                 href={REPO_URL}
@@ -275,23 +298,62 @@ const Navbar: React.FC = () => {
               </a>
 
               {user && (
-                <div className="flex items-center gap-3 border-l border-slate-200 dark:border-slate-700 pl-4">
-                  {location.pathname !== '/dashboard' && (
-                    <Link
-                      to="/dashboard"
-                      className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                    >
-                      <LayoutDashboard size={18} />
-                      <span className="hidden sm:inline">Dashboard</span>
-                    </Link>
-                  )}
+                <div className="relative" ref={userMenuRef}>
                   <button
-                    onClick={signOut}
-                    className="text-slate-400 hover:text-red-500 transition-colors"
-                    title="Se déconnecter"
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                    className="flex items-center gap-2 p-1 rounded-full border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 transition-all bg-white dark:bg-slate-900 overflow-hidden"
                   >
-                    <LogOut size={18} />
+                    <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-500 dark:text-slate-400">
+                      <User size={18} />
+                    </div>
                   </button>
+
+                  {/* Desktop User Dropdown */}
+                  <div className={`absolute right-0 mt-3 w-64 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl transition-all duration-300 origin-top-right transform ${isUserMenuOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 -translate-y-2 pointer-events-none'
+                    }`}>
+                    <div className="p-2">
+                      <div className="px-4 py-3 mb-2 border-b border-slate-100 dark:border-slate-800">
+                        <p className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">Session active</p>
+                        <p className="text-sm font-bold text-slate-900 dark:text-white truncate">{user.email}</p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <Link
+                          to="/dashboard"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className={`flex items-center gap-3 w-full p-3 rounded-xl font-medium transition-colors ${location.pathname === '/dashboard'
+                            ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                            : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                            }`}
+                        >
+                          <LayoutDashboard size={18} />
+                          <span>Mon Dashboard</span>
+                        </Link>
+
+                        <Link
+                          to="/donate"
+                          onClick={() => setIsUserMenuOpen(false)}
+                          className={`flex items-center gap-3 w-full p-3 rounded-xl font-medium transition-colors ${location.pathname === '/donate'
+                            ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                            : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                            }`}
+                        >
+                          <Heart size={18} />
+                          <span>Soutenir le projet</span>
+                        </Link>
+
+                        <div className="pt-2 mt-2 border-t border-slate-100 dark:border-slate-800">
+                          <button
+                            onClick={() => { signOut(); setIsUserMenuOpen(false); }}
+                            className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 font-medium transition-colors"
+                          >
+                            <LogOut size={18} />
+                            <span>Déconnexion</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 

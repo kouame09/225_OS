@@ -90,3 +90,17 @@ export interface Announcement {
   image_url?: string;
   is_active: boolean;
 }
+
+export interface Pitch {
+  id: string;
+  created_at: string;
+  user_id: string;
+  project_name: string;
+  pitch: string;
+  need: string;
+  email: string;
+  location: string;
+  link?: string;
+  slug: string;
+  user?: UserProfile;
+}

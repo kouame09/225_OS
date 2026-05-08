@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { X, ExternalLink, ArrowBigUp, MapPin, Calendar, User, ArrowLeft, Loader2, MessageSquare, Mail, Edit, Trash2, Smartphone } from 'lucide-react';
+import { ExternalLink, ArrowBigUp, MapPin, Calendar, User, ArrowLeft, Loader2, Link as LinkIcon, Mail, Edit, Trash2, Smartphone } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { getLaunchpadProductBySlug, toggleVote, deleteLaunchpadProduct } from '../services/launchpadService';
@@ -123,47 +123,57 @@ const ProductPage: React.FC = () => {
         }).format(date);
     };
 
+    // Keep only the first 2 words, add "..." if longer
+    const truncateName = (name: string, maxWords = 2): string => {
+        const words = name.trim().split(/\s+/);
+        if (words.length <= maxWords) return name;
+        return words.slice(0, maxWords).join(' ') + '...';
+    };
+
+    // Clean maker name logic
+    const makerName = truncateName(product.maker?.full_name || product.maker?.username || 'Membre de la communauté');
+
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-8 pb-24 relative">
+        <div className={`min-h-screen bg-slate-50 dark:bg-slate-950 pb-12 relative ${user ? 'pt-20' : 'pt-10'}`}>
             <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
 
-            {/* Fixed Back Button - Only for internal users */}
-            {user && (
-                <button
-                    onClick={() => navigate('/launchpad')}
-                    className="fixed top-6 left-6 z-50 p-3 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all shadow-lg group"
-                    aria-label="Retour au Launchpad"
-                >
-                    <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-                </button>
-            )}
-
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+                
+                {/* Navigation Header */}
+                {user && (
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 md:mb-8">
+                        <Link to="/launchpad" className="inline-flex items-center gap-2 text-slate-500 hover:text-emerald-500 transition-colors font-medium">
+                            <ArrowLeft size={20} />
+                            <span className="text-sm">Retour au Launchpad</span>
+                        </Link>
 
-                {/* Main Content Card */}
-                <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800">
-
-                    {/* Hero Image Section */}
-                    <div className="relative h-64 sm:h-80 md:h-[400px] w-full bg-slate-100 dark:bg-slate-800">
                         {isOwner && (
-                            <div className="absolute top-4 right-4 z-30 flex gap-2">
+                            <div className="flex gap-2 w-full sm:w-auto">
                                 <Link
                                     to={`/launchpad/edit/${product.slug}`}
-                                    className="p-2.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-xl text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all shadow-lg border border-slate-200 dark:border-slate-800"
-                                    title="Modifier"
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-sm font-bold"
                                 >
-                                    <Edit size={20} />
+                                    <Edit size={16} />
+                                    Modifier
                                 </Link>
-                                <button
+                                <button 
                                     onClick={handleDelete}
                                     disabled={isDeleting}
-                                    className="p-2.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-xl text-slate-600 dark:text-slate-400 hover:text-red-500 transition-all shadow-lg border border-slate-200 dark:border-slate-800 disabled:opacity-50"
-                                    title="Supprimer"
+                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-red-100 dark:border-red-900/30 text-red-500 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors text-sm font-bold disabled:opacity-50"
                                 >
-                                    {isDeleting ? <Loader2 size={20} className="animate-spin" /> : <Trash2 size={20} />}
+                                    {isDeleting ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                                    Supprimer
                                 </button>
                             </div>
                         )}
+                    </div>
+                )}
+
+                {/* Main Content Card */}
+                <div className="bg-white dark:bg-slate-900 rounded-3xl md:rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800 mb-10 md:mb-12">
+
+                    {/* Hero Image Section */}
+                    <div className="relative h-64 sm:h-80 md:h-[450px] w-full bg-slate-100 dark:bg-slate-800">
                         {product.image_url ? (
                             <img
                                 src={product.image_url}
@@ -275,17 +285,13 @@ const ProductPage: React.FC = () => {
 
                                 <div className="flex flex-wrap gap-6 mt-12 p-8 bg-slate-50 dark:bg-slate-800/40 rounded-3xl border border-slate-100 dark:border-slate-800/50">
                                     <Link to={`/profile/${product.maker?.id}`} className="flex items-center gap-3 group">
-                                        <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 overflow-hidden border-2 border-transparent group-hover:border-emerald-500 transition-all">
-                                            {product.maker?.avatar_url ? (
-                                                <img src={product.maker.avatar_url} alt="" className="w-full h-full object-cover" />
-                                            ) : (
-                                                <User size={20} />
-                                            )}
+                                        <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-emerald-600 overflow-hidden border-2 border-slate-200 dark:border-slate-700 shadow-inner group-hover:border-emerald-500 transition-all">
+                                            <User size={20} />
                                         </div>
                                         <div className="flex flex-col">
                                             <span className="text-xs text-slate-500 font-normal uppercase tracking-wider">Créé par</span>
                                             <span className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">
-                                                {product.maker?.full_name || product.maker?.username || 'Anonyme'}
+                                                {makerName}
                                             </span>
                                         </div>
                                     </Link>
@@ -336,7 +342,7 @@ const ProductPage: React.FC = () => {
                                             }}
                                             className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-sm shadow-lg shadow-emerald-500/20 transition-all hover:-translate-y-0.5"
                                         >
-                                            <MessageSquare size={16} />
+                                            <LinkIcon size={16} />
                                             <span>Copier le lien</span>
                                         </button>
                                     </div>
@@ -348,17 +354,17 @@ const ProductPage: React.FC = () => {
 
                 {/* CTA for unauthenticated users (Bottom) */}
                 {!user && (
-                    <div className="mt-12 p-8 bg-slate-900 dark:bg-slate-950 rounded-2xl shadow-xl text-white flex flex-col items-center text-center gap-6 relative overflow-hidden border border-slate-800">
+                    <div className="p-8 md:p-12 bg-slate-900 dark:bg-slate-950 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-white flex flex-col items-center text-center gap-6 relative overflow-hidden border border-slate-800">
                         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
                         <div className="relative z-10 max-w-2xl">
-                            <h3 className="text-3xl font-bold mb-3">Vous aimez ce produit ?</h3>
-                            <p className="text-slate-300 text-lg mb-2">
+                            <h3 className="text-3xl md:text-4xl font-black mb-4">Vous aimez ce produit ?</h3>
+                            <p className="text-slate-300 text-lg md:text-xl mb-4">
                                 Rejoignez 225 Open Source pour découvrir plus de pépites, voter pour vos projets préférés et lancer vos propres créations.
                             </p>
                         </div>
                         <Link
                             to="/"
-                            className="relative z-10 px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-lg rounded-xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                            className="relative z-10 px-10 py-5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xl rounded-2xl transition-all shadow-xl hover:shadow-emerald-500/20 transform hover:-translate-y-1"
                         >
                             Créer un compte gratuit
                         </Link>

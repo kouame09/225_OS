@@ -54,9 +54,7 @@ const Why225OpenSource: React.FC = () => {
                             <p className="text-lg leading-relaxed mb-4">
                                 En Côte d'Ivoire, les développeurs talentueux ont du mal à prouver leurs compétences aux entreprises internationales. Un CV PDF ne signifie rien face à la concurrence mondiale. Mais un <strong className="text-slate-900 dark:text-white font-semibold">portfolio public de contributions réelles ?</strong> C'est une preuve indéniable.
                             </p>
-                            <p className="text-lg leading-relaxed">
-                                En centralisant les projets ivoiriens, nous créons un moteur de découverte de talents. Les entreprises internationales à la recherche de développeurs africains peuvent nous trouver. Les entreprises locales peuvent identifier des pépites cachées. Les développeurs juniors peuvent apprendre des seniors. Il ne s'agit pas seulement de code, mais d'une <strong className="text-slate-900 dark:text-white font-semibold">opportunité économique</strong>.
-                            </p>
+
                         </section>
 
                         <section>

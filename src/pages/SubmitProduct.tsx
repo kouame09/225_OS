@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import { Rocket, Loader2, Save, X, Globe, Image as ImageIcon, Layout, ArrowLeft, Mail, Smartphone } from 'lucide-react';
-import { addLaunchpadProduct, getLaunchpadProductBySlug, updateLaunchpadProduct } from '../services/launchpadService';
+import { Rocket, Loader2, Save, X, Globe, Image as ImageIcon, Layout, ArrowLeft, Mail, Smartphone, Upload } from 'lucide-react';
+import { addLaunchpadProduct, getLaunchpadProductBySlug, updateLaunchpadProduct, uploadProductImage } from '../services/launchpadService';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 
@@ -20,6 +20,8 @@ const SubmitProduct: React.FC = () => {
     const [appStoreUrl, setAppStoreUrl] = useState('');
     const [playStoreUrl, setPlayStoreUrl] = useState('');
     const [imageUrl, setImageUrl] = useState('');
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [contactEmail, setContactEmail] = useState('');
     const { slug } = useParams<{ slug: string }>();
     const isEditMode = !!slug;
@@ -60,18 +62,51 @@ const SubmitProduct: React.FC = () => {
         }
     }, [isEditMode, slug, user, navigate]);
 
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            // Check file type
+            if (!file.type.startsWith('image/')) {
+                addNotification('error', 'Type de fichier invalide', 'Veuillez sélectionner une image (PNG, JPG, etc.)');
+                return;
+            }
+            // Check file size (2MB limit)
+            if (file.size > 2 * 1024 * 1024) {
+                addNotification('error', 'Fichier trop lourd', 'L\'image ne doit pas dépasser 2Mo pour économiser de la bande passante.');
+                return;
+            }
+            setImageFile(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!user) return;
 
-        if (!name || !tagline || !description || (!url && !appStoreUrl && !playStoreUrl) || !imageUrl) {
-            addNotification('error', 'Champs manquants', 'Veuillez remplir tous les champs obligatoires (incluant au moins un lien).');
+        if (!name || !tagline || !description || (!url && !appStoreUrl && !playStoreUrl) || (!imageUrl && !imageFile)) {
+            addNotification('error', 'Champs manquants', 'Veuillez remplir tous les champs obligatoires (incluant au moins un lien et une image).');
             return;
         }
 
         setSubmitting(true);
+        console.log("Démarrage de la soumission...", { name, hasFile: !!imageFile, imageUrl });
 
         try {
+            let finalImageUrl = imageUrl;
+            if (imageFile) {
+                console.log("Upload de l'image en cours...");
+                finalImageUrl = await uploadProductImage(imageFile);
+                console.log("Image uploadée avec succès:", finalImageUrl);
+            }
+
+            if (!finalImageUrl) {
+                throw new Error("Une image est requise.");
+            }
             if (isEditMode && slug) {
                 // We need the ID to update. The GET by slug should have it.
                 const currentProduct = await getLaunchpadProductBySlug(slug);
@@ -82,7 +117,7 @@ const SubmitProduct: React.FC = () => {
                     tagline,
                     description,
                     url,
-                    image_url: imageUrl,
+                    image_url: finalImageUrl,
                     contact_email: contactEmail,
                     app_store_url: appStoreUrl,
                     play_store_url: playStoreUrl
@@ -94,7 +129,7 @@ const SubmitProduct: React.FC = () => {
                     tagline,
                     description,
                     url,
-                    image_url: imageUrl,
+                    image_url: finalImageUrl,
                     maker_id: user.id,
                     contact_email: contactEmail,
                     app_store_url: appStoreUrl,
@@ -107,6 +142,7 @@ const SubmitProduct: React.FC = () => {
             console.error(e);
             addNotification('error', isEditMode ? 'Échec de la mise à jour' : 'Échec du lancement', e.message);
         } finally {
+            console.log("Soumission terminée.");
             setSubmitting(false);
         }
     };
@@ -229,32 +265,48 @@ const SubmitProduct: React.FC = () => {
 
                             <div>
                                 <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
-                                    URL de la capture d'écran / Logo
+                                    Capture d'écran / Logo du produit (Requis)
                                 </label>
-                                <div className="relative">
-                                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                        <ImageIcon className="h-5 w-5 text-slate-400" />
+                                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-200 dark:border-slate-800 border-dashed rounded-3xl hover:border-emerald-500/50 transition-all bg-slate-50/50 dark:bg-slate-950/50 group">
+                                    <div className="space-y-1 text-center">
+                                        {(imagePreview || imageUrl) ? (
+                                            <div className="relative inline-block">
+                                                <img
+                                                    src={imagePreview || imageUrl}
+                                                    alt="Aperçu"
+                                                    className="max-h-48 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800"
+                                                />
+                                                <button
+                                                    type="button"
+                                                    onClick={() => { 
+                                                        setImageFile(null); 
+                                                        setImagePreview(null); 
+                                                        setImageUrl(''); 
+                                                    }}
+                                                    className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full shadow-lg hover:bg-red-600 transition-colors"
+                                                >
+                                                    <X size={16} />
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div className="flex flex-col items-center">
+                                                <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 mb-4 group-hover:scale-110 transition-transform">
+                                                    <Upload className="h-8 w-8 text-slate-400 group-hover:text-emerald-500 transition-colors" />
+                                                </div>
+                                                <div className="flex text-sm text-slate-600 dark:text-slate-400">
+                                                    <label htmlFor="file-upload" className="relative cursor-pointer bg-transparent rounded-md font-bold text-emerald-600 hover:text-emerald-500 focus-within:outline-none transition-colors">
+                                                        <span>Télécharger un fichier</span>
+                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" accept="image/*" onChange={handleFileChange} />
+                                                    </label>
+                                                    <p className="pl-1">ou glisser-déposer</p>
+                                                </div>
+                                                <p className="text-xs text-slate-500 mt-2 font-medium">
+                                                    PNG, JPG, GIF jusqu'à 2Mo
+                                                </p>
+                                            </div>
+                                        )}
                                     </div>
-                                    <input
-                                        type="url"
-                                        required
-                                        placeholder="https://image-url.com/shot.png"
-                                        className="block w-full pl-12 pr-4 py-4 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all font-medium"
-                                        value={imageUrl}
-                                        onChange={(e) => setImageUrl(e.target.value)}
-                                    />
                                 </div>
-                                {imageUrl && (
-                                    <div className="mt-4 p-2 border border-slate-100 dark:border-slate-800 rounded-2xl bg-slate-50 dark:bg-slate-900/50">
-                                        <p className="text-xs font-bold text-slate-400 mb-2 uppercase ml-2">Aperçu</p>
-                                        <img
-                                            src={imageUrl}
-                                            alt="Aperçu"
-                                            className="max-h-40 rounded-xl mx-auto shadow-md"
-                                            onError={(e) => (e.currentTarget.src = 'https://via.placeholder.com/400x200?text=Format+image+invalide')}
-                                        />
-                                    </div>
-                                )}
                             </div>
 
                             <div>

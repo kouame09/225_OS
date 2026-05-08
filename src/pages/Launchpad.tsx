@@ -107,11 +107,11 @@ const Launchpad: React.FC = () => {
                 products={products}
             />
 
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
-                    <div>
+                    <div className="max-w-3xl">
                         <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold mb-2 uppercase tracking-wider text-sm">
                             <Rocket size={16} />
                             <span>Launchpad</span>
@@ -119,14 +119,14 @@ const Launchpad: React.FC = () => {
                         <h1 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                             Découvrez les pépites <span className="text-emerald-500">locales</span>
                         </h1>
-                        <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
+                        <p className="mt-3 text-lg text-slate-600 dark:text-slate-400">
                             La vitrine des meilleurs produits, SaaS et applications créés par la communauté tech ivoirienne.
                         </p>
                     </div>
 
                     <Link
                         to="/launchpad/submit"
-                        className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none"
+                        className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none shrink-0"
                     >
                         <Plus size={20} />
                         Lancer un produit
