@@ -59,15 +59,18 @@ const SubmitProduct: React.FC = () => {
                 }
             };
             fetchProduct();
+        } else if (user && !isEditMode) {
+            setContactEmail(user.email || '');
         }
     }, [isEditMode, slug, user, navigate]);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            // Check file type
-            if (!file.type.startsWith('image/')) {
-                addNotification('error', 'Type de fichier invalide', 'Veuillez sélectionner une image (PNG, JPG, etc.)');
+            // Check file type (PNG, JPG, WEBP only)
+            const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
+            if (!allowedTypes.includes(file.type)) {
+                addNotification('error', 'Format non supporté', 'Veuillez sélectionner une image au format PNG, JPG ou WEBP.');
                 return;
             }
             // Check file size (2MB limit)
@@ -267,45 +270,56 @@ const SubmitProduct: React.FC = () => {
                                 <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
                                     Capture d'écran / Logo du produit (Requis)
                                 </label>
-                                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-slate-200 dark:border-slate-800 border-dashed rounded-3xl hover:border-emerald-500/50 transition-all bg-slate-50/50 dark:bg-slate-950/50 group">
-                                    <div className="space-y-1 text-center">
-                                        {(imagePreview || imageUrl) ? (
-                                            <div className="relative inline-block">
-                                                <img
-                                                    src={imagePreview || imageUrl}
-                                                    alt="Aperçu"
-                                                    className="max-h-48 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800"
-                                                />
-                                                <button
-                                                    type="button"
-                                                    onClick={() => { 
-                                                        setImageFile(null); 
-                                                        setImagePreview(null); 
-                                                        setImageUrl(''); 
-                                                    }}
-                                                    className="absolute -top-2 -right-2 bg-red-500 text-white p-1 rounded-full shadow-lg hover:bg-red-600 transition-colors"
-                                                >
-                                                    <X size={16} />
-                                                </button>
+                                <div className="mt-1 flex justify-center border-2 border-slate-200 dark:border-slate-800 border-dashed rounded-3xl hover:border-emerald-500/50 transition-all bg-slate-50/50 dark:bg-slate-950/50 group relative">
+                                    <input 
+                                        id="file-upload" 
+                                        name="file-upload" 
+                                        type="file" 
+                                        className="sr-only" 
+                                        accept="image/png, image/jpeg, image/webp" 
+                                        onChange={handleFileChange} 
+                                    />
+                                    
+                                    {(imagePreview || imageUrl) ? (
+                                        <div className="relative p-6">
+                                            <img
+                                                src={imagePreview || imageUrl}
+                                                alt="Aperçu"
+                                                className="max-h-48 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={(e) => { 
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    setImageFile(null); 
+                                                    setImagePreview(null); 
+                                                    setImageUrl(''); 
+                                                }}
+                                                className="absolute top-4 right-4 bg-red-500 text-white p-1.5 rounded-full shadow-lg hover:bg-red-600 transition-colors z-10"
+                                            >
+                                                <X size={16} />
+                                            </button>
+                                            <label htmlFor="file-upload" className="absolute inset-0 cursor-pointer rounded-3xl">
+                                                <span className="sr-only">Changer l'image</span>
+                                            </label>
+                                        </div>
+                                    ) : (
+                                        <label htmlFor="file-upload" className="w-full py-10 flex flex-col items-center cursor-pointer">
+                                            <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 mb-4 group-hover:scale-110 transition-transform">
+                                                <Upload className="h-8 w-8 text-slate-400 group-hover:text-emerald-500 transition-colors" />
                                             </div>
-                                        ) : (
-                                            <div className="flex flex-col items-center">
-                                                <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-800 mb-4 group-hover:scale-110 transition-transform">
-                                                    <Upload className="h-8 w-8 text-slate-400 group-hover:text-emerald-500 transition-colors" />
-                                                </div>
-                                                <div className="flex text-sm text-slate-600 dark:text-slate-400">
-                                                    <label htmlFor="file-upload" className="relative cursor-pointer bg-transparent rounded-md font-bold text-emerald-600 hover:text-emerald-500 focus-within:outline-none transition-colors">
-                                                        <span>Télécharger un fichier</span>
-                                                        <input id="file-upload" name="file-upload" type="file" className="sr-only" accept="image/*" onChange={handleFileChange} />
-                                                    </label>
-                                                    <p className="pl-1">ou glisser-déposer</p>
-                                                </div>
-                                                <p className="text-xs text-slate-500 mt-2 font-medium">
-                                                    PNG, JPG, GIF jusqu'à 2Mo
-                                                </p>
+                                            <div className="flex text-sm text-slate-600 dark:text-slate-400">
+                                                <span className="transition-colors">
+                                                    Télécharger un fichier
+                                                </span>
+                                                <p className="pl-1">ou glisser-déposer</p>
                                             </div>
-                                        )}
-                                    </div>
+                                            <p className="text-xs text-slate-500 mt-2 font-medium">
+                                                PNG, JPG, WEBP jusqu'à 2Mo
+                                            </p>
+                                        </label>
+                                    )}
                                 </div>
                             </div>
 
