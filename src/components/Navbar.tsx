@@ -176,23 +176,6 @@ const Navbar: React.FC = () => {
               <span>Soutenir 225OS</span>
             </Link>
 
-            <Link
-              to="/opensource-day"
-              onClick={closeMobileMenu}
-              className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/opensource-day'
-                ? 'bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
-                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                }`}
-            >
-              <Calendar size={18} className="text-orange-500" />
-              <div className="flex items-center gap-2">
-                <span>Open Source Day</span>
-                <span className="bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                  Event
-                </span>
-              </div>
-            </Link>
-
             <a
               href={REPO_URL}
               target="_blank"
@@ -297,20 +280,6 @@ const Navbar: React.FC = () => {
                       New
                     </span>
                   </Link>
-
-                  <Link
-                    to="/opensource-day"
-                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/opensource-day'
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                      : 'text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'
-                      }`}
-                  >
-                    <Calendar size={14} />
-                    <span>Open Source Day</span>
-                    <span className="bg-orange-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                      Event
-                    </span>
-                  </Link>
                 </>
               )}
 
@@ -325,20 +294,6 @@ const Navbar: React.FC = () => {
                   >
                     <Heart size={14} />
                     <span>Soutenir</span>
-                  </Link>
-
-                  <Link
-                    to="/opensource-day"
-                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/opensource-day'
-                      ? 'bg-orange-50 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-700'
-                      : 'text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-700 hover:bg-orange-50 dark:hover:bg-orange-900/30'
-                      }`}
-                  >
-                    <Calendar size={14} />
-                    <span>Open Source Day</span>
-                    <span className="bg-orange-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                      Event
-                    </span>
                   </Link>
                 </>
               )}
