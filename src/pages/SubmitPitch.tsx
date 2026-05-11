@@ -34,7 +34,7 @@ const SubmitPitch: React.FC = () => {
         'Lead Technique',
         'Mentor / Conseils',
         'Associé',
-        'Bêta-testeurs'
+        'Acheteur'
     ];
 
     useEffect(() => {
