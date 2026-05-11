@@ -39,6 +39,7 @@
 - **Project Discovery**: Browse and search open source projects from Ivorian developers
 - **225 Launchpad**: Discover and vote for the best local products, SaaS and apps
 - **PitchHub**: Share your startup ideas and find co-founders, investors, or technical leads
+- **Open Source Day 2026**: Dedicated page for the annual Ivorian open source event
 - **Global Search**: Advanced real-time search for projects and talents
 - **Talents Showcase**: Discover and connect with Ivorian developers and their expertise
 - **Announcement System**: Stay updated with community events and promos
@@ -124,7 +125,8 @@
 │   ├── pages/          # Page components
 │   │   ├── Home.tsx
 │   │   ├── Launchpad.tsx
-│   │   ├── PitchHub.tsx       # NEW: Startup Ideas Hub
+│   │   ├── PitchHub.tsx       # Startup Ideas Hub
+│   │   ├── OpenSourceDay.tsx  # Annual Community Event Page
 │   │   ├── ProductPage.tsx    # Product details
 │   │   ├── PitchDetails.tsx   # Pitch details
 │   │   ├── SubmitProduct.tsx
@@ -168,9 +170,16 @@ Users can add their GitHub projects with:
 
 ### PitchHub
 - **Idea Sharing**: Post your startup or project ideas to get feedback
+- **Problem-Solution Focus**: Dedicated "Problem" field to explain the pain point being solved
 - **Need-Based Filtering**: Filter pitches by need (Co-founder, Investor, Tech Lead, etc.)
 - **Talent Matchmaking**: Connect with project owners and potential partners
 - **Collaborative Ecosystem**: A space for early-stage collaboration and networking
+
+### Open Source Day
+- **Annual Event**: Centralized information for the Ivorian Open Source Day 2026
+- **Strategic Vision**: Highlighting the importance of digital sovereignty in Côte d'Ivoire
+- **Stakeholder Engagement**: Dedicated call-to-action for decision-makers and investors
+- **Community Gathering**: Showcase of local expertise and talent networking
 
 ### Search & Accessibility
 - **Global Search**: Instantly find projects, products, and pitches

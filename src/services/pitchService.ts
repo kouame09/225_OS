@@ -9,6 +9,7 @@ const mapPitchFromDB = (p: any): Pitch => {
         created_at: p.created_at,
         user_id: p.user_id,
         project_name: p.project_name,
+        problem: p.problem,
         pitch: p.pitch,
         need: p.need,
         email: p.email,
@@ -88,11 +89,12 @@ export const addPitch = async (pitch: Omit<Pitch, 'id' | 'created_at' | 'slug'>)
         
         const body = {
             project_name: pitch.project_name,
+            problem: pitch.problem,
             pitch: pitch.pitch,
             need: pitch.need,
             email: pitch.email,
             location: pitch.location,
-            link: pitch.link, // VERIFY THIS FIELD
+            link: pitch.link,
             user_id: pitch.user_id,
             slug: slug
         };
@@ -134,11 +136,12 @@ export const updatePitch = async (id: string, pitch: Partial<Pitch>): Promise<vo
 
         const body = {
             project_name: pitch.project_name,
+            problem: pitch.problem,
             pitch: pitch.pitch,
             need: pitch.need,
             email: pitch.email,
             location: pitch.location,
-            link: pitch.link // VERIFY THIS FIELD
+            link: pitch.link
         };
 
         console.log("pitchService: Sending PATCH for id", id, "with body:", body);

@@ -30,6 +30,7 @@ import SubmitPitch from './pages/SubmitPitch';
 import PitchDetails from './pages/PitchDetails';
 import EditProfile from './pages/EditProfile';
 import AdminAnnouncements from './pages/AdminAnnouncements';
+import OpenSourceDay from './pages/OpenSourceDay';
 import { CONFIG } from './config';
 
 const App: React.FC = () => {
@@ -72,6 +73,7 @@ const App: React.FC = () => {
               <Route path="/donate" element={<Donation />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/admin/announcements" element={<AdminAnnouncements />} />
+              <Route path="/opensource-day" element={<OpenSourceDay />} />
             </Route>
           </Routes>
           <ToastContainer />

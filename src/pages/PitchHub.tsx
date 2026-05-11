@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Lightbulb, Plus, Search, Filter, ExternalLink, MapPin, Loader2, Trash2, Edit3, ArrowRight } from 'lucide-react';
+import { Lightbulb, Plus, Search, Filter, ExternalLink, MapPin, Loader2, Trash2, Edit3, ArrowRight, Info } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { getPitches, deletePitch } from '../services/pitchService';

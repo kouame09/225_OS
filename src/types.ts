@@ -96,6 +96,7 @@ export interface Pitch {
   created_at: string;
   user_id: string;
   project_name: string;
+  problem?: string;
   pitch: string;
   need: string;
   email: string;

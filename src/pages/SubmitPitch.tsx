@@ -20,6 +20,7 @@ const SubmitPitch: React.FC = () => {
 
     // Form states
     const [projectName, setProjectName] = useState('');
+    const [problem, setProblem] = useState('');
     const [pitchContent, setPitchContent] = useState('');
     const [need, setNeed] = useState('Co-fondateur');
     const [email, setEmail] = useState('');
@@ -44,6 +45,7 @@ const SubmitPitch: React.FC = () => {
                     if (data) {
                         setPitchId(data.id);
                         setProjectName(data.project_name);
+                        setProblem(data.problem || '');
                         setPitchContent(data.pitch);
                         setNeed(data.need);
                         setEmail(data.email);
@@ -89,6 +91,7 @@ const SubmitPitch: React.FC = () => {
         try {
             const payload = {
                 project_name: projectName,
+                problem: problem || null,
                 pitch: pitchContent,
                 need: need,
                 email: email,
@@ -164,6 +167,24 @@ const SubmitPitch: React.FC = () => {
                                 value={projectName}
                                 onChange={(e) => setProjectName(e.target.value)}
                                 required
+                            />
+                        </div>
+
+                        {/* The Problem */}
+                        <div>
+                            <div className="flex justify-between items-center mb-2">
+                                <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                                    Le Problème (Pourquoi ce projet ?)
+                                </label>
+                                <span className={`text-xs font-medium ${problem.length > 250 ? 'text-rose-500' : 'text-slate-400'}`}>
+                                    {problem.length} / 300
+                                </span>
+                            </div>
+                            <textarea
+                                placeholder="Quel problème votre projet résout-il ? Décrivez brièvement le pain point ou le besoin auquel vous répondez. (Ex: Les développeurs locaux ont du mal à trouver des projets pertinents dans leur région)"
+                                className="w-full h-28 px-5 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white resize-none"
+                                value={problem}
+                                onChange={(e) => setProblem(e.target.value.slice(0, 300))}
                             />
                         </div>
 

@@ -171,6 +171,19 @@ const PitchDetails: React.FC = () => {
                     </div>
 
                     <div className="p-6 md:p-10 lg:p-12">
+                        {/* The Problem Section */}
+                        {pitch.problem && (
+                            <div className="mb-10 md:mb-12">
+                                <h2 className="text-[10px] font-black text-rose-500 uppercase tracking-[0.2em] mb-4 md:mb-6 flex items-center gap-2">
+                                    <span className="w-6 md:w-10 h-[2px] bg-rose-500"></span>
+                                    Le Problème
+                                </h2>
+                                <p className="text-lg md:text-xl text-slate-700 dark:text-slate-200 leading-relaxed font-medium whitespace-pre-wrap">
+                                    "{pitch.problem}"
+                                </p>
+                            </div>
+                        )}
+
                         {/* The Pitch Content */}
                         <div className="mb-10 md:mb-12">
                             <h2 className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] mb-4 md:mb-6 flex items-center gap-2">
