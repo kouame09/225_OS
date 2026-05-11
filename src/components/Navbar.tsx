@@ -161,23 +161,6 @@ const Navbar: React.FC = () => {
                     </span>
                   </div>
                 </Link>
-
-                <Link
-                  to="/opensource-day"
-                  onClick={closeMobileMenu}
-                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/opensource-day'
-                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                    : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                    }`}
-                >
-                  <Calendar size={18} className="text-emerald-500" />
-                  <div className="flex items-center gap-2">
-                    <span>Open Source Day</span>
-                    <span className="bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                      Event
-                    </span>
-                  </div>
-                </Link>
               </>
             )}
 
@@ -419,23 +402,6 @@ const Navbar: React.FC = () => {
                         >
                           <Heart size={18} />
                           <span>Soutenir 225OS</span>
-                        </Link>
-
-                        <Link
-                          to="/opensource-day"
-                          onClick={() => setIsUserMenuOpen(false)}
-                          className={`flex items-center gap-3 w-full p-3 rounded-xl font-medium transition-colors ${location.pathname === '/opensource-day'
-                            ? 'bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400'
-                            : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                            }`}
-                        >
-                          <Calendar size={18} className="text-orange-500" />
-                          <div className="flex items-center gap-2">
-                            <span>Open Source Day</span>
-                            <span className="bg-orange-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                              Event
-                            </span>
-                          </div>
                         </Link>
 
                         <div className="pt-2 mt-2 border-t border-slate-100 dark:border-slate-800">
