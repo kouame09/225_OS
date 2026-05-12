@@ -161,6 +161,23 @@ const Navbar: React.FC = () => {
                     </span>
                   </div>
                 </Link>
+
+                <Link
+                  to="/opensource-day"
+                  onClick={closeMobileMenu}
+                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/opensource-day'
+                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                    : 'text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
+                    }`}
+                >
+                  <Calendar size={18} />
+                  <div className="flex items-center gap-2">
+                    <span>Open Source Day</span>
+                    <span className="bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                      Event
+                    </span>
+                  </div>
+                </Link>
               </>
             )}
 
