@@ -72,7 +72,7 @@ const Home: React.FC = () => {
 
           <h1 className="text-4xl sm:text-6xl md:text-6xl lg:text-7xl font-[900] tracking-tight mb-8 leading-[1.1] md:leading-[1.05]">
             <span className="block text-slate-900 dark:text-white">Open source.</span>
-
+            <span className="block text-slate-900 dark:text-white">Talents connectés.</span>
             <span className="relative inline-block mt-2">
               <span className="relative z-10 text-transparent bg-clip-text bg-emerald-600">Innovation accélérée.</span>
               <svg className="absolute -bottom-2 left-0 w-full h-3 text-emerald-500/30 dark:text-emerald-500/20 pointer-events-none" viewBox="0 0 100 12" preserveAspectRatio="none">
