@@ -15,39 +15,39 @@
 
 ---
 
-## About The Project
+## À Propos du Projet
 
-**225 Open Source** is a centralized platform showcasing open source projects built by developers in Côte d'Ivoire. While GitHub is the world's largest open source platform, it lacks a crucial feature: **filtering projects by country**. That's where we come in.
+**225 Open Source** est une plateforme centralisée qui met en valeur les projets open source développés par des développeurs en Côte d'Ivoire. Bien que GitHub soit la plus grande plateforme open source au monde, il lui manque une fonctionnalité cruciale : **le filtrage des projets par pays**. C'est là que nous intervenons.
 
-### The Problem We Solve
+### Le Problème que Nous Résolvons
 
-- **No Country Filter on GitHub**: Impossible to easily discover open source projects created by Ivorian developers
-- **Limited Visibility**: Ivorian talents remain hidden in the global ocean of open source projects
-- **Fragmented Collaboration**: Difficult for Ivorian developers to find each other and collaborate
+- **Pas de Filtre par Pays sur GitHub**: Impossible de découvrir facilement les projets open source créés par des développeurs ivoiriens
+- **Visibilité Limitée**: Les talents ivoiriens restent cachés dans l'océan mondial des projets open source
+- **Collaboration Fragmentée**: Difficile pour les développeurs ivoiriens de se trouver et de collaborer
 
-### Our Solution
+### Notre Solution
 
-- **Smart Centralization**: We aggregate Ivorian open source projects from GitHub
-- **Country Filtering**: Instant access to all open source projects created in Côte d'Ivoire
-- **Unified Community**: A central space to discover, contribute, and collaborate with local talents
+- **Centralisation Intelligente**: Nous agrégeons les projets open source ivoiriens depuis GitHub
+- **Filtrage par Pays**: Accès instantané à tous les projets open source créés en Côte d'Ivoire
+- **Communauté Unifiée**: Un espace central pour découvrir, contribuer et collaborer avec les talents locaux
 
 ---
 
-## Features
+## Fonctionnalités
 
-- **Project Discovery**: Browse and search open source projects from Ivorian developers
-- **225 Launchpad**: Discover and vote for the best local products, SaaS and apps
-- **PitchHub**: Share your startup ideas and find co-founders, investors, or technical leads
-- **Open Source Day 2026**: Dedicated page for the annual Ivorian open source event
-- **Global Search**: Advanced real-time search for projects and talents
-- **Talents Showcase**: Discover and connect with Ivorian developers and their expertise
-- **Announcement System**: Stay updated with community events and promos
-- **Donation System**: Support the platform and local open source initiatives
-- **Smart Filtering**: Filter projects by technology, category, and popularity
-- **User Profiles**: Showcase your projects, skills, and social links
-- **Dark Mode**: Beautiful UI with light and dark themes
-- **Secure Authentication**: Powered by Supabase with email and GitHub OAuth
-- **Responsive Design**: Optimized for desktop, tablet, and mobile
+- **Découverte de Projets**: Parcourez et recherchez des projets open source de développeurs ivoiriens
+- **225 Launchpad**: Découvrez et votez pour les meilleurs produits locaux, SaaS et applications
+- **PitchHub**: Partagez vos idées de startup et trouvez des co-fondateurs, investisseurs ou leads techniques
+- **Open Source Day 2026**: Page dédiée à l'événement annuel open source ivoirien
+- **Recherche Globale**: Recherche en temps réel avancée pour les projets et talents
+- **Vitrine de Talents**: Découvrez et connectez-vous avec des développeurs ivoiriens et leur expertise
+- **Système d'Annonces**: Restez informé des événements et promos de la communauté
+- **Système de Dons**: Soutenez la plateforme et les initiatives open source locales
+- **Filtrage Intelligent**: Filtrez les projets par technologie, catégorie et popularité
+- **Profils Utilisateur**: Mettez en valeur vos projets, compétences et liens sociaux
+- **Mode Sombre**: Interface élégante avec thèmes clair et sombre
+- **Authentification Sécurisée**: Propulsé par Supabase avec email et GitHub OAuth
+- **Design Responsive**: Optimisé pour desktop, tablette et mobile
 
 ---
 
