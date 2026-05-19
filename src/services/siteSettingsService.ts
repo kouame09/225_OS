@@ -8,7 +8,7 @@ export interface SiteSetting {
   value: boolean;
 }
 
-export const getSiteSetting = async (key: string): Promise<boolean> => {
+export const getSiteSetting = async (key: string, defaultValue: boolean = true): Promise<boolean> => {
   try {
     if (!SUPABASE_URL || !SUPABASE_KEY) throw new Error("Missing Supabase config");
 
@@ -23,15 +23,15 @@ export const getSiteSetting = async (key: string): Promise<boolean> => {
     });
 
     if (!response.ok) {
-      if (response.status === 406) return true; // Default to true if not found
+      if (response.status === 406) return defaultValue;
       throw new Error(`Fetch error: ${response.status}`);
     }
 
     const data = await response.json();
-    return data?.value ?? true;
+    return data?.value ?? defaultValue;
   } catch (err) {
     console.error("siteSettingsService: getSiteSetting failed", err);
-    return true; // Default to enabled on error
+    return defaultValue;
   }
 };
 
@@ -55,5 +55,34 @@ export const updateSiteSetting = async (key: string, value: boolean): Promise<vo
   } catch (err) {
     console.error("siteSettingsService: updateSiteSetting failed", err);
     throw err;
+  }
+};
+
+export const getAllSiteSettings = async (): Promise<Record<string, boolean>> => {
+  try {
+    if (!SUPABASE_URL || !SUPABASE_KEY) throw new Error("Missing Supabase config");
+
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/site_settings?select=*`, {
+      method: 'GET',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error(`Fetch error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const settings: Record<string, boolean> = {};
+    (data || []).forEach((setting: any) => {
+      settings[setting.key] = setting.value;
+    });
+    return settings;
+  } catch (err) {
+    console.error("siteSettingsService: getAllSiteSettings failed", err);
+    return {};
   }
 };

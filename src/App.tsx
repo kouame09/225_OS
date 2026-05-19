@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -6,6 +6,8 @@ import { NotificationProvider } from './contexts/NotificationContext';
 import Layout from './components/Layout';
 import ToastContainer from './components/ToastContainer';
 import ScrollToTop from './components/ScrollToTop';
+import MaintenancePage from './pages/MaintenancePage';
+import { getAllSiteSettings } from './services/siteSettingsService';
 
 // Pages
 import Home from './pages/Home';
@@ -17,7 +19,6 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import Contact from './pages/Contact';
 import Dashboard from './pages/Dashboard';
 import EditProject from './pages/EditProject';
-import MaintenancePage from './pages/MaintenancePage';
 import Donation from './pages/Donation';
 import ResetPassword from './pages/ResetPassword';
 import Profile from './pages/Profile';
@@ -31,16 +32,40 @@ import PitchDetails from './pages/PitchDetails';
 import EditProfile from './pages/EditProfile';
 import AdminAnnouncements from './pages/AdminAnnouncements';
 import OpenSourceDay from './pages/OpenSourceDay';
-import { CONFIG } from './config';
 
 const App: React.FC = () => {
-  if (CONFIG.IS_MAINTENANCE_MODE) {
+  const [maintenanceMode, setMaintenanceMode] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      const settings = await getAllSiteSettings();
+      setMaintenanceMode(settings['maintenance_mode'] ?? false);
+    };
+    loadSettings();
+
+    // Poll every 30 seconds for maintenance mode changes
+    const interval = setInterval(loadSettings, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (maintenanceMode === null) {
+    return (
+      <ThemeProvider>
+        <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
+          <div className="animate-spin w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full" />
+        </div>
+      </ThemeProvider>
+    );
+  }
+
+  if (maintenanceMode) {
     return (
       <ThemeProvider>
         <MaintenancePage />
       </ThemeProvider>
     );
   }
+
   return (
     <ThemeProvider>
       <NotificationProvider>

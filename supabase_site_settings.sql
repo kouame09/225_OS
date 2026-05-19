@@ -11,9 +11,11 @@ CREATE TABLE IF NOT EXISTS public.site_settings (
   updated_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Insert default: Open Source Day is visible by default
+-- Insert default settings
 INSERT INTO public.site_settings (key, value)
-VALUES ('show_opensource_day', true)
+VALUES 
+  ('show_opensource_day', true),
+  ('maintenance_mode', false)
 ON CONFLICT (key) DO NOTHING;
 
 -- ============================================================
@@ -22,7 +24,7 @@ ON CONFLICT (key) DO NOTHING;
 
 ALTER TABLE public.site_settings ENABLE ROW LEVEL SECURITY;
 
--- Anyone can READ settings (needed for Navbar to check visibility)
+-- Anyone can READ settings (needed for Navbar and App to check)
 CREATE POLICY "Anyone can read site settings"
   ON public.site_settings
   FOR SELECT
