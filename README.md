@@ -45,7 +45,8 @@
 - **Système de Dons**: Soutenez la plateforme et les initiatives open source locales
 - **Filtrage Intelligent**: Filtrez les projets par technologie, catégorie et popularité
 - **Profils Utilisateur**: Mettez en valeur vos projets, compétences et liens sociaux
-- **Mode Sombre**: Interface élégante avec thèmes clair et sombre
+- **Mode Sombre**: Interface élégante avec thèmes clair et sombre (style GitHub)
+- **Contrôle Admin Dynamique**: Mode maintenance et visibilité Open Source Day contrôlés depuis le dashboard
 - **Authentification Sécurisée**: Propulsé par Supabase avec email et GitHub OAuth
 - **Design Responsive**: Optimisé pour desktop, tablette et mobile
 
@@ -395,6 +396,23 @@ CREATE TABLE public.announcements (
 ```
 **Rôle**: Annonces gérées par les admins (événements, promos). Deux types: `event` et `promo`.
 
+#### 7. `site_settings` (Paramètres du Site)
+```sql
+CREATE TABLE public.site_settings (
+  key TEXT PRIMARY KEY,
+  value BOOLEAN NOT NULL DEFAULT true,
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+```
+**Rôle**: Stocke les paramètres dynamiques du site contrôlés depuis le dashboard admin.
+
+| Clé | Valeur par défaut | Description |
+|-----|-------------------|-------------|
+| `show_opensource_day` | `true` | Affiche/masque l'onglet Open Source Day dans la navigation |
+| `maintenance_mode` | `false` | Active/désactive le mode maintenance pour tout le site |
+
+**Fonctionnement**: L'application charge ces paramètres au démarrage et les rafraîchit toutes les 30 secondes. Le toggle maintenance mode permet de mettre le site en maintenance sans modifier le code.
+
 ### Supabase Storage Buckets
 
 | Bucket | Usage | Limite |
@@ -466,6 +484,8 @@ Supabase utilise PostgreSQL RLS pour sécuriser l'accès aux données:
 | | INSERT/UPDATE/DELETE | Owner | `auth.uid() = user_id` |
 | **announcements** | SELECT | Public | `is_active = true` |
 | | ALL | Admin | Email = `princekouame7@gmail.com` |
+| **site_settings** | SELECT | Public | `true` |
+| | INSERT/UPDATE | Authenticated | `auth.role() = 'authenticated'` |
 
 #### Protection des Routes
 
@@ -1101,7 +1121,7 @@ npm run build
 
 1. Créer un projet sur [supabase.com](https://supabase.com)
 2. Créer les tables dans le Dashboard > SQL Editor:
-   - `profiles`, `projects`, `products`, `product_votes`, `pitches`, `announcements`
+   - `profiles`, `projects`, `products`, `product_votes`, `pitches`, `announcements`, `site_settings`
 3. Activer l'authentification Email et GitHub OAuth dans Auth > Providers
 4. Créer les buckets Storage:
    - `launchpad-images` (public, 2MB max)
@@ -1123,15 +1143,26 @@ Le fichier `vercel.json` configure les rewrites SPA:
 }
 ```
 
-### Maintenance Mode
+### Mode Maintenance (Dynamique)
 
-Activer/désactiver le mode maintenance dans `src/config.ts`:
+Le mode maintenance est désormais contrôlé dynamiquement depuis le dashboard admin, plus besoin de modifier le code :
 
-```typescript
-export const CONFIG = {
-  IS_MAINTENANCE_MODE: false  // Mettre à true pour activer
-};
-```
+1. Se connecter en tant qu'admin (`princekouame7@gmail.com`)
+2. Aller dans `/admin/announcements`
+3. Utiliser le toggle **Mode Maintenance** :
+   - **Activé** → Tous les visiteurs voient la page de maintenance
+   - **Désactivé** → Le site est accessible normalement
+
+Le changement est détecté automatiquement par l'application toutes les 30 secondes via un polling sur la table `site_settings`.
+
+### Paramètres du Site (Dashboard Admin)
+
+Le dashboard admin (`/admin/announcements`) permet de contrôler :
+
+| Paramètre | Description | Impact |
+|-----------|-------------|--------|
+| **Mode Maintenance** | Active/désactive l'accès au site | Tous les visiteurs voient la page de maintenance |
+| **Open Source Day** | Affiche/masque l'onglet dans la navigation | Le lien disparaît de la navbar et la page redirige vers l'accueil |
 
 ### Scripts npm
 
