@@ -21,6 +21,8 @@ const Navbar: React.FC = () => {
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const REPO_URL = 'https://github.com/kouame09/225_OS';
+  const STAR_CACHE_KEY = '225os_github_stars';
+  const STAR_CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -34,11 +36,35 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     const getStars = async () => {
+      const cached = localStorage.getItem(STAR_CACHE_KEY);
+      if (cached) {
+        const { count, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < STAR_CACHE_DURATION) {
+          setStarCount(count);
+          return;
+        }
+      }
       try {
         const data = await fetchGithubMetadata(REPO_URL);
         setStarCount(data.stargazers_count);
-      } catch (error) {
-        console.error('Error fetching stars:', error);
+        localStorage.setItem(STAR_CACHE_KEY, JSON.stringify({ count: data.stargazers_count, timestamp: Date.now() }));
+      } catch {
+        try {
+          const res = await fetch('https://img.shields.io/github/stars/kouame09/225_OS.json');
+          if (res.ok) {
+            const json = await res.json();
+            const count = parseInt(json.message, 10);
+            if (!isNaN(count)) {
+              setStarCount(count);
+              localStorage.setItem(STAR_CACHE_KEY, JSON.stringify({ count, timestamp: Date.now() }));
+            }
+          }
+        } catch {
+          if (cached) {
+            const { count } = JSON.parse(cached);
+            setStarCount(count);
+          }
+        }
       }
     };
     getStars();
@@ -214,7 +240,6 @@ const Navbar: React.FC = () => {
             >
               <div className="flex items-center gap-3">
                 <Github size={18} />
-                <span>GitHub</span>
               </div>
               {starCount !== null && (
                 <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md text-[10px] font-bold text-slate-600 dark:text-slate-400">
@@ -350,9 +375,8 @@ const Navbar: React.FC = () => {
                 className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
               >
                 <Github size={14} />
-                <span>GitHub</span>
                 {starCount !== null && (
-                  <div className="flex items-center gap-1 border-l border-slate-200 dark:border-slate-700 ml-1 pl-2 text-slate-500 dark:text-slate-400 transition-colors">
+                  <div className="flex items-center gap-1 text-slate-500 dark:text-slate-400 transition-colors">
                     <Star size={12} className="fill-current text-amber-500" />
                     <span className="font-bold">{formatStars(starCount)}</span>
                   </div>
