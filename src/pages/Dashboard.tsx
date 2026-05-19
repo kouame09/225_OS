@@ -324,7 +324,7 @@ const Dashboard: React.FC = () => {
                                             <div className="flex items-center gap-2 pt-4 border-t border-slate-100 dark:border-slate-700">
                                                 <Link
                                                     to={`/project/${project.slug}`}
-                                                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors text-sm font-medium"
+                                                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-steel-600 dark:text-steel-400 hover:bg-steel-50 dark:hover:bg-steel-900/20 rounded-lg transition-colors text-sm font-medium"
                                                     title="Voir le projet"
                                                 >
                                                     <Eye size={16} />

@@ -60,7 +60,7 @@ const Home: React.FC = () => {
 
         {/* Dynamic Glowing Orbs */}
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-emerald-500/20 dark:bg-emerald-500/10 rounded-full blur-[120px] -z-10 mix-blend-multiply dark:mix-blend-screen opacity-40 animate-[pulse_8s_infinite]"></div>
-        <div className="absolute top-40 right-1/4 w-[500px] h-[500px] bg-blue-500/20 dark:bg-blue-500/10 rounded-full blur-[100px] -z-10 opacity-30 animate-[pulse_10s_infinite_2s]"></div>
+        <div className="absolute top-40 right-1/4 w-[500px] h-[500px] bg-steel-500/20 dark:bg-steel-500/10 rounded-full blur-[100px] -z-10 opacity-30 animate-[pulse_10s_infinite_2s]"></div>
         <div className="absolute -bottom-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[120px] -z-10 opacity-30"></div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -109,7 +109,7 @@ const Home: React.FC = () => {
 
           {/* Community & Connection Highlight - Redesigned */}
           <div className="mt-24 md:mt-32 relative max-w-[1200px] mx-auto w-full px-4 sm:px-6">
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-blue-500/10 to-purple-500/20 blur-[100px] -z-10 rounded-full opacity-60"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-steel-500/10 to-purple-500/20 blur-[100px] -z-10 rounded-full opacity-60"></div>
 
             <div className="w-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-3xl border border-white/40 dark:border-slate-800/60 p-8 md:p-16 rounded-[3rem] shadow-2xl shadow-emerald-900/5 dark:shadow-black/40 overflow-hidden relative group">
 
@@ -177,7 +177,7 @@ const Home: React.FC = () => {
                     <div className="absolute w-[300px] sm:w-[380px] md:w-[450px] aspect-square animate-[spin_40s_linear_infinite]">
                       {/* Node 1 */}
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-slate-800 p-3.5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 animate-[spin_40s_linear_infinite_reverse]">
-                        <Terminal size={24} className="text-blue-500" />
+                        <Terminal size={24} className="text-steel-500" />
                       </div>
                       {/* Node 2 */}
                       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 bg-white dark:bg-slate-800 p-3.5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 animate-[spin_40s_linear_infinite_reverse]">
@@ -439,7 +439,7 @@ const Home: React.FC = () => {
             <div className="flex items-center gap-2 bg-slate-800/80 backdrop-blur-sm border border-slate-700 px-4 py-2 rounded-xl text-slate-300 text-sm shadow-sm hover:border-emerald-500/50 hover:text-emerald-400 transition-colors">
               <Terminal size={14} /> Développeurs
             </div>
-            <div className="flex items-center gap-2 bg-slate-800/80 backdrop-blur-sm border border-slate-700 px-4 py-2 rounded-xl text-slate-300 text-sm shadow-sm hover:border-blue-500/50 hover:text-blue-400 transition-colors">
+            <div className="flex items-center gap-2 bg-slate-800/80 backdrop-blur-sm border border-slate-700 px-4 py-2 rounded-xl text-slate-300 text-sm shadow-sm hover:border-steel-500/50 hover:text-steel-400 transition-colors">
               <Database size={14} /> Data Scientists / Analysts
             </div>
             <div className="flex items-center gap-2 bg-slate-800/80 backdrop-blur-sm border border-slate-700 px-4 py-2 rounded-xl text-slate-300 text-sm shadow-sm hover:border-red-500/50 hover:text-red-400 transition-colors">
@@ -704,7 +704,7 @@ const Home: React.FC = () => {
               <div className="flex flex-col items-center text-center group">
                 <div className="w-20 h-20 bg-white dark:bg-slate-900 rounded-[2rem] flex items-center justify-center mb-8 relative shadow-xl border border-slate-100 dark:border-slate-800 group-hover:scale-110 transition-transform duration-500">
                   <span className="text-3xl font-black text-slate-900 dark:text-white">3</span>
-                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-blue-500 rounded-xl shadow-lg flex items-center justify-center transform -rotate-12 group-hover:rotate-0 transition-transform">
+                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-steel-500 rounded-xl shadow-lg flex items-center justify-center transform -rotate-12 group-hover:rotate-0 transition-transform">
                     <Rocket className="text-white" size={16} />
                   </div>
                 </div>
@@ -742,7 +742,7 @@ const Home: React.FC = () => {
             {/* Logo 2 */}
             <div className="flex items-center gap-3 transition-all duration-500 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default">
               <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm transition-all">
-                <Cpu className="h-8 w-8 text-blue-500" />
+                <Cpu className="h-8 w-8 text-steel-500" />
               </div>
               <span className="text-xl font-black tracking-tight text-slate-800 dark:text-white">IvoireSoft</span>
             </div>
@@ -776,7 +776,7 @@ const Home: React.FC = () => {
         <div className="max-w-6xl mx-auto rounded-[3.5rem] bg-slate-950 relative overflow-hidden p-12 md:p-24 shadow-3xl shadow-emerald-500/10 border border-white/5 group">
           {/* Animated Background Mesh */}
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-500/20 rounded-full blur-[120px] -mr-64 -mt-64 animate-pulse pointer-events-none group-hover:bg-emerald-500/30 transition-colors duration-1000"></div>
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] -ml-64 -mb-64 pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-steel-500/20 rounded-full blur-[120px] -ml-64 -mb-64 pointer-events-none"></div>
 
           <div className="relative z-10 flex flex-col items-center text-center">
             <h2 className="text-4xl md:text-6xl font-[900] text-white tracking-tight mb-8 leading-tight">

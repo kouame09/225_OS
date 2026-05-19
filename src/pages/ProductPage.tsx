@@ -299,7 +299,7 @@ const ProductPage: React.FC = () => {
                                     <div className="h-10 w-px bg-slate-200 dark:bg-slate-700 mx-2 hidden sm:block" />
 
                                     <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+                                        <div className="w-10 h-10 rounded-full bg-steel-100 dark:bg-steel-900/30 flex items-center justify-center text-steel-600">
                                             <Calendar size={20} />
                                         </div>
                                         <div className="flex flex-col">

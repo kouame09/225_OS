@@ -30,7 +30,7 @@ const Toast: React.FC<ToastProps> = ({ id, type, title, message, duration = 5000
       case 'warning':
         return <AlertCircle className="w-5 h-5 text-yellow-500" />;
       case 'info':
-        return <AlertCircle className="w-5 h-5 text-blue-500" />;
+        return <AlertCircle className="w-5 h-5 text-steel-500" />;
       default:
         return <CheckCircle className="w-5 h-5 text-green-500" />;
     }
@@ -45,7 +45,7 @@ const Toast: React.FC<ToastProps> = ({ id, type, title, message, duration = 5000
       case 'warning':
         return 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200';
       case 'info':
-        return 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200';
+        return 'bg-steel-50 dark:bg-steel-900/20 border-steel-200 dark:border-steel-800 text-steel-800 dark:text-steel-200';
       default:
         return 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200';
     }

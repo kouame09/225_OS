@@ -15,7 +15,7 @@ const Contact: React.FC = () => {
 
           {/* Background Decor */}
           <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-500/5 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-500/5 rounded-full blur-3xl -ml-10 -mb-10 pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-steel-500/5 rounded-full blur-3xl -ml-10 -mb-10 pointer-events-none"></div>
 
           <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-3xl flex items-center justify-center mx-auto mb-8 text-emerald-600 dark:text-emerald-400 shadow-inner rotate-3">
             <MessageSquare size={36} />

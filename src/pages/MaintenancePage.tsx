@@ -7,7 +7,7 @@ const MaintenancePage: React.FC = () => {
             {/* Background Elements */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
                 <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-[100px]" />
-                <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-[100px]" />
+                <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] bg-steel-500/10 dark:bg-steel-500/5 rounded-full blur-[100px]" />
                 <div className="absolute -bottom-[10%] left-[20%] w-[60%] h-[60%] bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-[100px]" />
             </div>
 

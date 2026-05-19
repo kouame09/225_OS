@@ -494,7 +494,7 @@ const AnnouncementCard: React.FC<{
             <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button
                     onClick={onEdit}
-                    className="p-1.5 text-blue-500 hover:bg-blue-500/10 rounded-md transition-colors"
+                    className="p-1.5 text-steel-500 hover:bg-steel-500/10 rounded-md transition-colors"
                     title="Modifier"
                 >
                     <Pencil size={16} />

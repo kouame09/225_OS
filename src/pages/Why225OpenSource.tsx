@@ -102,7 +102,7 @@ const Why225OpenSource: React.FC = () => {
                             </p>
                         </section>
 
-                        <section className="bg-gradient-to-br from-emerald-50 to-blue-50 dark:from-emerald-950/20 dark:to-blue-950/20 p-8 sm:p-10 rounded-3xl border border-emerald-200 dark:border-emerald-800 mt-12 relative overflow-hidden">
+                        <section className="bg-gradient-to-br from-emerald-50 to-steel-50 dark:from-emerald-950/20 dark:to-steel-900/20 p-8 sm:p-10 rounded-3xl border border-emerald-200 dark:border-emerald-800 mt-12 relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none"></div>
                             <div className="relative z-10">
                                 <div className="flex items-center gap-3 mb-6">

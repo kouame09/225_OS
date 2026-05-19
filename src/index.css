@@ -12,6 +12,28 @@
   --color-primary-600: #059669;
   --color-primary-700: #047857;
 
+  --color-steel-50: #eff6ff;
+  --color-steel-100: #dbeafe;
+  --color-steel-200: #bfdbfe;
+  --color-steel-400: #7AB8E5;
+  --color-steel-500: #4A90D9;
+  --color-steel-600: #3B7DC0;
+  --color-steel-800: #1E3A5F;
+  --color-steel-900: #152A45;
+
+  /* GitHub Dark Mode - Slate overrides (hybrid light/dark) */
+  --color-slate-50: #f6f8fa;
+  --color-slate-100: #e8ebef;
+  --color-slate-200: #d0d7de;
+  --color-slate-300: #b1bac4;
+  --color-slate-400: #8b949e;
+  --color-slate-500: #6e7681;
+  --color-slate-600: #484f58;
+  --color-slate-700: #3d444d;
+  --color-slate-800: #30363d;
+  --color-slate-900: #21262d;
+  --color-slate-950: #0d1117;
+
   --animate-shimmer: shimmer 2.5s infinite linear;
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-delayed: float 7s ease-in-out 3s infinite;
@@ -73,26 +95,26 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d0d7de;
   border-radius: 4px;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: #30363d;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #8b949e;
 }
 
 /* Custom Thin Scrollbar for Categories */
 .thin-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 transparent;
+  scrollbar-color: #d0d7de transparent;
 }
 
 .dark .thin-scrollbar {
-  scrollbar-color: #475569 transparent;
+  scrollbar-color: #30363d transparent;
 }
 
 .thin-scrollbar::-webkit-scrollbar {
@@ -105,16 +127,16 @@
 }
 
 .thin-scrollbar::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d0d7de;
   border-radius: 20px;
 }
 
 .dark .thin-scrollbar::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: #30363d;
 }
 
 .thin-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #8b949e;
 }
 
 /* Hide Scrollbar but allow scrolling */

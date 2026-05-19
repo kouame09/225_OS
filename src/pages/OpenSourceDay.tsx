@@ -64,7 +64,7 @@ const OpenSourceDay: React.FC = () => {
         {/* Background Effects */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/20 rounded-full blur-[120px] -z-10 mix-blend-multiply dark:mix-blend-screen opacity-60" />
-        <div className="absolute top-20 right-0 w-[600px] h-[400px] bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[100px] -z-10 opacity-40" />
+        <div className="absolute top-20 right-0 w-[600px] h-[400px] bg-steel-500/10 dark:bg-steel-500/20 rounded-full blur-[100px] -z-10 opacity-40" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Badge Événement */}
@@ -185,7 +185,7 @@ const OpenSourceDay: React.FC = () => {
               
               {/* Decorative elements */}
               <div className="absolute -top-4 -right-4 w-24 h-24 bg-emerald-500/10 blur-2xl rounded-full"></div>
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-steel-500/10 blur-3xl rounded-full"></div>
             </div>
           </div>
         </div>
