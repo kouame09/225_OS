@@ -1,8 +1,29 @@
-import React from 'react';
-import { Calendar, MapPin, Users, Target, Lightbulb, HandHeart, ArrowRight, Sparkles, Globe, Building2, Code2, Trophy } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Calendar, MapPin, Users, Target, Lightbulb, HandHeart, ArrowRight, Sparkles, Globe, Building2, Code2, Trophy, Loader2 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { getSiteSetting } from '../services/siteSettingsService';
 
 const OpenSourceDay: React.FC = () => {
+  const navigate = useNavigate();
+  const [isVisible, setIsVisible] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkVisibility = async () => {
+      const visible = await getSiteSetting('show_opensource_day');
+      if (!visible) {
+        navigate('/', { replace: true });
+      } else {
+        setIsVisible(true);
+      }
+    };
+    checkVisibility();
+  }, [navigate]);
+
+  if (isVisible === null) {
+    return <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950"><Loader2 className="animate-spin text-slate-400 w-8 h-8" /></div>;
+  }
+
+  if (!isVisible) return null;
 
   const targetAudiences = [
     {

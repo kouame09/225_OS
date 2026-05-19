@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
 import SearchModalPublic from './SearchModalPublic';
 import { fetchGithubMetadata } from '../services/githubService';
+import { getSiteSetting } from '../services/siteSettingsService';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
@@ -16,6 +17,7 @@ const Navbar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [starCount, setStarCount] = useState<number | null>(null);
+  const [osdVisible, setOsdVisible] = useState<boolean>(true);
   const userMenuRef = useRef<HTMLDivElement>(null);
 
   const REPO_URL = 'https://github.com/kouame09/225_OS';
@@ -40,6 +42,14 @@ const Navbar: React.FC = () => {
       }
     };
     getStars();
+  }, []);
+
+  useEffect(() => {
+    const loadOSDSetting = async () => {
+      const isVisible = await getSiteSetting('show_opensource_day');
+      setOsdVisible(isVisible);
+    };
+    loadOSDSetting();
   }, []);
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
@@ -162,6 +172,7 @@ const Navbar: React.FC = () => {
                   </div>
                 </Link>
 
+                {osdVisible && (
                 <Link
                   to="/opensource-day"
                   onClick={closeMobileMenu}
@@ -178,6 +189,7 @@ const Navbar: React.FC = () => {
                     </span>
                   </div>
                 </Link>
+                )}
               </>
             )}
 
@@ -298,6 +310,7 @@ const Navbar: React.FC = () => {
                     </span>
                   </Link>
 
+                  {osdVisible && (
                   <Link
                     to="/opensource-day"
                     className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/opensource-day'
@@ -311,6 +324,7 @@ const Navbar: React.FC = () => {
                       Event
                     </span>
                   </Link>
+                  )}
                 </>
               )}
 
