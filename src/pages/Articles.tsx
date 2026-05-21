@@ -5,6 +5,7 @@ import { getArticles } from '../services/articleService';
 import { Article } from '../types';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from '../components/AuthModal';
+import SearchModal from '../components/SearchModal';
 
 const CATEGORIES = [
   "Tutoriels & Guides",
@@ -19,9 +20,9 @@ const Articles: React.FC = () => {
   const { user } = useAuth();
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
     const fetchAllArticles = async () => {
@@ -42,13 +43,9 @@ const Articles: React.FC = () => {
   const filteredArticles = useMemo(() => {
     return articles.filter(article => {
       const matchesCategory = selectedCategory === 'all' || article.category === selectedCategory;
-      const matchesSearch =
-        article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        article.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())));
-      return matchesCategory && matchesSearch;
+      return matchesCategory;
     });
-  }, [articles, selectedCategory, searchQuery]);
+  }, [articles, selectedCategory]);
 
   // Reading time estimator helper
   const getReadingTime = (content: string): number => {
@@ -60,6 +57,7 @@ const Articles: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-8 pb-24">
       <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+      <SearchModal type="article" isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -78,38 +76,33 @@ const Articles: React.FC = () => {
             </p>
           </div>
 
-          <Link
-            to={user ? "/my-articles" : "#"}
-            onClick={(e) => {
-              if (!user) {
-                e.preventDefault();
-                setIsAuthModalOpen(true);
-              }
-            }}
-            className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none shrink-0"
-          >
-            <Plus size={20} className="text-white dark:text-slate-900" />
-            <span>Écrire un article</span>
-          </Link>
+          <div className="flex items-center gap-3 shrink-0">
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="flex items-center justify-center gap-2 px-5 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-semibold rounded-2xl hover:border-emerald-500/40 transition-all shadow-sm"
+            >
+              <Search size={18} />
+              <span>Rechercher</span>
+            </button>
+
+            <Link
+              to={user ? "/my-articles" : "#"}
+              onClick={(e) => {
+                if (!user) {
+                  e.preventDefault();
+                  setIsAuthModalOpen(true);
+                }
+              }}
+              className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none"
+            >
+              <Plus size={20} className="text-white dark:text-slate-900" />
+              <span>Écrire un article</span>
+            </Link>
+          </div>
         </div>
 
-        {/* Filters & Search */}
-        <div className="space-y-6 mb-10">
-
-          {/* Search bar */}
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
-            <input
-              type="text"
-              placeholder="Rechercher par titre, résumé ou #tag..."
-              className="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white font-semibold shadow-sm"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-
-          {/* Category Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide">
+        {/* Category Pills */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide mb-10">
             <button
               onClick={() => setSelectedCategory('all')}
               className={`px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${selectedCategory === 'all'
@@ -132,7 +125,6 @@ const Articles: React.FC = () => {
               </button>
             ))}
           </div>
-        </div>
 
         {/* Content Area */}
         {loading ? (

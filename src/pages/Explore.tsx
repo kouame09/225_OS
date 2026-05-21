@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search, Filter, Terminal, Loader2, Lock, ChevronLeft, ChevronRight, Megaphone, Gift } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
-import SearchModal from '../components/SearchModal';
+import SearchModalPublic from '../components/SearchModalPublic';
 import Pagination from '../components/Pagination';
 import { Project } from '../types';
 import { getProjects } from '../services/projectService';
@@ -154,10 +154,9 @@ const Explore: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-8 pb-24">
-            <SearchModal
+            <SearchModalPublic
                 isOpen={isSearchOpen}
                 onClose={() => setIsSearchOpen(false)}
-                projects={projects}
             />
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

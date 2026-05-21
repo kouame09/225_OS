@@ -6,6 +6,7 @@ import { getPitches, deletePitch } from '../services/pitchService';
 import { Pitch } from '../types';
 import { useNotification } from '../contexts/NotificationContext';
 import AuthModal from '../components/AuthModal';
+import SearchModal from '../components/SearchModal';
 
 const PitchHub: React.FC = () => {
     const { user } = useAuth();
@@ -14,9 +15,9 @@ const PitchHub: React.FC = () => {
 
     const [pitches, setPitches] = useState<Pitch[]>([]);
     const [loading, setLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState('');
     const [filterNeed, setFilterNeed] = useState<string>('all');
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isDeleting, setIsDeleting] = useState<string | null>(null);
 
     const fetchData = async () => {
@@ -48,12 +49,10 @@ const PitchHub: React.FC = () => {
 
     const filteredPitches = useMemo(() => {
         return pitches.filter(p => {
-            const matchesSearch = p.project_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                p.pitch.toLowerCase().includes(searchQuery.toLowerCase());
             const matchesFilter = filterNeed === 'all' || p.need === filterNeed;
-            return matchesSearch && matchesFilter;
+            return matchesFilter;
         });
-    }, [pitches, searchQuery, filterNeed]);
+    }, [pitches, filterNeed]);
 
     const handleDelete = async (id: string, name: string) => {
         if (!window.confirm(`Supprimer le pitch pour "${name}" ?`)) return;
@@ -73,6 +72,7 @@ const PitchHub: React.FC = () => {
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-8 pb-24">
             <AuthModal isOpen={isAuthModalOpen} onClose={() => setIsAuthModalOpen(false)} />
+            <SearchModal type="pitch" isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -91,27 +91,27 @@ const PitchHub: React.FC = () => {
                         </p>
                     </div>
 
-                    <Link
-                        to="/pitchhub/submit"
-                        className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none shrink-0"
-                    >
-                        <Plus size={20} />
-                        Publier un Pitch
-                    </Link>
+                    <div className="flex items-center gap-3 shrink-0">
+                        <button
+                            onClick={() => setIsSearchOpen(true)}
+                            className="flex items-center justify-center gap-2 px-5 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-semibold rounded-2xl hover:border-emerald-500/40 transition-all shadow-sm"
+                        >
+                            <Search size={18} />
+                            <span>Rechercher</span>
+                        </button>
+
+                        <Link
+                            to="/pitchhub/submit"
+                            className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none"
+                        >
+                            <Plus size={20} />
+                            Publier un Pitch
+                        </Link>
+                    </div>
                 </div>
 
-                {/* Filters & Search */}
-                <div className="flex flex-col md:flex-row gap-4 mb-10">
-                    <div className="relative flex-grow">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
-                        <input
-                            type="text"
-                            placeholder="Rechercher une idée, un mot-clé..."
-                            className="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                    </div>
+                {/* Filter */}
+                <div className="flex items-center gap-4 mb-10">
                     <div className="relative min-w-[200px]">
                         <Filter className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                         <select
