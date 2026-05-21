@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star, Rocket, Lightbulb, Calendar, BookOpen, Settings } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Star, Rocket, Lightbulb, Calendar, BookOpen, Settings } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
-import SearchModalPublic from './SearchModalPublic';
 import { fetchGithubMetadata } from '../services/githubService';
 import { getSiteSetting } from '../services/siteSettingsService';
 
@@ -13,7 +12,7 @@ const Navbar: React.FC = () => {
   const { darkMode, toggleDarkMode } = useTheme();
   const { user, signOut } = useAuth();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [authView, setAuthView] = useState<'login' | 'signup'>('login');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [starCount, setStarCount] = useState<number | null>(null);
@@ -90,11 +89,7 @@ const Navbar: React.FC = () => {
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
-        initialView="signup"
-      />
-      <SearchModalPublic
-        isOpen={isSearchOpen}
-        onClose={() => setIsSearchOpen(false)}
+        initialView={authView}
       />
 
       {/* Mobile Menu Backdrop */}
@@ -131,14 +126,6 @@ const Navbar: React.FC = () => {
           <div className="space-y-1">
             {location.pathname !== '/' && (
               <>
-                <button
-                  onClick={() => { setIsSearchOpen(true); closeMobileMenu(); }}
-                  className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold transition-colors"
-                >
-                  <Search size={18} className="text-emerald-500" />
-                  <span>Rechercher</span>
-                </button>
-
                 <Link
                   to="/explore"
                   onClick={closeMobileMenu}
@@ -227,7 +214,7 @@ const Navbar: React.FC = () => {
 
             {user && location.pathname !== '/' && (
               <>
-                <div className="py-2 px-4">
+                <div className="py-2 px-4 mt-2 border-t border-slate-100 dark:border-slate-800">
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Mon espace</p>
                 </div>
 
@@ -284,8 +271,8 @@ const Navbar: React.FC = () => {
               </div>
             ) : (
               <button
-                onClick={() => { setIsAuthOpen(true); closeMobileMenu(); }}
-                className="mt-2 flex items-center gap-3 w-full p-4 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black justify-center shadow-lg"
+                onClick={() => { setAuthView('login'); setIsAuthOpen(true); closeMobileMenu(); }}
+                className="mt-4 flex items-center justify-center gap-2 w-full p-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black shadow-lg shadow-emerald-600/20 transition-all"
               >
                 <User size={18} />
                 <span>Connexion</span>
@@ -310,14 +297,6 @@ const Navbar: React.FC = () => {
             <div className="hidden md:flex items-center gap-4 sm:gap-6">
               {location.pathname !== '/' && (
                 <>
-                  <button
-                    onClick={() => setIsSearchOpen(true)}
-                    className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors"
-                    aria-label="Rechercher"
-                  >
-                    <Search size={20} />
-                  </button>
-
                   <Link
                     to="/explore"
                     className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/explore'
@@ -400,7 +379,7 @@ const Navbar: React.FC = () => {
                 )}
               </a>
 
-              {user && (
+              {user ? (
                 <div className="relative" ref={userMenuRef}>
                   <button
                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
@@ -434,7 +413,7 @@ const Navbar: React.FC = () => {
                         </Link>
 
                         <button
-                          onClick={() => { setIsUserMenuOpen(false); closeMobileMenu(); window.location.href = '/edit-profile'; }}
+                          onClick={() => { setIsUserMenuOpen(false); window.location.href = '/edit-profile'; }}
                           className="flex items-center gap-3 w-full p-3 rounded-xl font-medium hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"
                         >
                           <Settings size={18} />
@@ -466,6 +445,14 @@ const Navbar: React.FC = () => {
                     </div>
                   </div>
                 </div>
+              ) : (
+                <button
+                  onClick={() => { setAuthView('login'); setIsAuthOpen(true) }}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-sm transition-all shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/30 hover:scale-[1.02] active:scale-95"
+                >
+                  <User size={16} />
+                  <span>Connexion</span>
+                </button>
               )}
 
               <button

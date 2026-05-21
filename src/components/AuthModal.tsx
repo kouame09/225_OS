@@ -167,8 +167,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
   const getDescription = () => {
     switch (view) {
-      case 'login': return 'Entrez vos informations pour accéder à votre compte';
-      case 'signup': return 'Connectez-vous avec les professionnels de la tech africaine aujourd\'hui';
+      case 'login': return 'Entrez vos informations pour commencer à publier vos idées et travaux';
+      case 'signup': return 'Connectez-vous avec les professionnels de la tech ivoirienne aujourd\'hui';
       case 'forgot': return 'Entrez votre e-mail pour recevoir les instructions de réinitialisation';
     }
   };
