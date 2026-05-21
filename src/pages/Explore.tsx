@@ -1,21 +1,17 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search, Filter, Terminal, Loader2, Lock, ChevronLeft, ChevronRight, Megaphone, Gift } from 'lucide-react';
 import ProjectCard from '../components/ProjectCard';
-import SearchModal from '../components/SearchModal';
+import SearchModalPublic from '../components/SearchModalPublic';
 import Pagination from '../components/Pagination';
 import { Project } from '../types';
 import { getProjects } from '../services/projectService';
-import { useAuth } from '../contexts/AuthContext';
-import AuthModal from '../components/AuthModal';
 import { Announcement } from '../types';
 import { getAnnouncements } from '../services/announcementService';
 
 const Explore: React.FC = () => {
-    const { user, loading: authLoading } = useAuth();
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [isAuthOpen, setIsAuthOpen] = useState(false);
     const [selectedStack, setSelectedStack] = useState<string | null>(null);
     const [currentEventIndex, setCurrentEventIndex] = useState(0);
     const [currentPromoIndex, setCurrentPromoIndex] = useState(0);
@@ -31,20 +27,8 @@ const Explore: React.FC = () => {
     const activeEvents = useMemo(() => announcements.filter(a => a.type === 'event' && a.is_active), [announcements]);
     const hasActivePromo = activePromos.length > 0;
 
-    // Redirect to auth if not logged in
     useEffect(() => {
-        if (!authLoading && !user) {
-            setIsAuthOpen(true);
-        }
-    }, [user, authLoading]);
-
-    useEffect(() => {
-        // Only fetch if user is logged in
         const fetchData = async () => {
-            if (!user) {
-                setLoading(false);
-                return;
-            }
             try {
                 // Fetch projects and announcements in parallel
                 const [projectsData, announcementsData] = await Promise.all([
@@ -62,10 +46,8 @@ const Explore: React.FC = () => {
             }
         };
 
-        if (!authLoading && user) {
-            fetchData();
-        }
-    }, [user, authLoading]);
+        fetchData();
+    }, []);
 
     // Auto-scroll events carousel
     useEffect(() => {
@@ -93,15 +75,13 @@ const Explore: React.FC = () => {
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-                if (user) {
-                    e.preventDefault();
-                    setIsSearchOpen(true);
-                }
+                e.preventDefault();
+                setIsSearchOpen(true);
             }
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [user]);
+    }, []);
 
     const allStacks = useMemo(() => {
         const stacks = new Set<string>();
@@ -170,23 +150,13 @@ const Explore: React.FC = () => {
         setTimeout(() => setIsAutoScrollPausedPromos(false), 10000);
     };
 
-    if (authLoading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950"><Loader2 className="animate-spin text-emerald-500" /></div>;
-
-    // Show auth modal if not logged in, but don't show the restricted access UI
-    if (!user) {
-        return (
-            <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
-                <AuthModal isOpen={isAuthOpen} onClose={() => setIsAuthOpen(false)} />
-            </div>
-        );
-    }
+    if (loading) return <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950"><Loader2 className="animate-spin text-emerald-500" /></div>;
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 pt-8 pb-24">
-            <SearchModal
+            <SearchModalPublic
                 isOpen={isSearchOpen}
                 onClose={() => setIsSearchOpen(false)}
-                projects={projects}
             />
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

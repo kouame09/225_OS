@@ -20,7 +20,6 @@ export interface UserProfile {
   username?: string;
   full_name?: string;
   avatar_url?: string;
-  banner_url?: string;
   headline?: string;
   bio?: string;
   location?: string;
@@ -105,3 +104,19 @@ export interface Pitch {
   slug: string;
   user?: UserProfile;
 }
+
+export interface Article {
+  id: string;
+  created_at: string;
+  user_id: string;
+  title: string;
+  category: string;
+  slug: string;
+  image_url?: string;
+  summary: string;
+  content: string;
+  tags: string[];
+  status?: 'draft' | 'published';
+  user?: UserProfile;
+}
+

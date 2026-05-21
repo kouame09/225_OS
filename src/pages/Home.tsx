@@ -26,23 +26,16 @@ import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isSignupOpen, setIsSignupOpen] = useState(false);
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (!loading && user) {
-      navigate('/dashboard');
-    }
-  }, [user, loading, navigate]);
+    // No redirect - let users browse freely even when logged in
+  }, [user, loading]);
 
   return (
     <div className="min-h-screen relative bg-slate-50 dark:bg-slate-950 font-sans overflow-x-hidden">
-      <AuthModal
-        isOpen={isAuthOpen}
-        onClose={() => setIsAuthOpen(false)}
-      />
       <AuthModal
         isOpen={isSignupOpen}
         onClose={() => setIsSignupOpen(false)}
@@ -88,10 +81,10 @@ const Home: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
-              onClick={() => setIsAuthOpen(true)}
+              onClick={() => navigate('/explore')}
               className="group w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-black text-lg transition-all flex items-center justify-center gap-3 shadow-xl shadow-emerald-600/20 hover:shadow-emerald-600/30 hover:scale-[1.02] active:scale-95"
             >
-              C'est parti !
+              Explorer la plateforme
               <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <Link
@@ -802,7 +795,7 @@ const Home: React.FC = () => {
                 onClick={() => setIsSignupOpen(true)}
                 className="w-full sm:w-auto px-10 py-5 bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-xl text-white font-black text-lg rounded-2xl transition-all hover:border-white/20 hover:-translate-y-1 shadow-xl"
               >
-                Créer mon compte
+                Rejoindre la communauté
               </button>
             </div>
 

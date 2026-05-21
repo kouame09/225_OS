@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ExternalLink, ArrowBigUp, MapPin, Calendar, User, ArrowLeft, Loader2, Link as LinkIcon, Mail, Edit, Trash2, Smartphone } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';

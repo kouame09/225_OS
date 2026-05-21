@@ -100,6 +100,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
     setSuccessMessage(null);
     setLoading(true);
 
+    let success = false;
+
     try {
       if (view === 'login') {
         const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
@@ -108,7 +110,6 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         });
         if (signInError) throw signInError;
 
-        // Check for manual approval
         const { data: profile } = await supabase
           .from('profiles')
           .select('is_approved')
@@ -120,7 +121,7 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
           throw new Error('Votre compte a été désactivé par un administrateur.');
         }
 
-        onClose();
+        success = true;
       } else if (view === 'signup') {
         if (password !== confirmPassword) {
           throw new Error("Les mots de passe ne correspondent pas");
@@ -131,17 +132,24 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
         });
         if (signUpError) throw signUpError;
         setSuccessMessage('Compte créé ! Veuillez vérifier vos e-mails pour valider votre compte.');
+        success = true;
       } else if (view === 'forgot') {
         const { error } = await supabase.auth.resetPasswordForEmail(email, {
           redirectTo: window.location.origin + '/reset-password',
         });
         if (error) throw error;
         setSuccessMessage('Lien de réinitialisation envoyé par e-mail.');
+        success = true;
       }
     } catch (err: any) {
       setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
+    }
+
+    if (success) {
+      resetForm();
+      onClose();
     }
   };
 
@@ -167,8 +175,8 @@ const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, initialView = 'l
 
   const getDescription = () => {
     switch (view) {
-      case 'login': return 'Entrez vos informations pour accéder à votre compte';
-      case 'signup': return 'Connectez-vous avec les professionnels de la tech africaine aujourd\'hui';
+      case 'login': return 'Entrez vos informations pour commencer à publier vos idées et travaux';
+      case 'signup': return 'Connectez-vous avec les professionnels de la tech ivoirienne aujourd\'hui';
       case 'forgot': return 'Entrez votre e-mail pour recevoir les instructions de réinitialisation';
     }
   };

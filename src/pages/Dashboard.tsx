@@ -5,7 +5,7 @@ import { Project } from '../types';
 import { getUserProjects, deleteProject } from '../services/projectService';
 import { getUserLaunchpadProducts } from '../services/launchpadService';
 import { Link, useNavigate } from 'react-router-dom';
-import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork, Eye, Pencil, User, Rocket, ArrowBigUp, MessageCircle } from 'lucide-react';
+import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork, Eye, Pencil, User, Rocket, ArrowBigUp, MessageCircle, BookOpen } from 'lucide-react';
 import Pagination from '../components/Pagination';
 import ConfirmModal from '../components/ConfirmModal';
 import AnnouncementManager from '../components/AnnouncementManager';
@@ -148,11 +148,11 @@ const Dashboard: React.FC = () => {
                     </div>
                     <div className="flex gap-3">
                         <Link
-                            to="/edit-profile"
+                            to="/my-articles"
                             className="flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-semibold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all"
                         >
-                            <User size={20} />
-                            <span className="hidden sm:inline">Mon Profil</span>
+                            <BookOpen size={20} />
+                            <span className="hidden sm:inline">Publier un article</span>
                         </Link>
                         <Link
                             to="/add"

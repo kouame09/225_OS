@@ -85,14 +85,14 @@ export const updateProfile = async (userId: string, updates: Partial<UserProfile
     }
 };
 
-export const uploadProfileImage = async (userId: string, file: File, type: 'avatar' | 'banner'): Promise<{ url?: string, error?: string }> => {
+export const uploadProfileImage = async (userId: string, file: File, type: 'avatar'): Promise<{ url?: string, error?: string }> => {
     try {
         const token = await getAuthToken();
         if (!url || !key || !token) throw new Error("Missing config or auth token");
 
         const fileExt = file.name.split('.').pop();
-        const fileName = `${userId}-${type}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-        const filePath = `${fileName}`;
+        const fileName = `${type}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+        const filePath = `${userId}/${fileName}`;
 
         const response = await fetch(`${url}/storage/v1/object/profiles/${filePath}`, {
             method: 'POST',
