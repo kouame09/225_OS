@@ -77,7 +77,7 @@ const PitchHub: React.FC = () => {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
                     <div className="max-w-3xl">
                         <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold mb-2 uppercase tracking-wider text-sm">
                             <Lightbulb size={16} />
@@ -91,18 +91,10 @@ const PitchHub: React.FC = () => {
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-3 shrink-0">
-                        <button
-                            onClick={() => setIsSearchOpen(true)}
-                            className="flex items-center justify-center gap-2 px-5 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-semibold rounded-2xl hover:border-emerald-500/40 transition-all shadow-sm"
-                        >
-                            <Search size={18} />
-                            <span>Rechercher</span>
-                        </button>
-
+                    <div className="shrink-0">
                         <Link
                             to="/pitchhub/submit"
-                            className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none"
+                            className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none whitespace-nowrap"
                         >
                             <Plus size={20} />
                             Publier un Pitch
@@ -110,9 +102,17 @@ const PitchHub: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Filter */}
-                <div className="flex items-center gap-4 mb-10">
-                    <div className="relative min-w-[200px]">
+                {/* Search Bar & Filter */}
+                <div className="flex flex-col md:flex-row gap-4 mb-10">
+                    <button
+                        onClick={() => setIsSearchOpen(true)}
+                        className="flex-1 flex items-center gap-3 px-5 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-slate-400 hover:border-emerald-500/40 transition-all"
+                    >
+                        <Search size={18} className="shrink-0" />
+                        <span className="text-left truncate">Rechercher un pitch par nom de projet, idée ou mot-clé...</span>
+                    </button>
+
+                    <div className="relative md:min-w-[220px]">
                         <Filter className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                         <select
                             className="w-full pl-12 pr-4 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white appearance-none cursor-pointer"

@@ -62,7 +62,7 @@ const Articles: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold mb-2 uppercase tracking-wider text-sm">
               <BookOpen size={16} />
@@ -76,15 +76,7 @@ const Articles: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="flex items-center justify-center gap-2 px-5 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-semibold rounded-2xl hover:border-emerald-500/40 transition-all shadow-sm"
-            >
-              <Search size={18} />
-              <span>Rechercher</span>
-            </button>
-
+          <div className="shrink-0">
             <Link
               to={user ? "/my-articles" : "#"}
               onClick={(e) => {
@@ -93,7 +85,7 @@ const Articles: React.FC = () => {
                   setIsAuthModalOpen(true);
                 }
               }}
-              className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none"
+              className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none whitespace-nowrap"
             >
               <Plus size={20} className="text-white dark:text-slate-900" />
               <span>Publier un article</span>
@@ -101,8 +93,17 @@ const Articles: React.FC = () => {
           </div>
         </div>
 
+        {/* Search Bar */}
+        <button
+          onClick={() => setIsSearchOpen(true)}
+          className="w-full flex items-center gap-3 px-5 py-4 mb-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-slate-400 hover:border-emerald-500/40 transition-all"
+        >
+          <Search size={18} className="shrink-0" />
+          <span className="text-left truncate">Rechercher un article par titre, tag ou mot-clé...</span>
+        </button>
+
         {/* Category Pills */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide mb-10">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide mb-10 flex-nowrap">
             <button
               onClick={() => setSelectedCategory('all')}
               className={`px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${selectedCategory === 'all'

@@ -168,7 +168,7 @@ const Launchpad: React.FC = () => {
                     <div className="pb-4 w-full md:w-auto">
                         <button
                             onClick={() => setIsSearchOpen(true)}
-                            className="w-full md:w-[320px] flex items-center justify-between px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-500 dark:text-slate-400 hover:border-emerald-500 dark:hover:border-emerald-500 transition-colors shadow-sm"
+                            className="w-full md:w-[320px] flex items-center justify-between px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-slate-500 dark:text-slate-400 hover:border-emerald-500 dark:hover:border-emerald-500 transition-colors"
                         >
                             <div className="flex items-center gap-2">
                                 <Search size={18} />

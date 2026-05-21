@@ -32,7 +32,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, type }) => {
 
     const config = {
         article: {
-            placeholder: 'Rechercher des articles, tutoriels, tips...',
+            placeholder: 'Rechercher par titre, résumé, tag ou mot-clé...',
             label: 'Articles',
             icon: <BookOpen size={14} />,
             color: 'text-emerald-500',
@@ -59,7 +59,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, type }) => {
             },
         },
         pitch: {
-            placeholder: 'Rechercher une idée, un projet, un mot-clé...',
+            placeholder: 'Rechercher par nom de projet, description ou mot-clé...',
             label: 'Pitches',
             icon: <Lightbulb size={14} />,
             color: 'text-amber-500',
