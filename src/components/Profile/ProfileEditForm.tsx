@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { UserProfile } from '../../types';
 import { updateProfile, uploadProfileImage } from '../../services/profileService';
 import { useNotification } from '../../contexts/NotificationContext';
-import { Save, Loader2, Camera, Image as ImageIcon, X } from 'lucide-react';
+import { Save, Loader2, Camera, X, Plus } from 'lucide-react';
 
 interface ProfileEditFormProps {
     initialProfile: UserProfile;
@@ -99,26 +99,14 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white">Photo de profil (Max 500 Ko)</h3>
 
                 <div className="flex flex-col items-center">
-                    <div className="relative group">
-                        <div
-                            className="w-32 h-32 rounded-full border-2 border-dashed border-gray-200 dark:border-slate-800 overflow-hidden relative bg-gray-200 dark:bg-slate-700 cursor-pointer hover:border-emerald-500/50 transition-all"
-                            onClick={() => avatarInputRef.current?.click()}
-                        >
-                            {avatarPreview ? (
-                                <>
-                                    <img src={avatarPreview} alt="Avatar Preview" className="w-full h-full object-cover" />
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                                        <Camera className="text-white" size={24} />
-                                    </div>
-                                </>
-                            ) : (
-                                <div className="flex flex-col items-center justify-center h-full text-gray-400">
-                                    <Camera size={32} />
+                    {avatarPreview ? (
+                        <div className="relative group">
+                            <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-200 dark:bg-slate-700 shadow-md">
+                                <img src={avatarPreview} alt="Avatar Preview" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                                    <Camera className="text-white" size={24} />
                                 </div>
-                            )}
-                        </div>
-
-                        {avatarPreview && (
+                            </div>
                             <button
                                 type="button"
                                 onClick={(e) => { e.stopPropagation(); handleRemoveFile(); }}
@@ -127,16 +115,30 @@ const ProfileEditForm: React.FC<ProfileEditFormProps> = ({ initialProfile, onSav
                             >
                                 <X size={14} />
                             </button>
-                        )}
-
-                        <input
-                            type="file"
-                            ref={avatarInputRef}
-                            className="hidden"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                        />
-                    </div>
+                            <input
+                                type="file"
+                                ref={avatarInputRef}
+                                className="hidden"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                            />
+                        </div>
+                    ) : (
+                        <div
+                            className="w-32 h-32 rounded-full border-2 border-dashed border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/20 flex flex-col items-center justify-center cursor-pointer hover:border-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition-all"
+                            onClick={() => avatarInputRef.current?.click()}
+                        >
+                            <Plus size={28} className="text-emerald-500 mb-1" />
+                            <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">Ajouter</span>
+                        </div>
+                    )}
+                    <input
+                        type="file"
+                        ref={avatarInputRef}
+                        className="hidden"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                    />
                 </div>
             </div>
 

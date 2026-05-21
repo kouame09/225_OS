@@ -3,9 +3,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { getProfile, updateProfile, uploadProfileImage } from '../services/profileService';
 import { UserProfile } from '../types';
-import { Loader2, ArrowLeft, Save, Camera, Image as ImageIcon, X, Eye, EyeOff, Key, User as UserIcon } from 'lucide-react';
+import { Loader2, ArrowLeft, Save, Camera, X, Plus } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../lib/supabaseClient';
 
 const EditProfile: React.FC = () => {
     const { user } = useAuth();
@@ -30,14 +29,6 @@ const EditProfile: React.FC = () => {
     const [avatarFile, setAvatarFile] = useState<File | null>(null);
     const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const [currentPassword, setCurrentPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [showCurrentPw, setShowCurrentPw] = useState(false);
-    const [showNewPw, setShowNewPw] = useState(false);
-    const [showConfirmPw, setShowConfirmPw] = useState(false);
-    const [savingPw, setSavingPw] = useState(false);
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -115,30 +106,6 @@ const EditProfile: React.FC = () => {
         }
     };
 
-    const handleSavePassword = async () => {
-        if (!newPassword || newPassword !== confirmPassword) {
-            addNotification('error', 'Erreur', 'Les mots de passe ne correspondent pas.');
-            return;
-        }
-        if (newPassword.length < 6) {
-            addNotification('error', 'Erreur', 'Le mot de passe doit contenir au moins 6 caractères.');
-            return;
-        }
-        setSavingPw(true);
-        try {
-            const { error } = await supabase.auth.updateUser({ password: newPassword });
-            if (error) throw error;
-            setCurrentPassword('');
-            setNewPassword('');
-            setConfirmPassword('');
-            addNotification('success', 'Succès', 'Mot de passe mis à jour avec succès.');
-        } catch (err: any) {
-            addNotification('error', 'Erreur', err.message || 'Impossible de mettre à jour le mot de passe.');
-        } finally {
-            setSavingPw(false);
-        }
-    };
-
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen pt-20">
@@ -172,35 +139,37 @@ const EditProfile: React.FC = () => {
 
                 {/* Profile Info Form */}
                 <form onSubmit={handleSubmit} className="space-y-8">
-                    {/* Images */}
+                    {/* Avatar */}
                     <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
                         <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Photo de profil</h3>
                         <div className="flex justify-center">
-                            <div className="relative">
+                            {avatarPreview ? (
+                                <div className="relative group">
+                                    <div className="w-32 h-32 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 shadow-md">
+                                        <img src={avatarPreview} alt="Avatar" className="w-full h-full object-cover" />
+                                    </div>
+                                    <div className="absolute inset-0 rounded-full bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer" onClick={() => document.getElementById('avatar-input')?.click()}>
+                                        <Camera className="text-white" size={28} />
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={handleRemoveFile}
+                                        className="absolute -top-1 -right-1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors z-20 shadow-lg border-2 border-white dark:border-slate-900"
+                                    >
+                                        <X size={12} />
+                                    </button>
+                                </div>
+                            ) : (
                                 <div
-                                    className="w-28 h-28 rounded-full border-2 border-dashed border-slate-200 dark:border-slate-700 overflow-hidden relative bg-slate-100 dark:bg-slate-800 cursor-pointer hover:border-emerald-500/50 transition-all"
+                                    className="w-32 h-32 rounded-full border-2 border-dashed border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/20 flex flex-col items-center justify-center cursor-pointer hover:border-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-900/30 transition-all"
                                     onClick={() => document.getElementById('avatar-input')?.click()}
                                 >
-                                    {avatarPreview ? (
-                                        <>
-                                            <img src={avatarPreview} alt="Avatar" className="w-full h-full object-cover" />
-                                            <button
-                                                type="button"
-                                                onClick={(e) => { e.stopPropagation(); handleRemoveFile(); }}
-                                                className="absolute -top-1 -right-1 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors z-20 shadow-lg border-2 border-white dark:border-slate-900"
-                                            >
-                                                <X size={12} />
-                                            </button>
-                                            </>
-                                        ) : (
-                                            <div className="flex items-center justify-center h-full text-slate-400">
-                                                <Camera size={28} />
-                                            </div>
-                                        )}
-                                    </div>
-                                    <input id="avatar-input" type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
+                                    <Plus size={28} className="text-emerald-500 mb-1" />
+                                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wide">Ajouter</span>
                                 </div>
-                            </div>
+                            )}
+                            <input id="avatar-input" type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
+                        </div>
                     </div>
 
                     {/* Basic Info */}
@@ -299,66 +268,6 @@ const EditProfile: React.FC = () => {
                         </button>
                     </div>
                 </form>
-
-                {/* Password Section */}
-                <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 mt-8">
-                    <div className="flex items-center gap-2 mb-4">
-                        <Key size={18} className="text-emerald-500" />
-                        <h3 className="text-lg font-bold text-slate-900 dark:text-white">Changer le mot de passe</h3>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="relative">
-                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Mot de passe actuel</label>
-                            <input
-                                type={showCurrentPw ? 'text' : 'password'}
-                                value={currentPassword}
-                                onChange={(e) => setCurrentPassword(e.target.value)}
-                                className="w-full px-4 py-2.5 pr-10 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white text-sm"
-                                placeholder="••••••••"
-                            />
-                            <button type="button" onClick={() => setShowCurrentPw(!showCurrentPw)} className="absolute right-3 top-[34px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer">
-                                {showCurrentPw ? <EyeOff size={16} /> : <Eye size={16} />}
-                            </button>
-                        </div>
-                        <div className="relative">
-                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Nouveau mot de passe</label>
-                            <input
-                                type={showNewPw ? 'text' : 'password'}
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
-                                className="w-full px-4 py-2.5 pr-10 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white text-sm"
-                                placeholder="••••••••"
-                            />
-                            <button type="button" onClick={() => setShowNewPw(!showNewPw)} className="absolute right-3 top-[34px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer">
-                                {showNewPw ? <EyeOff size={16} /> : <Eye size={16} />}
-                            </button>
-                        </div>
-                        <div className="relative md:col-span-1">
-                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Confirmer le mot de passe</label>
-                            <input
-                                type={showConfirmPw ? 'text' : 'password'}
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                className="w-full px-4 py-2.5 pr-10 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:ring-2 focus:ring-emerald-500 outline-none transition-all dark:text-white text-sm"
-                                placeholder="••••••••"
-                            />
-                            <button type="button" onClick={() => setShowConfirmPw(!showConfirmPw)} className="absolute right-3 top-[34px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 cursor-pointer">
-                                {showConfirmPw ? <EyeOff size={16} /> : <Eye size={16} />}
-                            </button>
-                        </div>
-                    </div>
-                    <div className="flex justify-end mt-4">
-                        <button
-                            type="button"
-                            onClick={handleSavePassword}
-                            disabled={savingPw || !newPassword || !confirmPassword}
-                            className="flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-xl hover:bg-slate-800 dark:hover:bg-slate-100 transition-colors disabled:opacity-50 font-bold cursor-pointer"
-                        >
-                            {savingPw ? <Loader2 size={18} className="animate-spin" /> : <Key size={18} />}
-                            <span>Changer le mot de passe</span>
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     );

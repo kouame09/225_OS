@@ -91,8 +91,8 @@ export const uploadProfileImage = async (userId: string, file: File, type: 'avat
         if (!url || !key || !token) throw new Error("Missing config or auth token");
 
         const fileExt = file.name.split('.').pop();
-        const fileName = `${userId}-${type}-${Math.random().toString(36).substring(2)}.${fileExt}`;
-        const filePath = `${fileName}`;
+        const fileName = `${type}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+        const filePath = `${userId}/${fileName}`;
 
         const response = await fetch(`${url}/storage/v1/object/profiles/${filePath}`, {
             method: 'POST',
