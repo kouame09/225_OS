@@ -223,15 +223,16 @@ const MyArticles: React.FC = () => {
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">Mes Articles ({articles.length})</h2>
             </div>
 
-            <div className="divide-y divide-slate-100 dark:divide-slate-800">
-              {articles.map((article) => {
-                const readTime = getReadingTime(article.content);
-                return (
-                  <div
-                    key={article.id}
-                    className="group px-6 py-5 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
-                  >
-                    <div className="flex items-start gap-4">
+            <div className="overflow-x-auto">
+              <div className="divide-y divide-slate-100 dark:divide-slate-800 min-w-[600px]">
+                {articles.map((article) => {
+                  const readTime = getReadingTime(article.content);
+                  return (
+                    <div
+                      key={article.id}
+                      className="group px-6 py-5 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+                    >
+                      <div className="flex items-start gap-4">
                       {/* Cover Image Thumbnail */}
                       {article.image_url ? (
                         <div className="shrink-0 w-20 h-20 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700">
@@ -318,6 +319,7 @@ const MyArticles: React.FC = () => {
                   </div>
                 );
               })}
+              </div>
             </div>
           </div>
         ) : (
@@ -558,8 +560,8 @@ const MyArticles: React.FC = () => {
             <div className="relative w-full max-w-4xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col h-[85vh] sm:h-[80vh] animate-in fade-in-50 zoom-in-95 duration-300">
               {/* Preview Header */}
               <div className="flex items-center justify-between px-6 py-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
-                <div className="flex items-center gap-3">
-                  <span className="bg-emerald-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
+                  <span className="bg-emerald-500 text-white text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider self-start">
                     {previewArticle.category}
                   </span>
                   <span className="text-xs text-slate-400 flex items-center gap-1">
