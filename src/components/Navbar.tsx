@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star, Rocket, Lightbulb, Calendar } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star, Rocket, Lightbulb, Calendar, BookOpen } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
@@ -139,6 +139,30 @@ const Navbar: React.FC = () => {
               </button>
             )}
 
+            <Link
+              to="/explore"
+              onClick={closeMobileMenu}
+              className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/explore'
+                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                }`}
+            >
+              <Compass size={18} />
+              <span>Explorer</span>
+            </Link>
+
+            <Link
+              to="/articles"
+              onClick={closeMobileMenu}
+              className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/articles')
+                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                }`}
+            >
+              <BookOpen size={18} className="text-emerald-500" />
+              <span>Articles</span>
+            </Link>
+
             {user && (
               <>
                 <Link
@@ -156,67 +180,55 @@ const Navbar: React.FC = () => {
                 <div className="py-2 px-4">
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Navigation</p>
                 </div>
-
-                <Link
-                  to="/explore"
-                  onClick={closeMobileMenu}
-                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/explore'
-                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                    : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                    }`}
-                >
-                  <Compass size={18} />
-                  <span>Explorer</span>
-                </Link>
-
-                <Link
-                  to="/launchpad"
-                  onClick={closeMobileMenu}
-                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/launchpad')
-                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                    : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                    }`}
-                >
-                  <Rocket size={18} />
-                  <span>Launchpad</span>
-                </Link>
-
-                <Link
-                  to="/pitchhub"
-                  onClick={closeMobileMenu}
-                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/pitchhub')
-                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                    : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                    }`}
-                >
-                  <Lightbulb size={18} />
-                  <div className="flex items-center gap-2">
-                    <span>PitchHub</span>
-                    <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                      New
-                    </span>
-                  </div>
-                </Link>
-
-                {osdVisible && (
-                <Link
-                  to="/opensource-day"
-                  onClick={closeMobileMenu}
-                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/opensource-day'
-                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                    : 'text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
-                    }`}
-                >
-                  <Calendar size={18} />
-                  <div className="flex items-center gap-2">
-                    <span>Open Source Day</span>
-                    <span className="bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                      Event
-                    </span>
-                  </div>
-                </Link>
-                )}
               </>
+            )}
+
+            <Link
+              to="/launchpad"
+              onClick={closeMobileMenu}
+              className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/launchpad')
+                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                }`}
+            >
+              <Rocket size={18} />
+              <span>Launchpad</span>
+            </Link>
+
+            <Link
+              to="/pitchhub"
+              onClick={closeMobileMenu}
+              className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/pitchhub')
+                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                }`}
+            >
+              <Lightbulb size={18} />
+              <div className="flex items-center gap-2">
+                <span>PitchHub</span>
+                <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                  New
+                </span>
+              </div>
+            </Link>
+
+            {osdVisible && (
+              <Link
+                to="/opensource-day"
+                onClick={closeMobileMenu}
+                className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/opensource-day'
+                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                  : 'text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
+                  }`}
+              >
+                <Calendar size={18} />
+                <div className="flex items-center gap-2">
+                  <span>Open Source Day</span>
+                  <span className="bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                    Event
+                  </span>
+                </div>
+              </Link>
             )}
 
             <Link
@@ -295,47 +307,56 @@ const Navbar: React.FC = () => {
                 </button>
               )}
 
-              {user && (
-                <>
-                  <Link
-                    to="/explore"
-                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/explore'
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
-                      }`}
-                  >
-                    <Compass size={14} />
-                    <span>Explorer</span>
-                  </Link>
+            <Link
+              to="/explore"
+              className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/explore'
+                ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                }`}
+            >
+              <Compass size={14} />
+              <span>Explorer</span>
+            </Link>
 
+            <Link
+              to="/articles"
+              className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/articles')
+                ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                }`}
+            >
+              <BookOpen size={14} />
+              <span>Articles</span>
+            </Link>
 
+            {user && (
+              <>
+                <Link
+                  to="/launchpad"
+                  className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/launchpad')
+                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                    : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                    }`}
+                >
+                  <Rocket size={14} />
+                  <span>Launchpad</span>
+                </Link>
 
-                  <Link
-                    to="/launchpad"
-                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/launchpad')
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
-                      }`}
-                  >
-                    <Rocket size={14} />
-                    <span>Launchpad</span>
-                  </Link>
+                <Link
+                  to="/pitchhub"
+                  className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/pitchhub')
+                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                    : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                    }`}
+                >
+                  <Lightbulb size={14} />
+                  <span>PitchHub</span>
+                  <span className="bg-emerald-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                    New
+                  </span>
+                </Link>
 
-                  <Link
-                    to="/pitchhub"
-                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/pitchhub')
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
-                      }`}
-                  >
-                    <Lightbulb size={14} />
-                    <span>PitchHub</span>
-                    <span className="bg-emerald-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                      New
-                    </span>
-                  </Link>
-
-                  {osdVisible && (
+                {osdVisible && (
                   <Link
                     to="/opensource-day"
                     className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/opensource-day'
@@ -349,9 +370,9 @@ const Navbar: React.FC = () => {
                       Event
                     </span>
                   </Link>
-                  )}
-                </>
-              )}
+                )}
+              </>
+            )}
 
               {!user && (
                 <>

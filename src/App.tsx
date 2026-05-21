@@ -32,6 +32,9 @@ import PitchDetails from './pages/PitchDetails';
 import EditProfile from './pages/EditProfile';
 import AdminAnnouncements from './pages/AdminAnnouncements';
 import OpenSourceDay from './pages/OpenSourceDay';
+import Articles from './pages/Articles';
+import ArticleDetails from './pages/ArticleDetails';
+import MyArticles from './pages/MyArticles';
 
 const ADMIN_EMAIL = 'princekouame7@gmail.com';
 
@@ -97,6 +100,9 @@ const AppContent: React.FC = () => {
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/admin/announcements" element={<AdminAnnouncements />} />
           <Route path="/opensource-day" element={<OpenSourceDay />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/:slug" element={<ArticleDetails />} />
+          <Route path="/my-articles" element={<MyArticles />} />
         </Route>
       </Routes>
       <ToastContainer />

@@ -105,3 +105,19 @@ export interface Pitch {
   slug: string;
   user?: UserProfile;
 }
+
+export interface Article {
+  id: string;
+  created_at: string;
+  user_id: string;
+  title: string;
+  category: string;
+  slug: string;
+  image_url?: string;
+  summary: string;
+  content: string;
+  tags: string[];
+  status?: 'draft' | 'published';
+  user?: UserProfile;
+}
+
