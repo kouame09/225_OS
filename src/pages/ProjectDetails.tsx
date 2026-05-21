@@ -119,6 +119,19 @@ const ProjectDetails: React.FC = () => {
         </button>
       )}
 
+      {/* Public Back Link - Visible for unauthenticated users */}
+      {!user && (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+          <button
+            onClick={() => navigate('/explore')}
+            className="inline-flex items-center gap-2 text-slate-500 hover:text-emerald-500 transition-colors font-medium"
+          >
+            <ArrowLeft size={20} />
+            <span className="text-sm">Retour aux projets</span>
+          </button>
+        </div>
+      )}
+
       {/* Page Background Ambience (Blurred) */}
       <div className="h-96 w-full bg-slate-900 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/90 z-10"></div>

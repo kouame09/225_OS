@@ -100,14 +100,10 @@ const PitchDetails: React.FC = () => {
                 
                 {/* Navigation Header */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 md:mb-8">
-                    {user ? (
-                        <Link to="/pitchhub" className="inline-flex items-center gap-2 text-slate-500 hover:text-emerald-500 transition-colors font-medium">
-                            <ArrowLeft size={20} />
-                            <span className="text-sm">Retour au Hub</span>
-                        </Link>
-                    ) : (
-                        <div /> // Spacer for flex alignment if no back button
-                    )}
+                    <Link to="/pitchhub" className="inline-flex items-center gap-2 text-slate-500 hover:text-emerald-500 transition-colors font-medium">
+                        <ArrowLeft size={20} />
+                        <span className="text-sm">Retour au Hub</span>
+                    </Link>
 
                     <div className="flex gap-2 w-full sm:w-auto">
                         <button 

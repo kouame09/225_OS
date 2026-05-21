@@ -140,34 +140,32 @@ const ProductPage: React.FC = () => {
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
                 
                 {/* Navigation Header */}
-                {user && (
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 md:mb-8">
-                        <Link to="/launchpad" className="inline-flex items-center gap-2 text-slate-500 hover:text-emerald-500 transition-colors font-medium">
-                            <ArrowLeft size={20} />
-                            <span className="text-sm">Retour au Launchpad</span>
-                        </Link>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 md:mb-8">
+                    <Link to="/launchpad" className="inline-flex items-center gap-2 text-slate-500 hover:text-emerald-500 transition-colors font-medium">
+                        <ArrowLeft size={20} />
+                        <span className="text-sm">Retour au Launchpad</span>
+                    </Link>
 
-                        {isOwner && (
-                            <div className="flex gap-2 w-full sm:w-auto">
-                                <Link
-                                    to={`/launchpad/edit/${product.slug}`}
-                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-sm font-bold"
-                                >
-                                    <Edit size={16} />
-                                    Modifier
-                                </Link>
-                                <button 
-                                    onClick={handleDelete}
-                                    disabled={isDeleting}
-                                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-red-100 dark:border-red-900/30 text-red-500 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors text-sm font-bold disabled:opacity-50"
-                                >
-                                    {isDeleting ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
-                                    Supprimer
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                )}
+                    {isOwner && (
+                        <div className="flex gap-2 w-full sm:w-auto">
+                            <Link
+                                to={`/launchpad/edit/${product.slug}`}
+                                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-sm font-bold"
+                            >
+                                <Edit size={16} />
+                                Modifier
+                            </Link>
+                            <button 
+                                onClick={handleDelete}
+                                disabled={isDeleting}
+                                className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-red-100 dark:border-red-900/30 text-red-500 rounded-xl hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors text-sm font-bold disabled:opacity-50"
+                            >
+                                {isDeleting ? <Loader2 size={16} className="animate-spin" /> : <Trash2 size={16} />}
+                                Supprimer
+                            </button>
+                        </div>
+                    )}
+                </div>
 
                 {/* Main Content Card */}
                 <div className="bg-white dark:bg-slate-900 rounded-3xl md:rounded-[2.5rem] shadow-xl overflow-hidden border border-slate-200 dark:border-slate-800 mb-10 md:mb-12">
