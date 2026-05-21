@@ -77,6 +77,33 @@ export const getPitchBySlug = async (slug: string): Promise<Pitch | null> => {
     }
 };
 
+export const getUserPitches = async (userId: string): Promise<Pitch[]> => {
+    try {
+        const url = import.meta.env.VITE_SUPABASE_URL;
+        const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+        const token = await getAuthToken() || key;
+
+        const response = await fetch(`${url}/rest/v1/pitches?user_id=eq.${userId}&select=*,profiles:user_id(id,full_name,avatar_url,headline)&order=created_at.desc`, {
+            method: 'GET',
+            headers: {
+                'apikey': key,
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Fetch error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return (data || []).map((p: any) => mapPitchFromDB(p));
+    } catch (err) {
+        console.error("pitchService: getUserPitches failed", err);
+        return [];
+    }
+};
+
 export const addPitch = async (pitch: Omit<Pitch, 'id' | 'created_at' | 'slug'>): Promise<void> => {
     try {
         const url = import.meta.env.VITE_SUPABASE_URL;
