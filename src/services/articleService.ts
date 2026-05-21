@@ -14,8 +14,52 @@ const buildHeaders = async (token?: string) => {
   };
 };
 
-const ADMIN_EMAIL_NAME_MAP: Record<string, string> = {
-  'princekouame7@gmail.com': 'Prince Kouamé'
+const ADMIN_USER_IDS = new Set<string>(['d9751b0d-7e14-4dd9-b715-915d324f64e3']);
+const ADMIN_NAME = 'Prince Kouamé';
+
+const fetchProfiles = async (userIds: string[]): Promise<Map<string, UserProfile>> => {
+  if (userIds.length === 0) return new Map();
+  const uniqueIds = [...new Set(userIds)];
+  const idFilter = uniqueIds.map(id => `id.eq.${id}`).join(',');
+  const headers = await buildHeaders();
+
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=id,username,full_name,avatar_url,headline&${idFilter}`, {
+      method: 'GET',
+      headers
+    });
+
+    if (!response.ok) return new Map();
+
+    const data = await response.json();
+    const map = new Map<string, UserProfile>();
+    (data || []).forEach((p: any) => {
+      let fullName = p.full_name;
+      if (!fullName && ADMIN_USER_IDS.has(p.id)) {
+        fullName = ADMIN_NAME;
+      }
+      map.set(p.id, {
+        id: p.id,
+        username: p.username,
+        full_name: fullName,
+        avatar_url: p.avatar_url,
+        headline: p.headline
+      });
+    });
+
+    for (const uid of uniqueIds) {
+      if (!map.has(uid) && ADMIN_USER_IDS.has(uid)) {
+        map.set(uid, {
+          id: uid,
+          full_name: ADMIN_NAME
+        });
+      }
+    }
+
+    return map;
+  } catch {
+    return new Map();
+  }
 };
 
 const mapArticleFromDB = (a: any): Article => {
@@ -33,44 +77,6 @@ const mapArticleFromDB = (a: any): Article => {
     status: a.status || 'published',
     user: undefined
   };
-};
-
-const fetchProfiles = async (userIds: string[]): Promise<Map<string, UserProfile>> => {
-  if (userIds.length === 0) return new Map();
-  const uniqueIds = [...new Set(userIds)];
-  const idFilter = uniqueIds.map(id => `id.eq.${id}`).join(',');
-  const headers = await buildHeaders();
-
-  try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=id,username,full_name,avatar_url,headline,email&${idFilter}`, {
-      method: 'GET',
-      headers
-    });
-
-    if (!response.ok) return new Map();
-
-    const data = await response.json();
-    const map = new Map<string, UserProfile>();
-    (data || []).forEach((p: any) => {
-      let fullName = p.full_name;
-      if (p.email === 'princekouame7@gmail.com') {
-        fullName = 'Prince Kouamé';
-      } else if (!fullName && p.email && ADMIN_EMAIL_NAME_MAP[p.email]) {
-        fullName = ADMIN_EMAIL_NAME_MAP[p.email];
-      }
-      map.set(p.id, {
-        id: p.id,
-        username: p.username,
-        full_name: fullName,
-        avatar_url: p.avatar_url,
-        headline: p.headline,
-        email: p.email
-      });
-    });
-    return map;
-  } catch {
-    return new Map();
-  }
 };
 
 const enrichArticlesWithProfiles = async (articles: Article[]): Promise<Article[]> => {
