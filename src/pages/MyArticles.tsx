@@ -218,7 +218,7 @@ const MyArticles: React.FC = () => {
 
         {/* User Articles List - Row Layout */}
         {articles.length > 0 ? (
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">Mes Articles ({articles.length})</h2>
             </div>
@@ -323,7 +323,7 @@ const MyArticles: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div className="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800">
             <div className="w-16 h-16 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
               <BookOpen size={28} />
             </div>

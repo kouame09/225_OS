@@ -196,7 +196,7 @@ const Dashboard: React.FC = () => {
 
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
+                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                         <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Projets</div>
                         <div className="text-4xl font-bold text-slate-900 dark:text-white mt-2">{totalProjects}</div>
                         <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
@@ -204,7 +204,7 @@ const Dashboard: React.FC = () => {
                             <span className="text-xs text-slate-400 dark:text-slate-500">dépôts importés</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
+                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                         <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Produits</div>
                         <div className="text-4xl font-bold text-emerald-500 mt-2 flex items-center gap-2">
                             {totalProducts} <Rocket size={24} />
@@ -215,7 +215,7 @@ const Dashboard: React.FC = () => {
                             <span className="text-xs text-slate-400 dark:text-slate-500">votes récoltés</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
+                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                         <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Étoiles</div>
                         <div className="text-4xl font-bold text-amber-500 mt-2 flex items-center gap-2">
                             {totalStars} <Star size={24} fill="currentColor" />
@@ -226,7 +226,7 @@ const Dashboard: React.FC = () => {
                             <span className="text-xs text-slate-400 dark:text-slate-500">par projet</span>
                         </div>
                     </div>
-                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
+                    <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                         <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Forks</div>
                         <div className="text-4xl font-bold text-slate-700 dark:text-slate-300 mt-2 flex items-center gap-2">
                             {totalForks} <GitFork size={24} />
@@ -240,7 +240,7 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 {/* Projects Table */}
-                <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
                     <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
                         <h2 className="text-lg font-bold text-slate-900 dark:text-white">Vos Projets</h2>
                     </div>

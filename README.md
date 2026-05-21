@@ -33,18 +33,55 @@
 
 ---
 
+## Mises à Jour Récentes
+
+### v2.1.0 — Mai 2026
+
+#### Pages Publiques & Navigation
+- **Page article publique** : Les articles partagés s'affichent sans header/footer pour les utilisateurs non connectés, avec un CTA "Rejoindre la communauté" en bas
+- **Liens de retour** : Boutons "Retour" visibles sur toutes les pages de détail publiques (Pitch, Produit, Projet, Article) pour les visiteurs non connectés
+- **Accès public élargi** : `/explore`, `/articles`, `/launchpad`, `/pitchhub` accessibles sans authentification
+
+#### Recherche
+- **SearchModal générique** : Composant réutilisable avec prop `type` (`'article'` | `'pitch'`) — chaque page n'indexe que son propre contenu
+- **Barres de recherche redesignées** : Pleine largeur sous le header sur Articles et PitchHub, côte à côte avec le filtre sur PitchHub desktop
+- **Placeholders explicites** : Textes descriptifs avec troncature sur mobile pour éviter le retour à la ligne
+- **Images de couverture** : Les résultats de recherche d'articles affichent leur image de couverture
+
+#### Dashboard & Admin
+- **Design épuré** : Ombres (`shadow-sm`) supprimées des cartes stats, tableaux et conteneurs admin — conservation des borders légers
+- **Liste articles scrollable** : Scroll horizontal sur mobile dans la gestion des articles pour éviter la condensation du contenu
+- **Modal de prévisualisation** : Catégorie et temps de lecture empilés sur mobile, côte à côte sur desktop
+
+#### Mobile UX
+- **Boutons empilés** : Recherche et publication se stackent verticalement sur mobile (Articles, PitchHub)
+- **Catégories scrollables** : Pills de catégories avec scroll horizontal forcé sur mobile
+- **Responsive amélioré** : Ajustements de layout sur toutes les pages de détail et formulaires
+
+#### Corrections
+- **AuthModal** : Correction du bug de spinner infini après connexion réussie
+- **Articles** : Affichage correct du nom et avatar de l'auteur (suppression de la colonne `username` inexistante)
+- **Avatar upload** : Correction de la violation RLS Storage avec le chemin `userId/filename`
+- **Edit Profile** : Suppression de la section changement de mot de passe, simplification de l'UI avatar
+- **Profile page** : Intégration des composants `ProfileArticles` et `ProfilePitches`, suppression de la bannière
+
+---
+
 ## Fonctionnalités
 
 - **Découverte de Projets**: Parcourez et recherchez des projets open source de développeurs ivoiriens
 - **225 Launchpad**: Découvrez et votez pour les meilleurs produits locaux, SaaS et applications
 - **PitchHub**: Partagez vos idées de startup et trouvez des co-fondateurs, investisseurs ou leads techniques
+- **Articles & DevBlog**: Tutoriels, tips, retours d'expérience et actualités tech partagés par la communauté
 - **Open Source Day 2026**: Page dédiée à l'événement annuel open source ivoirien
-- **Recherche Globale**: Recherche en temps réel avancée pour les projets et talents
+- **Recherche Contextuelle**: Modals de recherche par type de contenu (articles, pitches, projets, produits)
+- **Pages Publiques Immersives**: Pages de détail sans header/footer pour les visiteurs non connectés avec CTA d'engagement
 - **Vitrine de Talents**: Découvrez et connectez-vous avec des développeurs ivoiriens et leur expertise
 - **Système d'Annonces**: Restez informé des événements et promos de la communauté
 - **Système de Dons**: Soutenez la plateforme et les initiatives open source locales
 - **Filtrage Intelligent**: Filtrez les projets par technologie, catégorie et popularité
 - **Profils Utilisateur**: Mettez en valeur vos projets, compétences et liens sociaux
+- **Éditeur Markdown**: Rédaction d'articles avec preview en temps réel et gestion brouillon/publié
 - **Mode Sombre**: Interface élégante avec thèmes clair et sombre (style GitHub)
 - **Contrôle Admin Dynamique**: Mode maintenance et visibilité Open Source Day contrôlés depuis le dashboard
 - **Authentification Sécurisée**: Propulsé par Supabase avec email et GitHub OAuth
@@ -376,7 +413,26 @@ CREATE TABLE public.pitches (
 ```
 **Rôle**: Stocke les idées de startup partagées dans le PitchHub pour faciliter le matchmaking.
 
-#### 6. `announcements` (Annonces)
+#### 6. `articles` (Articles Techniques)
+```sql
+CREATE TABLE public.articles (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id),
+  title TEXT NOT NULL,
+  category TEXT NOT NULL,
+  image_url TEXT,
+  summary TEXT NOT NULL,
+  content TEXT NOT NULL,                    -- Markdown content
+  tags TEXT[],                              -- Array de tags
+  status TEXT CHECK (status IN ('draft', 'published')) DEFAULT 'published',
+  slug TEXT UNIQUE,
+  created_at TIMESTAMPTZ DEFAULT now(),
+  updated_at TIMESTAMPTZ DEFAULT now()
+);
+```
+**Rôle**: Stocke les articles techniques rédigés par les utilisateurs. Supporte le statut brouillon/publié et le contenu Markdown.
+
+#### 7. `announcements` (Annonces)
 ```sql
 CREATE TABLE public.announcements (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -396,7 +452,7 @@ CREATE TABLE public.announcements (
 ```
 **Rôle**: Annonces gérées par les admins (événements, promos). Deux types: `event` et `promo`.
 
-#### 7. `site_settings` (Paramètres du Site)
+#### 8. `site_settings` (Paramètres du Site)
 ```sql
 CREATE TABLE public.site_settings (
   key TEXT PRIMARY KEY,
@@ -481,6 +537,8 @@ Supabase utilise PostgreSQL RLS pour sécuriser l'accès aux données:
 | | INSERT/UPDATE/DELETE | Maker | `auth.uid() = maker_id` |
 | **product_votes** | INSERT/DELETE | Authenticated | `auth.uid() = user_id` |
 | **pitches** | SELECT | Public | `true` |
+| | INSERT/UPDATE/DELETE | Owner | `auth.uid() = user_id` |
+| **articles** | SELECT | Public | `status = 'published'` |
 | | INSERT/UPDATE/DELETE | Owner | `auth.uid() = user_id` |
 | **announcements** | SELECT | Public | `is_active = true` |
 | | ALL | Admin | Email = `princekouame7@gmail.com` |
@@ -734,15 +792,16 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 │   │   ├── Navbar.tsx           # Navigation principale (desktop + mobile)
 │   │   ├── Footer.tsx           # Footer avec liens
 │   │   ├── AuthModal.tsx        # Modal Login/Signup/Forgot password
+│   │   ├── SearchModal.tsx      # Modal de recherche générique (type: article/pitch)
+│   │   ├── SearchModalPublic.tsx # Modal de recherche projets (public)
 │   │   ├── ProjectCard.tsx      # Carte projet GitHub
 │   │   ├── Badge.tsx            # Badge technologie
 │   │   ├── Pagination.tsx       # Contrôles de pagination
 │   │   ├── Toast.tsx            # Notification individuelle
 │   │   ├── ToastContainer.tsx   # Gestionnaire de notifications
-│   │   ├── SearchModal.tsx      # Modal de recherche (auth)
-│   │   ├── SearchModalPublic.tsx # Modal de recherche (public)
 │   │   ├── ConfirmModal.tsx     # Dialogue de confirmation
 │   │   ├── ScrollToTop.tsx      # Reset scroll on navigate
+│   │   ├── MarkdownEditor.tsx   # Éditeur Markdown avec preview
 │   │   ├── AnnouncementManager.tsx # Admin CRUD announcements
 │   │   ├── Launchpad/
 │   │   │   ├── ProductCard.tsx      # Carte produit avec vote
@@ -753,6 +812,8 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 │   │       ├── ProfileAbout.tsx     # Section bio
 │   │       ├── ProfileProjects.tsx  # Projets de l'utilisateur
 │   │       ├── ProfileLaunchpad.tsx # Produits Launchpad
+│   │       ├── ProfileArticles.tsx  # Articles de l'utilisateur
+│   │       ├── ProfilePitches.tsx   # Pitches de l'utilisateur
 │   │       └── ProfileEditForm.tsx  # Formulaire d'édition
 │   │
 │   ├── contexts/            # Context React (Global State)
@@ -773,9 +834,12 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 │   │
 │   ├── pages/               # Pages (Routes)
 │   │   ├── Home.tsx               # Landing page
-│   │   ├── Explore.tsx            # Browse projects (auth required)
+│   │   ├── Explore.tsx            # Browse projects (public)
 │   │   ├── Launchpad.tsx          # Product showcase (trending/new)
 │   │   ├── PitchHub.tsx           # Startup ideas hub
+│   │   ├── Articles.tsx           # Browse articles (public)
+│   │   ├── MyArticles.tsx         # Manage my articles (CRUD + Markdown)
+│   │   ├── ArticleDetails.tsx     # Article detail page
 │   │   ├── OpenSourceDay.tsx      # Annual event page
 │   │   ├── Dashboard.tsx          # User dashboard with stats
 │   │   ├── Profile.tsx            # Public user profile
@@ -880,32 +944,35 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Routing (22 Routes)
+### Routing (26 Routes)
 
 | Path | Page | Auth | Description |
 |------|------|------|-------------|
 | `/` | Home | Non | Landing page avec hero, features, CTA |
-| `/explore` | Explore | Oui | Browse projects avec filtres et recherche |
+| `/explore` | Explore | Non | Browse projects avec filtres et recherche |
 | `/launchpad` | Launchpad | Non | Showcase produits (Trending/New) |
 | `/launchpad/submit` | SubmitProduct | Oui | Formulaire soumission produit |
 | `/launchpad/edit/:slug` | SubmitProduct | Oui | Édition produit existant |
-| `/launchpad/p/:slug` | ProductPage | Non | Page détail produit |
+| `/launchpad/p/:slug` | ProductPage | Non | Page détail produit (immersive si non connecté) |
 | `/pitchhub` | PitchHub | Non | Browse idées startup |
 | `/pitchhub/submit` | SubmitPitch | Oui | Formulaire soumission pitch |
 | `/pitchhub/edit/:slug` | SubmitPitch | Oui | Édition pitch existant |
-| `/pitchhub/p/:slug` | PitchDetails | Non | Page détail pitch |
+| `/pitchhub/p/:slug` | PitchDetails | Non | Page détail pitch (immersive si non connecté) |
+| `/articles` | Articles | Non | Browse articles techniques |
+| `/articles/:slug` | ArticleDetails | Non | Page détail article (immersive si non connecté) |
+| `/my-articles` | MyArticles | Oui | Gestion de mes articles (CRUD + Markdown) |
 | `/add` | AddProject | Oui | Ajouter projet GitHub |
 | `/dashboard` | Dashboard | Oui | Tableau de bord utilisateur |
 | `/edit-profile` | EditProfile | Oui | Éditer profil |
 | `/edit/:slug` | EditProject | Oui | Éditer projet |
 | `/profile/:id` | Profile | Non | Profil public utilisateur |
-| `/project/:slug` | ProjectDetails | Non | Détail projet |
+| `/project/:slug` | ProjectDetails | Non | Détail projet (toujours immersif) |
 | `/why` | Why225OpenSource | Non | Mission et vision |
 | `/privacy` | PrivacyPolicy | Non | Politique de confidentialité |
 | `/contact` | Contact | Non | Page contact |
 | `/donate` | Donation | Non | Dons (Wave + Buy Me A Coffee) |
 | `/reset-password` | ResetPassword | Non | Réinitialisation mot de passe |
-| `/admin/announcements` | AdminAnnouncements | Admin | Gestion annonces |
+| `/admin/announcements` | AdminAnnouncements | Admin | Gestion annonces et paramètres site |
 | `/opensource-day` | OpenSourceDay | Non | Page événement annuel |
 
 ---
@@ -1305,8 +1372,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-**Version**: 2.0.0
-**Last Updated**: May 2026
+**Version**: 2.1.0
+**Last Updated**: May 21, 2026
 **Maintained by**: 225 Open Source Team
 
 ---

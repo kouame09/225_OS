@@ -92,7 +92,7 @@ const AdminAnnouncements: React.FC = () => {
                 {/* Site Settings Grid */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     {/* Maintenance Mode Toggle */}
-                    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
                         <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-800">
                             <div className="flex items-center gap-3">
                                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
@@ -146,7 +146,7 @@ const AdminAnnouncements: React.FC = () => {
                     </div>
 
                     {/* Open Source Day Visibility Toggle */}
-                    <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
                         <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-800">
                             <div className="flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center">

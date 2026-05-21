@@ -141,7 +141,7 @@ const AnnouncementManager: React.FC = () => {
     const draftAnnouncements = filteredAnnouncements.filter(a => !a.is_active);
 
     return (
-        <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-6 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 overflow-hidden">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
                     <h2 className="text-xl font-bold text-slate-900 dark:text-white">Gestion des Annonces</h2>
