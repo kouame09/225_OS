@@ -11,24 +11,7 @@ interface ProfileHeaderProps {
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isOwnProfile }) => {
     return (
         <div className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-gray-100 dark:border-slate-800 transition-colors duration-300">
-            {/* Banner */}
-            <div className="h-48 md:h-64 bg-gray-200 dark:bg-slate-800 relative">
-                {profile.banner_url ? (
-                    <img
-                        src={profile.banner_url}
-                        alt="Profile Banner"
-                        className="w-full h-full object-cover"
-                    />
-                ) : (
-                    <div className="w-full h-full bg-emerald-600 flex items-center justify-center relative overflow-hidden">
-                        {/* Watermark */}
-                        <div className="relative z-10 flex flex-col items-center opacity-30 select-none">
-                            <span className="text-3xl md:text-5xl font-black text-white tracking-tighter italic">225 OPEN SOURCE</span>
-                            <span className="text-xs md:text-sm font-bold text-white/50 tracking-widest uppercase">Communauté Tech Ivoirienne</span>
-                        </div>
-                    </div>
-                )}
-
+            <div className="px-6 md:px-8 pt-8 pb-8 relative">
                 {isOwnProfile && (
                     <Link
                         to="/edit-profile"
@@ -38,12 +21,10 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ profile, isOwnProfile }) 
                         <Edit2 size={18} className="text-gray-700 dark:text-gray-300" />
                     </Link>
                 )}
-            </div>
 
-            <div className="px-6 md:px-8 pb-8 relative">
                 <div className="flex flex-col md:flex-row items-start md:items-end mb-4 md:mb-6">
                     {/* Avatar */}
-                    <div className="relative -mt-16 md:-mt-20">
+                    <div className="relative">
                         <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white dark:border-slate-900 overflow-hidden bg-gray-200 dark:bg-slate-700 shadow-md">
                             <img
                                 src={profile.avatar_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.full_name || 'User')}&background=cbd5e1&color=475569`}

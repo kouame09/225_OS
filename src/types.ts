@@ -20,7 +20,6 @@ export interface UserProfile {
   username?: string;
   full_name?: string;
   avatar_url?: string;
-  banner_url?: string;
   headline?: string;
   bio?: string;
   location?: string;

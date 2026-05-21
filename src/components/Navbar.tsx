@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star, Rocket, Lightbulb, Calendar, BookOpen } from 'lucide-react';
+import { Moon, Sun, Github, Terminal, User, LogOut, LayoutDashboard, Compass, Heart, Search, Users, Star, Rocket, Lightbulb, Calendar, BookOpen, Settings } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
@@ -160,7 +160,12 @@ const Navbar: React.FC = () => {
                 }`}
             >
               <BookOpen size={18} className="text-emerald-500" />
-              <span>Articles</span>
+              <div className="flex items-center gap-2">
+                <span>Articles</span>
+                <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                  New
+                </span>
+              </div>
             </Link>
 
             {user && (
@@ -175,6 +180,15 @@ const Navbar: React.FC = () => {
                 >
                   <LayoutDashboard size={18} className="text-emerald-500" />
                   <span>Mon Dashboard</span>
+                </Link>
+
+                <Link
+                  to="/edit-profile"
+                  onClick={closeMobileMenu}
+                  className="flex items-center gap-3 w-full p-3 rounded-xl font-bold hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"
+                >
+                  <Settings size={18} className="text-emerald-500" />
+                  <span>Modifier mon profil</span>
                 </Link>
 
                 <div className="py-2 px-4">
@@ -204,12 +218,7 @@ const Navbar: React.FC = () => {
                 }`}
             >
               <Lightbulb size={18} />
-              <div className="flex items-center gap-2">
-                <span>PitchHub</span>
-                <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                  New
-                </span>
-              </div>
+              <span>PitchHub</span>
             </Link>
 
             {osdVisible && (
@@ -326,7 +335,12 @@ const Navbar: React.FC = () => {
                 }`}
             >
               <BookOpen size={14} />
-              <span>Articles</span>
+              <div className="flex items-center gap-1">
+                <span>Articles</span>
+                <span className="bg-emerald-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                  New
+                </span>
+              </div>
             </Link>
 
             {user && (
@@ -349,11 +363,8 @@ const Navbar: React.FC = () => {
                     : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
                     }`}
                 >
-                  <Lightbulb size={14} />
-                  <span>PitchHub</span>
-                  <span className="bg-emerald-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                    New
-                  </span>
+                    <Lightbulb size={14} />
+                    <span>PitchHub</span>
                 </Link>
 
                 {osdVisible && (
@@ -436,6 +447,14 @@ const Navbar: React.FC = () => {
                           <LayoutDashboard size={18} />
                           <span>Mon Dashboard</span>
                         </Link>
+
+                        <button
+                          onClick={() => { setIsUserMenuOpen(false); closeMobileMenu(); window.location.href = '/edit-profile'; }}
+                          className="flex items-center gap-3 w-full p-3 rounded-xl font-medium hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"
+                        >
+                          <Settings size={18} />
+                          <span>Modifier mon profil</span>
+                        </button>
 
                         <Link
                           to="/donate"
