@@ -200,11 +200,6 @@ export const updateArticle = async (id: string, article: Partial<Omit<Article, '
       status: article.status
     };
 
-    if (article.title) {
-      const baseSlug = slugify(article.title);
-      body.slug = `${baseSlug}-${Math.random().toString(36).substring(2, 7)}`;
-    }
-
     const headers = await buildHeaders(token);
     const response = await fetch(`${SUPABASE_URL}/rest/v1/articles?id=eq.${id}`, {
       method: 'PATCH',
