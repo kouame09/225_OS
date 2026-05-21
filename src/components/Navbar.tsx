@@ -129,47 +129,108 @@ const Navbar: React.FC = () => {
           )}
 
           <div className="space-y-1">
-            {location.pathname === '/' && (
-              <button
-                onClick={() => { setIsSearchOpen(true); closeMobileMenu(); }}
-                className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold transition-colors"
-              >
-                <Search size={18} className="text-emerald-500" />
-                <span>Rechercher</span>
-              </button>
+            {location.pathname !== '/' && (
+              <>
+                <button
+                  onClick={() => { setIsSearchOpen(true); closeMobileMenu(); }}
+                  className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold transition-colors"
+                >
+                  <Search size={18} className="text-emerald-500" />
+                  <span>Rechercher</span>
+                </button>
+
+                <Link
+                  to="/explore"
+                  onClick={closeMobileMenu}
+                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/explore'
+                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                    : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                    }`}
+                >
+                  <Compass size={18} />
+                  <span>Explorer</span>
+                </Link>
+
+                <Link
+                  to="/articles"
+                  onClick={closeMobileMenu}
+                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/articles')
+                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                    : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                    }`}
+                >
+                  <BookOpen size={18} className="text-emerald-500" />
+                  <div className="flex items-center gap-2">
+                    <span>Articles</span>
+                    <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                      New
+                    </span>
+                  </div>
+                </Link>
+
+                <Link
+                  to="/launchpad"
+                  onClick={closeMobileMenu}
+                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/launchpad')
+                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                    : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                    }`}
+                >
+                  <Rocket size={18} />
+                  <span>Launchpad</span>
+                </Link>
+
+                <Link
+                  to="/pitchhub"
+                  onClick={closeMobileMenu}
+                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/pitchhub')
+                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                    : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
+                    }`}
+                >
+                  <Lightbulb size={18} />
+                  <span>PitchHub</span>
+                </Link>
+
+                {osdVisible && (
+                  <Link
+                    to="/opensource-day"
+                    onClick={closeMobileMenu}
+                    className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/opensource-day'
+                      ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
+                      : 'text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
+                      }`}
+                  >
+                    <Calendar size={18} />
+                    <div className="flex items-center gap-2">
+                      <span>Open Source Day</span>
+                      <span className="bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                        Event
+                      </span>
+                    </div>
+                  </Link>
+                )}
+
+                <Link
+                  to="/donate"
+                  onClick={closeMobileMenu}
+                  className={`flex items-center gap-3 w-full p-3 rounded-xl font-black transition-colors ${location.pathname === '/donate'
+                    ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300'
+                    : 'bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/20'
+                    }`}
+                >
+                  <Heart size={18} />
+                  <span>Soutenir 225OS</span>
+                </Link>
+              </>
             )}
 
-            <Link
-              to="/explore"
-              onClick={closeMobileMenu}
-              className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/explore'
-                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                }`}
-            >
-              <Compass size={18} />
-              <span>Explorer</span>
-            </Link>
-
-            <Link
-              to="/articles"
-              onClick={closeMobileMenu}
-              className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/articles')
-                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                }`}
-            >
-              <BookOpen size={18} className="text-emerald-500" />
-              <div className="flex items-center gap-2">
-                <span>Articles</span>
-                <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                  New
-                </span>
-              </div>
-            </Link>
-
-            {user && (
+            {user && location.pathname !== '/' && (
               <>
+                <div className="py-2 px-4">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Mon espace</p>
+                </div>
+
                 <Link
                   to="/dashboard"
                   onClick={closeMobileMenu}
@@ -190,67 +251,8 @@ const Navbar: React.FC = () => {
                   <Settings size={18} className="text-emerald-500" />
                   <span>Modifier mon profil</span>
                 </Link>
-
-                <div className="py-2 px-4">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Navigation</p>
-                </div>
               </>
             )}
-
-            <Link
-              to="/launchpad"
-              onClick={closeMobileMenu}
-              className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/launchpad')
-                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                }`}
-            >
-              <Rocket size={18} />
-              <span>Launchpad</span>
-            </Link>
-
-            <Link
-              to="/pitchhub"
-              onClick={closeMobileMenu}
-              className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname.startsWith('/pitchhub')
-                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                : 'hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300'
-                }`}
-            >
-              <Lightbulb size={18} />
-              <span>PitchHub</span>
-            </Link>
-
-            {osdVisible && (
-              <Link
-                to="/opensource-day"
-                onClick={closeMobileMenu}
-                className={`flex items-center gap-3 w-full p-3 rounded-xl font-bold transition-colors ${location.pathname === '/opensource-day'
-                  ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
-                  : 'text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/20'
-                  }`}
-              >
-                <Calendar size={18} />
-                <div className="flex items-center gap-2">
-                  <span>Open Source Day</span>
-                  <span className="bg-orange-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                    Event
-                  </span>
-                </div>
-              </Link>
-            )}
-
-            <Link
-              to="/donate"
-              onClick={closeMobileMenu}
-              className={`flex items-center gap-3 w-full p-3 rounded-xl font-black transition-colors ${location.pathname === '/donate'
-                ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300'
-                : 'bg-emerald-50 dark:bg-emerald-900/10 text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/20'
-                }`}
-            >
-              <Heart size={18} />
-              <span>Soutenir 225OS</span>
-            </Link>
 
             <a
               href={REPO_URL}
@@ -306,97 +308,80 @@ const Navbar: React.FC = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-4 sm:gap-6">
-              {location.pathname === '/' && (
-                <button
-                  onClick={() => setIsSearchOpen(true)}
-                  className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors"
-                  aria-label="Rechercher"
-                >
-                  <Search size={20} />
-                </button>
-              )}
+              {location.pathname !== '/' && (
+                <>
+                  <button
+                    onClick={() => setIsSearchOpen(true)}
+                    className="p-2 rounded-lg text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-colors"
+                    aria-label="Rechercher"
+                  >
+                    <Search size={20} />
+                  </button>
 
-            <Link
-              to="/explore"
-              className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/explore'
-                ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
-                }`}
-            >
-              <Compass size={14} />
-              <span>Explorer</span>
-            </Link>
+                  <Link
+                    to="/explore"
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/explore'
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                      }`}
+                  >
+                    <Compass size={14} />
+                    <span>Explorer</span>
+                  </Link>
 
-            <Link
-              to="/articles"
-              className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/articles')
-                ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
-                }`}
-            >
-              <BookOpen size={14} />
-              <div className="flex items-center gap-1">
-                <span>Articles</span>
-                <span className="bg-emerald-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                  New
-                </span>
-              </div>
-            </Link>
+                  <Link
+                    to="/articles"
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/articles')
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                      }`}
+                  >
+                    <BookOpen size={14} />
+                    <div className="flex items-center gap-1">
+                      <span>Articles</span>
+                      <span className="bg-emerald-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                        New
+                      </span>
+                    </div>
+                  </Link>
 
-            {user && (
-              <>
-                <Link
-                  to="/launchpad"
-                  className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/launchpad')
-                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                    : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
-                    }`}
-                >
-                  <Rocket size={14} />
-                  <span>Launchpad</span>
-                </Link>
+                  <Link
+                    to="/launchpad"
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/launchpad')
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                      }`}
+                  >
+                    <Rocket size={14} />
+                    <span>Launchpad</span>
+                  </Link>
 
-                <Link
-                  to="/pitchhub"
-                  className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/pitchhub')
-                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                    : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
-                    }`}
-                >
+                  <Link
+                    to="/pitchhub"
+                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname.startsWith('/pitchhub')
+                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                      : 'text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800'
+                      }`}
+                  >
                     <Lightbulb size={14} />
                     <span>PitchHub</span>
-                </Link>
-
-                {osdVisible && (
-                  <Link
-                    to="/opensource-day"
-                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/opensource-day'
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                      : 'text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'
-                      }`}
-                  >
-                    <Calendar size={14} />
-                    <span>Open Source Day</span>
-                    <span className="bg-orange-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
-                      Event
-                    </span>
                   </Link>
-                )}
-              </>
-            )}
 
-              {!user && (
-                <>
-                  <Link
-                    to="/donate"
-                    className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/donate'
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
-                      : 'text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'
-                      }`}
-                  >
-                    <Heart size={14} />
-                    <span>Soutenir</span>
-                  </Link>
+                  {osdVisible && (
+                    <Link
+                      to="/opensource-day"
+                      className={`flex items-center gap-2 px-3 py-1.5 text-xs font-medium border rounded-lg transition-colors ${location.pathname === '/opensource-day'
+                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-700'
+                        : 'text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-700 hover:bg-emerald-50 dark:hover:bg-emerald-900/30'
+                        }`}
+                    >
+                      <Calendar size={14} />
+                      <span>Open Source Day</span>
+                      <span className="bg-orange-500 text-white text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider animate-pulse">
+                        Event
+                      </span>
+                    </Link>
+                  )}
                 </>
               )}
 
