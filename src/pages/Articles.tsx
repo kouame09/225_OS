@@ -96,7 +96,7 @@ const Articles: React.FC = () => {
               className="flex items-center justify-center gap-2 px-6 py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-200 dark:shadow-none"
             >
               <Plus size={20} className="text-white dark:text-slate-900" />
-              <span>Écrire un article</span>
+              <span>Publier un article</span>
             </Link>
           </div>
         </div>
