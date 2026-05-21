@@ -359,7 +359,7 @@ const ProductPage: React.FC = () => {
                         <div className="relative z-10 max-w-2xl">
                             <h3 className="text-3xl md:text-4xl font-black mb-4">Vous aimez ce produit ?</h3>
                             <p className="text-slate-300 text-lg md:text-xl mb-4">
-                                Rejoignez 225 Open Source pour découvrir plus de pépites, voter pour vos projets préférés et lancer vos propres créations.
+                                Rejoignez 225 Open Source pour découvrir plus de pépites, voter pour vos produits préférés et publier vos propres créations.
                             </p>
                         </div>
                         <Link

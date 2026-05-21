@@ -4,8 +4,10 @@ import { getArticleBySlug } from '../services/articleService';
 import { Article } from '../types';
 import { BookOpen, Calendar, Clock, User, ChevronLeft, ArrowRight, Share2, Twitter, Linkedin, Facebook, Link as LinkIcon, Check } from 'lucide-react';
 import { parseMarkdownToHtml } from '../utils/markdownParser';
+import { useAuth } from '../contexts/AuthContext';
 
 const ArticleDetails: React.FC = () => {
+  const { user } = useAuth();
   const { slug } = useParams<{ slug: string }>();
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
@@ -227,6 +229,25 @@ const ArticleDetails: React.FC = () => {
             </a>
           </div>
         </div>
+
+        {/* CTA for unauthenticated users */}
+        {!user && (
+          <div className="p-8 md:p-12 bg-slate-900 dark:bg-slate-950 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-white flex flex-col items-center text-center gap-6 relative overflow-hidden border border-slate-800">
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div className="relative z-10 max-w-2xl">
+              <h3 className="text-3xl md:text-4xl font-black mb-4">Vous aimez cet article ?</h3>
+              <p className="text-slate-300 text-lg md:text-xl mb-4">
+                Rejoignez 225 Open Source pour écrire vos propres articles, partager votre expertise et rejoindre la communauté tech.
+              </p>
+            </div>
+            <Link
+              to="/"
+              className="relative z-10 px-10 py-5 bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xl rounded-2xl transition-all shadow-xl hover:shadow-emerald-500/20 transform hover:-translate-y-1"
+            >
+              Rejoindre la communauté
+            </Link>
+          </div>
+        )}
 
       </div>
     </div>
