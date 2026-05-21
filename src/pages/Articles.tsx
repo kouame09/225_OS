@@ -237,7 +237,7 @@ const Articles: React.FC = () => {
                           </Link>
                           <div className="flex flex-col text-left">
                           <Link to={`/profile/${article.user_id}`} className="text-xs font-bold text-slate-950 dark:text-white hover:text-emerald-500 transition-colors">
-                            {article.user?.full_name || article.user?.username || (article.user_id === 'd9751b0d-7e14-4dd9-b715-915d324f64e3' ? 'Prince Kouamé' : 'Membre 225OS')}
+                            {article.user?.full_name || (article.user_id === 'd9751b0d-7e14-4dd9-b715-915d324f64e3' ? 'Prince Kouamé' : 'Membre 225OS')}
                           </Link>
                           <span className="text-[9px] text-slate-400 font-medium">
                             Auteur

@@ -24,7 +24,7 @@ const fetchProfiles = async (userIds: string[]): Promise<Map<string, UserProfile
   const headers = await buildHeaders();
 
   try {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=id,username,full_name,avatar_url,headline&${idFilter}`, {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/profiles?select=id,full_name,avatar_url,headline&${idFilter}`, {
       method: 'GET',
       headers
     });
@@ -40,7 +40,6 @@ const fetchProfiles = async (userIds: string[]): Promise<Map<string, UserProfile
       }
       map.set(p.id, {
         id: p.id,
-        username: p.username,
         full_name: fullName,
         avatar_url: p.avatar_url,
         headline: p.headline
