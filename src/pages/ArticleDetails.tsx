@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getArticleBySlug } from '../services/articleService';
 import { Article } from '../types';
-import { BookOpen, Calendar, Clock, User, ChevronLeft, ArrowRight, Share2, Twitter, Linkedin, Facebook, Link as LinkIcon, Check } from 'lucide-react';
+import { BookOpen, Calendar, Clock, User, ChevronLeft, ArrowRight, Share2, Link as LinkIcon, Check } from 'lucide-react';
 import { parseMarkdownToHtml } from '../utils/markdownParser';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -199,34 +199,19 @@ const ArticleDetails: React.FC = () => {
             <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Partager :</span>
             <button
               onClick={handleShare}
-              className="flex items-center justify-center gap-1.5 px-4 py-2 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 bg-white dark:bg-slate-900 cursor-pointer shadow-sm transition-all"
+              className="flex items-center justify-center gap-1.5 px-4 py-2 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 bg-white dark:bg-slate-900 cursor-pointer transition-all"
             >
               <Share2 size={14} />
               <span>Partager</span>
             </button>
             <button
               onClick={handleCopyLink}
-              className="flex items-center justify-center gap-1.5 px-4 py-2 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 bg-white dark:bg-slate-900 cursor-pointer shadow-sm transition-all"
+              className="flex items-center justify-center gap-1.5 px-4 py-2 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 rounded-xl text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 bg-white dark:bg-slate-900 cursor-pointer transition-all"
             >
               {copied ? <Check size={14} className="text-emerald-500" /> : <LinkIcon size={14} />}
               <span className={copied ? 'text-emerald-500' : ''}>{copied ? 'Copié !' : 'Copier le lien'}</span>
             </button>
-            <a
-              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article?.title || '')}&url=${encodeURIComponent(window.location.href)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center p-2 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 rounded-xl text-slate-500 hover:text-sky-500 bg-white dark:bg-slate-900 cursor-pointer shadow-sm transition-all"
-            >
-              <Twitter size={14} />
-            </a>
-            <a
-              href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(article?.title || '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center p-2 border border-slate-200 dark:border-slate-800 hover:border-blue-600/50 rounded-xl text-slate-500 hover:text-blue-600 bg-white dark:bg-slate-900 cursor-pointer shadow-sm transition-all"
-            >
-              <Linkedin size={14} />
-            </a>
+
           </div>
         </div>
 
