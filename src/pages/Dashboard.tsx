@@ -181,11 +181,11 @@ const Dashboard: React.FC = () => {
                         </div>
                         <div className="text-left">
                             <h3 className="text-emerald-900 dark:text-emerald-400 font-bold">Rejoignez le Gbonhi ! 🇨🇮</h3>
-                            <p className="text-emerald-700/70 dark:text-emerald-500/60 text-sm">Discutez avec les autres builders sur WhatsApp.</p>
+                            <p className="text-emerald-700/70 dark:text-emerald-500/60 text-sm">Discutez et partagez avec d'autres builders.</p>
                         </div>
                     </div>
                     <a
-                        href="https://chat.whatsapp.com/CjWNZ6lTyrc4m0Yweizi99?mode=gi_t"
+                        href="https://t.me/communaute225opensource"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full sm:w-auto px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition-all shadow-md shadow-emerald-500/20 text-center"
