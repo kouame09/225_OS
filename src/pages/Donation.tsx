@@ -5,7 +5,7 @@ const Donation: React.FC = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const geniusUrl = "https://pay.genius.ci/product/soutenir-225-open-source-ULtWJC";
+    const geniusUrl = "https://geniuspay.ci/product/soutenir-225-open-source-ULtWJC";
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans flex items-center justify-center p-4 sm:p-6">
