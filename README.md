@@ -15,91 +15,90 @@
 
 ---
 
-## À Propos du Projet
+## About The Project
 
-**225 Open Source** est une plateforme centralisée qui met en valeur les projets open source développés par des développeurs en Côte d'Ivoire. Bien que GitHub soit la plus grande plateforme open source au monde, il lui manque une fonctionnalité cruciale : **le filtrage des projets par pays**. C'est là que nous intervenons.
+**225 Open Source** is a centralized platform that showcases open source projects developed by developers in Côte d'Ivoire. While GitHub is the world's largest open source platform, it lacks a crucial feature: **filtering projects by country**. That's where we come in.
 
-### Le Problème que Nous Résolvons
+### The Problem We Solve
 
-- **Pas de Filtre par Pays sur GitHub**: Impossible de découvrir facilement les projets open source créés par des développeurs ivoiriens
-- **Visibilité Limitée**: Les talents ivoiriens restent cachés dans l'océan mondial des projets open source
-- **Collaboration Fragmentée**: Difficile pour les développeurs ivoiriens de se trouver et de collaborer
+- **No Country Filter on GitHub**: Impossible to easily discover open source projects created by Ivorian developers
+- **Limited Visibility**: Ivorian talents remain hidden in the global ocean of open source projects
+- **Fragmented Collaboration**: Difficult for Ivorian developers to find and collaborate with each other
 
-### Notre Solution
+### Our Solution
 
-- **Centralisation Intelligente**: Nous agrégeons les projets open source ivoiriens depuis GitHub
-- **Filtrage par Pays**: Accès instantané à tous les projets open source créés en Côte d'Ivoire
-- **Communauté Unifiée**: Un espace central pour découvrir, contribuer et collaborer avec les talents locaux
+- **Smart Centralization**: We aggregate Ivorian open source projects from GitHub
+- **Country Filtering**: Instant access to all open source projects created in Côte d'Ivoire
+- **Unified Community**: A central space to discover, contribute, and collaborate with local talents
 
 ---
 
-## Mises à Jour Récentes
+## Recent Updates
 
-### v2.1.0 — Mai 2026
+### v2.1.0 — May 2026
 
-#### Pages Publiques & Navigation
-- **Page article publique** : Les articles partagés s'affichent sans header/footer pour les utilisateurs non connectés, avec un CTA "Rejoindre la communauté" en bas
-- **Liens de retour** : Boutons "Retour" visibles sur toutes les pages de détail publiques (Pitch, Produit, Projet, Article) pour les visiteurs non connectés
-- **Accès public élargi** : `/explore`, `/articles`, `/launchpad`, `/pitchhub` accessibles sans authentification
+#### Public Pages & Navigation
+- **Public article page**: Shared articles display without header/footer for unauthenticated users, with a "Join the community" CTA at the bottom
+- **Back links**: "Back" buttons visible on all public detail pages (Pitch, Product, Project, Article) for visitors
+- **Extended public access**: `/explore`, `/articles`, `/launchpad`, `/pitchhub` accessible without authentication
 
-#### Recherche
-- **SearchModal générique** : Composant réutilisable avec prop `type` (`'article'` | `'pitch'`) — chaque page n'indexe que son propre contenu
-- **Barres de recherche redesignées** : Pleine largeur sous le header sur Articles et PitchHub, côte à côte avec le filtre sur PitchHub desktop
-- **Placeholders explicites** : Textes descriptifs avec troncature sur mobile pour éviter le retour à la ligne
-- **Images de couverture** : Les résultats de recherche d'articles affichent leur image de couverture
+#### Search
+- **Generic SearchModal**: Reusable component with `type` prop (`'article'` | `'pitch'`) — each page indexes only its own content
+- **Redesigned search bars**: Full width below the header on Articles and PitchHub, side by side with the filter on PitchHub desktop
+- **Explicit placeholders**: Descriptive text with truncation on mobile to prevent line wrapping
+- **Cover images**: Article search results display their cover image
 
 #### Dashboard & Admin
-- **Design épuré** : Ombres (`shadow-sm`) supprimées des cartes stats, tableaux et conteneurs admin — conservation des borders légers
-- **Liste articles scrollable** : Scroll horizontal sur mobile dans la gestion des articles pour éviter la condensation du contenu
-- **Modal de prévisualisation** : Catégorie et temps de lecture empilés sur mobile, côte à côte sur desktop
+- **Clean design**: Shadows (`shadow-sm`) removed from stat cards, tables, and admin containers — kept light borders
+- **Scrollable article list**: Horizontal scroll on mobile in article management to prevent content condensation
+- **Preview modal**: Category and reading time stacked on mobile, side by side on desktop
 
 #### Mobile UX
-- **Boutons empilés** : Recherche et publication se stackent verticalement sur mobile (Articles, PitchHub)
-- **Catégories scrollables** : Pills de catégories avec scroll horizontal forcé sur mobile
-- **Responsive amélioré** : Ajustements de layout sur toutes les pages de détail et formulaires
+- **Stacked buttons**: Search and publish stack vertically on mobile (Articles, PitchHub)
+- **Scrollable categories**: Category pills with forced horizontal scroll on mobile
+- **Improved responsive**: Layout adjustments on all detail pages and forms
 
-#### Corrections
-- **AuthModal** : Correction du bug de spinner infini après connexion réussie
-- **Articles** : Affichage correct du nom et avatar de l'auteur (suppression de la colonne `username` inexistante)
-- **Avatar upload** : Correction de la violation RLS Storage avec le chemin `userId/filename`
-- **Edit Profile** : Suppression de la section changement de mot de passe, simplification de l'UI avatar
-- **Profile page** : Intégration des composants `ProfileArticles` et `ProfilePitches`, suppression de la bannière
-
----
-
-## Fonctionnalités
-
-- **Découverte de Projets**: Parcourez et recherchez des projets open source de développeurs ivoiriens
-- **225 Launchpad**: Découvrez et votez pour les meilleurs produits locaux, SaaS et applications
-- **PitchHub**: Partagez vos idées de startup et trouvez des co-fondateurs, investisseurs ou leads techniques
-- **Articles & DevBlog**: Tutoriels, tips, retours d'expérience et actualités tech partagés par la communauté
-- **Open Source Day 2026**: Page dédiée à l'événement annuel open source ivoirien
-- **Recherche Contextuelle**: Modals de recherche par type de contenu (articles, pitches, projets, produits)
-- **Pages Publiques Immersives**: Pages de détail sans header/footer pour les visiteurs non connectés avec CTA d'engagement
-- **Vitrine de Talents**: Découvrez et connectez-vous avec des développeurs ivoiriens et leur expertise
-- **Système d'Annonces**: Restez informé des événements et promos de la communauté
-- **Système de Dons**: Soutenez la plateforme et les initiatives open source locales
-- **Filtrage Intelligent**: Filtrez les projets par technologie, catégorie et popularité
-- **Profils Utilisateur**: Mettez en valeur vos projets, compétences et liens sociaux
-- **Éditeur Markdown**: Rédaction d'articles avec preview en temps réel et gestion brouillon/publié
-- **Mode Sombre**: Interface élégante avec thèmes clair et sombre (style GitHub)
-- **Contrôle Admin Dynamique**: Mode maintenance et visibilité Open Source Day contrôlés depuis le dashboard
-- **Authentification Sécurisée**: Propulsé par Supabase avec email et GitHub OAuth
-- **Design Responsive**: Optimisé pour desktop, tablette et mobile
+#### Fixes
+- **AuthModal**: Fixed infinite spinner bug after successful login
+- **Articles**: Correct display of author name and avatar (removed nonexistent `username` column)
+- **Avatar upload**: Fixed RLS Storage violation with `userId/filename` path
+- **Edit Profile**: Removed password change section, simplified avatar UI
+- **Profile page**: Integrated `ProfileArticles` and `ProfilePitches` components, removed banner
 
 ---
 
+## Features
 
-## 📚 Table des Matières
+- **Project Discovery**: Browse and search open source projects from Ivorian developers
+- **225 Launchpad**: Discover and vote for the best local products, SaaS and apps
+- **PitchHub**: Share your startup ideas and find co-founders, investors, or technical leads
+- **Articles & DevBlog**: Tutorials, tips, experience reports, and tech news shared by the community
+- **Open Source Day 2026**: Dedicated page for the annual Ivorian open source event
+- **Contextual Search**: Search modals by content type (articles, pitches, projects, products)
+- **Immersive Public Pages**: Detail pages without header/footer for visitors with engagement CTAs
+- **Talents Showcase**: Discover and connect with Ivorian developers and their expertise
+- **Announcement System**: Stay updated with community events and promos
+- **Donation System**: Support the platform and local open source initiatives
+- **Smart Filtering**: Filter projects by technology, category, and popularity
+- **User Profiles**: Showcase your projects, skills, and social links
+- **Markdown Editor**: Write articles with live preview and draft/published management
+- **Dark Mode**: Beautiful UI with light and dark themes (GitHub style)
+- **Dynamic Admin Control**: Maintenance mode and Open Source Day visibility controlled from the dashboard
+- **Secure Authentication**: Powered by Supabase with email and GitHub OAuth
+- **Responsive Design**: Optimized for desktop, tablet, and mobile
 
-1. [Vue d'Architecture Globale](#1-vue-darchitecture-globale)
-2. [Stack Technique](#2-stack-technique)
-3. [Structure de la Base de Données](#3-structure-de-la-base-de-données)
-4. [Authentification & Sécurité](#4-authentification--sécurité)
-5. [Flux de Données Détaillés](#5-flux-de-données-détaillés)
-6. [Architecture Frontend](#6-architecture-frontend)
-7. [Fonctionnement par Cas d'Usage](#7-fonctionnement-par-cas-dusage)
-8. [Configuration & Déploiement](#8-configuration--déploiement)
+---
+
+## 📚 Table of Contents
+
+1. [Global Architecture Overview](#1-global-architecture-overview)
+2. [Tech Stack](#2-tech-stack)
+3. [Database Structure](#3-database-structure)
+4. [Authentication & Security](#4-authentication--security)
+5. [Detailed Data Flows](#5-detailed-data-flows)
+6. [Frontend Architecture](#6-frontend-architecture)
+7. [Use Case Walkthroughs](#7-use-case-walkthroughs)
+8. [Configuration & Deployment](#8-configuration--deployment)
 9. [About The Project](#9-about-the-project)
 10. [Features](#10-features)
 11. [Getting Started](#11-getting-started)
@@ -108,7 +107,7 @@
 
 ---
 
-## 1. Vue d'Architecture Globale
+## 1. Global Architecture Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -129,7 +128,7 @@
 │  │  │              React SPA (Vite Build)                       │   │       │
 │  │  │  ┌─────────┐  ┌─────────┐  ┌──────────┐  ┌─────────────┐  │   │       │
 │  │  │  │  Pages  │  │Components│ │ Services │  │  Contexts   │  │   │       │
-│  │  │  │  (22)   │  │  (25+)  │  │   (6)    │  │    (3)      │  │   │       │
+│  │  │  │  (22)   │  │  (25+)   │  │   (6)    │  │    (3)      │  │   │       │
 │  │  │  │         │  │         │  │          │  │             │  │   │       │
 │  │  │  │ Home    │  │ Navbar  │  │ project  │  │ AuthContext │  │   │       │
 │  │  │  │ Explore │  │ Footer  │  │ launchpad│  │ ThemeContext│  │   │       │
@@ -198,53 +197,53 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Points Clés de l'Architecture
+### Architecture Highlights
 
-- **Frontend**: React 18 + TypeScript + Vite (build ultra-rapide)
+- **Frontend**: React 18 + TypeScript + Vite (fast build times)
 - **Backend-as-a-Service**: Supabase (PostgreSQL + Auth + Storage)
-- **Authentification**: JWT tokens avec refresh automatique + vérification d'approbation
-- **Sécurité**: Row Level Security (RLS) au niveau de la base de données
+- **Authentication**: JWT tokens with auto-refresh + approval verification
+- **Security**: Row Level Security (RLS) at the database level
 - **UI**: Tailwind CSS v4 (PostCSS plugin)
-- **Icônes**: Lucide React
+- **Icons**: Lucide React
 - **Routing**: React Router DOM 6 (22 routes)
-- **Déploiement**: Vercel (SPA rewrites)
+- **Deployment**: Vercel (SPA rewrites)
 
 ---
 
-## 2. Stack Technique
+## 2. Tech Stack
 
 ### Frontend
-| Technologie | Version | Rôle |
-|-------------|---------|------|
-| React | 18.2.0 | Framework UI |
-| TypeScript | 5.8.2 | Typage statique |
+| Technology | Version | Role |
+|------------|---------|------|
+| React | 18.2.0 | UI Framework |
+| TypeScript | 5.8.2 | Static typing |
 | Vite | 6.2.0 | Build tool & Dev server |
-| React Router DOM | 6.22.3 | Routing client-side (22 routes) |
-| Tailwind CSS | 4.1.18 | Framework CSS (PostCSS plugin) |
-| Lucide React | 0.344.0 | Icônes |
+| React Router DOM | 6.22.3 | Client-side routing (22 routes) |
+| Tailwind CSS | 4.1.18 | CSS framework (PostCSS plugin) |
+| Lucide React | 0.344.0 | Icons |
 
 ### Backend & Infrastructure
-| Technologie | Rôle |
-|-------------|------|
+| Technology | Role |
+|------------|------|
 | Supabase | BaaS (Backend-as-a-Service) |
-| PostgreSQL | Base de données relationnelle |
-| GoTrue | Service d'authentification |
-| PostgREST | API REST générée automatiquement |
-| Supabase Storage | Stockage d'images (produits, profils) |
-| Vercel | Hébergement & CDN |
+| PostgreSQL | Relational database |
+| GoTrue | Authentication service |
+| PostgREST | Auto-generated REST API |
+| Supabase Storage | Image storage (products, profiles) |
+| Vercel | Hosting & CDN |
 
-### Outils de Développement
-| Outil | Rôle |
-|-------|------|
-| PostCSS | Transformation CSS |
-| Autoprefixer | Préfixes CSS automatiques |
-| TypeScript | Compilation et typage |
+### Development Tools
+| Tool | Role |
+|------|------|
+| PostCSS | CSS transformation |
+| Autoprefixer | Automatic CSS prefixes |
+| TypeScript | Compilation and type checking |
 
 ---
 
-## 3. Structure de la Base de Données
+## 3. Database Structure
 
-### Schéma Entité-Relation (ERD)
+### Entity-Relationship Diagram (ERD)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -320,9 +319,9 @@
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Description des Tables
+### Table Descriptions
 
-#### 1. `profiles` (Extension du profil utilisateur)
+#### 1. `profiles` (User Profile Extension)
 ```sql
 CREATE TABLE public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -343,9 +342,9 @@ CREATE TABLE public.profiles (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 ```
-**Rôle**: Stocke les informations de profil des utilisateurs. Créé automatiquement lors de la première connexion. Le flag `is_approved` permet aux admins de désactiver des comptes.
+**Role**: Stores user profile information. Auto-created on first login. The `is_approved` flag allows admins to disable accounts.
 
-#### 2. `projects` (Projets Open Source)
+#### 2. `projects` (Open Source Projects)
 ```sql
 CREATE TABLE public.projects (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -354,7 +353,7 @@ CREATE TABLE public.projects (
   author TEXT,
   description TEXT,
   repo_url TEXT,
-  stacks TEXT[],                     -- Array de technologies
+  stacks TEXT[],                     -- Array of technologies
   stars INTEGER DEFAULT 0,
   forks INTEGER DEFAULT 0,
   language TEXT,
@@ -364,9 +363,9 @@ CREATE TABLE public.projects (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 ```
-**Rôle**: Contient les projets GitHub soumis par les utilisateurs. Les métadonnées (stars, forks, language) sont synchronisées automatiquement via l'API GitHub.
+**Role**: Contains GitHub projects submitted by users. Metadata (stars, forks, language) is auto-synced via the GitHub API.
 
-#### 3. `products` (Produits Launchpad)
+#### 3. `products` (Launchpad Products)
 ```sql
 CREATE TABLE public.products (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -383,9 +382,9 @@ CREATE TABLE public.products (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 ```
-**Rôle**: Stocke les produits SaaS/apps soumis au Launchpad (style ProductHunt).
+**Role**: Stores SaaS/app products submitted to the Launchpad (ProductHunt-style).
 
-#### 4. `product_votes` (Votes Launchpad)
+#### 4. `product_votes` (Launchpad Votes)
 ```sql
 CREATE TABLE public.product_votes (
   product_id UUID REFERENCES public.products(id) ON DELETE CASCADE,
@@ -393,9 +392,9 @@ CREATE TABLE public.product_votes (
   PRIMARY KEY (product_id, user_id)
 );
 ```
-**Rôle**: Table de jointure pour le système de vote communautaire. Un utilisateur ne peut voter qu'une fois par produit.
+**Role**: Junction table for the community voting system. One vote per user per product.
 
-#### 5. `pitches` (Idées Startup - PitchHub)
+#### 5. `pitches` (Startup Ideas - PitchHub)
 ```sql
 CREATE TABLE public.pitches (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -403,7 +402,7 @@ CREATE TABLE public.pitches (
   project_name TEXT NOT NULL,
   problem TEXT,
   pitch TEXT,
-  need TEXT,                         -- Co-fondateur, Investisseur, etc.
+  need TEXT,                         -- Co-founder, Investor, etc.
   email TEXT,
   location TEXT,
   link TEXT,
@@ -411,9 +410,9 @@ CREATE TABLE public.pitches (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 ```
-**Rôle**: Stocke les idées de startup partagées dans le PitchHub pour faciliter le matchmaking.
+**Role**: Stores startup ideas shared in PitchHub for matchmaking.
 
-#### 6. `articles` (Articles Techniques)
+#### 6. `articles` (Technical Articles)
 ```sql
 CREATE TABLE public.articles (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -423,16 +422,16 @@ CREATE TABLE public.articles (
   image_url TEXT,
   summary TEXT NOT NULL,
   content TEXT NOT NULL,                    -- Markdown content
-  tags TEXT[],                              -- Array de tags
+  tags TEXT[],                              -- Array of tags
   status TEXT CHECK (status IN ('draft', 'published')) DEFAULT 'published',
   slug TEXT UNIQUE,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
 );
 ```
-**Rôle**: Stocke les articles techniques rédigés par les utilisateurs. Supporte le statut brouillon/publié et le contenu Markdown.
+**Role**: Stores technical articles written by users. Supports draft/published status and Markdown content.
 
-#### 7. `announcements` (Annonces)
+#### 7. `announcements` (Announcements)
 ```sql
 CREATE TABLE public.announcements (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -450,9 +449,9 @@ CREATE TABLE public.announcements (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 ```
-**Rôle**: Annonces gérées par les admins (événements, promos). Deux types: `event` et `promo`.
+**Role**: Admin-managed announcements (events, promos). Two types: `event` and `promo`.
 
-#### 8. `site_settings` (Paramètres du Site)
+#### 8. `site_settings` (Site Settings)
 ```sql
 CREATE TABLE public.site_settings (
   key TEXT PRIMARY KEY,
@@ -460,31 +459,31 @@ CREATE TABLE public.site_settings (
   updated_at TIMESTAMPTZ DEFAULT now()
 );
 ```
-**Rôle**: Stocke les paramètres dynamiques du site contrôlés depuis le dashboard admin.
+**Role**: Stores dynamic site settings controlled from the admin dashboard.
 
-| Clé | Valeur par défaut | Description |
-|-----|-------------------|-------------|
-| `show_opensource_day` | `true` | Affiche/masque l'onglet Open Source Day dans la navigation |
-| `maintenance_mode` | `false` | Active/désactive le mode maintenance pour tout le site |
+| Key | Default | Description |
+|-----|---------|-------------|
+| `show_opensource_day` | `true` | Shows/hides the Open Source Day tab in navigation |
+| `maintenance_mode` | `false` | Enables/disables maintenance mode for the entire site |
 
-**Fonctionnement**: L'application charge ces paramètres au démarrage et les rafraîchit toutes les 30 secondes. Le toggle maintenance mode permet de mettre le site en maintenance sans modifier le code.
+**How it works**: The app loads these settings on startup and refreshes them every 30 seconds. The maintenance toggle lets you put the site in maintenance mode without modifying code.
 
 ### Supabase Storage Buckets
 
-| Bucket | Usage | Limite |
-|--------|-------|--------|
-| `launchpad-images` | Screenshots/logos produits | 2MB par fichier |
-| `profiles` | Avatars et bannières utilisateurs | 500KB avatar, 1MB banner |
+| Bucket | Usage | Limit |
+|--------|-------|-------|
+| `launchpad-images` | Product screenshots/logos | 2MB per file |
+| `profiles` | User avatars and banners | 500KB avatar, 1MB banner |
 
 ---
 
-## 4. Authentification & Sécurité
+## 4. Authentication & Security
 
-### Architecture d'Authentification
+### Authentication Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         AUTHENTIFICATION FLOW                               │
+│                         AUTHENTICATION FLOW                                  │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
 │  ┌──────────────┐          ┌──────────────────┐          ┌──────────────┐  │
@@ -521,13 +520,13 @@ CREATE TABLE public.site_settings (
 └─────────┴───────────────────────────┴──────────────────────────┴──────────┘
 ```
 
-### Fonctionnalités de Sécurité
+### Security Features
 
 #### Row Level Security (RLS)
 
-Supabase utilise PostgreSQL RLS pour sécuriser l'accès aux données:
+Supabase uses PostgreSQL RLS to secure data access:
 
-| Table | Opération | Qui | Condition |
+| Table | Operation | Who | Condition |
 |-------|-----------|-----|-----------|
 | **profiles** | SELECT | Public | `is_approved = true` |
 | | INSERT/UPDATE | Owner | `auth.uid() = id` |
@@ -545,38 +544,38 @@ Supabase utilise PostgreSQL RLS pour sécuriser l'accès aux données:
 | **site_settings** | SELECT | Public | `true` |
 | | INSERT/UPDATE | Authenticated | `auth.role() = 'authenticated'` |
 
-#### Protection des Routes
+#### Route Protection
 
-| Type de Route | Exemples | Protection |
-|---------------|----------|------------|
-| **Public** | Home, Launchpad, PitchHub, Profile | Aucune |
-| **Authentifié** | Explore, Dashboard, AddProject, SubmitProduct | `user !== null` |
+| Route Type | Examples | Protection |
+|------------|----------|------------|
+| **Public** | Home, Launchpad, PitchHub, Profile | None |
+| **Authenticated** | Explore, Dashboard, AddProject, SubmitProduct | `user !== null` |
 | **Admin** | AdminAnnouncements | Email = `princekouame7@gmail.com` |
 
-#### Gestion des Tokens
+#### Token Management
 
 ```typescript
 // src/utils/supabaseUtils.ts
-// Robuste token getter avec fallback localStorage
+// Robust token getter with localStorage fallback
 export const getAuthToken = async (): Promise<string | null> => {
-  // 1. Essayer via le client Supabase
-  // 2. Fallback: parser localStorage (sb-*-auth-token)
-  // 3. Retourner null si tout échoue
+  // 1. Try via Supabase client
+  // 2. Fallback: parse localStorage (sb-*-auth-token)
+  // 3. Return null if all fails
 };
 ```
 
-#### Timeout de Sécurité
+#### Security Timeout
 
-L'authentification implémente des timeouts pour éviter le loading infini:
-- **Init session**: 1 seconde max
-- **Sign out**: 1 seconde max + nettoyage manuel du localStorage
-- **Upload d'image**: 15 secondes avec AbortController
+Authentication implements timeouts to prevent infinite loading:
+- **Init session**: 1 second max
+- **Sign out**: 1 second max + manual localStorage cleanup
+- **Image upload**: 15 seconds with AbortController
 
 ---
 
-## 5. Flux de Données Détaillés
+## 5. Detailed Data Flows
 
-### 5.1 Ajout d'un Projet GitHub (Add Project)
+### 5.1 Adding a GitHub Project (Add Project)
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -639,7 +638,7 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 5.2 Vote sur un Produit Launchpad
+### 5.2 Voting on a Launchpad Product
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -684,7 +683,7 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 5.3 Synchronisation des Stats GitHub
+### 5.3 GitHub Stats Sync
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -734,7 +733,7 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 5.4 Dashboard - Agrégation des Statistiques
+### 5.4 Dashboard - Stats Aggregation
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -780,51 +779,51 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 
 ---
 
-## 6. Architecture Frontend
+## 6. Frontend Architecture
 
-### Structure des Dossiers
+### Folder Structure
 
 ```
 225_OS/
 ├── src/
-│   ├── components/          # Composants réutilisables
-│   │   ├── Layout.tsx           # Shell avec Nav/Footer conditionnels
-│   │   ├── Navbar.tsx           # Navigation principale (desktop + mobile)
-│   │   ├── Footer.tsx           # Footer avec liens
-│   │   ├── AuthModal.tsx        # Modal Login/Signup/Forgot password
-│   │   ├── SearchModal.tsx      # Modal de recherche générique (type: article/pitch)
-│   │   ├── SearchModalPublic.tsx # Modal de recherche projets (public)
-│   │   ├── ProjectCard.tsx      # Carte projet GitHub
-│   │   ├── Badge.tsx            # Badge technologie
-│   │   ├── Pagination.tsx       # Contrôles de pagination
-│   │   ├── Toast.tsx            # Notification individuelle
-│   │   ├── ToastContainer.tsx   # Gestionnaire de notifications
-│   │   ├── ConfirmModal.tsx     # Dialogue de confirmation
+│   ├── components/          # Reusable components
+│   │   ├── Layout.tsx           # Shell with conditional Nav/Footer
+│   │   ├── Navbar.tsx           # Main navigation (desktop + mobile)
+│   │   ├── Footer.tsx           # Footer with links
+│   │   ├── AuthModal.tsx        # Login/Signup/Forgot password modal
+│   │   ├── SearchModal.tsx      # Generic search modal (type: article/pitch)
+│   │   ├── SearchModalPublic.tsx # Project search modal (public)
+│   │   ├── ProjectCard.tsx      # GitHub project card
+│   │   ├── Badge.tsx            # Technology badge
+│   │   ├── Pagination.tsx       # Pagination controls
+│   │   ├── Toast.tsx            # Individual notification
+│   │   ├── ToastContainer.tsx   # Notification manager
+│   │   ├── ConfirmModal.tsx     # Confirmation dialog
 │   │   ├── ScrollToTop.tsx      # Reset scroll on navigate
-│   │   ├── MarkdownEditor.tsx   # Éditeur Markdown avec preview
+│   │   ├── MarkdownEditor.tsx   # Markdown editor with preview
 │   │   ├── AnnouncementManager.tsx # Admin CRUD announcements
 │   │   ├── Launchpad/
-│   │   │   ├── ProductCard.tsx      # Carte produit avec vote
-│   │   │   ├── ProductGrid.tsx      # Grille de produits
-│   │   │   └── ProductSearchModal.tsx # Recherche Launchpad
+│   │   │   ├── ProductCard.tsx      # Product card with vote
+│   │   │   ├── ProductGrid.tsx      # Product grid
+│   │   │   └── ProductSearchModal.tsx # Launchpad search
 │   │   └── Profile/
-│   │       ├── ProfileHeader.tsx    # Bannière, avatar, socials
-│   │       ├── ProfileAbout.tsx     # Section bio
-│   │       ├── ProfileProjects.tsx  # Projets de l'utilisateur
-│   │       ├── ProfileLaunchpad.tsx # Produits Launchpad
-│   │       ├── ProfileArticles.tsx  # Articles de l'utilisateur
-│   │       ├── ProfilePitches.tsx   # Pitches de l'utilisateur
-│   │       └── ProfileEditForm.tsx  # Formulaire d'édition
+│   │       ├── ProfileHeader.tsx    # Banner, avatar, socials
+│   │       ├── ProfileAbout.tsx     # Bio section
+│   │       ├── ProfileProjects.tsx  # User projects
+│   │       ├── ProfileLaunchpad.tsx # Launchpad products
+│   │       ├── ProfileArticles.tsx  # User articles
+│   │       ├── ProfilePitches.tsx   # User pitches
+│   │       └── ProfileEditForm.tsx  # Edit form
 │   │
-│   ├── contexts/            # Context React (Global State)
-│   │   ├── AuthContext.tsx        # État d'authentification
+│   ├── contexts/            # React Contexts (Global State)
+│   │   ├── AuthContext.tsx        # Authentication state
 │   │   ├── ThemeContext.tsx       # Dark/light mode
-│   │   └── NotificationContext.tsx # Système de toast
+│   │   └── NotificationContext.tsx # Toast system
 │   │
 │   ├── lib/                 # Configuration
-│   │   └── supabaseClient.ts      # Client Supabase
+│   │   └── supabaseClient.ts      # Supabase client
 │   │
-│   ├── services/            # Logique métier & API
+│   ├── services/            # Business logic & API
 │   │   ├── projectService.ts      # CRUD projects + GitHub sync
 │   │   ├── launchpadService.ts    # CRUD products + votes + uploads
 │   │   ├── pitchService.ts        # CRUD pitches
@@ -855,11 +854,11 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 │   │   ├── Why225OpenSource.tsx   # Mission/vision page
 │   │   ├── PrivacyPolicy.tsx      # Privacy policy
 │   │   ├── Contact.tsx            # Contact page
-│   │   ├── Donation.tsx           # Donation page (Wave + BMC)
+│   │   ├── Donation.tsx           # Donation page (Genius)
 │   │   ├── ResetPassword.tsx      # Password reset
 │   │   └── MaintenancePage.tsx    # Maintenance mode page
 │   │
-│   ├── utils/               # Utilitaires
+│   ├── utils/               # Utilities
 │   │   ├── supabaseUtils.ts       # Robust auth token getter
 │   │   └── slugify.ts             # URL-safe slug generation
 │   │
@@ -884,7 +883,7 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 └── README.md
 ```
 
-### Flux de Données Frontend
+### Frontend Data Flow
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -915,7 +914,7 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 │  │      ▼           ▼             ▼            ▼             ▼             │   │
 │  │   ┌──────┐   ┌──────┐     ┌────────┐   ┌───────┐   ┌────────┐         │   │
 │  │   │Static│   │Project│    │Product │   │ Pitch │   │ Stats  │         │   │
-│  │   │Contenu│  │Cards │    │Grid +  │   │ Cards │   │ Cards  │         │   │
+│  │   │Content│  │Cards │    │Grid +  │   │ Cards │   │ Cards  │         │   │
 │  │   │       │   │Filters│   │ Vote   │   │ Filter│   │ Project│         │   │
 │  │   └──────┘   └──────┘     └────────┘   └───────┘   └────────┘         │   │
 │  │                                                                         │   │
@@ -948,38 +947,38 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 
 | Path | Page | Auth | Description |
 |------|------|------|-------------|
-| `/` | Home | Non | Landing page avec hero, features, CTA |
-| `/explore` | Explore | Non | Browse projects avec filtres et recherche |
-| `/launchpad` | Launchpad | Non | Showcase produits (Trending/New) |
-| `/launchpad/submit` | SubmitProduct | Oui | Formulaire soumission produit |
-| `/launchpad/edit/:slug` | SubmitProduct | Oui | Édition produit existant |
-| `/launchpad/p/:slug` | ProductPage | Non | Page détail produit (immersive si non connecté) |
-| `/pitchhub` | PitchHub | Non | Browse idées startup |
-| `/pitchhub/submit` | SubmitPitch | Oui | Formulaire soumission pitch |
-| `/pitchhub/edit/:slug` | SubmitPitch | Oui | Édition pitch existant |
-| `/pitchhub/p/:slug` | PitchDetails | Non | Page détail pitch (immersive si non connecté) |
-| `/articles` | Articles | Non | Browse articles techniques |
-| `/articles/:slug` | ArticleDetails | Non | Page détail article (immersive si non connecté) |
-| `/my-articles` | MyArticles | Oui | Gestion de mes articles (CRUD + Markdown) |
-| `/add` | AddProject | Oui | Ajouter projet GitHub |
-| `/dashboard` | Dashboard | Oui | Tableau de bord utilisateur |
-| `/edit-profile` | EditProfile | Oui | Éditer profil |
-| `/edit/:slug` | EditProject | Oui | Éditer projet |
-| `/profile/:id` | Profile | Non | Profil public utilisateur |
-| `/project/:slug` | ProjectDetails | Non | Détail projet (toujours immersif) |
-| `/why` | Why225OpenSource | Non | Mission et vision |
-| `/privacy` | PrivacyPolicy | Non | Politique de confidentialité |
-| `/contact` | Contact | Non | Page contact |
-| `/donate` | Donation | Non | Dons (Wave + Buy Me A Coffee) |
-| `/reset-password` | ResetPassword | Non | Réinitialisation mot de passe |
-| `/admin/announcements` | AdminAnnouncements | Admin | Gestion annonces et paramètres site |
-| `/opensource-day` | OpenSourceDay | Non | Page événement annuel |
+| `/` | Home | No | Landing page with hero, features, CTA |
+| `/explore` | Explore | No | Browse projects with filters and search |
+| `/launchpad` | Launchpad | No | Product showcase (Trending/New) |
+| `/launchpad/submit` | SubmitProduct | Yes | Product submission form |
+| `/launchpad/edit/:slug` | SubmitProduct | Yes | Edit existing product |
+| `/launchpad/p/:slug` | ProductPage | No | Product detail page (immersive if not logged in) |
+| `/pitchhub` | PitchHub | No | Browse startup ideas |
+| `/pitchhub/submit` | SubmitPitch | Yes | Pitch submission form |
+| `/pitchhub/edit/:slug` | SubmitPitch | Yes | Edit existing pitch |
+| `/pitchhub/p/:slug` | PitchDetails | No | Pitch detail page (immersive if not logged in) |
+| `/articles` | Articles | No | Browse technical articles |
+| `/articles/:slug` | ArticleDetails | No | Article detail page (immersive if not logged in) |
+| `/my-articles` | MyArticles | Yes | Manage my articles (CRUD + Markdown) |
+| `/add` | AddProject | Yes | Add GitHub project |
+| `/dashboard` | Dashboard | Yes | User dashboard |
+| `/edit-profile` | EditProfile | Yes | Edit profile |
+| `/edit/:slug` | EditProject | Yes | Edit project |
+| `/profile/:id` | Profile | No | Public user profile |
+| `/project/:slug` | ProjectDetails | No | Project detail (always immersive) |
+| `/why` | Why225OpenSource | No | Mission and vision |
+| `/privacy` | PrivacyPolicy | No | Privacy policy |
+| `/contact` | Contact | No | Contact page |
+| `/donate` | Donation | No | Donations (Genius) |
+| `/reset-password` | ResetPassword | No | Password reset |
+| `/admin/announcements` | AdminAnnouncements | Admin | Announcement management & site settings |
+| `/opensource-day` | OpenSourceDay | No | Annual event page |
 
 ---
 
-## 7. Fonctionnement par Cas d'Usage
+## 7. Use Case Walkthroughs
 
-### 7.1 Inscription et Connexion
+### 7.1 Registration and Login
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -1013,7 +1012,7 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 7.2 Soumission d'un Projet GitHub
+### 7.2 Submitting a GitHub Project
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -1057,7 +1056,7 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 7.3 Vote sur un Produit Launchpad
+### 7.3 Voting on a Launchpad Product
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -1086,7 +1085,7 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 7.4 PitchHub - Partage d'Idées
+### 7.4 PitchHub - Sharing Ideas
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -1100,8 +1099,8 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 │     ├─ Problem being solved (300 chars max)                                  │
 │     ├─ The Pitch (500 chars max)                                             │
 │     ├─ Need type (dropdown):                                                 │
-│     │   Co-fondateur, Latefounder, Investisseur, Lead Technique,             │
-│     │   Mentor/Conseils, Associé, Acheteur                                   │
+│     │   Co-founder, Latefounder, Investor, Technical Lead,                   │
+│     │   Mentor/Advice, Partner, Buyer                                        │
 │     ├─ Contact email                                                         │
 │     ├─ Location                                                              │
 │     └─ Optional link                                                         │
@@ -1120,7 +1119,7 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 └──────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 7.5 Profils Utilisateurs
+### 7.5 User Profiles
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -1151,11 +1150,11 @@ L'authentification implémente des timeouts pour éviter le loading infini:
 
 ---
 
-## 8. Configuration & Déploiement
+## 8. Configuration & Deployment
 
-### Variables d'Environnement
+### Environment Variables
 
-Créer un fichier `.env.local` à la racine:
+Create a `.env.local` file at the project root:
 
 ```env
 # Supabase Configuration
@@ -1166,41 +1165,41 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 ### Installation
 
 ```bash
-# 1. Cloner le projet
+# 1. Clone the project
 git clone https://github.com/kouame09/225_OS
 cd 225_OS
 
-# 2. Installer les dépendances
+# 2. Install dependencies
 npm install
 
-# 3. Configurer les variables d'environnement
+# 3. Configure environment variables
 cp .env.example .env.local
-# Éditer .env.local avec vos credentials Supabase
+# Edit .env.local with your Supabase credentials
 
-# 4. Lancer en mode développement
+# 4. Run in development mode
 npm run dev
 
-# 5. Build pour production
+# 5. Build for production
 npm run build
 ```
 
-### Configuration Supabase
+### Supabase Setup
 
-1. Créer un projet sur [supabase.com](https://supabase.com)
-2. Créer les tables dans le Dashboard > SQL Editor:
+1. Create a project at [supabase.com](https://supabase.com)
+2. Create tables in Dashboard > SQL Editor:
    - `profiles`, `projects`, `products`, `product_votes`, `pitches`, `announcements`, `site_settings`
-3. Activer l'authentification Email et GitHub OAuth dans Auth > Providers
-4. Créer les buckets Storage:
+3. Enable Email and GitHub OAuth authentication in Auth > Providers
+4. Create Storage buckets:
    - `launchpad-images` (public, 2MB max)
    - `profiles` (public, 1MB max)
-5. Configurer les politiques RLS pour chaque table
-6. Configurer les URLs de redirection:
-   - Site URL: `http://localhost:3000` (dev) ou `https://225os.com` (prod)
-   - Additional Redirect URLs: pour le reset password et OAuth
+5. Configure RLS policies for each table
+6. Configure redirect URLs:
+   - Site URL: `http://localhost:3000` (dev) or `https://225os.com` (prod)
+   - Additional Redirect URLs: for password reset and OAuth
 
-### Configuration Vercel
+### Vercel Configuration
 
-Le fichier `vercel.json` configure les rewrites SPA:
+The `vercel.json` file configures SPA rewrites:
 
 ```json
 {
@@ -1210,34 +1209,34 @@ Le fichier `vercel.json` configure les rewrites SPA:
 }
 ```
 
-### Mode Maintenance (Dynamique)
+### Maintenance Mode (Dynamic)
 
-Le mode maintenance est désormais contrôlé dynamiquement depuis le dashboard admin, plus besoin de modifier le code :
+Maintenance mode is now dynamically controlled from the admin dashboard, no code changes needed:
 
-1. Se connecter en tant qu'admin (`princekouame7@gmail.com`)
-2. Aller dans `/admin/announcements`
-3. Utiliser le toggle **Mode Maintenance** :
-   - **Activé** → Tous les visiteurs voient la page de maintenance
-   - **Désactivé** → Le site est accessible normalement
+1. Log in as admin (`princekouame7@gmail.com`)
+2. Go to `/admin/announcements`
+3. Use the **Mode Maintenance** toggle:
+   - **Enabled** → All visitors see the maintenance page
+   - **Disabled** → The site is accessible normally
 
-Le changement est détecté automatiquement par l'application toutes les 30 secondes via un polling sur la table `site_settings`.
+The change is automatically detected by the application every 30 seconds via polling on the `site_settings` table.
 
-### Paramètres du Site (Dashboard Admin)
+### Site Settings (Admin Dashboard)
 
-Le dashboard admin (`/admin/announcements`) permet de contrôler :
+The admin dashboard (`/admin/announcements`) controls:
 
-| Paramètre | Description | Impact |
-|-----------|-------------|--------|
-| **Mode Maintenance** | Active/désactive l'accès au site | Tous les visiteurs voient la page de maintenance |
-| **Open Source Day** | Affiche/masque l'onglet dans la navigation | Le lien disparaît de la navbar et la page redirige vers l'accueil |
+| Setting | Description | Impact |
+|---------|-------------|--------|
+| **Maintenance Mode** | Enables/disables site access | All visitors see the maintenance page |
+| **Open Source Day** | Shows/hides the tab in navigation | The link disappears from navbar and the page redirects to home |
 
-### Scripts npm
+### npm Scripts
 
-| Commande | Description |
-|----------|-------------|
-| `npm run dev` | Lance le serveur de développement (port 3000) |
-| `npm run build` | Build de production dans `dist/` |
-| `npm run preview` | Prévisualise le build de production |
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server (port 3000) |
+| `npm run build` | Production build in `dist/` |
+| `npm run preview` | Preview production build |
 
 ---
 
