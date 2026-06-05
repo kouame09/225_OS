@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.css';
+import 'highlight.js/styles/github-dark.css';
 // SAFETY: Unregister any existing service workers that might be blocking requests
 // This fixes the issue where a stale SW from a previous project/version intercepts Supabase requests
 if ('serviceWorker' in navigator) {
