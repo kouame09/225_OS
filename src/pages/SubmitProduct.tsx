@@ -269,17 +269,18 @@ const SubmitProduct: React.FC = () => {
                             <div>
                                 <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
                                     Capture d'écran / Logo du produit (Requis)
+                                    <span className="text-gray-500 ml-1">Optimisez votre image sur <a href="https://vert.sh/" className="text-emerald-500" target="_blank">vert.sh</a></span>
                                 </label>
                                 <div className="mt-1 flex justify-center border-2 border-slate-200 dark:border-slate-800 border-dashed rounded-3xl hover:border-emerald-500/50 transition-all bg-slate-50/50 dark:bg-slate-950/50 group relative">
-                                    <input 
-                                        id="file-upload" 
-                                        name="file-upload" 
-                                        type="file" 
-                                        className="sr-only" 
-                                        accept="image/png, image/jpeg, image/webp" 
-                                        onChange={handleFileChange} 
+                                    <input
+                                        id="file-upload"
+                                        name="file-upload"
+                                        type="file"
+                                        className="sr-only"
+                                        accept="image/png, image/jpeg, image/webp"
+                                        onChange={handleFileChange}
                                     />
-                                    
+
                                     {(imagePreview || imageUrl) ? (
                                         <div className="relative p-6">
                                             <img
@@ -289,12 +290,12 @@ const SubmitProduct: React.FC = () => {
                                             />
                                             <button
                                                 type="button"
-                                                onClick={(e) => { 
+                                                onClick={(e) => {
                                                     e.preventDefault();
                                                     e.stopPropagation();
-                                                    setImageFile(null); 
-                                                    setImagePreview(null); 
-                                                    setImageUrl(''); 
+                                                    setImageFile(null);
+                                                    setImagePreview(null);
+                                                    setImageUrl('');
                                                 }}
                                                 className="absolute top-4 right-4 bg-red-500 text-white p-1.5 rounded-full shadow-lg hover:bg-red-600 transition-colors z-10"
                                             >
@@ -316,7 +317,7 @@ const SubmitProduct: React.FC = () => {
                                                 <p className="pl-1">ou glisser-déposer</p>
                                             </div>
                                             <p className="text-xs text-slate-500 mt-2 font-medium">
-                                                PNG, JPG, WEBP jusqu'à 2Mo
+                                                PNG, JPG ou WEBP (format suggéré) jusqu'à 2Mo
                                             </p>
                                         </label>
                                     )}
