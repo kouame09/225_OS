@@ -45,8 +45,8 @@ export const parseMarkdownToHtml = (markdown: string): string => {
         }
 
         html += `
-          <div class="my-6 rounded-2xl overflow-hidden bg-slate-900 text-slate-100 shadow-lg font-mono text-sm leading-relaxed relative group">
-            <div class="flex items-center justify-between px-4 py-2.5 bg-slate-950/80 border-b border-slate-800/80 text-xs font-bold text-slate-400">
+          <div class="my-6 rounded-2xl overflow-hidden bg-slate-950 text-slate-100 shadow-lg font-mono text-sm leading-relaxed relative group border border-slate-800/50">
+            <div class="flex items-center justify-between px-4 py-2.5 bg-slate-900 border-b border-slate-800/80 text-xs font-bold text-slate-400">
               <span>${displayLang.toUpperCase() || 'CODE'}</span>
               <button 
                 onclick="navigator.clipboard.writeText(this.parentElement.nextElementSibling.innerText); const el = this; el.innerText = 'Copi\u00e9 !'; setTimeout(() => el.innerText = 'Copier', 2000);"

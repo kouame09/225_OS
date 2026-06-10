@@ -31,8 +31,10 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    // No redirect - let users browse freely even when logged in
-  }, [user, loading]);
+    if (!loading && user) {
+      navigate('/dashboard');
+    }
+  }, [user, loading, navigate]);
 
   return (
     <div className="min-h-screen relative bg-slate-50 dark:bg-slate-950 font-sans overflow-x-hidden">

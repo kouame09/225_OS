@@ -148,3 +148,9 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+/* Override Highlight.js styles for uniform code block background */
+.hljs {
+  background: transparent !important;
+  padding: 0 !important;
+}
