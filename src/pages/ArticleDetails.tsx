@@ -143,7 +143,7 @@ const ArticleDetails: React.FC = () => {
             <div className="flex items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-wider">
               <span className="flex items-center gap-1.5">
                 <Calendar size={14} />
-                {new Date(article.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                {new Date(article.published_at || article.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
               </span>
               <span>•</span>
               <span className="flex items-center gap-1.5">

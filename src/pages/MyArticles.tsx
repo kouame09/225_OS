@@ -272,7 +272,7 @@ const MyArticles: React.FC = () => {
                         <div className="flex items-center gap-3 mt-2 text-[11px] font-medium text-slate-400">
                           <span className="flex items-center gap-1">
                             <Calendar size={12} />
-                            {new Date(article.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                            {new Date(article.published_at || article.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
                           </span>
                           <span className="flex items-center gap-1">
                             <Clock size={12} />
@@ -619,7 +619,7 @@ const MyArticles: React.FC = () => {
               {/* Preview Footer */}
               <div className="flex items-center justify-between px-6 py-4 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800">
                 <span className="text-xs text-slate-400">
-                  Publié le {new Date(previewArticle.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  Publié le {new Date(previewArticle.published_at || previewArticle.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </span>
                 <button
                   onClick={() => setPreviewArticle(null)}

@@ -108,6 +108,7 @@ export interface Pitch {
 export interface Article {
   id: string;
   created_at: string;
+  published_at?: string;
   user_id: string;
   title: string;
   category: string;

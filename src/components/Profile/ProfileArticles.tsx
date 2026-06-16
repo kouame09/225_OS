@@ -77,7 +77,7 @@ const ProfileArticles: React.FC<ProfileArticlesProps> = ({ userId }) => {
                                     <div className="flex items-center gap-3 mt-2 text-[11px] font-medium text-slate-400">
                                         <span className="flex items-center gap-1">
                                             <Calendar size={12} />
-                                            {new Date(article.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                                            {new Date(article.published_at || article.created_at).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
                                         </span>
                                         <span className="flex items-center gap-1">
                                             <Clock size={12} />

@@ -65,6 +65,7 @@ const mapArticleFromDB = (a: any): Article => {
   return {
     id: a.id,
     created_at: a.created_at,
+    published_at: a.published_at,
     user_id: a.user_id,
     title: a.title,
     category: a.category,
@@ -91,7 +92,7 @@ const enrichArticlesWithProfiles = async (articles: Article[]): Promise<Article[
 export const getArticles = async (): Promise<Article[]> => {
   try {
     const headers = await buildHeaders();
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/articles?select=*&status=eq.published&order=created_at.desc`, {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/articles?select=*&status=eq.published&order=published_at.desc`, {
       method: 'GET',
       headers
     });
@@ -132,7 +133,7 @@ export const getArticleBySlug = async (slug: string): Promise<Article | null> =>
 export const getUserArticles = async (userId: string): Promise<Article[]> => {
   try {
     const headers = await buildHeaders();
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/articles?user_id=eq.${userId}&select=*&order=created_at.desc`, {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/articles?user_id=eq.${userId}&select=*&order=published_at.desc`, {
       method: 'GET',
       headers
     });
@@ -171,7 +172,8 @@ export const addArticle = async (article: Omit<Article, 'id' | 'created_at' | 's
         tags: article.tags,
         user_id: article.user_id,
         slug: slug,
-        status: article.status || 'published'
+        status: article.status || 'published',
+        published_at: article.status === 'published' ? new Date().toISOString() : null
       })
     });
 
@@ -199,6 +201,10 @@ export const updateArticle = async (id: string, article: Partial<Omit<Article, '
       tags: article.tags,
       status: article.status
     };
+
+    if (article.status === 'published') {
+      body.published_at = new Date().toISOString();
+    }
 
     const headers = await buildHeaders(token);
     const response = await fetch(`${SUPABASE_URL}/rest/v1/articles?id=eq.${id}`, {
