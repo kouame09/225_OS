@@ -5,7 +5,8 @@ const Donation: React.FC = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const geniusUrl = "https://geniuspay.ci/product/soutenir-225-open-source-ULtWJC";
+    const geniusUrl = "https://pay.jeko.africa/pl/766f9b0f-f256-4d31-94a8-3985bbf91dce";
+    const bmcUrl = "https://buymeacoffee.com/princekouame";
 
     return (
         <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans flex items-center justify-center p-4 sm:p-6">
@@ -18,48 +19,78 @@ const Donation: React.FC = () => {
                 <div className="mb-12">
                     <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
                         <span className="font-bold text-slate-900 dark:text-white">225 Open Source</span> est un projet de cœur.
-                        Votre contribution, même symbolique, nous aide à propulser l'écosystème tech ivoirien.
+                        Votre contribution, même symbolique, aide à faire grandir l'initiative.
                     </p>
                 </div>
 
-                {/* Single Payment Card */}
-                <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-6 md:p-8 transition-all hover:border-emerald-500/30">
-                    <div className="flex flex-col items-center gap-8">
-                        {/* Payment Icons */}
-                        <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
-                            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
-                                <img src="/paiement/mtn.png" alt="MTN" className="w-10 h-10 object-contain" />
+                <div className="space-y-6">
+
+                    {/* Genius Payment Card */}
+                    <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-6 md:p-8 transition-all hover:border-emerald-500/30">
+                        <div className="flex flex-col items-center gap-8">
+                            <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
+                                <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
+                                    <img src="/paiement/mtn.png" alt="MTN" className="w-10 h-10 object-contain" />
+                                </div>
+                                <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
+                                    <img src="/paiement/orange.png" alt="Orange" className="w-10 h-10 object-contain" />
+                                </div>
+                                <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
+                                    <img src="/paiement/moov.png" alt="Moov" className="w-10 h-10 object-contain" />
+                                </div>
+                                <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
+                                    <img src="/paiement/visa.webp" alt="Visa" className="w-10 h-10 object-contain" />
+                                </div>
+                                <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
+                                    <img src="/paiement/wave.jpg" alt="Wave" className="w-10 h-10 object-contain" />
+                                </div>
                             </div>
-                            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
-                                <img src="/paiement/orange.png" alt="Orange" className="w-10 h-10 object-contain" />
+
+                            <div className="text-center">
+                                <p className="text-slate-400 dark:text-slate-500 text-sm mb-1 font-medium">Paiement sécurisé</p>
+                                <h3 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tight">Mobile Money &amp; Carte Bancaire</h3>
                             </div>
-                            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
-                                <img src="/paiement/moov.png" alt="Moov" className="w-10 h-10 object-contain" />
+
+                            <a
+                                href={geniusUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full md:w-auto px-12 py-4 bg-[#009669] hover:bg-[#057a57] text-white font-bold rounded-2xl shadow-lg shadow-emerald-500/20 text-center transition-all transform hover:scale-[1.02] active:scale-95 text-lg"
+                            >
+                                Je soutiens 225OS
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Separator */}
+                    <div className="flex items-center gap-4">
+                        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800"></div>
+                        <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Ou avec</span>
+                        <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800"></div>
+                    </div>
+
+                    {/* Buy Me A Coffee card */}
+                    <div className="group bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 p-4 md:p-6 flex flex-col md:flex-row items-center justify-between gap-6 transition-all hover:border-yellow-500/30">
+                        <div className="flex items-center gap-6 w-full md:w-auto">
+                            <div className="w-20 h-20 bg-[#FFDD00] rounded-2xl flex items-center justify-center flex-shrink-0">
+                                <img src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg" alt="Buy Me A Coffee" className="w-10 h-10" />
                             </div>
-                            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
-                                <img src="/paiement/visa.webp" alt="Visa" className="w-10 h-10 object-contain" />
-                            </div>
-                            <div className="w-16 h-16 bg-slate-50 dark:bg-slate-900 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-800">
-                                <img src="/paiement/wave.jpg" alt="Wave" className="w-10 h-10 object-contain" />
+                            <div>
+                                <p className="text-slate-400 dark:text-slate-500 text-sm mb-1 font-medium">Ou nous offrir un café</p>
+                                <h3 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tight">Buy Me A Coffee</h3>
                             </div>
                         </div>
 
-                        {/* Text */}
-                        <div className="text-center">
-                            <p className="text-slate-400 dark:text-slate-500 text-sm mb-1 font-medium">Paiement sécurisé</p>
-                            <h3 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white tracking-tight">Mobile Money &amp; Carte Bancaire</h3>
-                        </div>
-
-                        {/* Button */}
                         <a
-                            href={geniusUrl}
+                            href={bmcUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full md:w-auto px-12 py-4 bg-[#009669] hover:bg-[#057a57] text-white font-bold rounded-2xl shadow-lg shadow-emerald-500/20 text-center transition-all transform hover:scale-[1.02] active:scale-95 text-lg"
+                            className="w-full md:w-auto px-10 py-4 bg-[#FFDD00] hover:bg-[#F2D200] text-black font-bold rounded-2xl shadow-lg shadow-yellow-500/10 text-center transition-all transform hover:scale-[1.02] active:scale-95"
                         >
-                            Je soutiens 225OS
+                            Soutenir via BMC
                         </a>
                     </div>
+
                 </div>
 
                 {/* Footer Disclaimer */}
