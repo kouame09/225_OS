@@ -202,7 +202,7 @@ const ProductPage: React.FC = () => {
                                 </div>
 
 
-                                <div className="prose prose-lg dark:prose-invert max-w-none mt-10">
+                                <div className="max-w-none mt-10">
                                     <p className="text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line text-lg">
                                         {product.description}
                                     </p>

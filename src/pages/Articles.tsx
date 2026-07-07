@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { BookOpen, Search, Calendar, Clock, User, ArrowRight, Loader2, Plus, X } from 'lucide-react';
+import { BookOpen, Search, Calendar, Clock, User, ArrowRight, Loader2, Plus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { getArticles } from '../services/articleService';
 import { Article } from '../types';

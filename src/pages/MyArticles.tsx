@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { Article } from '../types';
 import { getUserArticles, addArticle, updateArticle, deleteArticle } from '../services/articleService';
-import { Loader2, Plus, Edit3, Trash2, BookOpen, X, Image as ImageIcon, Sparkles, LayoutGrid, Calendar, ChevronLeft, Eye, Clock, FileEdit, FileCheck } from 'lucide-react';
+import { Loader2, Plus, Edit3, Trash2, BookOpen, X, Image as ImageIcon, Calendar, ChevronLeft, Eye, Clock, FileEdit, FileCheck } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import MarkdownEditor from '../components/MarkdownEditor';
 import ConfirmModal from '../components/ConfirmModal';
@@ -611,7 +611,7 @@ const MyArticles: React.FC = () => {
                 )}
 
                 <div
-                  className="text-slate-800 dark:text-slate-200 space-y-4 prose prose-sm dark:prose-invert max-w-none"
+                  className="text-slate-800 dark:text-slate-200 space-y-4"
                   dangerouslySetInnerHTML={{ __html: parseMarkdownToHtml(previewArticle.content) }}
                 />
               </div>

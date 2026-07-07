@@ -9,7 +9,6 @@ import 'highlight.js/styles/github-dark.css';
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations().then((registrations) => {
     for (const registration of registrations) {
-      console.log('Unregistering stale ServiceWorker:', registration);
       registration.unregister();
     }
   });

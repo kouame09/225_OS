@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getArticleBySlug } from '../services/articleService';
 import { Article } from '../types';
-import { BookOpen, Calendar, Clock, User, ChevronLeft, ArrowRight, Share2, Link as LinkIcon, Check } from 'lucide-react';
+import { BookOpen, Calendar, Clock, User, ChevronLeft, Share2, Link as LinkIcon, Check } from 'lucide-react';
 import { parseMarkdownToHtml } from '../utils/markdownParser';
 import { useAuth } from '../contexts/AuthContext';
 

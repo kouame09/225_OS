@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Terminal, Heart, Globe, Shield, ArrowLeft, Lightbulb, TrendingUp, Users, Code, DollarSign, FileText, User, Quote, Rocket, Zap, Award } from 'lucide-react';
+import { Heart, Globe, Shield, Lightbulb, TrendingUp, Users, Code, DollarSign, Quote, Rocket, Zap, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AuthModal from '../components/AuthModal';
 

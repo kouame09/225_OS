@@ -3,7 +3,6 @@ import { slugify } from '../utils/slugify';
 import { getAuthToken } from '../utils/supabaseUtils';
 
 const mapPitchFromDB = (p: any): Pitch => {
-    // console.log("pitchService: Data from DB:", p);
     return {
         id: p.id,
         created_at: p.created_at,
@@ -126,8 +125,6 @@ export const addPitch = async (pitch: Omit<Pitch, 'id' | 'created_at' | 'slug'>)
             slug: slug
         };
 
-        console.log("pitchService: Sending POST with body:", body);
-
         const response = await fetch(`${url}/rest/v1/pitches`, {
             method: 'POST',
             headers: {
@@ -145,8 +142,6 @@ export const addPitch = async (pitch: Omit<Pitch, 'id' | 'created_at' | 'slug'>)
             throw new Error(`Add Pitch Failed: ${response.status} ${errorText}`);
         }
 
-        const responseData = await response.json();
-        console.log("pitchService: POST Success response:", responseData);
     } catch (err) {
         console.error("pitchService: addPitch failed", err);
         throw err;
@@ -171,8 +166,6 @@ export const updatePitch = async (id: string, pitch: Partial<Pitch>): Promise<vo
             link: pitch.link
         };
 
-        console.log("pitchService: Sending PATCH for id", id, "with body:", body);
-
         const response = await fetch(`${url}/rest/v1/pitches?id=eq.${id}`, {
             method: 'PATCH',
             headers: {
@@ -190,8 +183,6 @@ export const updatePitch = async (id: string, pitch: Partial<Pitch>): Promise<vo
             throw new Error(`Update Pitch Failed: ${response.status}`);
         }
 
-        const responseData = await response.json();
-        console.log("pitchService: PATCH Success response:", responseData);
     } catch (err) {
         console.error("pitchService: updatePitch failed", err);
         throw err;

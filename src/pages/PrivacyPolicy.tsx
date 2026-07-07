@@ -18,7 +18,7 @@ const PrivacyPolicy: React.FC = () => {
             <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Politique de confidentialité</h1>
           </div>
 
-          <div className="prose prose-slate dark:prose-invert max-w-none">
+          <div>
             <p className="text-sm text-slate-400 mb-8 border-b border-slate-100 dark:border-slate-800 pb-4">
               Dernière mise à jour : {new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toLocaleDateString('fr-FR')}
             </p>

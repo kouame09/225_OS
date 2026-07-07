@@ -243,8 +243,6 @@ export const uploadProductImage = async (file: File): Promise<string> => {
     const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;
     const filePath = `products/${fileName}`;
 
-    console.log("Upload: starting for", file.name, "->", filePath, "size:", file.size);
-
     // Use AbortController for timeout
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 15000);
@@ -272,11 +270,8 @@ export const uploadProductImage = async (file: File): Promise<string> => {
             throw new Error(`Upload échoué (${response.status}): ${errorBody}`);
         }
 
-        console.log("Upload successful!");
-
         // Build the public URL
         const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/launchpad-images/${filePath}`;
-        console.log("Public URL:", publicUrl);
         return publicUrl;
 
     } catch (err: any) {

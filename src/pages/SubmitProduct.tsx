@@ -97,14 +97,10 @@ const SubmitProduct: React.FC = () => {
         }
 
         setSubmitting(true);
-        console.log("Démarrage de la soumission...", { name, hasFile: !!imageFile, imageUrl });
-
         try {
             let finalImageUrl = imageUrl;
             if (imageFile) {
-                console.log("Upload de l'image en cours...");
                 finalImageUrl = await uploadProductImage(imageFile);
-                console.log("Image uploadée avec succès:", finalImageUrl);
             }
 
             if (!finalImageUrl) {
@@ -145,7 +141,6 @@ const SubmitProduct: React.FC = () => {
             console.error(e);
             addNotification('error', isEditMode ? 'Échec de la mise à jour' : 'Échec du lancement', e.message);
         } finally {
-            console.log("Soumission terminée.");
             setSubmitting(false);
         }
     };

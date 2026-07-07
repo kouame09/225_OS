@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNotification } from '../contexts/NotificationContext';
 import { Project } from '../types';
-import { getUserProjects, deleteProject } from '../services/projectService';
+import { getUserProjects, deleteProject, syncProjectStats } from '../services/projectService';
 import { getUserLaunchpadProducts } from '../services/launchpadService';
 import { Link, useNavigate } from 'react-router-dom';
 import { Loader2, Plus, Trash2, Github, ExternalLink, Star, GitFork, Eye, Pencil, User, Rocket, ArrowBigUp, MessageCircle, BookOpen } from 'lucide-react';
@@ -16,6 +16,7 @@ const Dashboard: React.FC = () => {
     const navigate = useNavigate();
     const [projects, setProjects] = useState<Project[]>([]);
     const [isLoadingProjects, setIsLoadingProjects] = useState(true);
+    const [isSyncing, setIsSyncing] = useState(false);
     const [isDeleting, setIsDeleting] = useState<string | null>(null);
     const [projectToDelete, setProjectToDelete] = useState<Project | null>(null);
     const [totalProducts, setTotalProducts] = useState(0);
@@ -47,6 +48,25 @@ const Dashboard: React.FC = () => {
                 const data = await getUserProjects(user.id);
                 if (isMounted) {
                     setProjects(data);
+                }
+
+                // Sync GitHub stats in background
+                if (isMounted && data.length > 0) {
+                    setIsSyncing(true);
+                    const results = await Promise.allSettled(
+                        data.map(project => syncProjectStats(project))
+                    );
+                    if (isMounted) {
+                        const updated = data.map((project, i) => {
+                            const result = results[i];
+                            if (result.status === 'fulfilled' && Object.keys(result.value).length > 0) {
+                                return { ...project, ...result.value };
+                            }
+                            return project;
+                        });
+                        setProjects(updated);
+                        setIsSyncing(false);
+                    }
                 }
             } catch (error) {
                 console.error("Failed to load projects", error);
@@ -216,7 +236,10 @@ const Dashboard: React.FC = () => {
                         </div>
                     </div>
                     <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
-                        <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Étoiles</div>
+                        <div className="text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                            Total Étoiles
+                            {isSyncing && <Loader2 size={14} className="animate-spin text-slate-400" />}
+                        </div>
                         <div className="text-4xl font-bold text-amber-500 mt-2 flex items-center gap-2">
                             {totalStars} <Star size={24} fill="currentColor" />
                         </div>
