@@ -34,6 +34,7 @@ const Footer: React.FC = () => {
           <Link to="/why" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Pourquoi 225OS ?</Link>
           <Link to="/privacy" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Confidentialité</Link>
           <Link to="/contact" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Contact</Link>
+          <Link to="/terms" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">CGU</Link>
         </div>
 
         <div className="flex flex-col items-center md:items-end gap-4">

@@ -17,6 +17,7 @@ import Explore from './pages/Explore';
 import Why225OpenSource from './pages/Why225OpenSource';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Contact from './pages/Contact';
+import Terms from './pages/Terms';
 import Dashboard from './pages/Dashboard';
 import EditProject from './pages/EditProject';
 import Donation from './pages/Donation';
@@ -95,6 +96,7 @@ const AppContent: React.FC = () => {
           <Route path="/project/:slug" element={<ProjectDetails />} />
           <Route path="/why" element={<Why225OpenSource />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/donate" element={<Donation />} />
           <Route path="/reset-password" element={<ResetPassword />} />
