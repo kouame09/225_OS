@@ -19,7 +19,9 @@ import {
   Lightbulb,
   GraduationCap,
   PenTool,
-  Plus
+  Plus,
+  Clock,
+  User
 } from 'lucide-react';
 import AuthModal from '../components/AuthModal';
 import { useAuth } from '../contexts/AuthContext';
@@ -202,7 +204,7 @@ const Home: React.FC = () => {
         {/* Feature 1: Open Source (GitHub Projects) */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-6">
               <Globe size={14} />
               Open Source
             </div>
@@ -215,7 +217,7 @@ const Home: React.FC = () => {
           </div>
 
           {/* Card Mockup */}
-          <div className="w-full bg-white dark:bg-slate-900 rounded-[3rem] p-8 md:p-12 shadow-xl shadow-slate-200/50 dark:shadow-black/20 border border-slate-200/60 dark:border-slate-800 overflow-hidden relative">
+          <div className="w-full bg-white dark:bg-slate-900 rounded-[3rem] p-8 md:p-12 border border-slate-200/60 dark:border-slate-800 overflow-hidden relative">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/10 rounded-full blur-[80px] -mr-20 -mt-20 pointer-events-none"></div>
 
             <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
@@ -262,7 +264,7 @@ const Home: React.FC = () => {
           </div>
 
           {/* Card Mockup */}
-          <div className="w-full bg-emerald-50 dark:bg-emerald-950/20 rounded-[3rem] p-8 md:p-12 border-2 border-emerald-100 dark:border-emerald-900/50 overflow-hidden relative flex flex-col items-center justify-center">
+          <div className="w-full bg-white dark:bg-slate-900 rounded-[3rem] p-8 md:p-12 border border-slate-200/60 dark:border-slate-800 overflow-hidden relative flex flex-col items-center justify-center">
 
             <div className="w-full max-w-3xl bg-white dark:bg-slate-900 rounded-3xl shadow-xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 transform transition-transform hover:scale-[1.02] duration-300">
               <div className="w-24 h-24 md:w-32 md:h-32 rounded-[2rem] bg-gradient-to-br from-emerald-500 via-emerald-400 to-teal-600 flex flex-col items-center justify-center text-white shadow-xl shadow-emerald-500/30 flex-shrink-0 relative overflow-hidden group border-2 border-emerald-300">
@@ -293,10 +295,119 @@ const Home: React.FC = () => {
 
 
 
+        {/* Feature 3: PitchHub */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-6">
+              <Lightbulb size={14} />
+              Nouveau: PitchHub
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
+              L'idée existe. <br />Trouvez qui la construit.
+            </h2>
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+              Vous avez une idée de startup mais pas de co-fondateur ? PitchHub connecte les builders ivoiriens : cherchez un associé technique, un mentor, un investisseur ou un latefounder.
+            </p>
+          </div>
+
+          {/* Card Mockup */}
+          <div className="w-full bg-white dark:bg-slate-900 rounded-[3rem] p-8 md:p-12 border border-slate-200/60 dark:border-slate-800 overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-emerald-500/5 dark:bg-emerald-500/5 rounded-full blur-[100px] -mr-20 -mt-20 pointer-events-none"></div>
+
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+              {/* Pitch Card 1 */}
+              <Link to="/pitchhub" className="bg-slate-50 dark:bg-slate-950 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 transform -rotate-2 hover:rotate-0 transition-all duration-300 group">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="font-bold text-lg text-slate-900 dark:text-white">AgriMarket CI</div>
+                  <Lightbulb className="text-slate-300 dark:text-slate-600" size={20} />
+                </div>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">Marketplace direct producteur-consommateur pour Abidjan.</p>
+                <div className="flex items-center gap-3 text-xs font-semibold">
+                  <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 rounded-lg">Co-fondateur Tech</span>
+                </div>
+              </Link>
+
+              {/* Pitch Card 2 */}
+              <Link to="/pitchhub" className="bg-slate-50 dark:bg-slate-950 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 transform rotate-2 hover:rotate-0 transition-all duration-300 group md:mt-12">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="font-bold text-lg text-slate-900 dark:text-white">EduLab225</div>
+                  <Rocket className="text-slate-300 dark:text-slate-600" size={20} />
+                </div>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">Plateforme de tutorat peer-to-peer pour étudiants ivoiriens.</p>
+                <div className="flex items-center gap-3 text-xs font-semibold">
+                  <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-1 rounded-lg">Investisseur</span>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature 3b: Articles */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-6">
+              <PenTool size={14} />
+              Articles & Knowledge
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-6">
+              Apprenez. Partagez. <br />Montez en compétence.
+            </h2>
+            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+              Tutoriels, retours d'expérience, actu tech et conseils carrière écrits par la communauté. La knowledge base locale, en français, par ceux qui construisent.
+            </p>
+          </div>
+
+          {/* Card Mockup */}
+          <div className="w-full bg-white dark:bg-slate-900 rounded-[3rem] p-8 md:p-12 border border-slate-200/60 dark:border-slate-800 overflow-hidden relative">
+            <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-steel-500/5 dark:bg-steel-500/5 rounded-full blur-[100px] -ml-20 -mt-20 pointer-events-none"></div>
+
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+              {/* Article Card 1 */}
+              <Link to="/articles" className="bg-slate-50 dark:bg-slate-950 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 transform hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                <div className="mb-5">
+                  <Terminal size={28} strokeWidth={1.5} className="text-slate-800 dark:text-slate-200" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Tutoriels & Guides</span>
+                <h4 className="font-bold text-slate-900 dark:text-white mb-4 line-clamp-2 text-sm flex-grow">Déployer une API Express sur Vercel en 2026</h4>
+                <div className="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100 dark:border-slate-800">
+                  <span className="flex items-center gap-1"><User size={12} /> Prince K.</span>
+                  <span className="flex items-center gap-1"><Clock size={12} /> 8 min</span>
+                </div>
+              </Link>
+
+              {/* Article Card 2 */}
+              <Link to="/articles" className="bg-slate-50 dark:bg-slate-950 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 transform hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                <div className="mb-5">
+                  <ShieldAlert size={28} strokeWidth={1.5} className="text-slate-800 dark:text-slate-200" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Rex & Retours d'expérience</span>
+                <h4 className="font-bold text-slate-900 dark:text-white mb-4 line-clamp-2 text-sm flex-grow">Ce qu'on apprend en scaling une app à 50k users</h4>
+                <div className="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100 dark:border-slate-800">
+                  <span className="flex items-center gap-1"><User size={12} /> Thibaut K.</span>
+                  <span className="flex items-center gap-1"><Clock size={12} /> 12 min</span>
+                </div>
+              </Link>
+
+              {/* Article Card 3 */}
+              <Link to="/articles" className="bg-slate-50 dark:bg-slate-950 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 transform hover:-translate-y-1 transition-all duration-300 group flex flex-col">
+                <div className="mb-5">
+                  <GraduationCap size={28} strokeWidth={1.5} className="text-slate-800 dark:text-slate-200" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Conseils & Carrière</span>
+                <h4 className="font-bold text-slate-900 dark:text-white mb-4 line-clamp-2 text-sm flex-grow">De junior à mid : mon plan de carrière en 1 an</h4>
+                <div className="flex items-center justify-between text-xs text-slate-500 pt-3 border-t border-slate-100 dark:border-slate-800">
+                  <span className="flex items-center gap-1"><User size={12} /> Mahine</span>
+                  <span className="flex items-center gap-1"><Clock size={12} /> 6 min</span>
+                </div>
+              </Link>
+            </div>
+          </div>
+        </div>
+
         {/* Feature 4: Local Economy & Community */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 text-xs font-bold uppercase tracking-wider mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-6">
               <Shield size={14} />
               Économie Numérique Locale
             </div>
@@ -309,8 +420,8 @@ const Home: React.FC = () => {
           </div>
 
           {/* Card Mockup */}
-          <div className="w-full bg-purple-50 dark:bg-purple-950/20 rounded-[3rem] p-8 md:p-12 border-2 border-purple-100 dark:border-purple-900/30 overflow-hidden flex flex-col md:flex-row items-center justify-center gap-8 relative">
-            <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[80px] -ml-20 -mt-20 pointer-events-none"></div>
+          <div className="w-full bg-white dark:bg-slate-900 rounded-[3rem] p-8 md:p-12 border border-slate-200/60 dark:border-slate-800 overflow-hidden flex flex-col md:flex-row items-center justify-center gap-8 relative">
+            <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-slate-500/5 dark:bg-slate-500/5 rounded-full blur-[80px] -ml-20 -mt-20 pointer-events-none"></div>
 
             {/* Illustration/Mockup for Community/Sovereignty */}
             <div className="relative z-10 w-full max-w-2xl bg-slate-900 rounded-3xl p-6 shadow-2xl border border-slate-700 font-mono text-sm overflow-hidden flex flex-col group">
@@ -713,156 +824,44 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* --- PARTNERS SECTION (REDESIGNED) --- */}
-      <section className="py-24 relative bg-white dark:bg-slate-950/50 backdrop-blur-3xl overflow-hidden">
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
-
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col items-center mb-16">
-            <div className="h-px w-24 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent mb-8"></div>
-            <h2 className="text-sm font-[900] text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] text-center max-w-lg">
-              Ils soutiennent et utilisent <br className="sm:hidden" /> l'écosystème open source
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-12 gap-x-8 items-center justify-items-center opacity-50 dark:opacity-40 grayscale group/grid">
-            {/* Logo 1 */}
-            <div className="flex items-center gap-3 transition-all duration-500 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default">
-              <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm group-hover/grid:shadow-emerald-500/10 transition-all">
-                <Globe className="h-8 w-8 text-emerald-500" />
-              </div>
-              <span className="text-xl font-black tracking-tight text-slate-800 dark:text-white">AfricaTech</span>
-            </div>
-            {/* Logo 2 */}
-            <div className="flex items-center gap-3 transition-all duration-500 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default">
-              <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm transition-all">
-                <Cpu className="h-8 w-8 text-steel-500" />
-              </div>
-              <span className="text-xl font-black tracking-tight text-slate-800 dark:text-white">IvoireSoft</span>
-            </div>
-            {/* Logo 3 */}
-            <div className="flex items-center gap-3 transition-all duration-500 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default">
-              <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm transition-all">
-                <Terminal className="h-8 w-8 text-orange-500" />
-              </div>
-              <span className="text-xl font-black tracking-tight text-slate-800 dark:text-white">AbidjanCode</span>
-            </div>
-            {/* Logo 4 */}
-            <div className="flex items-center gap-3 transition-all duration-500 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default">
-              <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm transition-all">
-                <Shield className="h-8 w-8 text-purple-500" />
-              </div>
-              <span className="text-xl font-black tracking-tight text-slate-800 dark:text-white">SecuWeb</span>
-            </div>
-            {/* Logo 5 */}
-            <div className="flex items-center gap-3 transition-all duration-500 hover:grayscale-0 hover:opacity-100 hover:scale-110 cursor-default">
-              <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm transition-all">
-                <Users className="h-8 w-8 text-pink-500" />
-              </div>
-              <span className="text-xl font-black tracking-tight text-slate-800 dark:text-white">TechHub225</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* --- CTA SECTION (IMPROVED) --- */}
       <section className="py-24 relative overflow-hidden px-4">
-        <div className="max-w-6xl mx-auto rounded-[3.5rem] bg-slate-950 relative overflow-hidden p-12 md:p-24 shadow-3xl shadow-emerald-500/10 border border-white/5 group">
+        <div className="max-w-6xl mx-auto rounded-[3.5rem] bg-slate-950 relative overflow-hidden p-8 md:p-14 shadow-3xl shadow-emerald-500/10 border border-white/5 group">
           {/* Animated Background Mesh */}
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-500/20 rounded-full blur-[120px] -mr-64 -mt-64 animate-pulse pointer-events-none group-hover:bg-emerald-500/30 transition-colors duration-1000"></div>
           <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-steel-500/20 rounded-full blur-[120px] -ml-64 -mb-64 pointer-events-none"></div>
 
           <div className="relative z-10 flex flex-col items-center text-center">
-            <h2 className="text-4xl md:text-6xl font-[900] text-white tracking-tight mb-8 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-[900] text-white tracking-tight mb-5 leading-tight">
               Prêt à propulser <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-emerald-500">l'innovation locale ?</span>
             </h2>
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">
+            <p className="text-base md:text-lg text-slate-400 max-w-2xl mx-auto mb-7 font-medium leading-relaxed">
               Ne laissez pas vos efforts invisibles. Rejoignez le mouvement qui redéfinit l'excellence technique en Côte d'Ivoire.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-6 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
               <a
                 href="https://github.com/kouame09/225_OS"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-10 py-5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-lg rounded-2xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-1 flex items-center justify-center gap-3 relative overflow-hidden group/btn"
+                className="w-full sm:w-auto px-7 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm rounded-2xl transition-all shadow-xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:-translate-y-1 flex items-center justify-center gap-2 relative overflow-hidden group/btn"
               >
                 <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700 pointer-events-none"></div>
-                <Github size={24} />
+                <Github size={18} />
                 Participer au Projet
               </a>
-              <button
-                onClick={() => setIsSignupOpen(true)}
-                className="w-full sm:w-auto px-10 py-5 bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-xl text-white font-black text-lg rounded-2xl transition-all hover:border-white/20 hover:-translate-y-1 shadow-xl"
+              <Link
+                to="/explore"
+                className="w-full sm:w-auto px-7 py-3.5 bg-white/5 hover:bg-white/10 border border-white/10 backdrop-blur-xl text-white font-black text-sm rounded-2xl transition-all hover:border-white/20 hover:-translate-y-1 shadow-xl flex items-center justify-center gap-2"
               >
                 Rejoindre la communauté
-              </button>
+              </Link>
             </div>
 
-            <div className="mt-12 flex items-center gap-4 text-slate-500 text-sm font-bold uppercase tracking-widest">
+            <div className="mt-7 flex items-center gap-3 text-slate-500 text-xs font-bold uppercase tracking-widest">
               <span className="flex h-2 w-2 rounded-full bg-emerald-500"></span>
               Join 5k+ ivoirian builders
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- CONTRIBUTORS SECTION (ORGANIC) --- */}
-      <section className="py-24 relative bg-white dark:bg-slate-950 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-[900] text-slate-900 dark:text-white tracking-tight mb-6">
-              Rejoins une communauté <span className="text-emerald-500">dynamique.</span>
-            </h2>
-            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto font-medium">
-              Du junior passionné à l'expert senior, nous construisons ensemble l'écosystème tech ivoirien.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mb-16 max-w-4xl mx-auto">
-            {/* Prince */}
-            <div className="relative group p-1">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden shadow-xl transition-all duration-300 group-hover:scale-110 z-10 relative">
-                <img src="/Contributors/prince.jpg" alt="Prince Kouamé" className="w-full h-full object-cover" />
-              </div>
-              <div className="absolute -bottom-1 -right-1 bg-emerald-500 text-slate-950 p-1 rounded-full z-20 shadow-lg scale-0 group-hover:scale-100 transition-transform">
-                <CheckCircle size={14} strokeWidth={3} />
-              </div>
-            </div>
-
-            {/* Thibaut */}
-            <div className="relative group p-1">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden shadow-xl transition-all duration-300 group-hover:scale-110 z-10 relative">
-                <img src="/Contributors/Kouame_Thibaut.jpg" alt="Kouame Thibaut" className="w-full h-full object-cover" />
-              </div>
-            </div>
-
-            {/* Mahine */}
-            <div className="relative group p-1">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden shadow-xl transition-all duration-300 group-hover:scale-110 z-10 relative">
-                <img src="/Contributors/Mahine.jpg" alt="Mahine" className="w-full h-full object-cover" />
-              </div>
-            </div>
-
-            {/* Yaya */}
-            <div className="relative group p-1">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden shadow-xl transition-all duration-300 group-hover:scale-110 z-10 relative">
-                <img src="/Contributors/Yaya.jpeg" alt="Yaya" className="w-full h-full object-cover" />
-              </div>
-            </div>
-
-            {/* Bidjang */}
-            <div className="relative group p-1">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white dark:border-slate-800 overflow-hidden shadow-xl transition-all duration-300 group-hover:scale-110 z-10 relative">
-                <img src="/Contributors/dorgeles.jpg" alt="Dorgeles" className="w-full h-full object-cover" />
-              </div>
-            </div>
-
-            {/* Counter */}
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-slate-100 dark:bg-slate-900 flex items-center justify-center border-4 border-white dark:border-slate-800 text-slate-500 dark:text-slate-400 font-[900] text-xl md:text-2xl shadow-xl transition-all hover:bg-emerald-500 hover:text-white hover:scale-110 cursor-alias">
-              +100
             </div>
           </div>
         </div>
