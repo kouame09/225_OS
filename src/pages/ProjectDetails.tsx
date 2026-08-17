@@ -140,7 +140,7 @@ const ProjectDetails: React.FC = () => {
                 alt={project.name}
                 loading="lazy"
                 onError={handleImageError}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900 text-slate-700 dark:text-slate-600 font-bold text-7xl opacity-20 select-none">
