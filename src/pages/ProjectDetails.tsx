@@ -108,29 +108,14 @@ const ProjectDetails: React.FC = () => {
   return (
     <div className="min-h-screen pb-20 bg-slate-50 dark:bg-slate-950">
 
-      {/* Minimalist Back Button - Top Left - Only for internal users */}
-      {user && (
-        <button
-          onClick={() => navigate('/explore')}
-          className="fixed top-6 left-6 z-30 p-3 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all shadow-lg group"
-          aria-label="Retour aux projets"
-        >
-          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-        </button>
-      )}
-
-      {/* Public Back Link - Visible for unauthenticated users */}
-      {!user && (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-          <button
-            onClick={() => navigate('/explore')}
-            className="inline-flex items-center gap-2 text-slate-500 hover:text-emerald-500 transition-colors font-medium"
-          >
-            <ArrowLeft size={20} />
-            <span className="text-sm">Retour aux projets</span>
-          </button>
-        </div>
-      )}
+      {/* Minimalist Back Button - Top Left */}
+      <button
+        onClick={() => navigate('/explore')}
+        className="fixed top-6 left-6 z-30 p-3 rounded-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all shadow-lg group"
+        aria-label="Retour aux projets"
+      >
+        <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+      </button>
 
       {/* Page Background Ambience (Blurred) */}
       <div className="h-96 w-full bg-slate-900 relative overflow-hidden">
