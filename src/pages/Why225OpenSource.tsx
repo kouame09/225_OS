@@ -169,7 +169,7 @@ const Why225OpenSource: React.FC = () => {
                             {/* Author Card */}
                             <div className="p-6 sm:p-8 border-b border-slate-200 dark:border-slate-800">
                                 <div className="flex flex-col sm:flex-row items-center gap-6">
-                                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-4 border-emerald-200 dark:border-emerald-800 flex-shrink-0 shadow-lg">
+                                    <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-1 border-emerald-200 dark:border-emerald-800 flex-shrink-0 shadow-lg">
                                         <img
                                             src="/author.jpg"
                                             alt="Prince Kouamé"
@@ -178,9 +178,9 @@ const Why225OpenSource: React.FC = () => {
                                     </div>
                                     <div className="text-center sm:text-left">
                                         <h3 className="text-2xl font-extrabold text-slate-900 dark:text-white">Prince Kouamé</h3>
-                                        <p className="text-emerald-600 dark:text-emerald-400 font-semibold">Software Developer & Product Strategist</p>
+                                        <p className="text-emerald-600 dark:text-emerald-400 font-semibold">Software & Product engineering </p>
                                         <p className="text-slate-500 dark:text-slate-400 mt-2 text-sm">
-                                            Fondateur de 225 Open Source
+                                            Initiateur de 225 Open Source
                                         </p>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@ const Why225OpenSource: React.FC = () => {
                                     </p>
                                     <div className="mt-6 pt-6 border-t border-slate-800">
                                         <p className="text-emerald-400 font-bold">— Prince Kouamé</p>
-                                        <p className="text-slate-500 text-sm mt-1">Fondateur, 225 Open Source</p>
+                                        <p className="text-slate-500 text-sm mt-1">Initiateur de 225 Open Source</p>
                                     </div>
                                 </div>
                             </section>
